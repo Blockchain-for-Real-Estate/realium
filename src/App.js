@@ -14,6 +14,12 @@ function App() {
 				<Route path="/marketplace/:id?">
 					<Marketplace />
 				</Route>
+				{/* <Route path="/tokenization">
+					<Tokenization />
+				</Route>
+				<Route path="/invest">
+					<Invest />
+				</Route> */}
 			</Switch>
 		</Router>
 	)
