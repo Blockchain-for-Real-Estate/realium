@@ -22,7 +22,7 @@ export function Hero(props) {
                                 Fully Transparent | View comprehensive ownership history
                             </li>
                         </ul>
-                        <bs.Button variant="success">
+                        <bs.Button variant="success" href="/marketplace">
                             <b>Explore Marketplace</b>
                         </bs.Button>
                 </bs.Container>

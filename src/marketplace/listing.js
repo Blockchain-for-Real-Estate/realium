@@ -1,7 +1,7 @@
 import React from "react"
 import * as bs from "react-bootstrap"
 
-import comingSoon from "./coming-soon.jpg"
+import comingSoon from "../assets/images/coming-soon.jpg"
 
 export function Listing(props) {
     const fundingPercent = props.funded/props.price || 75
