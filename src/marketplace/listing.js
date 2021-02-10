@@ -1,21 +1,24 @@
 import React from "react"
 import * as bs from "react-bootstrap"
+import { useHistory } from "react-router-dom"
 
 import comingSoon from "../assets/images/coming-soon.jpg"
 
 export function Listing(props) {
+    let history = useHistory()
     const fundingPercent = props.listing.funded/props.listing.price*100
+
     return (
-        <bs.Card className="border-0 shadow">
-            <bs.CardImg src={props.listing.image || comingSoon} alt={props.listing.streetAddress || ""} />
+        <bs.Card className="border-0 shadow" onClick={() => history.push(`/marketplace/${props.listing.propertyType}/${props.listing.id}`)}>
+            <bs.CardImg src={props.listing.image || comingSoon} alt={props.listing.streetAddress} />
             <bs.Card.Body>
                 <bs.Row className="justify-content-around mb-3">
                     <div>
-                        <div className="font-weight-bold" style={{"fontSize": "0.9rem"}}>{props.listing.streetAddress || "445 W 400 N"}</div>
-                        <div className="text-muted" style={{"fontSize": "0.7rem"}}>{`${props.listing.city || "Provo"}, ${props.listing.state || "UT"}`}</div>
+                        <div className="font-weight-bold" style={{"fontSize": "0.9rem"}}>{props.listing.streetAddress}</div>
+                        <div className="text-muted" style={{"fontSize": "0.7rem"}}>{`${props.listing.city}, ${props.listing.state}`}</div>
                     </div>
                     <div>
-                        <div className="font-weight-bold text-right" style={{"fontSize": "0.9rem"}}>${props.listing.price || "500,400"}</div>
+                        <div className="font-weight-bold text-right" style={{"fontSize": "0.9rem"}}>${props.listing.price}</div>
                         <div className="text-muted text-right" style={{"fontSize": "0.7rem"}}>List Price</div>
                     </div>
                 </bs.Row>
@@ -25,14 +28,5 @@ export function Listing(props) {
                 </div>
             </bs.Card.Body>
         </bs.Card>
-    )   
+    )
 }
-
-// export function ListingRow(props) {
-
-//     return (
-//         <bs.Row>
-//
-//         </bs.Row>
-//     )
-// }

@@ -2,18 +2,21 @@ import React from "react"
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom"
 import { Home } from "./home"
 import { Marketplace } from "./marketplace"
+import { Explore } from "./marketplace/explore"
 import { Footer } from "./utilities/footer"
 
 function App() {
 	return (
 		<Router>
-
 			<Switch>
 				<Route exact path="/">
 					<Home />
 				</Route>
-				<Route path="/marketplace/:id?">
+				<Route path="/marketplace" exact>
 					<Marketplace />
+				</Route>
+				<Route path="/marketplace/:propType?/:id?">
+					<Explore />
 				</Route>
 				{/* <Route path="/tokenization">
 					<Tokenization />
@@ -23,7 +26,7 @@ function App() {
 				</Route> */}
 			</Switch>
 			<div className="u-margin-top-quad"></div>
-            <Footer />
+			<Footer />
 		</Router>
 	)
 }

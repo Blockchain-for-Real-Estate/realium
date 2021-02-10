@@ -56,8 +56,8 @@ export function Footer(props) {
                             GET STARTED
                         </bs.Button>
                     </div>
-                    <p className="col-sm" style={{"text-align": "right"}}>
-                        &copy;{new Date().getFullYear()} Realium, LLC | All rights reserved | 
+                    <p className="col-sm" style={{"textAlign": "right"}}>
+                        &copy;{new Date().getFullYear()} Realium, LLC | All rights reserved |
                     </p>
                 </div>
             </div>

@@ -1,8 +1,10 @@
 import React from "react"
 import * as bs from "react-bootstrap"
+import { useHistory } from "react-router-dom";
 import hero_img from "../assets/images/green-hero.jpg"
 
 export function Hero(props) {
+    let history = useHistory()
 
     return (
         <div className="u-margin-top-large">
@@ -25,7 +27,7 @@ export function Hero(props) {
                                     Fully Transparent | View comprehensive ownership history
                                 </li>
                             </ul>
-                            <bs.Button variant="success" href="/marketplace">
+                            <bs.Button variant="success" onClick={() => history.push('/marketplace')}>
                                 <b>Explore Marketplace</b>
                             </bs.Button>
                         </div>
