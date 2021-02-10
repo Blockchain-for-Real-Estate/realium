@@ -11,13 +11,13 @@ export function Residential(props) {
     //load in residential stuff from server here, until then use dummy data below
     return (
         <>
-            <div className="font-weight-bold mb-2" style={{"fontSize": "1.3rem"}}>Residential Properties For Sale</div>
+            <div className="font-weight-bold mb-2" style={{"fontSize": "1.3rem"}}>{props.title || "Residential Properties For Sale"}</div>
             <div className="text-muted mb-3">Create an investment portfolio that's diversified through real estate.</div>
             <div className="l-grid l-grid--c3">
                 {residentialData.map((property, idx) => (
                     <div className="l-grid__item">
                         <Listing listing={property}/>
-                        </div>
+                    </div>
                 ))}
             </div>
         </>

@@ -2,6 +2,7 @@ import React from "react"
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom"
 import { Home } from "./home"
 import { Marketplace } from "./marketplace"
+import { Footer } from "./utilities/footer"
 
 function App() {
 	return (
@@ -21,6 +22,8 @@ function App() {
 					<Invest />
 				</Route> */}
 			</Switch>
+			<div className="u-margin-top-quad"></div>
+            <Footer />
 		</Router>
 	)
 }
