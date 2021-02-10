@@ -1,13 +1,12 @@
 import React from "react"
 import * as bs from "react-bootstrap"
 
-import comingSoon from "./coming-soon.jpg"
-
+import comingSoon from "../assets/images/coming-soon.jpg"
 
 export function Listing(props) {
     const fundingPercent = props.listing.funded/props.listing.price*100
     return (
-        <bs.Card className="border-0 shadow" style={{"width": "28%", "height": "25rem"}}>
+        <bs.Card className="border-0 shadow">
             <bs.CardImg src={props.listing.image || comingSoon} alt={props.listing.streetAddress || ""} />
             <bs.Card.Body>
                 <bs.Row className="justify-content-around mb-3">
@@ -26,7 +25,7 @@ export function Listing(props) {
                 </div>
             </bs.Card.Body>
         </bs.Card>
-    )
+    )   
 }
 
 // export function ListingRow(props) {
