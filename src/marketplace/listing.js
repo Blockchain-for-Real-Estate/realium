@@ -2,7 +2,10 @@ import React from "react"
 import * as bs from "react-bootstrap"
 
 import comingSoon from "../assets/images/coming-soon.jpg"
+<<<<<<< HEAD
 
+=======
+>>>>>>> 2300fea913534a240fc6f289e12302b02f54a0b9
 
 export function Listing(props) {
     const fundingPercent = props.listing.funded/props.listing.price*100
