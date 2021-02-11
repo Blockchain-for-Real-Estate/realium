@@ -22,6 +22,7 @@ export function ListingDetails(props) {
         } else {
             setListing(commercialData[id])
         }
+        console.log(listing)
     }, [id, listing, listingType])
 
     return (

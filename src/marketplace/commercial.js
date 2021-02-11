@@ -37,7 +37,7 @@ export function Commercial(props) {
 
 
 export const commercialData = {
-    1: {
+    7: {
         id: 7,
         streetAddress: '333 Tech Ave',
         city: 'Provo',
@@ -55,7 +55,7 @@ export const commercialData = {
         yearBuilt: 1998,
         lotSize: 0.42
     },
-    2: {
+    8: {
         id: 8,
         streetAddress: '4200 Silk Road',
         city: 'Springville',
@@ -73,7 +73,7 @@ export const commercialData = {
         yearBuilt: 1998,
         lotSize: 0.42
     },
-    3: {
+    9: {
         id: 9,
         streetAddress: '100 Silicon Slopes',
         city: 'Lehi',
@@ -91,7 +91,7 @@ export const commercialData = {
         yearBuilt: 1998,
         lotSize: 0.42
     },
-    4: {
+    10: {
         id: 10,
         streetAddress: '200 Silicon Slopes',
         city: 'Lehi',
@@ -109,7 +109,7 @@ export const commercialData = {
         yearBuilt: 1998,
         lotSize: 0.42
     },
-    5: {
+    11: {
         id: 11,
         streetAddress: '111 Temple Way',
         city: 'Salt Lake City',
@@ -127,7 +127,7 @@ export const commercialData = {
         yearBuilt: 1998,
         lotSize: 0.42
     },
-    6: {
+    12: {
         id: 12,
         streetAddress: '120 Main Street',
         city: 'Salt Lake City',

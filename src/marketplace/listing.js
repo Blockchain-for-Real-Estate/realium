@@ -1,6 +1,7 @@
 import React from "react"
 import * as bs from "react-bootstrap"
 import { useHistory } from "react-router-dom"
+import NumberFormat from 'react-number-format'
 
 import comingSoon from "../assets/images/coming-soon.jpg"
 
@@ -18,11 +19,18 @@ export function Listing(props) {
                         <div className="text-muted" style={{"fontSize": "0.7rem"}}>{`${props.listing.city}, ${props.listing.state}`}</div>
                     </div>
                     <div>
-                        <div className="font-weight-bold text-right" style={{"fontSize": "0.9rem"}}>${props.listing.price}</div>
+                        <div className="font-weight-bold text-right" style={{"fontSize": "0.9rem"}}>
+                            <NumberFormat
+                                value={props.listing.price}
+                                displayType={'text'}
+                                thousandSeparator={true}
+                                prefix={'$'}
+                            />
+                        </div>
                         <div className="text-muted text-right" style={{"fontSize": "0.7rem"}}>List Price</div>
                     </div>
                 </bs.Row>
-                <div className="px-2">
+                <div className="px-3">
                     <bs.ProgressBar className="mb-1" now={fundingPercent} style={{"height": "0.1rem"}}/>
                     <div style={{"fontSize": "0.7rem"}} className="text-primary px-1">{fundingPercent}% funded</div>
                 </div>
