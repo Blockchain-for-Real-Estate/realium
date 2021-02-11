@@ -47,7 +47,13 @@ export const commercialData = {
         funded: 465000.00,
         listingType: 'commercial',
         propertyType: 'office',
-        image: com1
+        image: com1,
+        forcastedIncome: 8000,
+        minInvestment: 1000,
+        maxInvestment: 100000,
+        share: 20,
+        yearBuilt: 1998,
+        lotSize: 0.42
     },
     2: {
         id: 8,
@@ -59,7 +65,13 @@ export const commercialData = {
         funded: 825000.00,
         listingType: 'commercial',
         propertyType: 'office',
-        image: com2
+        image: com2,
+        forcastedIncome: 8000,
+        minInvestment: 1000,
+        maxInvestment: 100000,
+        share: 20,
+        yearBuilt: 1998,
+        lotSize: 0.42
     },
     3: {
         id: 9,
@@ -71,7 +83,13 @@ export const commercialData = {
         funded: 0.00,
         listingType: 'commercial',
         propertyType: 'office',
-        image: com3
+        image: com3,
+        forcastedIncome: 8000,
+        minInvestment: 1000,
+        maxInvestment: 100000,
+        share: 20,
+        yearBuilt: 1998,
+        lotSize: 0.42
     },
     4: {
         id: 10,
@@ -83,7 +101,13 @@ export const commercialData = {
         funded: 0.00,
         listingType: 'commercial',
         propertyType: 'office',
-        image: com4
+        image: com4,
+        forcastedIncome: 8000,
+        minInvestment: 1000,
+        maxInvestment: 100000,
+        share: 20,
+        yearBuilt: 1998,
+        lotSize: 0.42
     },
     5: {
         id: 11,
@@ -95,7 +119,13 @@ export const commercialData = {
         funded: 0.00,
         listingType: 'commercial',
         propertyType: 'office',
-        image: com5
+        image: com5,
+        forcastedIncome: 8000,
+        minInvestment: 1000,
+        maxInvestment: 100000,
+        share: 20,
+        yearBuilt: 1998,
+        lotSize: 0.42
     },
     6: {
         id: 12,
@@ -107,6 +137,12 @@ export const commercialData = {
         funded: 0.00,
         listingType: 'commercial',
         propertyType: 'office',
-        image: com6
+        image: com6,
+        forcastedIncome: 8000,
+        minInvestment: 1000,
+        maxInvestment: 100000,
+        share: 20,
+        yearBuilt: 1998,
+        lotSize: 0.42
     }
 }

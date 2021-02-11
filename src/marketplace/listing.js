@@ -9,7 +9,7 @@ export function Listing(props) {
     const fundingPercent = props.listing.funded/props.listing.price*100
 
     return (
-        <bs.Card className="border-0 shadow" onClick={() => history.push(`/marketplace/${props.listing.propertyType}/${props.listing.id}`)}>
+        <bs.Card className="border-0 shadow" onClick={() => history.push(`/marketplace/${props.listing.listingType}/${props.listing.id}`)}>
             <bs.CardImg src={props.listing.image || comingSoon} alt={props.listing.streetAddress} />
             <bs.Card.Body>
                 <bs.Row className="justify-content-around mb-3">

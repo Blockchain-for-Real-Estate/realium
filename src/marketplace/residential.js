@@ -46,8 +46,14 @@ export const residentialData = {
         price: 500400.00,
         funded: 375300.00,
         listingType: 'residential',
-        propertyType: 'singleFamily',
-        image: res1
+        propertyType: 'single family home',
+        image: res1,
+        forcastedIncome: 8000,
+        minInvestment: 1000,
+        maxInvestment: 100000,
+        share: 20,
+        yearBuilt: 1998,
+        lotSize: 0.42
     },
     2: {
         id: 2,
@@ -58,8 +64,14 @@ export const residentialData = {
         price: 12000000.00,
         funded: 600000.00,
         listingType: 'residential',
-        propertyType: 'singleFamily',
-        image: res2
+        propertyType: 'single family home',
+        image: res2,
+        forcastedIncome: 16000,
+        minInvestment: 1000,
+        maxInvestment: 100000,
+        share: 20,
+        yearBuilt: 1998,
+        lotSize: 0.42
     },
     3: {
         id: 3,
@@ -70,8 +82,14 @@ export const residentialData = {
         price: 330900.00,
         funded: 0.00,
         listingType: 'residential',
-        propertyType: 'singleFamily',
-        image: res3
+        propertyType: 'single family home',
+        image: res3,
+        forcastedIncome: 8000,
+        minInvestment: 1000,
+        maxInvestment: 100000,
+        share: 20,
+        yearBuilt: 1998,
+        lotSize: 0.42
     },
     4: {
         id: 4,
@@ -82,8 +100,14 @@ export const residentialData = {
         price: 800000.00,
         funded: 0.00,
         listingType: 'residential',
-        propertyType: 'singleFamily',
-        image: res4
+        propertyType: 'single family home',
+        image: res4,
+        forcastedIncome: 8000,
+        minInvestment: 1000,
+        maxInvestment: 100000,
+        share: 20,
+        yearBuilt: 1998,
+        lotSize: 0.42
     },
     5: {
         id: 5,
@@ -94,8 +118,14 @@ export const residentialData = {
         price: 780000.00,
         funded: 0.00,
         listingType: 'residential',
-        propertyType: 'singleFamily',
-        image: res5
+        propertyType: 'single family home',
+        image: res5,
+        forcastedIncome: 8000,
+        minInvestment: 1000,
+        maxInvestment: 100000,
+        share: 20,
+        yearBuilt: 1998,
+        lotSize: 0.42
     },
     6: {
         id: 6,
@@ -106,7 +136,13 @@ export const residentialData = {
         price: 499999.00,
         funded: 0.00,
         listingType: 'residential',
-        propertyType: 'singleFamily',
-        image: res6
+        propertyType: 'single family home',
+        image: res6,
+        forcastedIncome: 8000,
+        minInvestment: 1000,
+        maxInvestment: 100000,
+        share: 20,
+        yearBuilt: 1998,
+        lotSize: 0.42
     }
 }

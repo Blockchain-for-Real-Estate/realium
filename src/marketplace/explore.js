@@ -5,18 +5,19 @@ import { Commercial } from "./commercial"
 import { ListingDetails } from "./listing-details"
 import { Residential } from "./residential"
 
-const PROP_TYPES = ['residential', 'commercial']
+const LIST_TYPES = ['residential', 'commercial']
 
 export function Explore(props) {
     let history = useHistory()
-    let { propType, id } = useParams()
+    let { listingType, id } = useParams()
+
     return (
         <AppContainer page="marketplace">
             {
-                propType && id ?
-                <ListingDetails propType={propType} id={id} />
-                : PROP_TYPES.includes(propType) ?
-                    <Explorer propType={propType} />
+                listingType && id ?
+                <ListingDetails listingType={listingType} id={id} />
+                : LIST_TYPES.includes(listingType) ?
+                    <Explorer listingType={listingType} />
                     : history.push('/')
             }
         </AppContainer>
@@ -30,8 +31,8 @@ function Explorer(props) {
     return (
         <div>
             <ExplorerControls />
-            {props.propType === 'commercial' && <Commercial />}
-            {props.propType === 'residential' && <Residential />}
+            {props.listingType === 'commercial' && <Commercial />}
+            {props.listingType === 'residential' && <Residential />}
         </div>
     )
 }

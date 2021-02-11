@@ -15,7 +15,7 @@ function App() {
 				<Route path="/marketplace" exact>
 					<Marketplace />
 				</Route>
-				<Route path="/marketplace/:propType?/:id?">
+				<Route path="/marketplace/:listingType?/:id?">
 					<Explore />
 				</Route>
 				{/* <Route path="/tokenization">
