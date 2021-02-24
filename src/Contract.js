@@ -37,14 +37,14 @@ export default class Contract {
     }
 
     async store(number) {
-        let self = this;
+        //let self = this;
         let instance = await this.getContractInstance();
         console.log("NUMBER: ",number)
         return await instance.store(number);
     }
 
     async retrieve() {
-        let self = this;
+        //let self = this;
         let instance = await this.getContractInstance();
         return await instance.retrieve()
     }
