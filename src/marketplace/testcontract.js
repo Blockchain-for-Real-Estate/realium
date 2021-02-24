@@ -7,7 +7,7 @@ export function TestContract(props){
   
     const handleSubmit = (evt) => {
         evt.preventDefault();
-        alert(`Submitting Name ${number}`)
+        alert(`Submitting: ${number}`)
     }
 
     let contract = new Contract('fujinetwork');
