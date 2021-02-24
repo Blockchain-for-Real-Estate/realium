@@ -2,6 +2,7 @@ import React from "react"
 import { AppContainer } from "../utilities/app-container"
 import { Residential } from "./residential"
 import { Commercial } from "./commercial"
+import { TestContract } from "./testcontract"
 
 export function Marketplace(props) {
     return (
@@ -11,6 +12,9 @@ export function Marketplace(props) {
             </div>
             <div>
                 <Commercial />
+            </div>
+            <div>
+                <TestContract/>
             </div>
         </AppContainer>
     )
