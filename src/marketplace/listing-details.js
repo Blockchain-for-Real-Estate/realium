@@ -1,6 +1,7 @@
 import React from "react"
 import * as bs from "react-bootstrap"
 import { useParams } from "react-router-dom"
+import { useHistory } from "react-router-dom"
 import { titleCase } from "title-case"
 import NumberFormat from 'react-number-format'
 import { commercialData } from "./commercial"
@@ -12,6 +13,7 @@ import sqFtIcon from "../assets/images/purple_sq_footage_icon.png"
 import priceIcon from "../assets/images/purple_price_icon.png"
 
 export function ListingDetails(props) {
+    let history = useHistory()
     let { listingType, id } = useParams()
     let [listing, setListing] = React.useState()
 
@@ -165,7 +167,9 @@ export function ListingDetails(props) {
                             </bs.Table>
                         </div>
                         <div className="border-bottom mb-4"/>
-                        <bs.Button block className="font-weight-bold mb-3">
+                        <bs.Button block className="font-weight-bold mb-3" onClick={
+                            () => history.push(`/marketplace/${listing.listingType}/${listing.id}/purchase`)
+                        }>
                             PURCHASE SHARES
                         </bs.Button>
                         <div style={{"fontSize": "0.9rem"}} className="text-muted">
