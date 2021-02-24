@@ -4,6 +4,7 @@ import { Home } from "./home"
 import { Marketplace } from "./marketplace"
 import { Explore } from "./marketplace/explore"
 import { Footer } from "./utilities/footer"
+import { TestContract} from "./marketplace/testcontract"
 
 function App() {
 	return (
@@ -17,6 +18,9 @@ function App() {
 				</Route>
 				<Route path="/marketplace/:listingType?/:id?">
 					<Explore />
+				</Route>
+				<Route path="/marketplace/testcontract" exact>
+					<TestContract />
 				</Route>
 				{/* <Route path="/tokenization">
 					<Tokenization />
