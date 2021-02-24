@@ -37,8 +37,15 @@ module.exports = {
      network_id: "*",
      gas: 3000000,
      gasPrice: 470000000000
-   }
+   },
+   development_cli: {
+    host: "144.126.214.126",
+    port: 9650,
+    network_id: "*",
+    websockets: true
+},
   }
+  
 };
 
 // module.exports = {
