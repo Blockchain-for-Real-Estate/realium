@@ -25,14 +25,14 @@ export function AppContainer(props) {
                     </bs.NavItem>
                     <bs.NavItem>
                         <bs.NavLink as="div">
-                            <Link className={`text-decoration-none ${location === 'tokenization' ? 'text-primary' : 'text-muted' }`} to="/">
+                            <Link className={`text-decoration-none ${location === 'tokenization' ? 'text-primary' : 'text-muted' }`} to="/tokenization">
                                 Tokenization
                             </Link>
                         </bs.NavLink>
                     </bs.NavItem>
                     <bs.NavItem>
                         <bs.NavLink as="div">
-                            <Link className={`text-decoration-none ${location === 'invest' ? 'text-primary' : 'text-muted' }`} to="/">
+                            <Link className={`text-decoration-none ${location === 'invest' ? 'text-primary' : 'text-muted' }`} to="/invest">
                                 Invest
                             </Link>
                         </bs.NavLink>

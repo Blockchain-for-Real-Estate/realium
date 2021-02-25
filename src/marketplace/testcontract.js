@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import * as bs from "react-bootstrap";
 import Contract from '../Contract';
 
 export function TestContract(props){

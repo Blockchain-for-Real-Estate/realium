@@ -1,38 +1,37 @@
 import React from "react"
 import * as bs from "react-bootstrap"
 import { useHistory } from "react-router-dom";
-import hero_img from "../assets/images/green-hero.jpg"
 
 export function Hero(props) {
     let history = useHistory()
 
     return (
-        <div className="u-margin-top-large">
+        <div className="u-margin-top-large u-margin-bottom-large">
             <bs.Jumbotron>
                 <bs.Container>
                     <div className="l-grid l-grid--c2">
                         <div className="l-grid__item">
-                            <h1>A Modern Real Estate Solution</h1>
+                            <h1>{props.page.title}</h1>
                             <ul className="u-padding-top-double u-padding-bottom-double">
                                 <li>
-                                    Worldwide Liquidity | Tap into a global customer base
+                                    {props.page.bullet_one}
                                 </li>
                                 <li>
-                                    Fractional Tokenization | Sell a small piece of your equity
+                                    {props.page.bullet_two}
                                 </li>
                                 <li>
-                                    Create Liquidity | Sell your assets on your schedule
+                                    {props.page.bullet_three}
                                 </li>
                                 <li>
-                                    Fully Transparent | View comprehensive ownership history
+                                    {props.page.bullet_four}
                                 </li>
                             </ul>
                             <bs.Button variant="success" onClick={() => history.push('/marketplace')}>
-                                <b>Explore Marketplace</b>
+                                <b>{props.page.button_text}</b>
                             </bs.Button>
                         </div>
                         <div className="l-grid__item">
-                            <img src={hero_img} alt="green home"/>
+                            <img src={props.image} alt="hero"/>
                         </div>
                     </div>
                 </bs.Container>
