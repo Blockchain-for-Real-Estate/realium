@@ -6,47 +6,47 @@ import Storage from './contracts/Storage.json';
 const TruffleContract = require("truffle-contract");
 
 export default class Contract {
-    constructor(network){//, callback) {
+    constructor(network, callback) {
 
         this.config = Config[network];
         let web3Provider = new Web3.providers.HttpProvider(this.config.url);
         //let web3Provider = new Web3.providers.WebsocketProvider(this.config.url.replace('http', 'ws'));
         this.web3 = new Web3(web3Provider);
+        let accounts = this.web3.eth.getAccounts();
+        this.web3.eth.defaultAccount = accounts[0];
+        //this.web3.eth.personal.unlockAccount(accounts[0])
         // this.flightSuretyApp = new this.web3.eth.Contract(FlightSuretyApp.abi, config.appAddress);
         this.storage = TruffleContract(Storage);
         this.storage.setProvider(web3Provider);
-        //this.initialize(callback);
+        this.initialize(callback);
         this.owner = null;
-        this.airlines = [];
-        this.passengers = [];
     }
 
-    // initialize(callback) {
-    //     this.web3.eth.getAccounts((error, accts) => {
-           
-    //         this.owner = accts[0];
-    //         console.log(this.owner);
-    //         let counter = 1;
+    initialize(callback) {
+        this.web3.eth.getAccounts((error, accts) => {
+            this.owner = accts[0];
+            let counter = 1;
 
-    //         callback();
-    //     });
-    // }
+            callback();
+        });
+    }
 
     async getContractInstance(){
         return await this.storage.at(this.config.appAddress);
     }
 
-    async store(number) {
-        //let self = this;
+    async store(request) {
+        let self = this;
+        let caller = request.from || self.owner;
         let instance = await this.getContractInstance();
-        console.log("NUMBER: ",number)
-        return await instance.store(number);
+        return await instance.store(request, {from: caller});
     }
 
-    async retrieve() {
-        //let self = this;
+    async retrieve(request) {
+        let self = this;
+        let caller = self.owner;
         let instance = await this.getContractInstance();
-        return await instance.retrieve()
+        return await instance.retrieve({from: caller})
     }
 
     // async registerAirline(request) {

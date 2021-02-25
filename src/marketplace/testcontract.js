@@ -3,40 +3,33 @@ import Contract from '../Contract';
 
 export function TestContract(props){
     const [number, setNumber] = useState("");
+    const [storedNumber, setStoredNumber] = useState("");
   
     const handleSubmit = (evt) => {
+        setNumber(number)
+        contract.store(number)
         evt.preventDefault();
-        alert(`Submitting: ${number}`)
+        //alert(`Submitting: ${number}`)
     }
 
-    let contract = new Contract('fujinetwork');
+    let contract = new Contract('fujinetwork',() => {
 
-    let save  = () => {
+    });
+
+    let save  = (e) => {
         contract.store(number);
-        console.log(number);
-        console.log(contract.retrieve())
     }
 
     function retrieve() {
         let obj = contract.retrieve();
-        console.log(obj);
-        //return contract.retrieve();
+        obj.then(result => setStoredNumber(result.toNumber()))
+        alert(`This is your number: ${storedNumber}`)
     }
-
-    //  => {
-    //     try {
-    //         result = await contract.store(number);
-    //     } catch (e) {
-    //         console.log(e);
-    //         err = e;
-    //     } finally {
-    //         display(number, " stored");
-    //     }
-    // })
     
     return (
         <>
             <div>
+                {console.log(number)}
                 <div>
                     <form onSubmit={handleSubmit}>
                         <label>
@@ -49,11 +42,8 @@ export function TestContract(props){
                         </label>
                         <input type="submit" value="Submit" onSubmit={save}/>
                     </form>
-                    <p>
-                        {retrieve()}
-                    </p>
                 </div>
-  
+                <button onClick={retrieve}>Get Number</button>
             </div>
         </>
     );
