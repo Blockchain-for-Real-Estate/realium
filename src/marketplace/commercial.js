@@ -42,7 +42,7 @@ export const commercialData = {
         streetAddress: '333 Tech Ave',
         city: 'Provo',
         state: 'UT',
-        zip: 84601,
+        zipCode: 84601,
         price: 3100000.00,
         funded: 465000.00,
         listingType: 'commercial',
@@ -53,14 +53,14 @@ export const commercialData = {
         maxInvestment: 100000,
         share: 20,
         yearBuilt: 1998,
-        lotSize: 0.42
+        acerage: 0.42
     },
     8: {
         id: 8,
         streetAddress: '4200 Silk Road',
         city: 'Springville',
         state: 'UT',
-        zip: 84663,
+        zipCode: 84663,
         price: 1100000.00,
         funded: 825000.00,
         listingType: 'commercial',
@@ -71,14 +71,14 @@ export const commercialData = {
         maxInvestment: 100000,
         share: 20,
         yearBuilt: 1998,
-        lotSize: 0.42
+        acerage: 0.42
     },
     9: {
         id: 9,
         streetAddress: '100 Silicon Slopes',
         city: 'Lehi',
         state: 'UT',
-        zip: 84043,
+        zipCode: 84043,
         price: 10100000.00,
         funded: 0.00,
         listingType: 'commercial',
@@ -89,14 +89,14 @@ export const commercialData = {
         maxInvestment: 100000,
         share: 20,
         yearBuilt: 1998,
-        lotSize: 0.42
+        acerage: 0.42
     },
     10: {
         id: 10,
         streetAddress: '200 Silicon Slopes',
         city: 'Lehi',
         state: 'UT',
-        zip: 84043,
+        zipCode: 84043,
         price: 90000000.00,
         funded: 0.00,
         listingType: 'commercial',
@@ -107,14 +107,14 @@ export const commercialData = {
         maxInvestment: 100000,
         share: 20,
         yearBuilt: 1998,
-        lotSize: 0.42
+        acerage: 0.42
     },
     11: {
         id: 11,
         streetAddress: '111 Temple Way',
         city: 'Salt Lake City',
         state: 'UT',
-        zip: 84101,
+        zipCode: 84101,
         price: 109100000.00,
         funded: 0.00,
         listingType: 'commercial',
@@ -125,14 +125,14 @@ export const commercialData = {
         maxInvestment: 100000,
         share: 20,
         yearBuilt: 1998,
-        lotSize: 0.42
+        acerage: 0.42
     },
     12: {
         id: 12,
         streetAddress: '120 Main Street',
         city: 'Salt Lake City',
         state: 'UT',
-        zip: 84101,
+        zipCode: 84101,
         price: 60300000.00,
         funded: 0.00,
         listingType: 'commercial',
@@ -143,6 +143,6 @@ export const commercialData = {
         maxInvestment: 100000,
         share: 20,
         yearBuilt: 1998,
-        lotSize: 0.42
+        acerage: 0.42
     }
 }

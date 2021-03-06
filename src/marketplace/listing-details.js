@@ -36,7 +36,7 @@ export function ListingDetails(props) {
                     </bs.Row>
                     <bs.Row className="justify-content-between mb-4">
                         <div>
-                            {listing.streetAddress} {listing.city}, {listing.state} {listing.zip}
+                            {listing.streetAddress} {listing.city}, {listing.state} {listing.zipCode}
                         </div>
                         <div>
                             Marketplace > {titleCase(listing.listingType)} Properties
@@ -147,7 +147,7 @@ export function ListingDetails(props) {
                                             <img src={sqFtIcon} alt="lot size" className="pl-2 mr-2"/> Lot:
                                         </td>
                                         <td>
-                                            {listing.lotSize}
+                                            {listing.acerage}
                                         </td>
                                     </tr>
                                     <tr>

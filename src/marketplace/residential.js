@@ -35,14 +35,13 @@ export function Residential(props) {
     )
 }
 
-
 export const residentialData = {
     1: {
         id: 1,
         streetAddress: '445 W 400 N',
         city: 'Provo',
         state: 'UT',
-        zip: 84601,
+        zipCode: 84601,
         price: 500400.00,
         funded: 375300.00,
         listingType: 'residential',
@@ -53,14 +52,14 @@ export const residentialData = {
         maxInvestment: 100000,
         share: 20,
         yearBuilt: 1998,
-        lotSize: 0.42
+        acerage: 0.42
     },
     2: {
         id: 2,
         streetAddress: '1300 E 120 N',
         city: 'Highland',
         state: 'UT',
-        zip: 84003,
+        zipCode: 84003,
         price: 12000000.00,
         funded: 600000.00,
         listingType: 'residential',
@@ -71,14 +70,14 @@ export const residentialData = {
         maxInvestment: 100000,
         share: 20,
         yearBuilt: 1998,
-        lotSize: 0.42
+        acerage: 0.42
     },
     3: {
         id: 3,
         streetAddress: '305 W 400 S',
         city: 'Orem',
         state: 'UT',
-        zip: 84058,
+        zipCode: 84058,
         price: 330900.00,
         funded: 0.00,
         listingType: 'residential',
@@ -89,14 +88,14 @@ export const residentialData = {
         maxInvestment: 100000,
         share: 20,
         yearBuilt: 1998,
-        lotSize: 0.42
+        acerage: 0.42
     },
     4: {
         id: 4,
         streetAddress: '800 E 400 S',
         city: 'Orem',
         state: 'UT',
-        zip: 84058,
+        zipCode: 84058,
         price: 800000.00,
         funded: 0.00,
         listingType: 'residential',
@@ -107,14 +106,14 @@ export const residentialData = {
         maxInvestment: 100000,
         share: 20,
         yearBuilt: 1998,
-        lotSize: 0.42
+        acerage: 0.42
     },
     5: {
         id: 5,
         streetAddress: '120 Transit Way',
         city: 'Lehi',
         state: 'UT',
-        zip: 84043,
+        zipCode: 84043,
         price: 780000.00,
         funded: 0.00,
         listingType: 'residential',
@@ -125,14 +124,14 @@ export const residentialData = {
         maxInvestment: 100000,
         share: 20,
         yearBuilt: 1998,
-        lotSize: 0.42
+        acerage: 0.42
     },
     6: {
         id: 6,
         streetAddress: '210 E 100 S',
         city: 'Provo',
         state: 'UT',
-        zip: 84601,
+        zipCode: 84601,
         price: 499999.00,
         funded: 0.00,
         listingType: 'residential',
@@ -143,6 +142,6 @@ export const residentialData = {
         maxInvestment: 100000,
         share: 20,
         yearBuilt: 1998,
-        lotSize: 0.42
+        acerage: 0.42
     }
 }
