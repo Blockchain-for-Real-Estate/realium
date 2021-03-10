@@ -6,6 +6,6 @@ import hero_img from "../resources/images/orange-hero.jpg"
 
 export function Tokenization(props) {
     return (
-        <Hero page={props.content.TOKENIZATION_HERO} image={hero_img}/>
+        <Hero img={hero_img}/>
     )
 }

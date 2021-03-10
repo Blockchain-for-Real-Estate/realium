@@ -6,6 +6,6 @@ import hero_img from "../resources/images/yellow-hero.jpg"
 
 export function Invest(props) {
     return (
-        <Hero image={hero_img}/>
+        <Hero img={hero_img}/>
     )
 }
