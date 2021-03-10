@@ -1,6 +1,6 @@
 import React from "react"
 import * as bs from "react-bootstrap"
-import group_img from "../assets/images/Group 71.svg"
+import group_img from "../resources/images/Group 71.svg"
 
 export function HowItWorks(props) {
 

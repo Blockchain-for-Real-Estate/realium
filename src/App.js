@@ -1,7 +1,8 @@
 import React from "react"
-import enText from './assets/docs/en.json';
+import enText from './resources/docs/en.json';
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom"
 import { Home } from "./home"
+import { About } from "./about"
 import { Marketplace } from "./marketplace"
 import { Tokenization } from "./tokenization"
 import { Invest } from "./invest"
@@ -36,6 +37,7 @@ function App() {
 				<Route path="/invest" exact>
 					<Invest content={enText}/>
 				</Route>
+				<Route path="/about" component={About} />
 			</Switch>
 			<div className="u-margin-top-quad"></div>
 			<Footer />

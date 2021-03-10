@@ -4,12 +4,12 @@ import { Listing } from "./listing"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faLongArrowAltRight } from '@fortawesome/free-solid-svg-icons'
 
-import com1 from "../assets/images/commercial-1.jpg"
-import com2 from "../assets/images/commercial-2.jpg"
-import com3 from "../assets/images/commercial-3.jpg"
-import com4 from "../assets/images/commercial-4.jpg"
-import com5 from "../assets/images/commercial-5.jpg"
-import com6 from "../assets/images/commercial-6.jpg"
+import com1 from "../resources/images/commercial-1.jpg"
+import com2 from "../resources/images/commercial-2.jpg"
+import com3 from "../resources/images/commercial-3.jpg"
+import com4 from "../resources/images/commercial-4.jpg"
+import com5 from "../resources/images/commercial-5.jpg"
+import com6 from "../resources/images/commercial-6.jpg"
 
 
 // TODO: need to handle different number of listings loaded in

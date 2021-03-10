@@ -4,27 +4,44 @@ import { Listing } from "./listing"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faLongArrowAltRight } from '@fortawesome/free-solid-svg-icons'
 
-import res1 from "../assets/images/residential-1.jpg"
-import res2 from "../assets/images/residential-2.jpg"
-import res3 from "../assets/images/residential-3.jpg"
-import res4 from "../assets/images/residential-4.jpg"
-import res5 from "../assets/images/residential-5.jpg"
-import res6 from "../assets/images/residential-6.jpg"
+import res1 from "../resources/images/residential-1.jpg"
+import res2 from "../resources/images/residential-2.jpg"
+import res3 from "../resources/images/residential-3.jpg"
+import res4 from "../resources/images/residential-4.jpg"
+import res5 from "../resources/images/residential-5.jpg"
+import res6 from "../resources/images/residential-6.jpg"
 
 
 // TODO: need to handle different number of listings loaded in
 export function Residential(props) {
     //load in residential stuff from server here, until then use dummy data below
+
+    //temporary preview array, once we get data loaded in from actual db we can query for just three properties
+    let previewArr = []
+    if (props.preview) {
+        Object.keys(residentialData).forEach((key, idx) => {
+            if (idx < 3) {
+                previewArr.push(key)
+            }
+        })
+    }
+
     return (
         <>
-            <div className="font-weight-bold mb-2" style={{"fontSize": "1.3rem"}}>Residential Properties For Sale</div>
-            <div className="text-muted mb-3">Create an investment portfolio that's diversified residential real estate.</div>
-            <div className="l-grid l-grid--c3">
-                {Object.keys(residentialData).map(key => (
-                    <div key={key} className="l-grid__item">
-                        <Listing listing={residentialData[key]}/>
-                    </div>
-                ))}
+            <div className="mt-12 max-w-lg mx-auto grid gap-5 lg:grid-cols-3 lg:max-w-none">
+                {props.preview ?
+                    previewArr.map(key =>
+                        <div key={key} className="l-grid__item">
+                            <Listing listing={residentialData[key]}/>
+                        </div>
+                    )
+                :
+                    Object.keys(residentialData).map(key => (
+                        <div key={key} className="l-grid__item">
+                            <Listing listing={residentialData[key]}/>
+                        </div>
+                    ))
+                }
             </div>
             <div className="float-right" style={{"fontSize": "0.9rem"}}>
                 <Link to="/marketplace/residential" className="text-decoration-none text-muted">

@@ -7,10 +7,10 @@ import NumberFormat from 'react-number-format'
 import { commercialData } from "./commercial"
 import { residentialData } from "./residential"
 
-import typeIcon from "../assets/images/purple_prop_type.png"
-import yearIcon from "../assets/images/purple_year_built_icon.png"
-import sqFtIcon from "../assets/images/purple_sq_footage_icon.png"
-import priceIcon from "../assets/images/purple_price_icon.png"
+import typeIcon from "../resources/images/purple_prop_type.png"
+import yearIcon from "../resources/images/purple_year_built_icon.png"
+import sqFtIcon from "../resources/images/purple_sq_footage_icon.png"
+import priceIcon from "../resources/images/purple_price_icon.png"
 
 export function ListingDetails(props) {
     let history = useHistory()
@@ -24,7 +24,6 @@ export function ListingDetails(props) {
         } else {
             setListing(commercialData[id])
         }
-        console.log(listing)
     }, [id, listing, listingType])
 
     return (

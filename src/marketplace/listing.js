@@ -1,40 +1,39 @@
 import React from "react"
-import * as bs from "react-bootstrap"
 import { useHistory } from "react-router-dom"
-import NumberFormat from 'react-number-format'
+import { titleCase } from "title-case"
+import NumberFormat from "react-number-format"
 
-import comingSoon from "../assets/images/coming-soon.jpg"
+import comingSoon from "../resources/images/coming-soon.jpg"
 
 export function Listing(props) {
     let history = useHistory()
-    const fundingPercent = props.listing.funded/props.listing.price*100
 
     return (
-        <bs.Card className="border-0 shadow" onClick={() => history.push(`/marketplace/${props.listing.listingType}/${props.listing.id}`)}>
-            <bs.CardImg src={props.listing.image || comingSoon} alt={props.listing.streetAddress} />
-            <bs.Card.Body>
-                <bs.Row className="justify-content-around mb-3">
-                    <div>
-                        <div className="font-weight-bold" style={{"fontSize": "0.9rem"}}>{props.listing.streetAddress}</div>
-                        <div className="text-muted" style={{"fontSize": "0.7rem"}}>{`${props.listing.city}, ${props.listing.state}`}</div>
-                    </div>
-                    <div>
-                        <div className="font-weight-bold text-right" style={{"fontSize": "0.9rem"}}>
-                            <NumberFormat
-                                value={props.listing.price}
-                                displayType={'text'}
-                                thousandSeparator={true}
-                                prefix={'$'}
-                            />
-                        </div>
-                        <div className="text-muted text-right" style={{"fontSize": "0.7rem"}}>List Price</div>
-                    </div>
-                </bs.Row>
-                <div className="px-3">
-                    <bs.ProgressBar className="mb-1" now={fundingPercent} style={{"height": "0.1rem"}}/>
-                    <div style={{"fontSize": "0.7rem"}} className="text-primary px-1">{fundingPercent}% funded</div>
+        <div className="flex flex-col rounded-lg shadow-lg overflow-hidden" onClick={() => history.push(`/marketplace/${props.listing.listingType}/${props.listing.id}`)}>
+            <div className="flex-shrink-0">
+                <img className="h-48 w-full object-cover" src={props.listing.image || comingSoon} alt={props.listing.streetAddress} />
+            </div>
+            <div className="flex-1 bg-white p-6 flex flex-col justify-between">
+                <div className="flex-1">
+                    <p className="text-sm font-medium text-indigo-600">
+                    {titleCase(props.listing.listingType)}
+                    </p>
+                    <p className="text-xl font-semibold text-gray-900">
+                        {`${props.listing.city}, ${props.listing.state}`}
+                    </p>
+                    <p className="mt-3 text-base text-gray-500">
+                        {`This property is a ${props.listing.propertyType} located in ${props.listing.city}, ${props.listing.state}.`}
+                    </p>
+                    <p className="mt-3 text-sm font-medium text-indigo-600">
+                        <NumberFormat
+                            value={props.listing.share}
+                            displayType={'text'}
+                            thousandSeparator={true}
+                            prefix={'Share Price: $'}
+                        />
+                    </p>
                 </div>
-            </bs.Card.Body>
-        </bs.Card>
+            </div>
+        </div>
     )
 }

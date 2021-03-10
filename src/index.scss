@@ -1,6 +1,9 @@
-@import "assets/styles/sizing.scss";
-@import "assets/styles/utilities.scss";
-@import "assets/styles/layout.scss";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@import "resources/styles/sizing.scss";
+@import "resources/styles/utilities.scss";
+@import "resources/styles/layout.scss";
 
 html {
   background-color: #e3e3e3;
