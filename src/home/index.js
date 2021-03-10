@@ -1,6 +1,9 @@
 import React from "react"
 import { Residential } from "../marketplace/residential"
-import { Hero } from "../utilities/hero"
+import { NavItems } from "../utilities/nav-items"
+import hero_img from "../resources/images/green-hero.jpg"
+import logo from "../resources/images/logo.svg"
+import { Residential } from "../marketplace/residential"
 import hero_img from "../resources/images/green-hero.jpg"
 
 export function Home(props) {
