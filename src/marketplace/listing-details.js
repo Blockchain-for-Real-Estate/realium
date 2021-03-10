@@ -8,10 +8,6 @@ import typeIcon from "../resources/images/purple_prop_type.png"
 import yearIcon from "../resources/images/purple_year_built_icon.png"
 import sqFtIcon from "../resources/images/purple_sq_footage_icon.png"
 import priceIcon from "../resources/images/purple_price_icon.png"
-import res1 from "../resources/images/residential-1.jpg"
-import { StaticNavBar } from "../utilities/static-nav-bar"
-import { ApiAssetService } from "../api/services/asset.service"
-import { Transactions } from "./transactions"
 
 export function ListingDetails(props) {
     let history = useHistory()

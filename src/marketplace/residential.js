@@ -10,7 +10,6 @@ import res3 from "../resources/images/residential-3.jpg"
 import res4 from "../resources/images/residential-4.jpg"
 import res5 from "../resources/images/residential-5.jpg"
 import res6 from "../resources/images/residential-6.jpg"
-import { ApiAssetService } from "../api/services/asset.service"
 
 
 // TODO: need to handle different number of listings loaded in
