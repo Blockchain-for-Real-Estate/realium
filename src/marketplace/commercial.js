@@ -15,21 +15,54 @@ import com6 from "../resources/images/commercial-6.jpg"
 // TODO: need to handle different number of listings loaded in
 export function Commercial(props) {
     //load in commercial stuff from server here, until then use dummy data below
+
+    //temporary preview array, once we get data loaded in from actual db we can query for just three properties
+    let previewArr = []
+    if (props.preview) {
+        Object.keys(commercialData).forEach((key, idx) => {
+            if (idx < 3) {
+                previewArr.push(key)
+            }
+        })
+    }
+
     return (
         <>
-            <div className="font-weight-bold mb-2" style={{"fontSize": "1.3rem"}}>Commercial Properties For Sale</div>
-            <div className="text-muted mb-3">Create an investment portfolio that's diversified through commercial real estate.</div>
-            <div className="l-grid l-grid--c3">
-                {Object.keys(commercialData).map(key => (
-                    <div key={key} className="l-grid__item">
-                        <Listing listing={commercialData[key]}/>
+            {/* Explore Marketplace */}
+            <div className="relative bg-gray-50 pt-16 pb-20 px-4 sm:px-6 lg:pt-24 lg:pb-28 lg:px-8">
+                <div className="absolute inset-0">
+                    <div className="bg-white h-1/3 sm:h-2/3"/>
+                </div>
+                <div className="relative max-w-7xl mx-auto">
+                    <div className="text-center">
+                        <h2 className="text-3xl tracking-tight font-extrabold text-gray-900 sm:text-4xl">
+                            Commercial Properties
+                        </h2>
+                        <p className="mt-3 max-w-2xl mx-auto text-xl text-gray-500 sm:mt-4">
+                            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ipsa libero labore natus atque, ducimus sed.
+                        </p>
                     </div>
-                ))}
-            </div>
-            <div className="float-right" style={{"fontSize": "0.9rem"}}>
-                <Link to="/marketplace/commercial" className="text-decoration-none text-muted">
-                    Explore <FontAwesomeIcon icon={faLongArrowAltRight}/>
-                </Link>
+                    <div className="mt-12 max-w-lg mx-auto grid gap-5 lg:grid-cols-3 lg:max-w-none">
+                        {props.preview ?
+                            previewArr.map(key =>
+                                <div key={key} className="l-grid__item">
+                                    <Listing listing={commercialData[key]}/>
+                                </div>
+                            )
+                        :
+                            Object.keys(commercialData).map(key => (
+                                <div key={key} className="l-grid__item">
+                                    <Listing listing={commercialData[key]}/>
+                                </div>
+                            ))
+                        }
+                    </div>
+                    <div className="float-right" style={{"fontSize": "0.9rem"}}>
+                        <Link to="/marketplace/residential" className="text-decoration-none text-muted">
+                            Explore <FontAwesomeIcon icon={faLongArrowAltRight}/>
+                        </Link>
+                    </div>
+                </div>
             </div>
         </>
     )
@@ -46,7 +79,7 @@ export const commercialData = {
         price: 3100000.00,
         funded: 465000.00,
         listingType: 'commercial',
-        propertyType: 'office',
+        propertyType: 'office space',
         image: com1,
         forcastedIncome: 8000,
         minInvestment: 1000,
@@ -64,7 +97,7 @@ export const commercialData = {
         price: 1100000.00,
         funded: 825000.00,
         listingType: 'commercial',
-        propertyType: 'office',
+        propertyType: 'office space',
         image: com2,
         forcastedIncome: 8000,
         minInvestment: 1000,
@@ -82,7 +115,7 @@ export const commercialData = {
         price: 10100000.00,
         funded: 0.00,
         listingType: 'commercial',
-        propertyType: 'office',
+        propertyType: 'office space',
         image: com3,
         forcastedIncome: 8000,
         minInvestment: 1000,
@@ -100,7 +133,7 @@ export const commercialData = {
         price: 90000000.00,
         funded: 0.00,
         listingType: 'commercial',
-        propertyType: 'office',
+        propertyType: 'office space',
         image: com4,
         forcastedIncome: 8000,
         minInvestment: 1000,
@@ -118,7 +151,7 @@ export const commercialData = {
         price: 109100000.00,
         funded: 0.00,
         listingType: 'commercial',
-        propertyType: 'office',
+        propertyType: 'office space',
         image: com5,
         forcastedIncome: 8000,
         minInvestment: 1000,
@@ -136,7 +169,7 @@ export const commercialData = {
         price: 60300000.00,
         funded: 0.00,
         listingType: 'commercial',
-        propertyType: 'office',
+        propertyType: 'office space',
         image: com6,
         forcastedIncome: 8000,
         minInvestment: 1000,

@@ -6,9 +6,6 @@ import hero_img from "../resources/images/orange-hero.jpg"
 
 export function Tokenization(props) {
     return (
-        <AppContainer page="tokenization">
-            <Hero page={props.content.TOKENIZATION_HERO} image={hero_img}/>
-            <HowItWorks page={props.content.TOKENIZATION_HOW_IT_WORKS}/>
-        </AppContainer>
+        <Hero page={props.content.TOKENIZATION_HERO} image={hero_img}/>
     )
 }

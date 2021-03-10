@@ -10,8 +10,11 @@ export function NavItems(props) {
                         <Link className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50" to="/marketplace">
                             Marketplace
                         </Link>
-                        <Link className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50" to="/about">
-                            About
+                        <Link className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50" to="/tokenization">
+                            Tokenization
+                        </Link>
+                        <Link className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50" to="/invest">
+                            Invest
                         </Link>
                     </div>
                     <Link className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50" to="/">
@@ -23,8 +26,11 @@ export function NavItems(props) {
                     <Link className="font-medium text-gray-500 hover:text-gray-900" to="/marketplace">
                         Marketplace
                     </Link>
-                    <Link className="font-medium text-gray-500 hover:text-gray-900" to="/about">
-                        About
+                    <Link className="font-medium text-gray-500 hover:text-gray-900" to="/tokenization">
+                        Tokenization
+                    </Link>
+                    <Link className="font-medium text-gray-500 hover:text-gray-900" to="/invest">
+                        Invest
                     </Link>
                     <Link className="font-medium text-gray-500 hover:text-gray-900" to="/">
                         Log in

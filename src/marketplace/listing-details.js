@@ -11,6 +11,7 @@ import typeIcon from "../resources/images/purple_prop_type.png"
 import yearIcon from "../resources/images/purple_year_built_icon.png"
 import sqFtIcon from "../resources/images/purple_sq_footage_icon.png"
 import priceIcon from "../resources/images/purple_price_icon.png"
+import { StaticNavBar } from "../utilities/static-nav-bar"
 
 export function ListingDetails(props) {
     let history = useHistory()
@@ -27,6 +28,10 @@ export function ListingDetails(props) {
     }, [id, listing, listingType])
 
     return (
+        <>
+            <div className="u-padding-top-double u-margin-bottom-quad">
+                <StaticNavBar />
+            </div>
         <>  {listing &&
             <>
                 <div className="border-bottom mb-4">
@@ -181,5 +186,6 @@ export function ListingDetails(props) {
             </>
             }
         </>
+    </>
     )
 }

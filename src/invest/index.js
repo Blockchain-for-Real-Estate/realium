@@ -6,9 +6,6 @@ import hero_img from "../resources/images/yellow-hero.jpg"
 
 export function Invest(props) {
     return (
-        <AppContainer page="invest">
-            <Hero page={props.content.INVEST_HERO} image={hero_img}/>
-            <HowItWorks page={props.content.INVEST_HOW_IT_WORKS}/>
-        </AppContainer>
+        <Hero image={hero_img}/>
     )
 }
