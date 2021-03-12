@@ -33,19 +33,19 @@ export function Listing(props) {
                         />
                     </p>
                 </div>
-                <div class="mt-6 flex items-center">
-                    <div class="flex-shrink-0">
-                        <a href="#">
-                            <span class="sr-only">Roel Aufderehar</span>
-                            <img class="h-10 w-10 rounded-full" src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixqx=9RaZNtwCUv&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="" />
+                <div className="mt-6 flex items-center">
+                    <div className="flex-shrink-0">
+                        <a href="/">
+                            <span className="sr-only">Roel Aufderehar</span>
+                            <img className="h-10 w-10 rounded-full" src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixqx=9RaZNtwCUv&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="" />
                         </a>
                     </div>
-                    <div class="ml-3">
-                        <a href="#" class="hover:underline text-gray-800 text-sm">
+                    <div className="ml-3">
+                        <a href="/" className="hover:underline text-gray-800 text-sm">
                         Roel Aufderehar
                         </a>
-                        <div class="flex space-x-1 text-sm text-gray-500">
-                            <time datetime="2020-03-16">
+                        <div className="flex space-x-1 text-sm text-gray-500">
+                            <time dateTime="2020-03-16">
                             March 10, 2021
                             </time>
                         </div>

@@ -1,13 +1,18 @@
-import { django_environment as environment} from "../../../environment"
+import { django_environment as environment} from "../../environment"
 import axios from 'axios'
 import { Asset } from "../interfaces/asset.interface";
 
 export class ApiAssetService {
-    constructor() { }
   
-    public getAsset() {
+    public getAssets() {
       return axios.get<Asset>(
-        `${environment.api}/api/assets`
+        `${environment.api}/api/assets/`
+      );
+    }
+
+    public getAssetById(id: String) {
+      return axios.get<Asset>(
+        `${environment.api}/api/assets/${id}`
       );
     }
   

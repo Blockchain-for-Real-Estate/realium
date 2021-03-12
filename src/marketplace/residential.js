@@ -10,16 +10,30 @@ import res3 from "../resources/images/residential-3.jpg"
 import res4 from "../resources/images/residential-4.jpg"
 import res5 from "../resources/images/residential-5.jpg"
 import res6 from "../resources/images/residential-6.jpg"
+import { ApiAssetService } from "../api/services/asset.service"
 
 
 // TODO: need to handle different number of listings loaded in
 export function Residential(props) {
     //load in residential stuff from server here, until then use dummy data below
+    let [listings, setListings] = React.useState()
+    let assetApiService = new ApiAssetService();
+    listings = residentialData;
+
+    // React.useEffect(() => {
+    //     async function getProperties() {
+    //         const res = await assetApiService.getAssets();
+    //         console.log(res.data);
+    //         const properties = res.data;
+    //         setListings(properties);
+    //     }
+    //     getProperties();
+    // }, [])
 
     //temporary preview array, once we get data loaded in from actual db we can query for just three properties
     let previewArr = []
     if (props.preview) {
-        Object.keys(residentialData).forEach((key, idx) => {
+        Object.keys(listings).forEach((key, idx) => {
             if (idx < 3) {
                 previewArr.push(key)
             }
@@ -46,13 +60,13 @@ export function Residential(props) {
                         {props.preview ?
                             previewArr.map(key =>
                                 <div key={key} className="l-grid__item">
-                                    <Listing listing={residentialData[key]}/>
+                                    <Listing listing={listings[key]}/>
                                 </div>
                             )
                         :
-                            Object.keys(residentialData).map(key => (
+                            Object.keys(listings).map(key => (
                                 <div key={key} className="l-grid__item">
-                                    <Listing listing={residentialData[key]}/>
+                                    <Listing listing={listings[key]}/>
                                 </div>
                             ))
                         }

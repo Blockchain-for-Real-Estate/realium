@@ -348,5 +348,3 @@ export function Home(props) {
         </>
     )
 }
-
-{/* export const page = JSON.stringify(enText); */}
