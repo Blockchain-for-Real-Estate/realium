@@ -19,16 +19,19 @@ export function Residential(props) {
     let [listings, setListings] = React.useState()
     let assetApiService = new ApiAssetService();
     listings = residentialData;
-
+    
     // React.useEffect(() => {
-    //     async function getProperties() {
-    //         const res = await assetApiService.getAssets();
-    //         console.log(res.data);
-    //         const properties = res.data;
-    //         setListings(properties);
-    //     }
-    //     getProperties();
-    // }, [])
+    //     const fetchData = async () => {
+    //         try {
+    //             const properties = await assetApiService.getAssets();
+    //             setListings(properties.data);
+    //         } catch {
+    //             setListings(residentialData);
+    //         };
+    //     };
+
+    //     fetchData();
+    // }, []);
 
     //temporary preview array, once we get data loaded in from actual db we can query for just three properties
     let previewArr = []

@@ -3,8 +3,7 @@ import axios from 'axios'
 import { Transaction } from "../interfaces/transaction.interface";
 
 export class ApiTransactionService {
-    constructor() { }
-  
+    
     public getTransactions() {
       return axios.get<Transaction>(
         `${environment.api}/api/transactions/`
