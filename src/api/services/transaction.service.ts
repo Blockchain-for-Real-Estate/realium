@@ -1,25 +1,30 @@
-import { avax_environment as environment} from "../../../environment"
+import { django_environment as environment} from "../../environment"
 import axios from 'axios'
 import { Transaction } from "../interfaces/transaction.interface";
 
 export class ApiTransactionService {
-    constructor() { }
-  
-    public getAsset() {
+    
+    public getTransactions() {
       return axios.get<Transaction>(
-        `${environment.api}/api/transactions`
+        `${environment.api}/api/transactions/`
       );
     }
+
+    public getTransactionsByAssetId(id: String) {
+        return axios.get<Transaction>(
+          `${environment.api}/api/transactions/${id}`
+        );
+    }
   
-    public postAsset(data: Transaction) {
+    public postTransaction(data: Transaction) {
       return axios.post<Transaction>(
-        `${environment.api}/api/transactions`,
+        `${environment.api}/api/transactions/`,
         data
       );
     }
   
     //may not be necessary
-    public patchAsset(data: Partial<Transaction>) {
+    public patchTransaction(data: Partial<Transaction>) {
       return axios.patch<Transaction>(
         `${environment.api}/api/transactions`,
         data

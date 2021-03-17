@@ -4,32 +4,82 @@ import { Listing } from "./listing"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faLongArrowAltRight } from '@fortawesome/free-solid-svg-icons'
 
-import res1 from "../assets/images/residential-1.jpg"
-import res2 from "../assets/images/residential-2.jpg"
-import res3 from "../assets/images/residential-3.jpg"
-import res4 from "../assets/images/residential-4.jpg"
-import res5 from "../assets/images/residential-5.jpg"
-import res6 from "../assets/images/residential-6.jpg"
+import res1 from "../resources/images/residential-1.jpg"
+import res2 from "../resources/images/residential-2.jpg"
+import res3 from "../resources/images/residential-3.jpg"
+import res4 from "../resources/images/residential-4.jpg"
+import res5 from "../resources/images/residential-5.jpg"
+import res6 from "../resources/images/residential-6.jpg"
+import { ApiAssetService } from "../api/services/asset.service"
 
 
 // TODO: need to handle different number of listings loaded in
 export function Residential(props) {
     //load in residential stuff from server here, until then use dummy data below
+    let [listings, setListings] = React.useState()
+    let assetApiService = new ApiAssetService();
+    listings = residentialData;
+    
+    // React.useEffect(() => {
+    //     const fetchData = async () => {
+    //         try {
+    //             const properties = await assetApiService.getAssets();
+    //             setListings(properties.data);
+    //         } catch {
+    //             setListings(residentialData);
+    //         };
+    //     };
+
+    //     fetchData();
+    // }, []);
+
+    //temporary preview array, once we get data loaded in from actual db we can query for just three properties
+    let previewArr = []
+    if (props.preview) {
+        Object.keys(listings).forEach((key, idx) => {
+            if (idx < 3) {
+                previewArr.push(key)
+            }
+        })
+    }
+
     return (
         <>
-            <div className="font-weight-bold mb-2" style={{"fontSize": "1.3rem"}}>Residential Properties For Sale</div>
-            <div className="text-muted mb-3">Create an investment portfolio that's diversified residential real estate.</div>
-            <div className="l-grid l-grid--c3">
-                {Object.keys(residentialData).map(key => (
-                    <div key={key} className="l-grid__item">
-                        <Listing listing={residentialData[key]}/>
+            {/* Explore Marketplace */}
+            <div className="relative bg-gray-50 pt-16 pb-20 px-4 sm:px-6 lg:pt-24 lg:pb-28 lg:px-8">
+                <div className="absolute inset-0">
+                    <div className="bg-white h-1/3 sm:h-2/3"/>
+                </div>
+                <div className="relative max-w-7xl mx-auto">
+                    <div className="text-center">
+                        <h2 className="text-3xl tracking-tight font-extrabold text-gray-900 sm:text-4xl">
+                            Explore the Marketplace
+                        </h2>
+                        <p className="mt-3 max-w-2xl mx-auto text-xl text-gray-500 sm:mt-4">
+                            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ipsa libero labore natus atque, ducimus sed.
+                        </p>
                     </div>
-                ))}
-            </div>
-            <div className="float-right" style={{"fontSize": "0.9rem"}}>
-                <Link to="/marketplace/residential" className="text-decoration-none text-muted">
-                    Explore <FontAwesomeIcon icon={faLongArrowAltRight}/>
-                </Link>
+                    <div className="mt-12 max-w-lg mx-auto grid gap-5 lg:grid-cols-3 lg:max-w-none">
+                        {props.preview ?
+                            previewArr.map(key =>
+                                <div key={key} className="l-grid__item">
+                                    <Listing listing={listings[key]}/>
+                                </div>
+                            )
+                        :
+                            Object.keys(listings).map(key => (
+                                <div key={key} className="l-grid__item">
+                                    <Listing listing={listings[key]}/>
+                                </div>
+                            ))
+                        }
+                    </div>
+                    <div className="float-right" style={{"fontSize": "0.9rem"}}>
+                        <Link to="/marketplace/residential" className="text-decoration-none text-muted">
+                            Explore <FontAwesomeIcon icon={faLongArrowAltRight}/>
+                        </Link>
+                    </div>
+                </div>
             </div>
         </>
     )

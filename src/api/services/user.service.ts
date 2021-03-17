@@ -1,4 +1,4 @@
-import { django_environment as environment } from "../../../environment"
+import { django_environment as environment } from "../../environment"
 import axios from 'axios'
 import { User } from "../interfaces/user.interface";
 
