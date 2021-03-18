@@ -3,6 +3,10 @@ import * as bs from "react-bootstrap"
 import { useHistory } from "react-router-dom"
 //import { titleCase } from "title-case"
 import NumberFormat from 'react-number-format'
+import { ApiAssetService } from '../api/services/asset.service'
+import { StaticNavBar } from '../utilities/static-nav-bar'
+import res1 from "../resources/images/residential-1.jpg"
+import { Transactions } from "./transactions"
 
 import typeIcon from "../resources/images/purple_prop_type.png"
 import yearIcon from "../resources/images/purple_year_built_icon.png"
