@@ -32,7 +32,7 @@ export function NavItems(props) {
                     <Link className="font-medium text-gray-500 hover:text-gray-900" to="/invest">
                         Invest
                     </Link>
-                    <Link className="font-medium text-gray-500 hover:text-gray-900" to="/">
+                    <Link className="font-medium text-gray-500 hover:text-gray-900" to="/login">
                         Log in
                     </Link>
                 </div>
