@@ -5,7 +5,7 @@ export function Transactions(props) {
     let [transactions, setTransactions] = React.useState();
     let transactionViaApi = new ApiTransactionService();
 
-    const assetId = "30bb28e6-7b16-4d01-8e55-4be1c0f551ce";
+    const assetId = "09493dc1-46d9-47a2-a077-6a273d4ec0d9";
 
     React.useEffect(() => {
         try {
@@ -15,7 +15,6 @@ export function Transactions(props) {
                     setTransactions(txs);
                 }
             )
-        //} 
         } catch {
             setTransactions(null);
         }

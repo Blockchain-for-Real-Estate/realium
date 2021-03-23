@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useEffect, useState } from "react"
 import { Link } from "react-router-dom"
 import { Listing } from "./listing"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -16,22 +16,21 @@ import res6 from "../resources/images/residential-6.jpg"
 // TODO: need to handle different number of listings loaded in
 export function Residential(props) {
     //load in residential stuff from server here, until then use dummy data below
-    let [listings, setListings] = React.useState()
+    let [listings, setListings] = useState('')
     let assetApiService = new ApiAssetService();
-    listings = residentialData;
-    
-    // React.useEffect(() => {
-    //     const fetchData = async () => {
-    //         try {
-    //             const properties = await assetApiService.getAssets();
-    //             setListings(properties.data);
-    //         } catch {
-    //             setListings(residentialData);
-    //         };
-    //     };
 
-    //     fetchData();
-    // }, []);
+    useEffect(() => {
+        getAllProperties();
+    }, []);
+    
+    const getAllProperties = async () => {
+        await assetApiService.getAssets().then(
+            (res) => {
+                const properties = res.data;
+                setListings(properties);
+            }
+        ).catch(error => console.error(`Error: ${error}`));
+    }
 
     //temporary preview array, once we get data loaded in from actual db we can query for just three properties
     let previewArr = []

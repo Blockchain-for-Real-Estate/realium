@@ -1,7 +1,6 @@
 import React from "react"
 import * as bs from "react-bootstrap"
 import { useHistory } from "react-router-dom"
-//import { titleCase } from "title-case"
 import NumberFormat from 'react-number-format'
 import { ApiAssetService } from '../api/services/asset.service'
 import { StaticNavBar } from '../utilities/static-nav-bar'
@@ -19,15 +18,12 @@ export function ListingDetails(props) {
     let [listing, setListing] = React.useState()
     let assetViaApi = new ApiAssetService();
 
-    const assetId = "30bb28e6-7b16-4d01-8e55-4be1c0f551ce";
-
     React.useEffect(() => {
         const fetchData = async () => {
             try {
-                await assetViaApi.getAssetById(assetId).then(
+                await assetViaApi.getAssetById(props.id).then(
                     res => {
-                        const asset = res.data;
-                        setListing(asset);
+                        setListing(res.data);
                     }
                 )
             } catch {
@@ -199,7 +195,7 @@ export function ListingDetails(props) {
                 </>
                 }
                 {listing &&
-                    <Transactions listing={listing} assetId={assetId}/>
+                    <Transactions listing={listing} assetId={props.id}/>
                 }
             </>
         </>
