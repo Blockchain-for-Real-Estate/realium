@@ -3,15 +3,37 @@ import { useHistory } from "react-router-dom"
 import NumberFormat from "react-number-format"
 
 import comingSoon from "../resources/images/coming-soon.jpg"
+import res1 from "../resources/images/residential-1.jpg"
+import res2 from "../resources/images/residential-2.jpg"
+import res3 from "../resources/images/residential-3.jpg"
+import res4 from "../resources/images/residential-4.jpg"
+import res5 from "../resources/images/residential-5.jpg"
+import res6 from "../resources/images/residential-6.jpg"
+import com1 from "../resources/images/commercial-1.jpg"
+import com2 from "../resources/images/commercial-2.jpg"
+import com3 from "../resources/images/commercial-3.jpg"
+import com4 from "../resources/images/commercial-4.jpg"
+import com5 from "../resources/images/commercial-5.jpg"
+import com6 from "../resources/images/commercial-6.jpg"
 
 export function Listing(props) {
     let history = useHistory()
+    const residentialImages = [
+        res1, res2, res3, res4, res5, res6
+    ]
+    const commercialImages = [
+        com1, com2, com3, com4, com5, com6
+    ]
 
     return (
         <div className="flex flex-col rounded-lg shadow-lg overflow-hidden" onClick={() => history.push(`/marketplace/${props.listing.listingType}/${props.listing.assetId}`)}>
             <div className="flex-shrink-0">
-                <img className="h-48 w-full object-cover" src={props.listing.image || comingSoon} alt={props.listing.streetAddress} />
-            </div>
+                {props.listing.listingType === "Residential" ?
+                    <img className="h-48 w-full object-cover" src={residentialImages[props.index] || comingSoon} alt={props.listing.streetAddress} />
+                    :
+                    <img className="h-48 w-full object-cover" src={commercialImages[props.index] || comingSoon} alt={props.listing.streetAddress} />
+                }
+                </div>
             <div className="flex-1 bg-white p-6 flex flex-col justify-between">
                 <div className="flex-1">
                     <p className="text-sm font-medium text-indigo-600">
@@ -31,24 +53,6 @@ export function Listing(props) {
                             prefix={'Share Price: $'}
                         />
                     </p>
-                </div>
-                <div className="mt-6 flex items-center">
-                    <div className="flex-shrink-0">
-                        <a href="/">
-                            <span className="sr-only">Roel Aufderehar</span>
-                            <img className="h-10 w-10 rounded-full" src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixqx=9RaZNtwCUv&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="" />
-                        </a>
-                    </div>
-                    <div className="ml-3">
-                        <a href="/" className="hover:underline text-gray-800 text-sm">
-                        Roel Aufderehar
-                        </a>
-                        <div className="flex space-x-1 text-sm text-gray-500">
-                            <time dateTime="2020-03-16">
-                            March 10, 2021
-                            </time>
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>

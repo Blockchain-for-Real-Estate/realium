@@ -44,15 +44,15 @@ export function Commercial(props) {
                     </div>
                     <div className="mt-12 max-w-lg mx-auto grid gap-5 lg:grid-cols-3 lg:max-w-none">
                         {props.preview ?
-                            previewArr.map(key =>
+                            previewArr.map((key, idx) =>
                                 <div key={key} className="l-grid__item">
-                                    <Listing listing={commercialData[key]}/>
+                                    <Listing listing={commercialData[key]} index={idx}/>
                                 </div>
                             )
                         :
-                            Object.keys(commercialData).map(key => (
+                            Object.keys(commercialData).map((key, idx) => (
                                 <div key={key} className="l-grid__item">
-                                    <Listing listing={commercialData[key]}/>
+                                    <Listing listing={commercialData[key]} index={idx}/>
                                 </div>
                             ))
                         }

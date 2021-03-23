@@ -60,15 +60,15 @@ export function Residential(props) {
                     </div>
                     <div className="mt-12 max-w-lg mx-auto grid gap-5 lg:grid-cols-3 lg:max-w-none">
                         {props.preview ?
-                            previewArr.map(key =>
+                            previewArr.map((key, idx) =>
                                 <div key={key} className="l-grid__item">
-                                    <Listing listing={listings[key]}/>
+                                    <Listing listing={listings[key]} index={idx}/>
                                 </div>
                             )
                         :
-                            Object.keys(listings).map(key => (
+                            Object.keys(listings).map((key, idx) => (
                                 <div key={key} className="l-grid__item">
-                                    <Listing listing={listings[key]}/>
+                                    <Listing listing={listings[key]} index={idx}/>
                                 </div>
                             ))
                         }
