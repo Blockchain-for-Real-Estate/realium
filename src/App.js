@@ -7,6 +7,7 @@ import { Marketplace } from "./marketplace"
 import { Tokenization } from "./tokenization"
 import { Invest } from "./invest"
 import { Login } from "./login"
+import { Dashboard } from "./home/dashboard"
 import { Explore } from "./marketplace/explore"
 import { Purchase } from "./marketplace/purchase"
 import { Footer } from "./utilities/footer"
@@ -18,7 +19,7 @@ function App() {
 		<Router>
 			<Switch>
 				<Route exact path="/">
-					<Home content={enText}/>
+					<Home />
 				</Route>
 				<Route path="/marketplace" exact>
 					<Marketplace />
@@ -33,13 +34,14 @@ function App() {
 					<TestContract />
 				</Route>
 				<Route path="/tokenization" exact>
-					<Tokenization content={enText}/>
+					<Tokenization />
 				</Route>
 				<Route path="/invest" exact>
-					<Invest content={enText}/>
+					<Invest />
 				</Route>
 				<Route path="/about" component={About} />
 				<Route path="/login" component={Login} />
+				<Route path="/dashboard" component={Dashboard} />
 			</Switch>
 			<div className="u-margin-top-quad"></div>
 			<Footer />

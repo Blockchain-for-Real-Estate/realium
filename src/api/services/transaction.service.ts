@@ -26,7 +26,7 @@ export class ApiTransactionService {
     //may not be necessary
     public patchTransaction(data: Partial<Transaction>) {
       return axios.patch<Transaction>(
-        `${environment.api}/api/transactions`,
+        `${environment.api}/api/transactions/`,
         data
       );
     }

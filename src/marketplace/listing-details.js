@@ -3,7 +3,7 @@ import * as bs from "react-bootstrap"
 import { useHistory } from "react-router-dom"
 import NumberFormat from 'react-number-format'
 import { ApiAssetService } from '../api/services/asset.service'
-import { StaticNavBar } from '../utilities/static-nav-bar'
+import { NavItems } from '../utilities/nav-items'
 import res1 from "../resources/images/residential-1.jpg"
 import { Transactions } from "./transactions"
 
@@ -39,7 +39,7 @@ export function ListingDetails(props) {
         {!loading ? 
             <>
                 <div className="u-padding-top-double u-margin-bottom-quad">
-                    <StaticNavBar />
+                    <NavItems />
                 </div>
             <>  {listing &&
                 <>

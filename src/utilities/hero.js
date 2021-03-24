@@ -14,14 +14,22 @@ export function Hero(props) {
                         <polygon points="50,0 100,0 50,100 0,100" />
                     </svg>
 
-                    <div className="relative pt-6 px-4 sm:px-6 lg:px-8">
+                    <div className="relative pt-10 px-2 sm:px-6 lg:px-8">
                         <nav className="relative flex items-center justify-between sm:h-10 lg:justify-start" aria-label="Global">
                         <div className="flex items-center flex-grow flex-shrink-0 lg:flex-grow-0">
                             <div className="flex items-center justify-between w-full md:w-auto">
-                            <a href="/">
-                                <span className="sr-only">Workflow</span>
-                                <img className="h-8 w-auto sm:h-10" src={logo} alt="Realium"/>
-                            </a>
+                            {/* Home if logged out - Personal Dashboard if logged in */}
+                            {localStorage.getItem('token') === null ? 
+                                <a href="/">
+                                    <span className="sr-only">Workflow</span>
+                                    <img className="h-12 w-auto sm:h-16" src={logo} alt="Realium"/>
+                                </a>
+                                :
+                                <a href="/dashboard">
+                                    <span className="sr-only">Workflow</span>
+                                    <img className="h-12 w-auto sm:h-16" src={logo} alt="Realium"/>
+                                </a>
+                            }   
                             <div className="-mr-2 flex items-center md:hidden">
                                 <button type="button" className="bg-white rounded-md p-2 inline-flex items-center justify-center text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500" aria-expanded="false">
                                 <span className="sr-only">Open main menu</span>
@@ -33,7 +41,7 @@ export function Hero(props) {
                             </div>
                             </div>
                         </div>
-                        <div className="hidden md:block md:ml-10 md:pr-4 md:space-x-8">
+                        <div className="hidden md:block md:ml-4 md:pr-4 md:space-x-8">
                             <NavItems />
                         </div>
                         </nav>

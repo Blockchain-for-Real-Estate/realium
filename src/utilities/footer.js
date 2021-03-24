@@ -9,11 +9,11 @@ export function Footer(props) {
         <div className="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:py-16 lg:px-8">
             <div className="xl:grid xl:grid-cols-3 xl:gap-8">
             <div className="space-y-8 xl:col-span-1">
-                <img className="h-10" src={logo} alt="Realium"/>
+                <img className="h-20" src={logo} alt="Realium"/>
                 <p className="text-gray-500 text-base">
                 Realium is a financial technology company that assists in purchase, sale, and legal compliance of tokenized real estate assets.
                 </p>
-                <div className="flex space-x-6">
+                <div className="flex space-x-8">
                 <a href="/" className="text-gray-400 hover:text-gray-500">
                     <span className="sr-only">Facebook</span>
                     <svg className="h-6 w-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
@@ -63,12 +63,12 @@ export function Footer(props) {
                         </Link>
                     </li>
                     <li>
-                        <a href="/" className="text-base text-gray-500 hover:text-gray-900">
+                        <a href="/tokenization" className="text-base text-gray-500 hover:text-gray-900">
                         Tokenization
                         </a>
                     </li>
                     <li>
-                        <a href="/" className="text-base text-gray-500 hover:text-gray-900">
+                        <a href="/invest" className="text-base text-gray-500 hover:text-gray-900">
                         Investments
                         </a>
                     </li>

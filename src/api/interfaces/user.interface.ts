@@ -5,4 +5,6 @@ export interface User {
     kycVerified: boolean;
     walletAddress: string;
     email: string;
+    avaxusername: string;
+    avaxpassword: string;
 }

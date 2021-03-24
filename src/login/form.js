@@ -1,30 +1,43 @@
 import React from "react"
+import { useHistory } from "react-router-dom"
 import { Formik, Field, Form, ErrorMessage } from "formik"
 import * as Yup from "yup"
-
+import { ApiUserService } from "../api/services/user.service"
 
 export function LoginForm(props) {
+    let history = useHistory();
+    const userService = new ApiUserService();
     return (
         <Formik
             validateOnChange={false}
             validateOnBlur={false}
-            initialValues={{  email: '', password: '' }}
+            initialValues={{  username: '', password: '' }}
             validationSchema={Yup.object({
-                email: Yup.string().email()
+                username: Yup.string()
                     .required('Please enter your email.'),
                 password: Yup.string()
                     .required('Please enter a password.')
             })}
             onSubmit={(values, { setSubmitting }) => {
-                console.log(values)
+                userService.login(values).then(
+                    (response) => {
+                        localStorage.setItem('token', response.data.token)
+                        if (response.status === 200) {
+                            history.push(`/dashboard`)
+                        }
+                    }
+                ).catch(error => {
+                    console.error(error);
+                    alert("Login failed - recheck your username and password");
+                })
             }}
         >
             <Form>
                 <div className="space-y-6">
                     <div>
                         <label htmlFor="email" className="block text-sm font-medium text-gray-700">Email address</label>
-                        <Field name="email" type="email" className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"/>
-                        <ErrorMessage name="email" />
+                        <Field name="username" type="email" className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"/>
+                        <ErrorMessage name="username" />
                     </div>
 
                     <div className="space-y-1">

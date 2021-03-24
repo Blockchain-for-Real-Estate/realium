@@ -6,12 +6,14 @@ export interface Asset {
     propertyType: string;
     legalTypeId: number;
     tokenId: string;
+    tokenName: string;
     parcelId: string;
     streetAddress: string;
     city: string;
     state: string;
     zipCode: string;
-    price: number;
+    originalPrice: number;
+    listedPrice: number;
     funded: number;
     forcastedIncome: number;
     minInvestment: number;
@@ -21,4 +23,6 @@ export interface Asset {
     country: string;
     acerage: number;
     llc: string;
+    details: JSON;
+    listed: boolean;
 }
