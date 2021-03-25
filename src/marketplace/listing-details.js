@@ -57,15 +57,30 @@ export function ListingDetails(props) {
                         </bs.Row>
                     </div>
                     <bs.Row>
-                        <bs.Col md={8}>
+                        <bs.Col md={7}>
                             <div className="text-center mb-2">
-                                <img src={res1} alt={listing.propertyType}/>
+                                <img src={res1} alt={listing.propertyType} className="object-cover h-80 w-full"/>
                             </div>
+                            <bs.Row className="text-center mb-5">
+                                <bs.Col>
+                                    <img src={res1} alt={listing.propertyType} className="object-fill h-30 w-full"/>
+                                </bs.Col>
+                                <bs.Col>
+                                    <img src={res1} alt={listing.propertyType} className="object-fill h-30 w-full"/>
+                                </bs.Col>
+                                <bs.Col>
+                                    <img src={res1} alt={listing.propertyType} className="object-fill h-30 w-full"/>
+                                </bs.Col>
+                                <bs.Col>
+                                    <img src={res1} alt={listing.propertyType} className="object-fill h-30 w-full"/>
+                                </bs.Col>
+                            </bs.Row>
                             <div className="font-weight-bold" style={{"fontSize": "1.1rem"}}>Description</div>
                             <div>
                                 Property is located in {listing.city}, {listing.state} for a steal at {<NumberFormat value={listing.price} displayType={'text'} thousandSeparator={true} prefix={'$'}/>}.
                             </div>
                         </bs.Col>
+                        <bs.Col md={1} />
                         <bs.Col md={4}>
                             <bs.ProgressBar className="mb-3" now={listing.funded/listing.price*100} style={{"height": "0.1rem"}}/>
                             <div className="mb-3">

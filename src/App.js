@@ -4,8 +4,7 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom"
 import { Home } from "./home"
 import { About } from "./about"
 import { Marketplace } from "./marketplace"
-import { Tokenization } from "./tokenization"
-import { Invest } from "./invest"
+import { HowItWorks } from "./howitworks"
 import { Login } from "./login"
 import { Dashboard } from "./home/dashboard"
 import { Explore } from "./marketplace/explore"
@@ -33,11 +32,8 @@ function App() {
 				<Route path="/marketplace/testcontract" exact>
 					<TestContract />
 				</Route>
-				<Route path="/tokenization" exact>
-					<Tokenization />
-				</Route>
-				<Route path="/invest" exact>
-					<Invest />
+				<Route path="/howitworks" exact>
+					<HowItWorks />
 				</Route>
 				<Route path="/about" component={About} />
 				<Route path="/login" component={Login} />

@@ -10,11 +10,8 @@ export function NavItems(props) {
                         <Link className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50" to="/marketplace">
                             Marketplace
                         </Link>
-                        <Link className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50" to="/tokenization">
-                            Tokenization
-                        </Link>
-                        <Link className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50" to="/invest">
-                            Invest
+                        <Link className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50" to="/howitworks">
+                            How It Works
                         </Link>
                     </div>
                     {localStorage.getItem('token') === null ? 
@@ -28,15 +25,12 @@ export function NavItems(props) {
                     }
                 </>
             :
-                <div className="hidden md:block md:ml-10 md:pr-4 md:space-x-6">
+                <div className="hidden md:block md:ml-10 md:pr-4 md:space-x-10">
                     <Link className="font-medium text-gray-500 hover:text-gray-900" to="/marketplace">
                         Marketplace
                     </Link>
-                    <Link className="font-medium text-gray-500 hover:text-gray-900" to="/tokenization">
-                        Tokenization
-                    </Link>
-                    <Link className="font-medium text-gray-500 hover:text-gray-900" to="/invest">
-                        Invest
+                    <Link className="font-medium text-gray-500 hover:text-gray-900" to="/howitworks">
+                        How It Works
                     </Link>
                     {localStorage.getItem('token') === null ? 
                     <Link className="font-medium rounded-md text-white bg-indigo-500 hover:bg-indigo-700 md:py-3 md:text-md md:px-4" to="/login">
