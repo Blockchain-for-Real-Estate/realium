@@ -10,9 +10,9 @@ export class ApiTransactionService {
       );
     }
 
-    public getTransactionsByAssetId(id: String) {
+    public getFilteredTransactions(query: String) {
         return axios.get<Transaction>(
-          `${environment.api}/api/transactions/${id}`
+          `${environment.api}/api/transactions/${query}`
         );
     }
   

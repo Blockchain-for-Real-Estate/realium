@@ -4,13 +4,14 @@ import { useHistory } from "react-router-dom"
 import NumberFormat from 'react-number-format'
 import { ApiAssetService } from '../api/services/asset.service'
 import { NavItems } from '../utilities/nav-items'
-import res1 from "../resources/images/residential-1.jpg"
+import res1 from "../resources/images/residential-2.jpg"
 import { Transactions } from "./transactions"
 
 import typeIcon from "../resources/images/purple_prop_type.png"
 import yearIcon from "../resources/images/purple_year_built_icon.png"
 import sqFtIcon from "../resources/images/purple_sq_footage_icon.png"
 import priceIcon from "../resources/images/purple_price_icon.png"
+import { DetailsTable } from "./details-table"
 
 export function ListingDetails(props) {
     let history = useHistory()
@@ -38,11 +39,11 @@ export function ListingDetails(props) {
         <>
         {!loading ? 
             <>
-                <div className="u-padding-top-double u-margin-bottom-quad">
-                    <NavItems />
+                <div className="p-8 mb-4">
+                    <NavItems/>
                 </div>
             <>  {listing &&
-                <>
+                <div className="mb-12">
                     <div className="border-bottom mb-4">
                         <bs.Row className="mb-2">
                             <div style={{"fontSize": "1.3rem"}} className="font-weight-bold">{listing.propertyType} in {listing.city}, {listing.state}</div >
@@ -58,7 +59,7 @@ export function ListingDetails(props) {
                     </div>
                     <bs.Row>
                         <bs.Col md={7}>
-                            <div className="text-center mb-2">
+                            <div className="text-center mb-4">
                                 <img src={res1} alt={listing.propertyType} className="object-cover h-80 w-full"/>
                             </div>
                             <bs.Row className="text-center mb-5">
@@ -76,8 +77,9 @@ export function ListingDetails(props) {
                                 </bs.Col>
                             </bs.Row>
                             <div className="font-weight-bold" style={{"fontSize": "1.1rem"}}>Description</div>
-                            <div>
-                                Property is located in {listing.city}, {listing.state} for a steal at {<NumberFormat value={listing.price} displayType={'text'} thousandSeparator={true} prefix={'$'}/>}.
+                            <div className="mb-8">
+                                Property is located in {listing.city}, {listing.state} for a steal at {<NumberFormat value={listing.price} displayType={'text'} thousandSeparator={true} prefix={'$'}/>}. {/*{listing.description}*/}
+                                Anim aute id magna aliqua ad ad non deserunt sunt. Qui irure qui lorem cupidatat commodo. Elit sunt amet fugiat veniam occaecat fugiat aliqua. Anim aute id magna aliqua ad ad non deserunt sunt. Qui irure qui lorem cupidatat commodo. Elit sunt amet fugiat veniam occaecat fugiat aliqua. Anim aute id magna aliqua ad ad non deserunt sunt. Qui irure qui lorem cupidatat commodo. Elit sunt amet fugiat veniam occaecat fugiat aliqua. Anim aute id magna aliqua ad ad non deserunt sunt. Qui irure qui lorem cupidatat commodo. Elit sunt amet fugiat veniam occaecat fugiat aliqua.
                             </div>
                         </bs.Col>
                         <bs.Col md={1} />
@@ -207,8 +209,11 @@ export function ListingDetails(props) {
                             </div>
                         </bs.Col>
                     </bs.Row>
-                </>
+                </div>
                 }
+                <div className="mb-8">
+                    <DetailsTable listing={listing} />
+                </div>
                 {listing &&
                     <Transactions listing={listing} assetId={props.id}/>
                 }
