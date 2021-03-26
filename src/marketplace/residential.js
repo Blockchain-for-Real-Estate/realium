@@ -26,7 +26,7 @@ export function Residential(props) {
     const getAllProperties = async () => {
         await assetApiService.getAssets().then(
             (res) => {
-                const properties = res.data;
+                const properties = res.data.assets;
                 setListings(properties);
             }
         ).catch(error => console.error(`Error: ${error}`));

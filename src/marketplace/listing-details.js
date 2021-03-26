@@ -1,30 +1,34 @@
 import React from "react"
 import * as bs from "react-bootstrap"
-import { useHistory } from "react-router-dom"
 import NumberFormat from 'react-number-format'
 import { ApiAssetService } from '../api/services/asset.service'
 import { NavItems } from '../utilities/nav-items'
 import res1 from "../resources/images/residential-2.jpg"
 import { Transactions } from "./transactions"
+import { Modal } from "../utilities/modal"
 
 import typeIcon from "../resources/images/purple_prop_type.png"
 import yearIcon from "../resources/images/purple_year_built_icon.png"
 import sqFtIcon from "../resources/images/purple_sq_footage_icon.png"
 import priceIcon from "../resources/images/purple_price_icon.png"
 import { DetailsTable } from "./details-table"
+import styled from 'styled-components'
 
 export function ListingDetails(props) {
-    let history = useHistory()
-    let loading = false;
+    let loading;
     let [listing, setListing] = React.useState()
     let assetViaApi = new ApiAssetService();
+
+    const Image = styled.img`
+        border:1px solid grey;
+    `
 
     React.useEffect(() => {
         const fetchData = async () => {
             try {
                 await assetViaApi.getAssetById(props.id).then(
                     res => {
-                        setListing(res.data);
+                        setListing(res.data.assets[0]);
                     }
                 )
             } catch {
@@ -50,7 +54,7 @@ export function ListingDetails(props) {
                         </bs.Row>
                         <bs.Row className="justify-content-between mb-4">
                             <div>
-                                {listing.streetAddress} {listing.city}, {listing.state} {listing.zipCode}
+                                {listing.streetAddress} | {listing.city}, {listing.state} | {listing.zipCode}
                             </div>
                             <div>
                                 Marketplace > {listing.listingType} Properties
@@ -60,25 +64,25 @@ export function ListingDetails(props) {
                     <bs.Row>
                         <bs.Col md={7}>
                             <div className="text-center mb-4">
-                                <img src={res1} alt={listing.propertyType} className="object-cover h-80 w-full"/>
+                                <Image src={res1} alt={listing.propertyType} className="object-fill h-90 w-full"/>
                             </div>
                             <bs.Row className="text-center mb-5">
                                 <bs.Col>
-                                    <img src={res1} alt={listing.propertyType} className="object-fill h-30 w-full"/>
+                                    <Image src={res1} alt={listing.propertyType} className="object-fill h-30 w-full"/>
                                 </bs.Col>
                                 <bs.Col>
-                                    <img src={res1} alt={listing.propertyType} className="object-fill h-30 w-full"/>
+                                    <Image src={res1} alt={listing.propertyType} className="object-fill h-30 w-full"/>
                                 </bs.Col>
                                 <bs.Col>
-                                    <img src={res1} alt={listing.propertyType} className="object-fill h-30 w-full"/>
+                                    <Image src={res1} alt={listing.propertyType} className="object-fill h-30 w-full"/>
                                 </bs.Col>
                                 <bs.Col>
-                                    <img src={res1} alt={listing.propertyType} className="object-fill h-30 w-full"/>
+                                    <Image src={res1} alt={listing.propertyType} className="object-fill h-30 w-full"/>
                                 </bs.Col>
                             </bs.Row>
                             <div className="font-weight-bold" style={{"fontSize": "1.1rem"}}>Description</div>
                             <div className="mb-8">
-                                Property is located in {listing.city}, {listing.state} for a steal at {<NumberFormat value={listing.price} displayType={'text'} thousandSeparator={true} prefix={'$'}/>}. {/*{listing.description}*/}
+                                Property is located in {listing.city}, {listing.state} for a steal at {<NumberFormat value={listing.purchasedPrice} displayType={'text'} thousandSeparator={true} prefix={'$'}/>}. {/*{listing.description}*/}
                                 Anim aute id magna aliqua ad ad non deserunt sunt. Qui irure qui lorem cupidatat commodo. Elit sunt amet fugiat veniam occaecat fugiat aliqua. Anim aute id magna aliqua ad ad non deserunt sunt. Qui irure qui lorem cupidatat commodo. Elit sunt amet fugiat veniam occaecat fugiat aliqua. Anim aute id magna aliqua ad ad non deserunt sunt. Qui irure qui lorem cupidatat commodo. Elit sunt amet fugiat veniam occaecat fugiat aliqua. Anim aute id magna aliqua ad ad non deserunt sunt. Qui irure qui lorem cupidatat commodo. Elit sunt amet fugiat veniam occaecat fugiat aliqua.
                             </div>
                         </bs.Col>
@@ -94,7 +98,7 @@ export function ListingDetails(props) {
                                         thousandSeparator={true}
                                         prefix={'$'}
                                     /> / <NumberFormat
-                                            value={listing.price}
+                                            value={listing.purchasedPrice}
                                             displayType={'text'}
                                             thousandSeparator={true}
                                             prefix={'$'}
@@ -186,7 +190,7 @@ export function ListingDetails(props) {
                                             </td>
                                             <td>
                                                 <NumberFormat
-                                                    value={listing.price}
+                                                    value={listing.purchasedPrice}
                                                     displayType={'text'}
                                                     thousandSeparator={true}
                                                     prefix={'$'}
@@ -197,11 +201,7 @@ export function ListingDetails(props) {
                                 </bs.Table>
                             </div>
                             <div className="border-bottom mb-4"/>
-                            <bs.Button block className="font-weight-bold mb-3" onClick={
-                                () => history.push(`/marketplace/${listing.listingType}/${listing.id}/purchase`)
-                            }>
-                                PURCHASE SHARES
-                            </bs.Button>
+                                <Modal text="PURCHASE SHARES" />
                             <div style={{"fontSize": "0.9rem"}} className="text-muted">
                                 *By purchasing shares of this asset,
                                 you become a part owner of this property

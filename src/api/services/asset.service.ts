@@ -12,7 +12,7 @@ export class ApiAssetService {
 
     public getAssetById(id: String) {
       return axios.get<Asset>(
-        `${environment.api}/api/assets/${id}`
+        `${environment.api}/api/assets?assetId=${id}`
       );
     }
   
