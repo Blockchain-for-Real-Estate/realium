@@ -19,7 +19,7 @@ export class ApiUserService {
 
     public login(data: JSON) {
       return axios.post(
-        `http://localhost:8000/api/auth/`,
+        `${environment.api}/api/auth/`,
         data
       );
     }
