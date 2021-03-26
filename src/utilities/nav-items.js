@@ -33,11 +33,11 @@ export function NavItems(props) {
                         How It Works
                     </Link>
                     {localStorage.getItem('token') === null ? 
-                    <Link className="font-medium rounded-md text-white bg-indigo-500 hover:bg-indigo-700 md:py-3 md:text-md md:px-4" to="/login">
+                    <Link className="font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 md:py-3 md:text-md md:px-4" to="/login">
                         Sign in
                     </Link>
                     :
-                    <Link className="font-medium rounded-md text-white bg-indigo-500 hover:bg-indigo-700 md:py-3 md:text-md md:px-4" to="/" onClick={() => localStorage.removeItem('token')}>
+                    <Link className="font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 md:py-3 md:text-md md:px-4" to="/" onClick={() => localStorage.removeItem('token')}>
                         Sign out
                     </Link>}
                 </div>
