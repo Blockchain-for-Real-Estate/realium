@@ -2,7 +2,7 @@
 
 name: Deploy React to S3
 
-# Controls when the action will run. 
+# Controls when the action will run.
 on:
   # Triggers the workflow on push or pull request events but only for the master branch
   push:
@@ -22,7 +22,7 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [8.x, 10.x, 12.x]
+        node-version: [12.x]
 
     steps:
     - uses: actions/checkout@v1
