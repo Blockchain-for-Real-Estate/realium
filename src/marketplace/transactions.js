@@ -2,11 +2,11 @@ import React from "react"
 import { ApiTransactionService } from "../api/services/transaction.service"
 
 export function Transactions(props) {
-    let [transactions, setTransactions] = React.useState();
-    let transactionViaApi = new ApiTransactionService();
+    let [transactions, setTransactions] = React.useState()
 
     React.useEffect(() => {
         try {
+            let transactionViaApi = new ApiTransactionService()
             transactionViaApi.getFilteredTransactions(`?assetId=${props.assetId}`).then(
                 res => {
                     const txs = res.data;
@@ -16,7 +16,7 @@ export function Transactions(props) {
         } catch {
             setTransactions(null);
         }
-    }, [])
+    }, [props.assetId])
 
     return (
         /* Transactions Table */
@@ -82,4 +82,4 @@ export function Transactions(props) {
             </div>
         </div>
     )
-}  
+}

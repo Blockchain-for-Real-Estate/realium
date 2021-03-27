@@ -17,7 +17,6 @@ import styled from 'styled-components'
 export function ListingDetails(props) {
     let loading;
     let [listing, setListing] = React.useState()
-    let assetViaApi = new ApiAssetService();
 
     const Image = styled.img`
         border:1px solid grey;
@@ -26,9 +25,10 @@ export function ListingDetails(props) {
     React.useEffect(() => {
         const fetchData = async () => {
             try {
+                let assetViaApi = new ApiAssetService()
                 await assetViaApi.getAssetById(props.id).then(
                     res => {
-                        setListing(res.data.assets[0]);
+                        setListing(res.data.assets[0])
                     }
                 )
             } catch {
@@ -36,12 +36,12 @@ export function ListingDetails(props) {
             }
         };
 
-        fetchData();
-    }, []);
+        fetchData()
+    }, [props.id])
 
     return (
         <>
-        {!loading ? 
+        {!loading ?
             <>
                 <div className="p-8 mb-4">
                     <NavItems/>

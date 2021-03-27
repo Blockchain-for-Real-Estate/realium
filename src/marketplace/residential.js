@@ -20,17 +20,17 @@ export function Residential(props) {
     let assetApiService = new ApiAssetService();
 
     useEffect(() => {
-        getAllProperties();
+        const getAllProperties = async () => {
+            await assetApiService.getAssets().then(
+                (res) => {
+                    const properties = res.data.assets
+                    setListings(properties)
+                }
+            ).catch(error => console.error(`Error: ${error}`))
+        }
+
+        getAllProperties()
     }, []);
-    
-    const getAllProperties = async () => {
-        await assetApiService.getAssets().then(
-            (res) => {
-                const properties = res.data.assets;
-                setListings(properties);
-            }
-        ).catch(error => console.error(`Error: ${error}`));
-    }
 
     //temporary preview array, once we get data loaded in from actual db we can query for just three properties
     let previewArr = []
