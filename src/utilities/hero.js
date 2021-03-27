@@ -1,11 +1,14 @@
 import React from "react"
 import { NavItems } from "../utilities/nav-items"
+import { Link } from "react-router-dom"
 import logo from "../resources/images/logo.svg"
 
 export function Hero(props) {
 
-    const content = (page) => {
+    const subheading = (page) => {
         switch(page) {
+            case 'marketplace':
+                return 'Explore properties listed on the Realium marketplace and compare evaluations to make the best-tailored investments for you.'
             case 'howitworks':
                 return 'Blockchain is changing how the world does business and how real estate is being transacted. Realium leverages these benefits to make investing in real estate even more beneficial for you.';
             case 'dashboard':
@@ -14,6 +17,35 @@ export function Hero(props) {
                 return 'Realium allows you to invest directly into residential real estate. Each transaction is run on a privately-held blockchain to remove the need for third party involvement.';
         }
       }
+
+    const title = (page) => {
+        switch(page) {
+            case 'marketplace':
+                return <>
+                <span className="block xl:inline">Build Out Your </span>
+                <span className="block text-indigo-600 xl:inline">Investment Portfolio</span>
+                <span className="block xl:inline"> and Start Earning</span>
+            </>
+            case 'howitworks':
+                return <>
+                <span className="block xl:inline">How Does  </span>
+                <span className="block text-indigo-600 xl:inline">Realium</span>
+                <span className="block xl:inline"> Work vs Traditional Real Estate Investing?</span>
+            </>
+            case 'dashboard':
+                return <>
+                <span className="block xl:inline">Welcome to </span>
+                <span className="block text-indigo-600 xl:inline">Your Personalized Dashboard</span>
+                <span className="block xl:inline"> For Realium Investments</span>
+            </>
+            default:
+                return <>
+                    <span className="block xl:inline">A </span>
+                    <span className="block text-indigo-600 xl:inline">Stock Market</span>
+                    <span className="block xl:inline"> For Residential Housing</span>
+                </>
+        }
+    }
 
     return (
         /* Hero section */
@@ -31,15 +63,15 @@ export function Hero(props) {
                             <div className="flex items-center justify-between w-full md:w-auto">
                             {/* Home if logged out - Personal Dashboard if logged in */}
                             {localStorage.getItem('token') === null ? 
-                                <a href="/">
+                                <Link to="/">
                                     <span className="sr-only">Workflow</span>
                                     <img className="h-12 w-auto sm:h-16" src={logo} alt="Realium"/>
-                                </a>
+                                </Link>
                                 :
-                                <a href="/dashboard">
+                                <Link to="/dashboard">
                                     <span className="sr-only">Workflow</span>
                                     <img className="h-12 w-auto sm:h-16" src={logo} alt="Realium"/>
-                                </a>
+                                </Link>
                             }   
                             <div className="-mr-2 flex items-center md:hidden">
                                 <button type="button" className="bg-white rounded-md p-2 inline-flex items-center justify-center text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500" aria-expanded="false">
@@ -90,23 +122,21 @@ export function Hero(props) {
                     <main className="mt-10 mx-auto max-w-7xl px-4 sm:mt-12 sm:px-6 md:mt-16 lg:mt-20 lg:px-8 xl:mt-28">
                         <div className="sm:text-center lg:text-left">
                         <h1 className="text-4xl tracking-tight font-extrabold text-gray-900 sm:text-5xl md:text-6xl">
-                            <span className="block xl:inline">A </span>
-                            <span className="block text-indigo-600 xl:inline">Stock Market</span>
-                            <span className="block xl:inline"> For Residential Housing</span>
+                            {title(props.page)}
                         </h1>
                         <p className="mt-3 text-base text-gray-500 sm:mt-5 sm:text-lg sm:max-w-xl sm:mx-auto md:mt-5 md:text-xl lg:mx-0">
-                            {content(props.page)}
+                            {subheading(props.page)}
                         </p>
                         <div className="mt-5 sm:mt-8 sm:flex sm:justify-center lg:justify-start">
                             <div className="rounded-md">
-                            <a href="/" className="w-full flex items-center justify-center px-8 py-3 shadow border-transparent text-base font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 md:py-4 md:text-lg md:px-10">
+                            <Link to="/" className="w-full flex items-center justify-center px-8 py-3 shadow border-transparent text-base font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 md:py-4 md:text-lg md:px-10">
                                 Get started
-                            </a>
+                            </Link>
                             </div>
                             <div className="sm:mt-0 sm:ml-3">
-                            <a href="/marketplace" className="w-full flex items-center justify-center px-8 py-3 border-transparent text-base font-medium rounded-md text-indigo-700 shadow hover:bg-indigo-200 md:py-4 md:text-lg md:px-10">
+                            <Link to="/marketplace" className="w-full flex items-center justify-center px-8 py-3 border-transparent text-base font-medium rounded-md text-indigo-700 shadow hover:bg-indigo-200 md:py-4 md:text-lg md:px-10">
                                 View Marketplace
-                            </a>
+                            </Link>
                             </div>
                         </div>
                         </div>

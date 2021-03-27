@@ -7,7 +7,7 @@ export function Transactions(props) {
     React.useEffect(() => {
         try {
             let transactionViaApi = new ApiTransactionService()
-            transactionViaApi.getFilteredTransactions(`?assetId=${props.assetId}`).then(
+            transactionViaApi.getFilteredTransactions(props.assetId).then(
                 res => {
                     const txs = res.data;
                     setTransactions(txs);

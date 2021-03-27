@@ -1,7 +1,7 @@
 export const django_environment = {
     //wherever the django api is deployed to
     //api: "https://api.realium.io",
-    api: "http://3.135.215.176"
+    api: "https://api.realium.io"
     //api: "http://localhost:8000"
 }
 

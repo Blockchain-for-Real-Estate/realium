@@ -232,7 +232,7 @@ const residentialData = {
     city: 'Provo',
     state: 'UT',
     zipCode: 84601,
-    price: 500400.00,
+    purchasedPrice: 500400.00,
     funded: 375300.00,
     listingType: 'Residential',
     propertyType: 'Single Family Home',

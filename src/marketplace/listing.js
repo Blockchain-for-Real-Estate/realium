@@ -26,7 +26,7 @@ export function Listing(props) {
     ]
 
     return (
-        <div className="flex flex-col rounded-lg shadow-lg overflow-hidden" onClick={() => history.push(`/marketplace/${props.listing.listingType}/${props.listing.assetId}`)}>
+        <div className="flex flex-col rounded-lg shadow-lg overflow-hidden" style={{cursor: "pointer"}}onClick={() => history.push(`/marketplace/${props.listing.listingType}/${props.listing.assetId}`)}>
             <div className="flex-shrink-0">
                 {props.listing.listingType === "Residential" ?
                     <img className="h-48 w-full object-cover" src={residentialImages[props.index] || comingSoon} alt={props.listing.streetAddress} />
