@@ -17,10 +17,10 @@ import res6 from "../resources/images/residential-6.jpg"
 export function Residential(props) {
     //load in residential stuff from server here, until then use dummy data below
     let [listings, setListings] = useState('')
-    let assetApiService = new ApiAssetService();
 
     useEffect(() => {
         const getAllProperties = async () => {
+            let assetApiService = new ApiAssetService();
             await assetApiService.getAssets().then(
                 (res) => {
                     const properties = res.data.assets
