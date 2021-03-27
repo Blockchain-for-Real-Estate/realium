@@ -109,7 +109,7 @@ export function ListingDetails(props) {
                                 <bs.Table borderless size="sm" className="mb-3">
                                     <tbody>
                                         <tr>
-                                            <td>Forcasted Income: </td>
+                                            <td>Forecasted Income: </td>
                                             <td>
                                                 <NumberFormat
                                                     value={listing.forcastedIncome}

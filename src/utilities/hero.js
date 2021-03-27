@@ -4,6 +4,17 @@ import logo from "../resources/images/logo.svg"
 
 export function Hero(props) {
 
+    const content = (page) => {
+        switch(page) {
+            case 'howitworks':
+                return 'Blockchain is changing how the world does business and how real estate is being transacted. Realium leverages these benefits to make investing in real estate even more beneficial for you.';
+            case 'dashboard':
+                return 'Welcome to your personal Realium dashboard. Take a look at your recent investment activity, asset performance, or list your shares for exchange.';
+            default:
+                return 'Realium allows you to invest directly into residential real estate. Each transaction is run on a privately-held blockchain to remove the need for third party involvement.';
+        }
+      }
+
     return (
         /* Hero section */
         <>
@@ -84,7 +95,7 @@ export function Hero(props) {
                             <span className="block xl:inline"> For Residential Housing</span>
                         </h1>
                         <p className="mt-3 text-base text-gray-500 sm:mt-5 sm:text-lg sm:max-w-xl sm:mx-auto md:mt-5 md:text-xl lg:mx-0">
-                            Anim aute id magna aliqua ad ad non deserunt sunt. Qui irure qui lorem cupidatat commodo. Elit sunt amet fugiat veniam occaecat fugiat aliqua.
+                            {content(props.page)}
                         </p>
                         <div className="mt-5 sm:mt-8 sm:flex sm:justify-center lg:justify-start">
                             <div className="rounded-md">

@@ -7,7 +7,7 @@ import { Commercial } from "./commercial"
 export function Marketplace(props) {
     return (
         <>
-            <Hero img={hero_img} />
+            <Hero img={hero_img} page="marketplace"/>
             <Residential />
             <Commercial />
         </>

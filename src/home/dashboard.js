@@ -5,7 +5,7 @@ import hero_img from "../resources/images/pink-hero.jpg"
 export function Dashboard(props) {
     return (
         <>
-            <Hero img={hero_img} />
+            <Hero img={hero_img} page="dashboard"/>
         </>
     )
 }
