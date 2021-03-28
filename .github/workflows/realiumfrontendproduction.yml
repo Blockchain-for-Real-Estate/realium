@@ -62,5 +62,5 @@ jobs:
         run: yarn install && yarn build
       - name: Deploy app build to S3 bucket
         run: aws s3 sync ./build/ s3://${{ secrets.AWS_PRODUCTION_BUCKET_NAME }} --delete
-      # - name: Create Invalidation on CloudFront
-      #   run: aws cloudfront create-invalidation --distribution-id E6ETZBYCSC38U  --paths "/*"
+      - name: Create Invalidation on CloudFront
+        run: aws cloudfront create-invalidation --distribution-id E6ETZBYCSC38U  --paths "/*"
