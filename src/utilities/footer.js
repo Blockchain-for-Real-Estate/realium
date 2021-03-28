@@ -4,16 +4,16 @@ import { Link } from "react-router-dom"
 
 export function Footer(props) {
     return (
-        <footer className="bg-white" aria-labelledby="footerHeading">
+        <footer className="bg-gray-100" aria-labelledby="footerHeading">
         <h2 id="footerHeading" className="sr-only">Footer</h2>
-        <div className="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:py-16 lg:px-8">
+        <div className="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:py-10 lg:px-6">
             <div className="xl:grid xl:grid-cols-3 xl:gap-8">
             <div className="space-y-8 xl:col-span-1">
                 <Link to="/">
                     <img className="h-20" src={logo} alt="Realium"/>
                 </Link>
                 <p className="text-gray-500 text-base">
-                Realium is a financial technology company that assists in purchase, sale, and legal compliance of tokenized real estate assets.
+                    Realium is a financial technology company that assists in purchase, sale, and legal compliance of tokenized real estate assets.
                 </p>
                 <div className="flex space-x-8">
                 <Link to="/" className="text-gray-400 hover:text-gray-500">
@@ -52,7 +52,7 @@ export function Footer(props) {
                 </Link>
                 </div>
             </div>
-            <div className="mt-12 grid grid-cols-2 gap-8 xl:mt-0 xl:col-span-2">
+            <div className="mt-12 grid grid-cols-2 gap-8 xl:mt-10 xl:col-span-2">
                 <div className="md:grid md:grid-cols-2 md:gap-8">
                 <div>
                     <h3 className="text-sm font-semibold text-gray-400 tracking-wider uppercase">
@@ -82,9 +82,9 @@ export function Footer(props) {
                     </h3>
                     <ul className="mt-4 space-y-4">
                     <li>
-                        <Link to="https://docs.realium.io/" className="text-base text-gray-500 hover:text-gray-900">
+                        <a href="https://docs.realium.io/" target="_blank" rel="noreferrer" className="text-base text-gray-500 hover:text-gray-900">
                             White Papers
-                        </Link>
+                        </a>
                     </li>
                     <li>
                         <Link to="/" className="text-base text-gray-500 hover:text-gray-900">
@@ -149,7 +149,7 @@ export function Footer(props) {
                 </div>
             </div>
             </div>
-            <div className="mt-12 border-t border-gray-200 pt-8">
+            <div className="mt-8 border-t border-gray-300 pt-4">
             <p className="text-base text-gray-400 xl:text-center">
                 &copy; 2021 Realium, Inc. All rights reserved.
             </p>

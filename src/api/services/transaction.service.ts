@@ -12,7 +12,7 @@ export class ApiTransactionService {
 
     public getFilteredTransactions(id: String) {
         return axios.get<Transaction>(
-          `${environment.api}/api/transactions?assetId=${id}`
+          `${environment.api}/api/transactions?asset=${id}`
         );
     }
   
