@@ -9,7 +9,7 @@ export function Transactions(props) {
             let transactionViaApi = new ApiTransactionService()
             transactionViaApi.getFilteredTransactions(props.assetId).then(
                 res => {
-                    const txs = res.data;
+                    const txs = res.data.transactions;
                     setTransactions(txs);
                 }
             )
@@ -20,25 +20,30 @@ export function Transactions(props) {
 
     return (
         /* Transactions Table */
-        <div className="u-margin-top-quad">
+        <div className="mt-20 mb-20">
             <div className="bg-white shadow overflow-hidden sm:rounded-md">
-                <ul className="divide-y divide-gray-200">
             {transactions ?
-                Object.keys(transactions).map(key => (
+            <ul className="divide-y divide-gray-200 mb-0">
+                {Object.keys(transactions).map(key => (
                     /*This example requires Tailwind CSS v2.0+*/
                         <li key={key}>
-                        <a href={'https://etherscan.io/tx/' + transactions[key].transactionId} target="_blank" rel="noreferrer" className="block hover:bg-gray-50">
+                        <a href={'https://testnet.avascan.info/blockchain/x/tx/' + transactions[key].txId} target="_blank" rel="noreferrer" className="block hover:bg-gray-50">
                             <div className="flex items-center px-4 py-4 sm:px-6">
                             <div className="min-w-0 flex-1 flex items-center">
                                 <div className="min-w-0 flex-1 px-4 md:grid md:grid-cols-2 md:gap-4">
                                 <div>
-                                    <p className="text-lg font-medium text-indigo-600 truncate">{transactions[key].transactionId}</p>
+                                    <p className="text-lg font-medium text-indigo-600 truncate">{transactions[key].txId}</p>
                                     <p className="mt-2 flex items-center text-sm text-gray-500">
-                                    {/*Heroicon name: solid/mail*/}
-                                    <svg className="flex-shrink-0 mr-1.5 h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                                        <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z" />
-                                        <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z" />
+                                    {/*Heroicon name: solid/house*/}
+                                    {props.listing.listingType === "Residential" ? 
+                                    <svg className="flex-shrink-0 mr-1.5 h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                                        <path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z" />
                                     </svg>
+                                    :
+                                    <svg className="flex-shrink-0 mr-1.5 h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                                        <path fillRule="evenodd" d="M4 4a2 2 0 012-2h8a2 2 0 012 2v12a1 1 0 110 2h-3a1 1 0 01-1-1v-2a1 1 0 00-1-1H9a1 1 0 00-1 1v2a1 1 0 01-1 1H4a1 1 0 110-2V4zm3 1h2v2H7V5zm2 4H7v2h2V9zm2-4h2v2h-2V5zm2 4h-2v2h2V9z" clipRule="evenodd" />
+                                    </svg>
+                                    }
                                     <span className="truncate">{props.listing.assetName} - {props.listing.propertyType}</span>
                                     </p>
                                 </div>
@@ -46,7 +51,7 @@ export function Transactions(props) {
                                     <div>
                                     <p className="text-sm text-gray-900">
                                         Transacted on
-                                        <time> {transactions[key].transactionDateTime}</time>
+                                        <time> {transactions[key].txDateTime}</time>
                                     </p>
                                     <p className="mt-2 flex items-center text-sm text-gray-500">
                                         {/*Heroicon name: solid/check-circle*/}
@@ -68,17 +73,30 @@ export function Transactions(props) {
                             </div>
                         </a>
                         </li>
-                    ))
-                    :
-                    <li>
-                        <div className="flex items-center px-4 py-4">
-                            <div className="flex items-center text-lg font-medium text-indigo-600 truncate">
-                                No Transactions Recorded as of March 12, 2021
-                            </div>
-                        </div>
-                    </li>
-                }
+                    ))}
                 </ul>
+                :
+                <ul>
+                    <li key="no-transactions">
+                            <div className="flex items-center px-4 py-4 sm:px-6">
+                            <div className="min-w-0 flex-1 flex items-center">
+                                <div className="min-w-0 flex-1 px-4 md:grid md:grid-cols-2 md:gap-4">
+                                <div>
+                                    <p className="text-lg font-medium text-indigo-600 truncate">No Posted Transactions for {props.listing.AssetName}</p>
+                                    <p className="mt-2 flex items-center text-sm text-gray-500">
+                                    {/*Heroicon name: solid/house*/}
+                                    <svg className="flex-shrink-0 mr-1.5 h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                                        <path fillRule="evenodd" d="M4 4a2 2 0 012-2h8a2 2 0 012 2v12a1 1 0 110 2h-3a1 1 0 01-1-1v-2a1 1 0 00-1-1H9a1 1 0 00-1 1v2a1 1 0 01-1 1H4a1 1 0 110-2V4zm3 1h2v2H7V5zm2 4H7v2h2V9zm2-4h2v2h-2V5zm2 4h-2v2h2V9z" clipRule="evenodd" />
+                                    </svg>
+                                    <span className="truncate">{props.listing.assetName} - {props.listing.propertyType}</span>
+                                    </p>
+                                </div>
+                                </div>
+                            </div>
+                            </div>
+                        </li>
+                </ul>
+                }
             </div>
         </div>
     )

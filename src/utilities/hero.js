@@ -29,14 +29,14 @@ export function Hero(props) {
             </>
             case 'howitworks':
                 return <>
-                <span className="block xl:inline">How Does  </span>
+                <span className="block xl:inline">How Does </span>
                 <span className="block text-indigo-600 xl:inline">Realium</span>
                 <span className="block xl:inline"> Work vs Traditional Real Estate Investing?</span>
             </>
             case 'dashboard':
                 return <>
-                <span className="block xl:inline">Welcome to </span>
-                <span className="block text-indigo-600 xl:inline">Your Personalized Dashboard</span>
+                <span className="block xl:inline">Welcome to Your </span>
+                <span className="block text-indigo-600 xl:inline">Personalized Dashboard</span>
                 <span className="block xl:inline"> For Realium Investments</span>
             </>
             default:

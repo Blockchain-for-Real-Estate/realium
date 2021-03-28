@@ -34,7 +34,6 @@ function App() {
 				<Route path="/login" component={Login} />
 				<Route path="/dashboard" component={Dashboard} />
 			</Switch>
-			<div className="u-margin-top-quad"></div>
 			<Footer />
 		</Router>
 	)
