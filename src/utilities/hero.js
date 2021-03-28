@@ -1,7 +1,6 @@
 import React from "react"
 import { Link } from "react-router-dom"
 import { NavItems } from "../utilities/nav-items"
-import { Link } from "react-router-dom"
 import logo from "../resources/images/logo.svg"
 
 export function Hero(props) {
