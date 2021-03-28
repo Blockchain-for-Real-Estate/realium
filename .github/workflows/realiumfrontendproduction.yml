@@ -6,8 +6,6 @@ name: Deploy React to S3
 on:
   # Triggers the workflow on push or pull request events but only for the master branch
   push:
-    branches: [ master, s3-sync ]
-  pull_request:
     branches: [ master ]
 
   # Allows you to run this workflow manually from the Actions tab
