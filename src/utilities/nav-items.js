@@ -67,7 +67,7 @@ export function NavItems(props) {
                       <Link to="/marketplace" style={{ textDecoration: 'none' }} class="border-indigo-500 text-gray-900 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">
                         Marketplace
                       </Link>
-                      <Link to="howitworks" style={{ textDecoration: 'none' }} class="border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">
+                      <Link to="/howitworks" style={{ textDecoration: 'none' }} class="border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">
                         How It Works
                       </Link>
                       <a href="https://docs.realium.io" target="_blank" rel="noreferrer" style={{ textDecoration: 'none' }} class="border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">
