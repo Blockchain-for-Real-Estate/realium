@@ -1,4 +1,5 @@
 import React from "react";
+import { CreateAccountForm } from "../login/create";
 import { Purchase } from "./purchase"
 
 export function Modal(props) {
@@ -31,6 +32,8 @@ export function Modal(props) {
               {/*content*/}
               <div className="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
                 {/*header*/}
+                {props.page === "create" ?
+                <></>:
                 <div className="flex items-start justify-between p-4 border-b border-solid border-blueGray-200 rounded-t">
                   <h3 className="text-3xl font-semibold">
                     {props.buttonText}
@@ -44,11 +47,12 @@ export function Modal(props) {
                     </span>
                   </button>
                 </div>
+              }
                 {/*body*/}
                 {props.page === "create" ?
                 <div className="relative p-6 flex-auto">
                   {/* PLACE LOGIN FORM HERE */}
-                  <Purchase id={props.id}/>
+                  <CreateAccountForm id={props.id}/>
               </div>
                 :
                 <div className="relative p-6 flex-auto">
