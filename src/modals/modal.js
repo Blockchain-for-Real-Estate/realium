@@ -6,7 +6,7 @@ export function Modal(props) {
   return (
     <>
       <button
-        className="bg-indigo-500 text-white active:bg-indigo-500 font-bold uppercase text-sm w-full py-3 mb-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+        className="bg-indigo-600 text-white active:bg-indigo-500 font-bold uppercase text-sm w-full py-3 mb-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
         type="button"
         onClick={() => setShowModal(true)}
       >
@@ -35,9 +35,16 @@ export function Modal(props) {
                   </button>
                 </div>
                 {/*body*/}
+                {props.page === "create" ?
+                <div className="relative p-6 flex-auto">
+                  {/* PLACE LOGIN FORM HERE */}
+                  <Purchase id={props.id}/>
+              </div>
+                :
                 <div className="relative p-6 flex-auto">
                   <Purchase id={props.id}/>
                 </div>
+                }
                 {/*footer*/}
                 <div className="flex items-center justify-end p-6 border-t border-solid border-blueGray-200 rounded-b">
                   <button

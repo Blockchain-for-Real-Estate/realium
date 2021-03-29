@@ -25,7 +25,7 @@ export function Login(props) {
                             {/* </form> */}
                         </div>
                         <div className="mt-6">
-                            <Modal buttonText="Or create a free account"/>
+                            <Modal buttonText="Or create a free account" page="create"/>
                         </div>
                     </div>
                 </div>
