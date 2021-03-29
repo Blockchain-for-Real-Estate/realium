@@ -5,7 +5,7 @@ import { ApiAssetService } from '../api/services/asset.service'
 import { NavItems } from '../utilities/nav-items'
 import res1 from "../resources/images/residential-2.jpg"
 import { Transactions } from "./transactions"
-import { Modal } from "../utilities/modal"
+import { Modal } from "../modals/modal"
 
 import typeIcon from "../resources/images/purple_prop_type.png"
 import yearIcon from "../resources/images/purple_year_built_icon.png"
@@ -42,12 +42,8 @@ export function ListingDetails(props) {
     return (
         <>
         {!loading ?
-            <>
-                <div className="p-8 mb-4">
-                    <NavItems/>
-                </div>
             <>  {listing &&
-                <div className="mb-12">
+                <div className="mt-12 mb-12">
                     <div className="border-bottom mb-4">
                         <bs.Row className="mb-2">
                             <div style={{"fontSize": "1.3rem"}} className="font-weight-bold">{listing.propertyType} in {listing.city}, {listing.state}</div >
@@ -201,7 +197,7 @@ export function ListingDetails(props) {
                                 </bs.Table>
                             </div>
                             <div className="border-bottom mb-4"/>
-                                <Modal text="PURCHASE SHARES" />
+                                <Modal buttonText="PURCHASE SHARES" id={listing.avalancheAssetId}/>
                             <div style={{"fontSize": "0.9rem"}} className="text-muted">
                                 *By purchasing shares of this asset,
                                 you become a part owner of this property
@@ -218,7 +214,6 @@ export function ListingDetails(props) {
                     <Transactions listing={listing} assetId={props.id}/>
                 }
             </>
-        </>
         :
             <h1>Loading...</h1>
         }

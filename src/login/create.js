@@ -1,6 +1,6 @@
 import React from "react"
 import { useHistory } from "react-router-dom"
-import { Formik, Field, Form, ErrorMessage } from "formik"
+import { Formik, Field, Form } from "formik"
 import * as Yup from "yup"
 import { ApiUserService } from "../api/services/user.service"
 import logo from "../resources/images/logo.svg"

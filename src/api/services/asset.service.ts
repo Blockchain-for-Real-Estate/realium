@@ -12,7 +12,13 @@ export class ApiAssetService {
 
     public getAssetById(id: String) {
       return axios.get<Asset>(
-        `${environment.api}/api/assets?assetId=${id}`
+        `${environment.api}/api/assets?asset=${id}`
+      );
+    }
+
+    public getAssetShareListings(id: String) {
+      return axios.get<Asset>(
+        `${environment.api}/api/assets?avalancheAssetId=${id}&listed=true`
       );
     }
   
