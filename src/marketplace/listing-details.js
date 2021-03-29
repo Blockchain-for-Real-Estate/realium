@@ -2,7 +2,6 @@ import React from "react"
 import * as bs from "react-bootstrap"
 import NumberFormat from 'react-number-format'
 import { ApiAssetService } from '../api/services/asset.service'
-import { NavItems } from '../utilities/nav-items'
 import res1 from "../resources/images/residential-2.jpg"
 import { Transactions } from "./transactions"
 import { Modal } from "../modals/modal"
