@@ -5,6 +5,15 @@ export function Modal(props) {
   const [showModal, setShowModal] = React.useState(false);
   return (
     <>
+      {props.page === "create" ?
+        <button
+        className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-300 hover:bg-indigo-400 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+        type="button"
+        onClick={() => setShowModal(true)}
+      >
+      {props.buttonText}
+      </button>
+      :
       <button
         className="bg-indigo-600 text-white active:bg-indigo-500 font-bold uppercase text-sm w-full py-3 mb-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
         type="button"
@@ -12,6 +21,7 @@ export function Modal(props) {
       >
        {props.buttonText}
       </button>
+      }
       {showModal ? (
         <>
           <div
