@@ -1,6 +1,6 @@
 import React from "react"
 import { LoginForm } from "./form"
-import { Modal } from "../utilities/modal"
+import { Modal } from "../modals/modal"
 import logo from "../resources/images/logo.svg"
 import hero_img from "../resources/images/login.jpeg"
 
@@ -25,7 +25,7 @@ export function Login(props) {
                             {/* </form> */}
                         </div>
                         <div className="mt-6">
-                            <Modal text="Or create a free account"/>
+                            <Modal buttonText="Or create a free account"/>
                         </div>
                     </div>
                 </div>
