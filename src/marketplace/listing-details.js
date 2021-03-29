@@ -42,12 +42,8 @@ export function ListingDetails(props) {
     return (
         <>
         {!loading ?
-            <>
-                <div className="p-8 mb-4">
-                    <NavItems/>
-                </div>
             <>  {listing &&
-                <div className="mb-12">
+                <div className="mt-12 mb-12">
                     <div className="border-bottom mb-4">
                         <bs.Row className="mb-2">
                             <div style={{"fontSize": "1.3rem"}} className="font-weight-bold">{listing.propertyType} in {listing.city}, {listing.state}</div >
@@ -218,7 +214,6 @@ export function ListingDetails(props) {
                     <Transactions listing={listing} assetId={props.id}/>
                 }
             </>
-        </>
         :
             <h1>Loading...</h1>
         }

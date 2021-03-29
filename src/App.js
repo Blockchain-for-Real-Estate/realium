@@ -8,10 +8,12 @@ import { Login } from "./login"
 import { Dashboard } from "./home/dashboard"
 import { Explore } from "./marketplace/explore"
 import { Footer } from "./utilities/footer"
+import { NavItems } from "./utilities/nav-items"
 
 function App() {
 	return (
 		<Router>
+		<NavItems/>
 			<Switch>
 				<Route exact path="/">
 					<Home />

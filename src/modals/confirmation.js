@@ -109,6 +109,7 @@ export function Confirmation(props) {
                     onClick={() => {
                         setShowModal(false)
                         history.push("/dashboard/")
+                        window.location.reload();
                     }}>
                         Return to Dashboard
                     </button>
