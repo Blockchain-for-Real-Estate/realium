@@ -45,6 +45,9 @@ export function ListingDetails(props) {
                 <div className="mt-12 mb-12">
                     <div className="border-bottom mb-4">
                         <bs.Row className="mb-2">
+                            <h1 className="text-5xl font-extrabold text-gray-900 sm:text-center">{listing.assetName || "Valley Ridge"}</h1>
+                        </bs.Row>
+                        <bs.Row className="mb-2">
                             <div style={{"fontSize": "1.3rem"}} className="font-weight-bold">{listing.propertyType} in {listing.city}, {listing.state}</div >
                         </bs.Row>
                         <bs.Row className="justify-content-between mb-4">
