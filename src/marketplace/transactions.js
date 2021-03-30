@@ -21,9 +21,14 @@ export function Transactions(props) {
     return (
         /* Transactions Table */
         <div className="mt-20 mb-20">
-            <div className="bg-white shadow overflow-hidden sm:rounded-md">
+            <div className="bg-white">
+            <div class="sm:flex sm:flex-col sm:align-center mb-6">
+            <h1 class="text-5xl font-extrabold text-gray-900 sm:text-center">Chain History</h1>
+            <p class="mt-3 text-xl text-gray-500 sm:text-center">View recent blockchain transaction activity for {props.listing.assetName}. Navigate to see transaction-specific details provided by Avaxscan.</p>
+            
+            </div>
             {transactions ?
-            <ul className="divide-y divide-gray-200 mb-0">
+            <ul className="divide-y divide-gray-200 mb-0 shadow overflow-hidden sm:rounded-md">
                 {Object.keys(transactions).map(key => (
                     /*This example requires Tailwind CSS v2.0+*/
                         <li key={key}>
@@ -76,7 +81,7 @@ export function Transactions(props) {
                     ))}
                 </ul>
                 :
-                <ul>
+                <ul className="divide-y divide-gray-200 mb-0 shadow overflow-hidden sm:rounded-md">
                     <li key="no-transactions">
                             <div className="flex items-center px-4 py-4 sm:px-6">
                             <div className="min-w-0 flex-1 flex items-center">
