@@ -1,10 +1,33 @@
 import React from "react";
 import { useHistory } from "react-router-dom"
+import { ApiTransactionService } from "../api/services/transaction.service";
 
 export function Confirmation(props) {
     let history = useHistory();
-  const [showModal, setShowModal] = React.useState(false);
+    const [showModal, setShowModal] = React.useState(false);
     const [unconfirmed, setConfirmed] = React.useState(false);
+
+    async function submit(payload) {
+        const transactionService = new ApiTransactionService();
+        await transactionService.postTransaction(payload).then(
+            res => {
+                if (res.status === 200) {
+                    setConfirmed(true);
+                }
+            }
+        ).catch(error => console.error(`Error: ${error}`))
+    };
+
+    const payload = {
+        txTypeId: 1,
+        asset: "94a1c56b-f3c1-4db5-abad-b54cc4441ad9",
+        price: 200,
+        sender: string,
+        receiver: string,
+        txNFTId: string,
+        txAvaxId: string,
+        txDateTime: new Date.now()
+    }
 
   return (
         <>
@@ -101,7 +124,10 @@ export function Confirmation(props) {
                 <div class="mt-5 sm:mt-6">
                     {!unconfirmed ?
                     <button type="button" class="inline-flex justify-center w-full rounded-md border border-transparent shadow-sm px-4 py-2 bg-indigo-600 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:text-sm"
-                    onClick={() => setConfirmed(true)}>
+                    onClick={() => {
+                        //submit(payload)
+                        setConfirmed(true)
+                    }}>
                         CONFIRM PURCHASE
                     </button>
                     :
