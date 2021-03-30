@@ -3,6 +3,11 @@ import { Link } from "react-router-dom"
 import { Modal } from "../modals/modal"
 import logo from "../resources/images/logo.svg"
 
+function logout() {
+    localStorage.removeItem('token');
+    window.location.reload();
+}
+
 export function NavItems(props) {
     return (
         <>
@@ -76,7 +81,8 @@ export function NavItems(props) {
                       </a>
                     </div>
                   </div>
-                  <div className="flex items-center">
+                {localStorage.getItem('token') === null ?
+                <div className="flex items-center">
                     <div className="hidden md:ml-6 md:flex md:space-x-8 pr-8">
                         <Link to="/login" style={{ textDecoration: 'none' }} className="border-transparent text-gray-500 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">
                             Sign In
@@ -86,6 +92,21 @@ export function NavItems(props) {
                         <Modal buttonText="Sign Up" page="create"/>
                     </div>
                 </div>
+                :
+                <div className="flex items-center space-x-4">
+                    <div className="hidden md:ml-6 md:flex md:space-x-8 pr-8">
+                        <Link onClick={logout} style={{ textDecoration: 'none' }} className="border-transparent text-gray-500 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">
+                            Sign Out
+                        </Link>
+                    </div>
+                    <div className="flex-shrink-0 text-gray-900 bg-gray-100 border-2 border-gray-300 font-bold uppercase text-sm p-2 rounded focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                        type="button">TW
+                    </div>
+                    <div className="flex-shrink-0 text-gray-900 bg-indigo-100 border-2 border-indigo-500 font-bold uppercase text-sm p-2 rounded focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                        type="button">128.00 AVAX
+                    </div>
+                </div>
+                }
               </div>
             </div>
         </nav>

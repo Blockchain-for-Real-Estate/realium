@@ -24,6 +24,7 @@ export function LoginForm(props) {
                         localStorage.setItem('token', response.data.token)
                         if (response.status === 200) {
                             history.push(`/dashboard`)
+                            window.location.reload();
                         }
                     }
                 ).catch(error => {
