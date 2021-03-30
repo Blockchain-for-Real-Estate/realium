@@ -25,7 +25,7 @@ export function CreateAccountForm(props) {
             })}
             onSubmit={(values, { setSubmitting }) => {
                 var data = {
-                    'investorTinvestorTypeIdypeId':1,
+                    'investorTypeId':1,
                     'kycVerified':true,
                     'email':values.email,
                     'avaxpassword': values.password,

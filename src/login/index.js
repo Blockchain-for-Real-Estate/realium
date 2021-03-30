@@ -1,7 +1,6 @@
 import React from "react"
 import { LoginForm } from "./form"
 import { Modal } from "../modals/modal"
-import logo from "../resources/images/logo.svg"
 import hero_img from "../resources/images/login.jpeg"
 
 export function Login(props) {
@@ -10,11 +9,7 @@ export function Login(props) {
             <div className="flex-1 flex flex-col justify-center py-12 px-4 sm:px-6 lg:flex-none lg:px-20 xl:px-24">
                 <div className="mx-auto w-full max-w-sm lg:w-96">
                     <div>
-                        <a href="/">
-                            <span className="sr-only">Workflow</span>
-                            <img className="h-12 w-auto sm:h-16" src={logo} alt="Realium"/>
-                        </a>
-                        <h2 className="mt-6 text-3xl font-extrabold text-gray-900">
+                        <h2 className="mt-1 text-3xl font-extrabold text-gray-900">
                             Sign in to your account
                         </h2>
                     </div>

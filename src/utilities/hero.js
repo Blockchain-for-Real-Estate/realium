@@ -9,7 +9,7 @@ export function Hero(props) {
     const subheading = (page) => {
         switch(page) {
             case 'marketplace':
-                return 'Explore properties listed on the Realium marketplace and compare evaluations to make the best-tailored investments for you.'
+                return 'Explore properties listed on the Realium marketplace and compare evaluations to make the best-tailored investments for you. Then exchange your AVAX for unique non-fungible property tokens.'
             case 'howitworks':
                 return 'Blockchain is changing how the world does business and how real estate is being transacted. Realium leverages these benefits to make investing in real estate even more beneficial for you.';
             case 'dashboard':
@@ -25,19 +25,17 @@ export function Hero(props) {
                 return <>
                 <span className="block xl:inline">Build Out Your </span>
                 <span className="block text-indigo-600 xl:inline">Investment Portfolio</span>
-                <span className="block xl:inline"> and Start Earning</span>
             </>
             case 'howitworks':
                 return <>
-                <span className="block xl:inline">How Does </span>
+                <span className="block xl:inline">What Is Novel About the </span>
                 <span className="block text-indigo-600 xl:inline">Realium</span>
-                <span className="block xl:inline"> Work vs Traditional Real Estate Investing?</span>
+                <span className="block xl:inline"> Platform?</span>
             </>
             case 'dashboard':
                 return <>
-                <span className="block xl:inline">Welcome to Your </span>
+                <span className="block xl:inline">Welcome To Your </span>
                 <span className="block text-indigo-600 xl:inline">Personalized Dashboard</span>
-                <span className="block xl:inline"> For Realium Investments</span>
             </>
             default:
                 return <>
@@ -102,7 +100,7 @@ export function Hero(props) {
                         </p>
                         <div className="mt-5 sm:mt-8 sm:flex sm:justify-center lg:justify-start">
                             <div className="rounded-md">
-                            <Link to="/" className="w-full flex items-center justify-center px-8 py-3 shadow border-transparent text-base font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 md:py-4 md:text-lg md:px-10">
+                            <Link to="/login" className="w-full flex items-center justify-center px-8 py-3 shadow border-transparent text-base font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 md:py-4 md:text-lg md:px-10">
                                 Get started
                             </Link>
                             </div>
