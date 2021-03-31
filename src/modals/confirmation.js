@@ -3,7 +3,7 @@ import { useHistory } from "react-router-dom"
 
 export function Confirmation(props) {
     let history = useHistory();
-  const [showModal, setShowModal] = React.useState(false);
+    const [showModal, setShowModal] = React.useState(false);
     const [unconfirmed, setConfirmed] = React.useState(false);
 
   return (
@@ -102,7 +102,7 @@ export function Confirmation(props) {
                     {!unconfirmed ?
                     <button type="button" id="modalButton" class="inline-flex justify-center w-full rounded-md border border-transparent shadow-sm px-4 py-2 bg-indigo-600 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:text-sm"
                     onClick={() => {
-                        localStorage.getItem('token') !== null ?
+                        localStorage.getItem('token') !== null ? 
                             setConfirmed(true)
                         :
                         document.getElementById("modalText").innerHTML = "Please sign in to complete purchase."
@@ -115,7 +115,7 @@ export function Confirmation(props) {
                     <button type="button" class="inline-flex justify-center w-full rounded-md border border-transparent shadow-sm px-4 py-2 bg-indigo-600 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:text-sm"
                     onClick={() => {
                         setShowModal(false)
-                        history.push("/dashboard/")
+                        history.push("/dashboard")
                         window.location.reload();
                     }}>
                         Return to Dashboard

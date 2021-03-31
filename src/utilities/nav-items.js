@@ -105,7 +105,8 @@ export function NavItems(props) {
                         </Link>
                     </div>
                     <div className="flex-shrink-0 text-gray-900 bg-gray-100 border-2 border-gray-300 font-bold uppercase text-sm p-2 rounded focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
-                        type="button">TW
+                        type="button"
+                        onClick={() => history.push("/dashboard")}>TW
                     </div>
                     <div className="flex-shrink-0 text-gray-900 bg-indigo-100 border-2 border-indigo-500 font-bold uppercase text-sm p-2 rounded focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
                         type="button">128.00 AVAX
