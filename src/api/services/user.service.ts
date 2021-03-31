@@ -16,7 +16,7 @@ export class ApiUserService {
   
     public postUser(data: User) {
       return axios.post<User>(
-        `${environment.api}/register/`,
+        `${environment.api}/api/register/`,
         data
       );
     }

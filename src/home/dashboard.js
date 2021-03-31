@@ -1,4 +1,5 @@
 import React from "react"
+import "../modals/modal.css"
 
 export function Dashboard(props) {
     return (
@@ -172,28 +173,91 @@ export function Dashboard(props) {
                     <div className="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
                         <div className="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
                         <div className="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg mb-4">
-                            <table className="min-w-full divide-y divide-gray-200">
-                            <thead className="bg-gray-50">
+                            <table className="border-2 border-gray-100 m-0 p-0 min-w-full">
+                            <thead className="bg-gray-100 border-1 border-gray-700 divide-y p-3 uppercase text-md">
                                 <tr>
-                                <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                                     Time
                                 </th>
-                                <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                                     Event
                                 </th>
-                                <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                                     Quantity
                                 </th>
-                                <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                                     Asset
                                 </th>
-                                <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                                     Tx
                                 </th>
                                 </tr>
                             </thead>
-                            <tbody>
-                                <tr className="bg-white">
+                            <tbody className="divide-y">
+                                <tr className="bg-white m-4 border-b border-gray-200 sm:shadow-md">
+                                <td className="px-6 py-4 whitespace-nowrap text-xs font-medium text-gray-900" data-label="Time">
+                                    1 hour ago
+                                </td>
+                                <td className="px-6 py-4 whitespace-nowrap text-xs text-gray-500" data-label="Event">
+                                    List ssss
+                                </td>
+                                <td className="px-6 py-4 whitespace-nowrap text-xs text-gray-500" data-label="Quantity">
+                                    30,000 @ $8.80
+                                </td>
+                                <td className="px-6 py-4 whitespace-nowrap text-xs text-gray-500" data-label="Asset">
+                                    4738 E Woodbridge Way
+                                </td>
+                                <td className="px-6 py-4 whitespace-nowrap text-xs font-medium" data-label="Tx">
+                                    <a href="/" className="text-indigo-600 hover:text-indigo-900">
+                                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M8.3335 5.00016H5.00016C4.07969 5.00016 3.3335 5.74635 3.3335 6.66683V15.0002C3.3335 15.9206 4.07969 16.6668 5.00016 16.6668H13.3335C14.254 16.6668 15.0002 15.9206 15.0002 15.0002V11.6668M11.6668 3.3335H16.6668M16.6668 3.3335V8.3335M16.6668 3.3335L8.3335 11.6668" stroke="#4F46E5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
+                                    </a>
+                                </td>
+                                </tr>
+                                <tr className="bg-white m-4 border-b border-gray-200 sm:shadow-md">
+                                <td className="px-6 py-4 whitespace-nowrap text-xs font-medium text-gray-900">
+                                    1 hour ago
+                                </td>
+                                <td className="px-6 py-4 whitespace-nowrap text-xs text-gray-500">
+                                    List ssss
+                                </td>
+                                <td className="px-6 py-4 whitespace-nowrap text-xs text-gray-500">
+                                    30,000 @ $8.80
+                                </td>
+                                <td className="px-6 py-4 whitespace-nowrap text-xs text-gray-500">
+                                    4738 E Woodbridge Way
+                                </td>
+                                <td className="px-6 py-4 whitespace-nowrap text-right text-xs font-medium">
+                                    <a href="/" className="text-indigo-600 hover:text-indigo-900">
+                                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M8.3335 5.00016H5.00016C4.07969 5.00016 3.3335 5.74635 3.3335 6.66683V15.0002C3.3335 15.9206 4.07969 16.6668 5.00016 16.6668H13.3335C14.254 16.6668 15.0002 15.9206 15.0002 15.0002V11.6668M11.6668 3.3335H16.6668M16.6668 3.3335V8.3335M16.6668 3.3335L8.3335 11.6668" stroke="#4F46E5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
+                                    </a>
+                                </td>
+                                </tr>
+                                <tr className="bg-white m-4 border-b border-gray-200 sm:shadow-md">
+                                <td className="px-6 py-4 whitespace-nowrap text-xs font-medium text-gray-900">
+                                    1 hour ago
+                                </td>
+                                <td className="px-6 py-4 whitespace-nowrap text-xs text-gray-500">
+                                    List ssss
+                                </td>
+                                <td className="px-6 py-4 whitespace-nowrap text-xs text-gray-500">
+                                    30,000 @ $8.80
+                                </td>
+                                <td className="px-6 py-4 whitespace-nowrap text-xs text-gray-500">
+                                    4738 E Woodbridge Way
+                                </td>
+                                <td className="px-6 py-4 whitespace-nowrap text-right text-xs font-medium">
+                                    <a href="/" className="text-indigo-600 hover:text-indigo-900">
+                                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M8.3335 5.00016H5.00016C4.07969 5.00016 3.3335 5.74635 3.3335 6.66683V15.0002C3.3335 15.9206 4.07969 16.6668 5.00016 16.6668H13.3335C14.254 16.6668 15.0002 15.9206 15.0002 15.0002V11.6668M11.6668 3.3335H16.6668M16.6668 3.3335V8.3335M16.6668 3.3335L8.3335 11.6668" stroke="#4F46E5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
+                                    </a>
+                                </td>
+                                </tr>
+                                <tr className="bg-white m-4 border-b border-gray-200 sm:shadow-md">
                                 <td className="px-6 py-4 whitespace-nowrap text-xs font-medium text-gray-900">
                                     1 hour ago
                                 </td>
@@ -214,7 +278,7 @@ export function Dashboard(props) {
                                     </a>
                                 </td>
                                 </tr>
-                                <tr className="bg-white">
+                                <tr className="bg-white m-4 border-b border-gray-200 sm:shadow-md">
                                 <td className="px-6 py-4 whitespace-nowrap text-xs font-medium text-gray-900">
                                     1 hour ago
                                 </td>
@@ -235,7 +299,7 @@ export function Dashboard(props) {
                                     </a>
                                 </td>
                                 </tr>
-                                <tr className="bg-white">
+                                <tr className="bg-white m-4 border-b border-gray-200 sm:shadow-md">
                                 <td className="px-6 py-4 whitespace-nowrap text-xs font-medium text-gray-900">
                                     1 hour ago
                                 </td>
@@ -256,70 +320,7 @@ export function Dashboard(props) {
                                     </a>
                                 </td>
                                 </tr>
-                                <tr className="bg-white">
-                                <td className="px-6 py-4 whitespace-nowrap text-xs font-medium text-gray-900">
-                                    1 hour ago
-                                </td>
-                                <td className="px-6 py-4 whitespace-nowrap text-xs text-gray-500">
-                                    List ssss
-                                </td>
-                                <td className="px-6 py-4 whitespace-nowrap text-xs text-gray-500">
-                                    30,000 @ $8.80
-                                </td>
-                                <td className="px-6 py-4 whitespace-nowrap text-xs text-gray-500">
-                                    4738 E Woodbridge Way
-                                </td>
-                                <td className="px-6 py-4 whitespace-nowrap text-xs font-medium">
-                                    <a href="/" className="text-indigo-600 hover:text-indigo-900">
-                                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M8.3335 5.00016H5.00016C4.07969 5.00016 3.3335 5.74635 3.3335 6.66683V15.0002C3.3335 15.9206 4.07969 16.6668 5.00016 16.6668H13.3335C14.254 16.6668 15.0002 15.9206 15.0002 15.0002V11.6668M11.6668 3.3335H16.6668M16.6668 3.3335V8.3335M16.6668 3.3335L8.3335 11.6668" stroke="#4F46E5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                    </svg>
-                                    </a>
-                                </td>
-                                </tr>
-                                <tr className="bg-white">
-                                <td className="px-6 py-4 whitespace-nowrap text-xs font-medium text-gray-900">
-                                    1 hour ago
-                                </td>
-                                <td className="px-6 py-4 whitespace-nowrap text-xs text-gray-500">
-                                    List ssss
-                                </td>
-                                <td className="px-6 py-4 whitespace-nowrap text-xs text-gray-500">
-                                    30,000 @ $8.80
-                                </td>
-                                <td className="px-6 py-4 whitespace-nowrap text-xs text-gray-500">
-                                    4738 E Woodbridge Way
-                                </td>
-                                <td className="px-6 py-4 whitespace-nowrap text-right text-xs font-medium">
-                                    <a href="/" className="text-indigo-600 hover:text-indigo-900">
-                                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M8.3335 5.00016H5.00016C4.07969 5.00016 3.3335 5.74635 3.3335 6.66683V15.0002C3.3335 15.9206 4.07969 16.6668 5.00016 16.6668H13.3335C14.254 16.6668 15.0002 15.9206 15.0002 15.0002V11.6668M11.6668 3.3335H16.6668M16.6668 3.3335V8.3335M16.6668 3.3335L8.3335 11.6668" stroke="#4F46E5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                    </svg>
-                                    </a>
-                                </td>
-                                </tr>
-                                <tr className="bg-white">
-                                <td className="px-6 py-4 whitespace-nowrap text-xs font-medium text-gray-900">
-                                    1 hour ago
-                                </td>
-                                <td className="px-6 py-4 whitespace-nowrap text-xs text-gray-500">
-                                    List ssss
-                                </td>
-                                <td className="px-6 py-4 whitespace-nowrap text-xs text-gray-500">
-                                    30,000 @ $8.80
-                                </td>
-                                <td className="px-6 py-4 whitespace-nowrap text-xs text-gray-500">
-                                    4738 E Woodbridge Way
-                                </td>
-                                <td className="px-6 py-4 whitespace-nowrap text-right text-xs font-medium">
-                                    <a href="/" className="text-indigo-600 hover:text-indigo-900">
-                                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M8.3335 5.00016H5.00016C4.07969 5.00016 3.3335 5.74635 3.3335 6.66683V15.0002C3.3335 15.9206 4.07969 16.6668 5.00016 16.6668H13.3335C14.254 16.6668 15.0002 15.9206 15.0002 15.0002V11.6668M11.6668 3.3335H16.6668M16.6668 3.3335V8.3335M16.6668 3.3335L8.3335 11.6668" stroke="#4F46E5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                    </svg>
-                                    </a>
-                                </td>
-                                </tr>
-                                <tr className="bg-white">
+                                <tr className="bg-white m-4 border-b border-gray-200 sm:shadow-md">
                                 <td className="px-6 py-4 whitespace-nowrap text-xs font-medium text-gray-900">
                                     1 hour ago
                                 </td>
