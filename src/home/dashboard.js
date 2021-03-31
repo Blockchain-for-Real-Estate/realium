@@ -45,35 +45,38 @@ export function Dashboard(props) {
                     </div>
                     </div>
                     <dl className="mt-10 space-y-10">
-                        <div className="grid grid-cols-1 gap-6 sm:grid-cols-1">
+                        <div className="grid grid-cols-1 gap-6">
                         <div className="relative rounded-lg border border-gray-300 bg-white shadow-md flex items-center space-x-3 hover:border-gray-400 focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-indigo-500">
+                            <div className="grid grid-cols-1 sm:flex sm:flex-cols">
                             <div className="flex-shrink-0">
-                                <img className="w-48 h-full object-fill" src="https://images.unsplash.com/photo-1496128858413-b36217c2ce36?ixlib=rb-1.2.1&ixqx=9RaZNtwCUv&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1679&q=80" alt=""/>
+                                <img className="h-48 w-full object-fill sm:w-48 sm:h-full sm:object-cover" src="https://images.unsplash.com/photo-1496128858413-b36217c2ce36?ixlib=rb-1.2.1&ixqx=9RaZNtwCUv&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1679&q=80" alt=""/>
                             </div>
-                            <div className="flex-1 min-w-0 px-4 pt-3 pb-2">
-                                <div className="grid grid-cols-3 gap-1">
-                                    <div className="font-semibold">
+                            <div className="flex-1 min-w-0 space-x-2 pt-3 pb-3 pl-2">
+                                <div className="grid grid-cols-1 sm:grid-cols-3 sm:align-middle">
+                                    <div className="font-semibold grid grid-cols-2 text-center sm:text-left sm:grid-cols-1 sm:m-2">
                                         Address
-                                        <p className="text-xs text-gray-500 pt-1">
+                                        <p className="text-xs text-gray-500 pt-1 text-center sm:text-left">
                                             445 W 400 N 
+                                            <br/>
                                             Provo, UT 84601
                                         </p>
                                     </div>
-                                    <div className="font-semibold">
+                                    <div className="font-semibold grid text-center sm:text-left grid-cols-2 sm:grid-cols-1 sm:m-2">
                                         Shares
-                                        <p className="text-xs text-gray-500 pt-1">
+                                        <p className="text-xs text-gray-500 pt-1 text-center sm:text-left">
                                             10,000 shares
+                                            <br/>
                                             1,000 for sale
                                         </p>
                                     </div>
-                                    <div className="space-y-2">
-                                        <button className="bg-indigo-500 text-white active:bg-indigo-500 text-xs w-4/5 py-2 px-2 rounded shadow-sm hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150" type="button"
+                                    <div className="space-y-2 text-center sm:m-2">
+                                        <button className="bg-indigo-500 text-white active:bg-indigo-500 text-xs w-4/5 py-2 px-2 rounded shadow-sm hover:shadow-lg hover:bg-indigo-700 outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150" type="button"
                                             onClick={() => {
                                             }}
                                         >
                                         Sell Shares
                                         </button>
-                                        <button className="bg-indigo-200 text-indigo-600 active:bg-indigo-500 text-xs w-4/5 py-2 px-2 rounded shadow-sm hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150" type="button"
+                                        <button className="bg-indigo-200 text-indigo-600 active:bg-indigo-500 text-xs w-4/5 py-2 px-2 rounded shadow-sm hover:shadow-lg hover:bg-indigo-300 outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150" type="button"
                                             onClick={() => {
                                             }}
                                         >
@@ -81,36 +84,40 @@ export function Dashboard(props) {
                                         </button>
                                     </div>
                                 </div>
+                            </div>
                             </div>
                         </div>
                         <div className="relative rounded-lg border border-gray-300 bg-white shadow-md flex items-center space-x-3 hover:border-gray-400 focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-indigo-500">
+                            <div className="grid grid-cols-1 sm:flex sm:flex-cols">
                             <div className="flex-shrink-0">
-                                <img className="w-48 h-full object-fill" src="https://images.unsplash.com/photo-1496128858413-b36217c2ce36?ixlib=rb-1.2.1&ixqx=9RaZNtwCUv&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1679&q=80" alt=""/>
+                                <img className="h-48 w-full object-fill sm:w-48 sm:h-full sm:object-cover" src="https://images.unsplash.com/photo-1496128858413-b36217c2ce36?ixlib=rb-1.2.1&ixqx=9RaZNtwCUv&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1679&q=80" alt=""/>
                             </div>
-                            <div className="flex-1 min-w-0 px-4 pt-3 pb-2">
-                                <div className="grid grid-cols-3 gap-1">
-                                    <div className="font-semibold">
+                            <div className="flex-1 min-w-0 space-x-2 pt-3 pb-3 pl-2">
+                                <div className="grid grid-cols-1 sm:grid-cols-3 sm:align-middle">
+                                    <div className="font-semibold grid grid-cols-2 text-center sm:text-left sm:grid-cols-1 sm:m-2">
                                         Address
-                                        <p className="text-xs text-gray-500 pt-1">
+                                        <p className="text-xs text-gray-500 pt-1 text-center sm:text-left">
                                             445 W 400 N 
+                                            <br/>
                                             Provo, UT 84601
                                         </p>
                                     </div>
-                                    <div className="font-semibold">
+                                    <div className="font-semibold grid text-center sm:text-left grid-cols-2 sm:grid-cols-1 sm:m-2">
                                         Shares
-                                        <p className="text-xs text-gray-500 pt-1">
+                                        <p className="text-xs text-gray-500 pt-1 text-center sm:text-left">
                                             10,000 shares
+                                            <br/>
                                             1,000 for sale
                                         </p>
                                     </div>
-                                    <div className="space-y-2">
-                                        <button className="bg-indigo-500 text-white active:bg-indigo-500 text-xs w-4/5 py-2 px-2 rounded shadow-sm hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150" type="button"
+                                    <div className="space-y-2 text-center sm:m-2">
+                                        <button className="bg-indigo-500 text-white active:bg-indigo-500 text-xs w-4/5 py-2 px-2 rounded shadow-sm hover:shadow-lg hover:bg-indigo-700 outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150" type="button"
                                             onClick={() => {
                                             }}
                                         >
                                         Sell Shares
                                         </button>
-                                        <button className="bg-indigo-200 text-indigo-600 active:bg-indigo-500 text-xs w-4/5 py-2 px-2 rounded shadow-sm hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150" type="button"
+                                        <button className="bg-indigo-200 text-indigo-600 active:bg-indigo-500 text-xs w-4/5 py-2 px-2 rounded shadow-sm hover:shadow-lg hover:bg-indigo-300 outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150" type="button"
                                             onClick={() => {
                                             }}
                                         >
@@ -118,36 +125,40 @@ export function Dashboard(props) {
                                         </button>
                                     </div>
                                 </div>
+                            </div>
                             </div>
                         </div>
                         <div className="relative rounded-lg border border-gray-300 bg-white shadow-md flex items-center space-x-3 hover:border-gray-400 focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-indigo-500">
+                            <div className="grid grid-cols-1 sm:flex sm:flex-cols">
                             <div className="flex-shrink-0">
-                                <img className="w-48 h-full object-fill" src="https://images.unsplash.com/photo-1496128858413-b36217c2ce36?ixlib=rb-1.2.1&ixqx=9RaZNtwCUv&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1679&q=80" alt=""/>
+                                <img className="h-48 w-full object-fill sm:w-48 sm:h-full sm:object-cover" src="https://images.unsplash.com/photo-1496128858413-b36217c2ce36?ixlib=rb-1.2.1&ixqx=9RaZNtwCUv&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1679&q=80" alt=""/>
                             </div>
-                            <div className="flex-1 min-w-0 px-4 pt-3 pb-2">
-                                <div className="grid grid-cols-3 gap-1">
-                                    <div className="font-semibold">
+                            <div className="flex-1 min-w-0 space-x-2 pt-3 pb-3 pl-2">
+                                <div className="grid grid-cols-1 sm:grid-cols-3 sm:align-middle">
+                                    <div className="font-semibold grid grid-cols-2 text-center sm:text-left sm:grid-cols-1 sm:m-2">
                                         Address
-                                        <p className="text-xs text-gray-500 pt-1">
+                                        <p className="text-xs text-gray-500 pt-1 text-center sm:text-left">
                                             445 W 400 N 
+                                            <br/>
                                             Provo, UT 84601
                                         </p>
                                     </div>
-                                    <div className="font-semibold">
+                                    <div className="font-semibold grid text-center sm:text-left grid-cols-2 sm:grid-cols-1 sm:m-2">
                                         Shares
-                                        <p className="text-xs text-gray-500 pt-1">
+                                        <p className="text-xs text-gray-500 pt-1 text-center sm:text-left">
                                             10,000 shares
+                                            <br/>
                                             1,000 for sale
                                         </p>
                                     </div>
-                                    <div className="space-y-2">
-                                        <button className="bg-indigo-500 text-white active:bg-indigo-500 text-xs w-4/5 py-2 px-2 rounded shadow-sm hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150" type="button"
+                                    <div className="space-y-2 text-center sm:m-2">
+                                        <button className="bg-indigo-500 text-white active:bg-indigo-500 text-xs w-4/5 py-2 px-2 rounded shadow-sm hover:shadow-lg hover:bg-indigo-700 outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150" type="button"
                                             onClick={() => {
                                             }}
                                         >
                                         Sell Shares
                                         </button>
-                                        <button className="bg-indigo-200 text-indigo-600 active:bg-indigo-500 text-xs w-4/5 py-2 px-2 rounded shadow-sm hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150" type="button"
+                                        <button className="bg-indigo-200 text-indigo-600 active:bg-indigo-500 text-xs w-4/5 py-2 px-2 rounded shadow-sm hover:shadow-lg hover:bg-indigo-300 outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150" type="button"
                                             onClick={() => {
                                             }}
                                         >
@@ -155,13 +166,13 @@ export function Dashboard(props) {
                                         </button>
                                     </div>
                                 </div>
+                            </div>
                             </div>
                         </div>
                         </div>
                     </dl>
                 </div>
-
-                <div className="mt-10 -mx-4 relative lg:mt-0" aria-hidden="true">
+                <div className="mt-16 sm:mt-8 -mx-4 relative lg:mt-0" aria-hidden="true">
                 <div className="lg:grid lg:grid-flow-row-dense lg:grid-cols-1 lg:gap-8 lg:items-center">
                     <div className="lg:col-start-2">
                     <h3 className="text-2xl font-extrabold text-gray-900 tracking-tight sm:text-3xl">
@@ -172,7 +183,7 @@ export function Dashboard(props) {
                     <div className="flex flex-col">
                     <div className="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
                         <div className="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
-                        <div className="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg mb-4">
+                        <div className="sm:shadow-md overflow-hidden sm:rounded-lg">
                             <table className="border-2 border-gray-100 m-0 p-0 min-w-full">
                             <thead className="bg-gray-100 border-1 border-gray-700 divide-y p-3 uppercase text-md">
                                 <tr>
@@ -193,8 +204,31 @@ export function Dashboard(props) {
                                 </th>
                                 </tr>
                             </thead>
-                            <tbody className="divide-y">
-                                <tr className="bg-white m-4 border-b border-gray-200 sm:shadow-md">
+                            <tbody>
+                                <tr className="bg-white m-4 border-b border-gray-200 shadow-md rounded-md">
+                                <td className="px-6 py-4 whitespace-nowrap text-xs font-medium text-gray-900" data-label="Time">
+                                    1 hour ago
+                                </td>
+                                <td className="px-6 py-4 whitespace-nowrap text-xs text-gray-500" data-label="Event">
+                                    List ssss
+                                </td>
+                                <td className="px-6 py-4 whitespace-nowrap text-xs text-gray-500" data-label="Quantity">
+                                    30,000 @ $8.80
+                                </td>
+                                <td className="px-6 py-4 whitespace-nowrap text-xs text-gray-500" data-label="Asset">
+                                    4738 E Woodbridge Way
+                                </td>
+                                <td className="px-6 py-4 whitespace-nowrap text-xs font-medium justify-end" data-label="Tx">
+                                    <div className="object-right">
+                                    <a href="/" className="text-indigo-600 hover:text-indigo-900">
+                                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M8.3335 5.00016H5.00016C4.07969 5.00016 3.3335 5.74635 3.3335 6.66683V15.0002C3.3335 15.9206 4.07969 16.6668 5.00016 16.6668H13.3335C14.254 16.6668 15.0002 15.9206 15.0002 15.0002V11.6668M11.6668 3.3335H16.6668M16.6668 3.3335V8.3335M16.6668 3.3335L8.3335 11.6668" stroke="#4F46E5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
+                                    </a>
+                                    </div>
+                                </td>
+                                </tr>
+                                <tr className="bg-white m-4 border-b border-gray-200 shadow-md rounded-md">
                                 <td className="px-6 py-4 whitespace-nowrap text-xs font-medium text-gray-900" data-label="Time">
                                     1 hour ago
                                 </td>
@@ -215,20 +249,20 @@ export function Dashboard(props) {
                                     </a>
                                 </td>
                                 </tr>
-                                <tr className="bg-white m-4 border-b border-gray-200 sm:shadow-md">
-                                <td className="px-6 py-4 whitespace-nowrap text-xs font-medium text-gray-900">
+                                <tr className="bg-white m-4 border-b border-gray-200 shadow-md rounded-md">
+                                <td className="px-6 py-4 whitespace-nowrap text-xs font-medium text-gray-900" data-label="Time">
                                     1 hour ago
                                 </td>
-                                <td className="px-6 py-4 whitespace-nowrap text-xs text-gray-500">
+                                <td className="px-6 py-4 whitespace-nowrap text-xs text-gray-500" data-label="Event">
                                     List ssss
                                 </td>
-                                <td className="px-6 py-4 whitespace-nowrap text-xs text-gray-500">
+                                <td className="px-6 py-4 whitespace-nowrap text-xs text-gray-500" data-label="Quantity">
                                     30,000 @ $8.80
                                 </td>
-                                <td className="px-6 py-4 whitespace-nowrap text-xs text-gray-500">
+                                <td className="px-6 py-4 whitespace-nowrap text-xs text-gray-500" data-label="Asset">
                                     4738 E Woodbridge Way
                                 </td>
-                                <td className="px-6 py-4 whitespace-nowrap text-right text-xs font-medium">
+                                <td className="px-6 py-4 whitespace-nowrap text-xs font-medium" data-label="Tx">
                                     <a href="/" className="text-indigo-600 hover:text-indigo-900">
                                     <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                                         <path d="M8.3335 5.00016H5.00016C4.07969 5.00016 3.3335 5.74635 3.3335 6.66683V15.0002C3.3335 15.9206 4.07969 16.6668 5.00016 16.6668H13.3335C14.254 16.6668 15.0002 15.9206 15.0002 15.0002V11.6668M11.6668 3.3335H16.6668M16.6668 3.3335V8.3335M16.6668 3.3335L8.3335 11.6668" stroke="#4F46E5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
@@ -236,20 +270,20 @@ export function Dashboard(props) {
                                     </a>
                                 </td>
                                 </tr>
-                                <tr className="bg-white m-4 border-b border-gray-200 sm:shadow-md">
-                                <td className="px-6 py-4 whitespace-nowrap text-xs font-medium text-gray-900">
+                                <tr className="bg-white m-4 border-b border-gray-200 shadow-md rounded-md">
+                                <td className="px-6 py-4 whitespace-nowrap text-xs font-medium text-gray-900" data-label="Time">
                                     1 hour ago
                                 </td>
-                                <td className="px-6 py-4 whitespace-nowrap text-xs text-gray-500">
+                                <td className="px-6 py-4 whitespace-nowrap text-xs text-gray-500" data-label="Event">
                                     List ssss
                                 </td>
-                                <td className="px-6 py-4 whitespace-nowrap text-xs text-gray-500">
+                                <td className="px-6 py-4 whitespace-nowrap text-xs text-gray-500" data-label="Quantity">
                                     30,000 @ $8.80
                                 </td>
-                                <td className="px-6 py-4 whitespace-nowrap text-xs text-gray-500">
+                                <td className="px-6 py-4 whitespace-nowrap text-xs text-gray-500" data-label="Asset">
                                     4738 E Woodbridge Way
                                 </td>
-                                <td className="px-6 py-4 whitespace-nowrap text-right text-xs font-medium">
+                                <td className="px-6 py-4 whitespace-nowrap text-xs font-medium" data-label="Tx">
                                     <a href="/" className="text-indigo-600 hover:text-indigo-900">
                                     <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                                         <path d="M8.3335 5.00016H5.00016C4.07969 5.00016 3.3335 5.74635 3.3335 6.66683V15.0002C3.3335 15.9206 4.07969 16.6668 5.00016 16.6668H13.3335C14.254 16.6668 15.0002 15.9206 15.0002 15.0002V11.6668M11.6668 3.3335H16.6668M16.6668 3.3335V8.3335M16.6668 3.3335L8.3335 11.6668" stroke="#4F46E5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
@@ -257,20 +291,20 @@ export function Dashboard(props) {
                                     </a>
                                 </td>
                                 </tr>
-                                <tr className="bg-white m-4 border-b border-gray-200 sm:shadow-md">
-                                <td className="px-6 py-4 whitespace-nowrap text-xs font-medium text-gray-900">
+                                <tr className="bg-white m-4 border-b border-gray-200 shadow-md rounded-md">
+                                <td className="px-6 py-4 whitespace-nowrap text-xs font-medium text-gray-900" data-label="Time">
                                     1 hour ago
                                 </td>
-                                <td className="px-6 py-4 whitespace-nowrap text-xs text-gray-500">
+                                <td className="px-6 py-4 whitespace-nowrap text-xs text-gray-500" data-label="Event">
                                     List ssss
                                 </td>
-                                <td className="px-6 py-4 whitespace-nowrap text-xs text-gray-500">
+                                <td className="px-6 py-4 whitespace-nowrap text-xs text-gray-500" data-label="Quantity">
                                     30,000 @ $8.80
                                 </td>
-                                <td className="px-6 py-4 whitespace-nowrap text-xs text-gray-500">
+                                <td className="px-6 py-4 whitespace-nowrap text-xs text-gray-500" data-label="Asset">
                                     4738 E Woodbridge Way
                                 </td>
-                                <td className="px-6 py-4 whitespace-nowrap text-xs font-medium">
+                                <td className="px-6 py-4 whitespace-nowrap text-xs font-medium" data-label="Tx">
                                     <a href="/" className="text-indigo-600 hover:text-indigo-900">
                                     <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                                         <path d="M8.3335 5.00016H5.00016C4.07969 5.00016 3.3335 5.74635 3.3335 6.66683V15.0002C3.3335 15.9206 4.07969 16.6668 5.00016 16.6668H13.3335C14.254 16.6668 15.0002 15.9206 15.0002 15.0002V11.6668M11.6668 3.3335H16.6668M16.6668 3.3335V8.3335M16.6668 3.3335L8.3335 11.6668" stroke="#4F46E5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
@@ -278,20 +312,20 @@ export function Dashboard(props) {
                                     </a>
                                 </td>
                                 </tr>
-                                <tr className="bg-white m-4 border-b border-gray-200 sm:shadow-md">
-                                <td className="px-6 py-4 whitespace-nowrap text-xs font-medium text-gray-900">
+                                <tr className="bg-white m-4 border-b border-gray-200 shadow-md rounded-md">
+                                <td className="px-6 py-4 whitespace-nowrap text-xs font-medium text-gray-900" data-label="Time">
                                     1 hour ago
                                 </td>
-                                <td className="px-6 py-4 whitespace-nowrap text-xs text-gray-500">
+                                <td className="px-6 py-4 whitespace-nowrap text-xs text-gray-500" data-label="Event">
                                     List ssss
                                 </td>
-                                <td className="px-6 py-4 whitespace-nowrap text-xs text-gray-500">
+                                <td className="px-6 py-4 whitespace-nowrap text-xs text-gray-500" data-label="Quantity">
                                     30,000 @ $8.80
                                 </td>
-                                <td className="px-6 py-4 whitespace-nowrap text-xs text-gray-500">
+                                <td className="px-6 py-4 whitespace-nowrap text-xs text-gray-500" data-label="Asset">
                                     4738 E Woodbridge Way
                                 </td>
-                                <td className="px-6 py-4 whitespace-nowrap text-right text-xs font-medium">
+                                <td className="px-6 py-4 whitespace-nowrap text-xs font-medium" data-label="Tx">
                                     <a href="/" className="text-indigo-600 hover:text-indigo-900">
                                     <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                                         <path d="M8.3335 5.00016H5.00016C4.07969 5.00016 3.3335 5.74635 3.3335 6.66683V15.0002C3.3335 15.9206 4.07969 16.6668 5.00016 16.6668H13.3335C14.254 16.6668 15.0002 15.9206 15.0002 15.0002V11.6668M11.6668 3.3335H16.6668M16.6668 3.3335V8.3335M16.6668 3.3335L8.3335 11.6668" stroke="#4F46E5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
@@ -299,41 +333,20 @@ export function Dashboard(props) {
                                     </a>
                                 </td>
                                 </tr>
-                                <tr className="bg-white m-4 border-b border-gray-200 sm:shadow-md">
-                                <td className="px-6 py-4 whitespace-nowrap text-xs font-medium text-gray-900">
+                                <tr className="bg-white m-4 border-b border-gray-200 shadow-md rounded-md">
+                                <td className="px-6 py-4 whitespace-nowrap text-xs font-medium text-gray-900" data-label="Time">
                                     1 hour ago
                                 </td>
-                                <td className="px-6 py-4 whitespace-nowrap text-xs text-gray-500">
+                                <td className="px-6 py-4 whitespace-nowrap text-xs text-gray-500" data-label="Event">
                                     List ssss
                                 </td>
-                                <td className="px-6 py-4 whitespace-nowrap text-xs text-gray-500">
+                                <td className="px-6 py-4 whitespace-nowrap text-xs text-gray-500" data-label="Quantity">
                                     30,000 @ $8.80
                                 </td>
-                                <td className="px-6 py-4 whitespace-nowrap text-xs text-gray-500">
+                                <td className="px-6 py-4 whitespace-nowrap text-xs text-gray-500" data-label="Asset">
                                     4738 E Woodbridge Way
                                 </td>
-                                <td className="px-6 py-4 whitespace-nowrap text-right text-xs font-medium">
-                                    <a href="/" className="text-indigo-600 hover:text-indigo-900">
-                                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M8.3335 5.00016H5.00016C4.07969 5.00016 3.3335 5.74635 3.3335 6.66683V15.0002C3.3335 15.9206 4.07969 16.6668 5.00016 16.6668H13.3335C14.254 16.6668 15.0002 15.9206 15.0002 15.0002V11.6668M11.6668 3.3335H16.6668M16.6668 3.3335V8.3335M16.6668 3.3335L8.3335 11.6668" stroke="#4F46E5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                    </svg>
-                                    </a>
-                                </td>
-                                </tr>
-                                <tr className="bg-white m-4 border-b border-gray-200 sm:shadow-md">
-                                <td className="px-6 py-4 whitespace-nowrap text-xs font-medium text-gray-900">
-                                    1 hour ago
-                                </td>
-                                <td className="px-6 py-4 whitespace-nowrap text-xs text-gray-500">
-                                    List ssss
-                                </td>
-                                <td className="px-6 py-4 whitespace-nowrap text-xs text-gray-500">
-                                    30,000 @ $8.80
-                                </td>
-                                <td className="px-6 py-4 whitespace-nowrap text-xs text-gray-500">
-                                    4738 E Woodbridge Way
-                                </td>
-                                <td className="px-6 py-4 whitespace-nowrap text-right text-xs font-medium">
+                                <td className="px-6 py-4 whitespace-nowrap text-xs font-medium" data-label="Tx">
                                     <a href="/" className="text-indigo-600 hover:text-indigo-900">
                                     <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                                         <path d="M8.3335 5.00016H5.00016C4.07969 5.00016 3.3335 5.74635 3.3335 6.66683V15.0002C3.3335 15.9206 4.07969 16.6668 5.00016 16.6668H13.3335C14.254 16.6668 15.0002 15.9206 15.0002 15.0002V11.6668M11.6668 3.3335H16.6668M16.6668 3.3335V8.3335M16.6668 3.3335L8.3335 11.6668" stroke="#4F46E5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
