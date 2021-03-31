@@ -2,7 +2,7 @@ import React from "react"
 import { Hero } from "../utilities/hero"
 import { CollapsableSection, FAQS } from "../utilities/collapsable-section"
 import { Residential } from "../marketplace/residential"
-import hero_img from "../resources/images/green-hero.jpg"
+import hero_img from "../resources/images/hero-green.jpg"
 
 export function Home(props) {
     return (

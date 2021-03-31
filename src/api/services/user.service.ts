@@ -4,15 +4,19 @@ import { User } from "../interfaces/user.interface";
 
 export class ApiUserService {
   
-    public getUser() {
+    public getUser(id: string, token: string) {
+      const headers = {
+        "Authorization": "Token " + token
+      }
       return axios.get<User>(
-        `${environment.api}/api/users/`
+        `${environment.api}/api/users/?email=${id}`,
+        {headers}
       );
     }
   
     public postUser(data: User) {
       return axios.post<User>(
-        `${environment.api}/api/users/`,
+        `${environment.api}/register/`,
         data
       );
     }

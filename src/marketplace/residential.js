@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react"
-import { Link } from "react-router-dom"
+// import { Link } from "react-router-dom"
+// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+// import { faLongArrowAltRight } from '@fortawesome/free-solid-svg-icons'
 import { Listing } from "./listing"
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faLongArrowAltRight } from '@fortawesome/free-solid-svg-icons'
 import { ApiAssetService } from "../api/services/asset.service"
 
 import res1 from "../resources/images/residential-1.jpg"
@@ -73,11 +73,11 @@ export function Residential(props) {
                             ))
                         }
                     </div>
-                    <div className="float-right" style={{"fontSize": "0.9rem"}}>
+                    {/* <div className="float-right" style={{"fontSize": "0.9rem"}}>
                         <Link to="/marketplace/residential" className="text-decoration-none text-muted">
                             Explore <FontAwesomeIcon icon={faLongArrowAltRight}/>
                         </Link>
-                    </div>
+                    </div> */}
                 </div>
             </div>
         </>

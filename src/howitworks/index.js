@@ -1,6 +1,6 @@
 import React from "react"
 import { Hero } from "../utilities/hero"
-import hero_img from "../resources/images/orange-hero.jpg"
+import hero_img from "../resources/images/hero-orange.jpg"
 import res from "../resources/images/residential-model.svg"
 import com from "../resources/images/commercial-model.svg"
 import inv from "../resources/images/invest-model.svg"

@@ -23,8 +23,16 @@ export function LoginForm(props) {
                     (response) => {
                         localStorage.setItem('token', response.data.token)
                         if (response.status === 200) {
-                            history.push(`/dashboard`)
-                            window.location.reload();
+                            console.log(values.username)
+                            userService.getUser(values.username, response.data.token).then(
+                                (res) => {
+                                    localStorage.setItem('user', res.data);
+                                }
+                            ).then(
+                                history.push(`/dashboard`)
+                            ).then(
+                                window.location.reload()
+                            )
                         }
                     }
                 ).catch(error => {

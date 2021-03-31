@@ -4,7 +4,8 @@ import NumberFormat from 'react-number-format'
 import { ApiAssetService } from '../api/services/asset.service'
 import res1 from "../resources/images/residential-2.jpg"
 import { Transactions } from "./transactions"
-import { Modal } from "../modals/modal"
+//import { Modal } from "../modals/modal"
+import { ModalDev } from "../modals/modal-dev"
 
 import typeIcon from "../resources/images/purple_prop_type.png"
 import yearIcon from "../resources/images/purple_year_built_icon.png"
@@ -199,7 +200,7 @@ export function ListingDetails(props) {
                                 </bs.Table>
                             </div>
                             <div className="border-bottom mb-4"/>
-                                <Modal buttonText="PURCHASE SHARES" id={listing.avalancheAssetId}/>
+                                <ModalDev buttonText="PURCHASE SHARES" id={listing.avalancheAssetId}/>
                             <div style={{"fontSize": "0.9rem"}} className="text-muted">
                                 *By purchasing shares of this asset,
                                 you become a part owner of this property
