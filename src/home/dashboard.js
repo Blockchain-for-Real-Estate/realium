@@ -3,20 +3,22 @@ import "../modals/modal.css"
 import { ApiUserService } from "../api/services/user.service"
 
 export function Dashboard(props) {
+    let [user, setUser] = React.useState()
 
     React.useEffect(() => {
         const fetchData = async () => {
             try {
                 let userService = new ApiUserService()
-                // await userService.getUser(props.id).then(
-                //     res => {
-                //         setListing(res.data[0])
-                //     }
-                // )
+                await userService.getUser(props.id).then(
+                    res => {
+                        setUser(res.data[0])
+                    }
+                )
             } catch {
-                //setListing(residentialData)
+                setUser(defaultUser)
             }
         };
+
         fetchData();
     }, [])
 
@@ -386,4 +388,16 @@ export function Dashboard(props) {
             </div> 
         </>
     )
+}
+
+const defaultUser = {
+    "realiumUserId": 0,
+    "fullName": "Sam Jones",
+    "investorTypeId": 1,
+    "kycVerified": true,
+    "walletAddress": "X-fuji1e2v074npxl27gd60pezxf8vm039jktlv252pga",
+    "email": "sampleuser@email.com",
+    "avaxusername": "sample",
+    "avaxpassword": "sample",
+    "user": 0
 }

@@ -3,9 +3,10 @@ import { useParams } from "react-router-dom"
 import * as bs from "react-bootstrap"
 import NumberFormat from "react-number-format"
 import LoadingWave from "@bit/ngoue.playground.loading-wave"
-import { ApiPropertyService } from '../api/services/property.service'
 import { AppContainer } from "../utilities/app-container"
+import { ApiPropertyService } from '../api/services/property.service'
 import { ApiTokenService } from '../api/services/token.service'
+import { ApiEventService } from "../api/services/event.service"
 import { Transactions } from "./transactions"
 import { Modal } from "../modals/modal"
 
@@ -28,6 +29,7 @@ export function ListingDetails(props) {
     let { propertyId } = useParams()
     let [listing, setListing] = React.useState()
     let [token, setToken] = React.useState()
+    let [transactions, setTransactions] = React.useState()
     const residentialImages = [
         res1, res2, res3, res4, res5, res6
     ]
@@ -69,6 +71,11 @@ export function ListingDetails(props) {
                 setListing(residentialData)
             }
         };
+
+        fetchData()
+    }, [propertyId])
+
+    React.useEffect(() => {
         const fetchToken = async () => {
             try {
                 let tokenViaApi = new ApiTokenService()
@@ -82,13 +89,27 @@ export function ListingDetails(props) {
             }
         };
 
-        fetchData()
+        fetchToken()
+    }, [propertyId]);
+
+    React.useEffect(() => {
+        try {
+            let transactionViaApi = new ApiEventService()
+            transactionViaApi.getFilteredTransactions(propertyId).then(
+                res => {
+                    const txs = res.data;
+                    setTransactions(txs);
+                }
+            )
+        } catch {
+            setTransactions(null);
+        }
     }, [propertyId])
 
     return (
         <AppContainer page="marketplace">
         {!loading ?
-            <>  {listing &&
+            <>  {listing && token && transactions &&
                 <div className="mt-12 mb-12">
                     <div className="border-bottom mb-4 m-4">
                         <bs.Row className="mb-2">
@@ -257,11 +278,13 @@ export function ListingDetails(props) {
                 </div>
                 }
                 <div className="mb-8">
-                    <DetailsTable listing={listing} token={token}/>
+                    {listing && token && transactions &&
+                        <DetailsTable listing={listing} token={token} event={transactions}/>
+                    }
+                    {listing &&
+                        <Transactions listing={listing} propertyId={propertyId}/>
+                    }
                 </div>
-                {listing &&
-                    <Transactions listing={listing}/>
-                }
             </>
         :
         <div className="content-center flex flex-wrap justify-center py-72">

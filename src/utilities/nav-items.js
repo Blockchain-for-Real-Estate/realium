@@ -3,9 +3,12 @@ import { Link } from "react-router-dom"
 import { Modal } from "../modals/modal"
 import { useHistory } from "react-router-dom"
 import logo from "../resources/images/logo.svg"
+import { ApiBalanceService } from '../api/services/balance.service'
 
 export function NavItems(props) {
     let history = useHistory();
+    let [balance, setBalance] = React.useState()
+    let wallet = "X-fuji1e4kxg6vjpn43238y55u20pry2fx6agvnl0wf67"
 
     function logout() {
         localStorage.removeItem('token');
@@ -13,6 +16,29 @@ export function NavItems(props) {
         history.push("/")
         window.location.reload()
     }
+
+    const initials = () => {
+      let user = "Sam Jones"
+      let names = user.split(' ')
+      return names[0].split('')[0] + names[names.length-1].split('')[0]
+    }
+
+    React.useEffect(() => {
+      const fetchBalance = async () => {
+          try {
+            let balanceService = new ApiBalanceService()
+              await balanceService.getBalance(wallet).then(
+                  (res) => {
+                      setBalance(Number(res.data.result.balance)/1000000000) //AVAX uses a demonination of 9
+                  }
+              )
+          } catch {
+              setBalance(null)
+          }
+      };
+
+      fetchBalance()
+    }, [wallet])
 
     return (
         <>
@@ -110,11 +136,11 @@ export function NavItems(props) {
                     </div>
                     <div className="flex-shrink-0 text-gray-900 bg-gray-100 border-2 border-gray-300 font-bold uppercase text-sm p-2 rounded focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
                         type="button"
-                        onClick={() => history.push("/dashboard")}>TW
+                        onClick={() => history.push("/dashboard")}>{initials() || "TW"}
                     </div>
                     <div className="flex-shrink-0 text-gray-900 bg-indigo-100 border-2 border-indigo-500 font-bold uppercase text-sm p-2 rounded focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
                         type="button"
-                        onClick={() => history.push("/dashboard")}>128.00 AVAX
+                        onClick={() => history.push("/dashboard")}>{balance} AVAX
                     </div>
                 </div>
                 }
