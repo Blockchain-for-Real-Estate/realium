@@ -21,17 +21,16 @@ export function LoginForm(props) {
             onSubmit={(values, { setSubmitting }) => {
                 userService.login(values).then(
                     (response) => {
-                        localStorage.setItem('token', response.data.token)
+                        sessionStorage.setItem('token', response.data.token)
                         try { 
                             userService.getUser(values.username, response.data.token).then(
                                 (res) => {
                                     res.data[0].avaxpassword = "*********"
-                                    localStorage.setItem('user', JSON.stringify(res.data[0]));
+                                    sessionStorage.setItem('user', JSON.stringify(res.data[0]));
+                                    sessionStorage.setItem('id', JSON.stringify(res.data[0].realiumUserId))
                                 }
                             ).then(
                                 history.push(`/dashboard`)
-                            ).finally(
-                                window.location.reload()
                             )
                         } catch {
                             alert("Could not retrieve user")
