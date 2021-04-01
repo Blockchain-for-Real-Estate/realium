@@ -96,11 +96,11 @@ function TransactionRow(props) {
             </td>
             <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                 {/* add username? */}
-                {props.transaction.eventCreator}
+                {props.transaction.eventCreator.fullName}
             </td>
             <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                 {/* add username? */}
-                {props.transaction.eventType !== 'LIST' && props.transaction.tokenOwner}
+                {props.transaction.eventType !== 'LIST' && props.transaction.tokenOwner.fullName}
             </td>
             <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                 <TimeAgo date={props.transaction.eventDateTime}/>
