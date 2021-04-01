@@ -10,9 +10,15 @@ export class ApiTokenService {
       );
     }
 
-    public getFilteredTokens(id: String) {
+    public getPropertyTokens(id: String) {
         return axios.get<Token>(
           `${environment.api}/api/tokens/?property=${id}`
+        );
+    }
+
+    public getUserTokens(id: String) {
+        return axios.get<Token>(
+          `${environment.api}/api/tokens/?owner=${id}`
         );
     }
   

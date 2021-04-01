@@ -79,7 +79,7 @@ export function ListingDetails(props) {
         const fetchToken = async () => {
             try {
                 let tokenViaApi = new ApiTokenService()
-                    await tokenViaApi.getFilteredTokens(propertyId).then(
+                    await tokenViaApi.getPropertyTokens(propertyId).then(
                         res => {
                             setToken(res.data[0])
                         }

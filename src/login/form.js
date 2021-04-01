@@ -25,10 +25,13 @@ export function LoginForm(props) {
                         try { 
                             userService.getUser(values.username, response.data.token).then(
                                 (res) => {
-                                    localStorage.setItem('user', res.data.email);
+                                    res.data[0].avaxpassword = "*********"
+                                    localStorage.setItem('user', JSON.stringify(res.data[0]));
                                 }
                             ).then(
                                 history.push(`/dashboard`)
+                            ).finally(
+                                window.location.reload()
                             )
                         } catch {
                             alert("Could not retrieve user")

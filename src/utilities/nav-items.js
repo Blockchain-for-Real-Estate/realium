@@ -18,7 +18,7 @@ export function NavItems(props) {
     }
 
     const initials = () => {
-      let user = "Sam Jones"
+      let user = "Bentley Harrison"
       let names = user.split(' ')
       return names[0].split('')[0] + names[names.length-1].split('')[0]
     }

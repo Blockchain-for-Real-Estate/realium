@@ -2,7 +2,6 @@ import React from 'react'
 import NumberFormat from "react-number-format"
 
 export function DetailsTable(props) {
-    console.log(props.event)
     return (
         <div className="bg-white">
         <div className="max-w-7xl mx-auto py-10 px-4 sm:px-6 lg:px-8">

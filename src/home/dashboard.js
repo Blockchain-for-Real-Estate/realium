@@ -1,26 +1,46 @@
 import React from "react"
 import "../modals/modal.css"
-import { ApiUserService } from "../api/services/user.service"
+import { ApiTokenService } from "../api/services/token.service"
+import { ApiPropertyService } from "../api/services/property.service"
 
 export function Dashboard(props) {
-    let [user, setUser] = React.useState()
+    let user = localStorage.getItem('user')
+    console.log(user)
+    let [tokens, setTokens] = React.useState()
+    let [properties, setProperties] = React.useState()
 
     React.useEffect(() => {
+        let listings = []
         const fetchData = async () => {
             try {
-                let userService = new ApiUserService()
-                await userService.getUser(props.id).then(
+                let tokenService = new ApiTokenService()
+                let propertyService = new ApiPropertyService()
+                await tokenService.getUserTokens(1).then(
                     res => {
-                        setUser(res.data[0])
+                        setTokens(res.data)
                     }
-                )
+    )
+                // ).then(
+                //     tokens.map(async (token) => (
+                //         await propertyService.getAssetById(token.property).then(
+                //             res => {
+                //                 listings.push(res.data[0])
+                //             }
+                //         )
+                //     ).then(
+                //         setProperties(listings)
+                //     )
+                //))
             } catch {
-                setUser(defaultUser)
+                setTokens(null)
             }
         };
 
-        fetchData();
-    }, [])
+        fetchData()
+        console.log(tokens)
+    }, [user])
+
+    console.log(properties)
 
     return (
         <>
