@@ -8,7 +8,6 @@ import { CollapsableSection, FAQS } from "../utilities/collapsable-section"
 export function Marketplace(props) {
     return (
         <>
-            <Hero img={hero_img} page="marketplace"/>
             <Residential />
             <Commercial />
             {/* FAQs */}
