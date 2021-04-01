@@ -214,7 +214,7 @@ export function ListingDetails(props) {
                             <div style={{"fontSize": "1.3rem"}} className="font-weight-bold mb-3">
                                 Share Price:
                                 <NumberFormat
-                                    value={token.listedPrice / listing.seriesCount}
+                                    value={Math.round(token.listedPrice / listing.seriesCount)}
                                     displayType={'text'}
                                     thousandSeparator={true}
                                     prefix={'$'}
@@ -256,7 +256,7 @@ export function ListingDetails(props) {
                                             </td>
                                             <td>
                                                 <NumberFormat
-                                                    value={token.listedPrice}
+                                                    value={token.purchasedPrice}
                                                     displayType={'text'}
                                                     thousandSeparator={true}
                                                     prefix={'$'}

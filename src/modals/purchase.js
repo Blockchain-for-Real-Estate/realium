@@ -1,5 +1,7 @@
 import React, { useState } from 'react'
 import ReactTimeAgo from 'react-time-ago'
+
+import NumberFormat from "react-number-format"
 import { ApiEventService } from "../api/services/event.service"
 import { Confirmation } from './confirmation';
 import "./modal.css"
@@ -13,7 +15,7 @@ export function Purchase(props) {
                 let eventService = new ApiEventService()
                     await eventService.getListingsForAvaxAssetId(props.id).then(
                         res => {
-                            setPostings(res.data[0])
+                            setPostings(res.data)
                         }
                     )
             } catch {
@@ -23,8 +25,6 @@ export function Purchase(props) {
 
         fetchPostings()
     }, [props.id]);
-
-    console.log(postings)
 
     return (
         <>
@@ -47,8 +47,19 @@ export function Purchase(props) {
                             {Object.keys(postings).map(key => (
                             <tr key={key} className="m-4 border-b border-gray-200 sm:shadow">
                             <td className="p-3" data-label="From">{postings[key].tokenOwner.fullName || "Anonymous"}</td>
-                            <td className="p-3" data-label="Quantity">{postings[key].quantity}</td>
-                            <td className="p-3" data-label="Price">{postings[key].listedPrice}</td>
+                            <td className="p-3" data-label="Quantity">
+                            <NumberFormat
+                                value={postings[key].quantity}
+                                displayType={'text'}
+                                thousandSeparator={true}
+                            /></td>
+                            <td className="p-3" data-label="Price">
+                            <NumberFormat
+                                value={postings[key].listedPrice}
+                                displayType={'text'}
+                                thousandSeparator={true}
+                                prefix={"$"}
+                            /></td>
                             <td className="p-3" data-label="Time">
                                 <ReactTimeAgo date={postings[key].eventDateTime} locale="en-US"/>
                             </td>

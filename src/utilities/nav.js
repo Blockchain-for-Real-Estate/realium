@@ -1,19 +1,43 @@
 import React from "react"
 import { Link, useLocation, useHistory } from "react-router-dom"
 import logo from "../resources/images/logo.svg"
+import { ApiBalanceService } from '../api/services/balance.service'
 
 export function Nav(props) {
     const [menuOpen, setMenuOpen] = React.useState(false)
     let location = useLocation()
-    let history = useHistory()
     let route = location.pathname.split("/")[1]
+    let history = useHistory();
+    let [balance, setBalance] = React.useState()
 
     function logout() {
-        localStorage.removeItem('token');
-        localStorage.removeItem('user');
+        sessionStorage.clear()
         history.push("/")
         window.location.reload()
     }
+
+    const initials = () => {
+      let names = sessionStorage.getItem('user').split(' ')
+      return names[0].split('')[0] + names[names.length-1].split('')[0]
+    }
+
+    React.useEffect(() => {
+      let wallet = sessionStorage.getItem('avax')
+      const fetchBalance = async () => {
+          try {
+            let balanceService = new ApiBalanceService()
+              await balanceService.getBalance(wallet).then(
+                  (res) => {
+                      setBalance(Number(res.data.result.balance)/1000000000) //AVAX uses a demonination of 9
+                  }
+              )
+          } catch {
+              setBalance(null)
+          }
+      };
+
+      fetchBalance()
+    }, [])
 
     return (
         <nav className="bg-white shadow">
@@ -38,18 +62,20 @@ export function Nav(props) {
                         </div>
                     </div>
                     <div className="hidden sm:ml-6 sm:flex sm:items-center">
-                        {localStorage.getItem('token') === null ?
+                        {sessionStorage.getItem('token') === null ?
                             <Link className="block px-3 py-2 ml-10 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50 text-decoration-none" to="/login">
                                 Sign in
                             </Link>
                             :
                             <>
-                                <Link className="flex-shrink-0 text-gray-900 bg-gray-100 border-2 border-gray-300 font-bold uppercase text-sm p-2 rounded focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150 text-decoration-none" to="/dashboard">
-                                    TW
-                                </Link>
-                                <Link  className="flex-shrink-0 text-gray-900 bg-indigo-100 border-2 border-indigo-500 font-bold uppercase text-sm p-2 rounded focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150 text-decoration-none" to="/dashboard">
-                                    128.00 AVAX
-                                </Link>
+                                <div className="flex-shrink-0 text-gray-900 bg-gray-100 border-2 border-gray-300 font-bold uppercase text-sm p-2 rounded focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                                    type="button"
+                                    onClick={() => history.push("/dashboard")}>{initials() || "TW"}
+                                </div>
+                                <div className="flex-shrink-0 text-gray-900 bg-indigo-100 border-2 border-indigo-500 font-bold uppercase text-sm p-2 rounded focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                                    type="button"
+                                    onClick={() => history.push("/dashboard")}>{balance} AVAX
+                                </div>
                                 <Link onClick={logout} className="block px-3 py-2 rounded-md text-sm font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50 text-decoration-none" to="/">
                                     Sign out
                                 </Link>
@@ -85,18 +111,20 @@ export function Nav(props) {
                 </div>
                 <div className="pt-4 pb-3 border-t border-gray-200">
                 <div className="space-y-1">
-                    {localStorage.getItem('token') === null ?
+                    {sessionStorage.getItem('token') === null ?
                         <Link className="border-transparent text-gray-500 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-700 block pl-3 pr-4 py-2 border-l-4 text-base font-medium text-decoration-none" to="/login">
                             Sign in
                         </Link>
                         :
                         <>
-                            <Link className="border-transparent text-indigo-600 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-700 block pl-3 pr-4 py-2 border-l-4 text-base font-medium text-decoration-none" to="/dashboard">
-                                TW
-                            </Link>
-                            <Link  className="border-transparent text-indigo-600 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-700 block pl-3 pr-4 py-2 border-l-4 text-base font-medium text-decoration-none" to="/dashboard">
-                                128.00 AVAX
-                            </Link>
+                            <div className="flex-shrink-0 text-gray-900 bg-gray-100 border-2 border-gray-300 font-bold uppercase text-sm p-2 rounded focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                                type="button"
+                                onClick={() => history.push("/dashboard")}>{initials() || "TW"}
+                            </div>
+                            <div className="flex-shrink-0 text-gray-900 bg-indigo-100 border-2 border-indigo-500 font-bold uppercase text-sm p-2 rounded focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                                type="button"
+                                onClick={() => history.push("/dashboard")}>{balance} AVAX
+                            </div>
                             <Link onClick={logout} className="border-transparent text-gray-500 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-700 block pl-3 pr-4 py-2 border-l-4 text-base font-medium text-decoration-none" to="/">
                                 Sign out
                             </Link>

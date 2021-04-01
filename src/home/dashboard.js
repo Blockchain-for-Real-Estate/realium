@@ -107,7 +107,7 @@ export function Dashboard(props) {
                             </div>
                             <div className="flex-1 min-w-0 space-x-2 pt-2 pb-2 pl-2">
                                 <div className="grid grid-cols-1 sm:grid-cols-3 sm:align-middle sm:items-center">
-                                    <div className="font-semibold grid grid-cols-2 text-center sm:text-left sm:grid-cols-1 sm:m-2">
+                                    <div className="font-semibold grid grid-cols-2 mr-8 sm:mr-1 text-center sm:text-left sm:grid-cols-1 sm:m-2">
                                         Address
                                         <p className="text-xs text-gray-500 pt-1 text-center sm:text-left mb-0">
                                             {tokens[key].property.streetAddress}
@@ -115,7 +115,7 @@ export function Dashboard(props) {
                                             {tokens[key].property.city}, {tokens[key].property.state}
                                         </p>
                                     </div>
-                                    <div className="font-semibold grid grid-cols-2 text-center sm:text-left sm:grid-cols-1 sm:m-2">
+                                    <div className="font-semibold grid grid-cols-2 mr-8 sm:mr-1 text-center sm:text-left sm:grid-cols-1 sm:m-2">
                                         Shares
                                         <p className="text-xs text-gray-500 pt-1 text-center sm:text-left mb-0">
                                             <NumberFormat

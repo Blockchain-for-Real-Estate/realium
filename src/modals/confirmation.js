@@ -1,5 +1,6 @@
 import React from "react";
 import { useHistory } from "react-router-dom"
+import NumberFormat from "react-number-format"
 
 export function Confirmation(props) {
     let history = useHistory();
@@ -86,7 +87,19 @@ export function Confirmation(props) {
                     {!unconfirmed ?
                     <div class="mt-2">
                         <p class="text-sm text-gray-500" id="modalText">
-                        Are you sure you want to purchase <span className="text-sm text-indigo-600 font-bold">{props.shares}</span> shares for <span className="text-sm text-indigo-600 font-bold">${props.price}</span> per share?
+                        Are you sure you want to purchase <span className="text-sm text-indigo-600 font-bold">
+                            <NumberFormat
+                                value={props.shares}
+                                displayType={'text'}
+                                thousandSeparator={true}
+                            />
+                        </span> shares for <span className="text-sm text-indigo-600 font-bold">$
+                        <NumberFormat
+                                value={props.price}
+                                displayType={'text'}
+                                thousandSeparator={true}
+                            />
+                        </span> per share?
                         </p>
                     </div>
                     :

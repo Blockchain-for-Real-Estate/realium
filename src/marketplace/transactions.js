@@ -31,11 +31,11 @@ export function Transactions(props) {
                     <p className="mt-3 text-xl text-gray-500 sm:text-center">View recent blockchain transaction activity for {props.listing.propertyName}. Navigate to see transaction-specific details provided by Avaxscan.</p>
 
                 </div>
-                {transactions ?
-                    <div className="flex flex-col">
-                        <div className="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
-                            <div className="py-6 align-middle inline-block min-w-full sm:px-6 lg:px-8">
-                            <div className="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
+                {transactions &&
+                <div className="flex flex-col">
+                    <div className="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
+                        <div className="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
+                            <div className="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg mb-4">
                                 {transactions.length > 0 ?
                                     <table className="min-w-full divide-y divide-gray-200">
                                     <thead className="bg-gray-50">
@@ -73,6 +73,7 @@ export function Transactions(props) {
                         </div>
                     </div>
                 </div>
+                }
             </div>
         </div>
     )
