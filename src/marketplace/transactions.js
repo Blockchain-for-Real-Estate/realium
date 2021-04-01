@@ -17,15 +17,15 @@ export function Transactions(props) {
             setTransactions(null);
         }
     }, [props.assetId])
-
+    console.log(transactions)
     return (
         /* Transactions Table */
         <div className="mt-20 mb-20">
             <div className="bg-white">
             <div className="sm:flex sm:flex-col sm:align-center mb-6">
-            <h1 className="text-5xl font-extrabold text-gray-900 sm:text-center">Chain History</h1>
+            <h1 className="text-3xl font-extrabold text-gray-900 sm:text-center">Chain History</h1>
             <p className="mt-3 text-xl text-gray-500 sm:text-center">View recent blockchain transaction activity for {props.listing.assetName}. Navigate to see transaction-specific details provided by Avaxscan.</p>
-            
+
             </div>
             {transactions ?
             <ul className="divide-y divide-gray-200 mb-0 shadow overflow-hidden sm:rounded-md">
@@ -40,7 +40,7 @@ export function Transactions(props) {
                                     <p className="text-lg font-medium text-indigo-600 truncate">{transactions[key].txId}</p>
                                     <p className="mt-2 flex items-center text-sm text-gray-500">
                                     {/*Heroicon name: solid/house*/}
-                                    {props.listing.listingType === "Residential" ? 
+                                    {props.listing.listingType === "Residential" ?
                                     <svg className="flex-shrink-0 mr-1.5 h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
                                         <path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z" />
                                     </svg>

@@ -5,9 +5,9 @@ export function DetailsTable(props) {
         <div className="bg-white">
         <div className="max-w-7xl mx-auto py-10 px-4 sm:px-6 lg:px-8">
             <div className="sm:flex sm:flex-col sm:align-center">
-            <h1 className="text-5xl font-extrabold text-gray-900 sm:text-center">Property Statistics</h1>
+            <h1 className="text-3xl font-extrabold text-gray-900 sm:text-center">Property Statistics</h1>
             <p className="mt-3 text-xl text-gray-500 sm:text-center">Start building for free, then add a site plan to go live. Account plans unlock additional features.</p>
-            
+
             </div>
             <div className="mt-4 space-y-4 sm:mt-16 sm:space-y-0 sm:grid sm:grid-cols-1 sm:gap-6 lg:max-w-4xl lg:mx-auto xl:max-w-none xl:mx-0 xl:grid-cols-3">
             <div>
@@ -123,7 +123,7 @@ export function DetailsTable(props) {
                         <span className="flex-1 text-sm text-gray-500">Management Team</span>
                         <span className="flex-1 text-sm text-gray-500">South Ridge</span>
                         </li>
-                        
+
                     </ul>
                 </div>
             </div>
@@ -170,7 +170,7 @@ export function DetailsTable(props) {
                         <li className="flex space-x-3">
                         <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M5.33333 4V6.66667M4 5.33333H6.66667M6 13.3333V16M4.66667 14.6667H7.33333M10.6667 4L12.1905 8.57143L16 10L12.1905 11.4286L10.6667 16L9.14286 11.4286L5.33333 10L9.14286 8.57143L10.6667 4Z" stroke="#4F46E5" strokeLinecap="round" strokeLinejoin="round"/>
-                        </svg> 
+                        </svg>
                         <span className="flex-1 text-sm text-gray-500">Week High</span>
                         <span className="flex-1 text-sm text-gray-500">$7.30/share</span>
                         </li>
