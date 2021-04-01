@@ -20,7 +20,7 @@ export function Transactions(props) {
         } catch {
             setTransactions(null);
         }
-    }, [props.assetId])
+    }, [props.propertyId])
 
     return (
         /* Transactions Table */
@@ -106,10 +106,10 @@ function TransactionRow(props) {
                 <TimeAgo date={props.transaction.eventDateTime}/>
             </td>
             <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                {/* TODO: add link to avascan
+                {/* TODO: add link to avascan (missing id)
                     // <a href={'https://testnet.avascan.info/blockchain/x/tx/' + transactions[key].txId} target="_blank" rel="noreferrer" className="block hover:bg-gray-50">
                 */}
-                {props.transaction.eventType === "SALE" && <a><img src={link} alt="link to avaxscan"/></a>}
+                {props.transaction.eventType === "SALE" && <a href="https://testnet.avascan.info/blockchain/x/tx/"><img src={link} alt="link to avaxscan"/></a>}
             </td>
         </tr>
     )
