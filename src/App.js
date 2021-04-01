@@ -8,13 +8,13 @@ import { HowItWorks } from "./howitworks"
 import { Login } from "./login"
 import { Dashboard } from "./home/dashboard"
 import { Footer } from "./utilities/footer"
-import { NavItems } from "./utilities/nav-items"
+import { Nav } from "./utilities/nav"
 import { ListingDetails } from "./marketplace/listing-details"
 
 function App() {
 	return (
 		<Router>
-			<NavItems/>
+			<Nav />
 			<ScrollToTop>
 				<Switch>
 					<Route exact path="/">

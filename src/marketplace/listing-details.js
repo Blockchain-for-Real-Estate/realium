@@ -246,7 +246,7 @@ export function ListingDetails(props) {
                     <DetailsTable listing={listing} />
                 </div>
                 {listing &&
-                    <Transactions listing={listing} propertyId={propertyId}/>
+                    <Transactions listing={listing}/>
                 }
             </>
         :
