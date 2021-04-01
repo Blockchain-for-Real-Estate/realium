@@ -26,12 +26,18 @@ export function Listing(props) {
     ]
 
     return (
-        <div className="flex flex-col rounded-lg shadow-lg overflow-hidden" style={{cursor: "pointer"}}onClick={() => history.push(`/marketplace/${props.listing.listingType}/${props.listing.assetId}`)}>
+        <div className="flex flex-col rounded-lg shadow-lg overflow-hidden" style={{cursor: "pointer"}} onClick={() => props.listing.listingType === "Residential" ? history.push(`/marketplace/${props.listing.listingType}/${props.listing.assetId}`) : null}>
             <div className="flex-shrink-0">
                 {props.listing.listingType === "Residential" ?
-                    <img className="h-48 w-full object-cover" src={residentialImages[props.index] || comingSoon} alt={props.listing.streetAddress} />
+                    <div className="relative">
+                        <img className="h-48 w-full object-cover" src={residentialImages[props.index] || comingSoon} alt={props.listing.streetAddress} />
+                        <span class="absolute right-1 top-3 px-2 py-1 mr-2 text-xs font-bold leading-none text-red-100 bg-indigo-600 rounded-full">NEW</span>
+                    </div>
                     :
-                    <img className="h-48 w-full object-cover" src={commercialImages[props.index] || comingSoon} alt={props.listing.streetAddress} />
+                    <div className="relative">
+                        <img className="opacity-40 h-48 w-full object-cover" src={commercialImages[props.index] || comingSoon} alt={props.listing.streetAddress} />
+                        <span class="absolute right-1 top-3 px-2 px-2 py-1 mr-2 text-xs font-semibold leading-none text-white bg-green-400 rounded-full">COMING SOON</span>
+                    </div>
                 }
                 </div>
             <div className="flex-1 bg-white p-6 flex flex-col justify-between">

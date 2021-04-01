@@ -83,6 +83,10 @@ export function NavItems(props) {
                       </Link>
                       <a href="https://docs.realium.io" target="_blank" rel="noreferrer" style={{ textDecoration: 'none' }} className="border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">
                         Docs
+                        <span className="pr-2"></span>
+                        <svg width="12" height="12" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M8.3335 5.00016H5.00016C4.07969 5.00016 3.3335 5.74635 3.3335 6.66683V15.0002C3.3335 15.9206 4.07969 16.6668 5.00016 16.6668H13.3335C14.254 16.6668 15.0002 15.9206 15.0002 15.0002V11.6668M11.6668 3.3335H16.6668M16.6668 3.3335V8.3335M16.6668 3.3335L8.3335 11.6668" stroke="#4F46E5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
                       </a>
                     </div>
                   </div>
@@ -109,7 +113,8 @@ export function NavItems(props) {
                         onClick={() => history.push("/dashboard")}>TW
                     </div>
                     <div className="flex-shrink-0 text-gray-900 bg-indigo-100 border-2 border-indigo-500 font-bold uppercase text-sm p-2 rounded focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
-                        type="button">128.00 AVAX
+                        type="button"
+                        onClick={() => history.push("/dashboard")}>128.00 AVAX
                     </div>
                 </div>
                 }
