@@ -1,12 +1,12 @@
 import React from "react"
-import { ApiTransactionService } from "../api/services/transaction.service"
+import { ApiEventService } from "../api/services/event.service"
 
 export function Transactions(props) {
     let [transactions, setTransactions] = React.useState()
 
     React.useEffect(() => {
         try {
-            let transactionViaApi = new ApiTransactionService()
+            let transactionViaApi = new ApiEventService()
             transactionViaApi.getFilteredTransactions(props.assetId).then(
                 res => {
                     const txs = res.data.transactions;

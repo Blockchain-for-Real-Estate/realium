@@ -1,8 +1,8 @@
 import React from "react"
+import { useParams } from "react-router-dom"
 import * as bs from "react-bootstrap"
 import NumberFormat from 'react-number-format'
-import { ApiAssetService } from '../api/services/asset.service'
-import res1 from "../resources/images/residential-2.jpg"
+import { ApiPropertyService } from '../api/services/property.service'
 import { Transactions } from "./transactions"
 import { Modal } from "../modals/modal"
 
@@ -13,9 +13,40 @@ import priceIcon from "../resources/images/purple_price_icon.png"
 import { DetailsTable } from "./details-table"
 import styled from 'styled-components'
 
+import res1 from "../resources/images/residential-1.jpg"
+import res2 from "../resources/images/residential-2.jpg"
+import res3 from "../resources/images/residential-3.jpg"
+import res4 from "../resources/images/residential-4.jpg"
+import res5 from "../resources/images/residential-5.jpg"
+import res6 from "../resources/images/residential-6.jpg"
+
 export function ListingDetails(props) {
     let loading;
+    let { id } = useParams()
     let [listing, setListing] = React.useState()
+    const residentialImages = [
+        res1, res2, res3, res4, res5, res6
+    ]
+    // const residentialImages = {
+    //     1: [
+    //         res1, res2, res3, res4, res5, res6
+    //     ],
+    //     2: [
+    //         res1, res2, res3, res4, res5, res6
+    //     ],
+    //     3: [
+    //         res1, res2, res3, res4, res5, res6
+    //     ],
+    //     4: [
+    //         res1, res2, res3, res4, res5, res6
+    //     ],
+    //     5: [
+    //         res1, res2, res3, res4, res5, res6
+    //     ],
+    //     6: [
+    //         res1, res2, res3, res4, res5, res6
+    //     ],
+    // }
 
     const Image = styled.img`
         border:1px solid grey;
@@ -24,10 +55,10 @@ export function ListingDetails(props) {
     React.useEffect(() => {
         const fetchData = async () => {
             try {
-                let assetViaApi = new ApiAssetService()
+                let assetViaApi = new ApiPropertyService()
                 await assetViaApi.getAssetById(props.id).then(
                     res => {
-                        setListing(res.data.assets[0])
+                        setListing(res.data.properties[0])
                     }
                 )
             } catch {
@@ -62,20 +93,20 @@ export function ListingDetails(props) {
                     <bs.Row>
                         <bs.Col md={7}>
                             <div className="text-center mb-4">
-                                <Image src={res1} alt={listing.propertyType} className="object-fill h-90 w-full"/>
+                                <Image src={residentialImages[id-1]} alt={listing.propertyType} className="object-fill h-90 w-full"/>
                             </div>
                             <bs.Row className="text-center mb-5">
                                 <bs.Col>
-                                    <Image src={res1} alt={listing.propertyType} className="object-fill h-30 w-full"/>
+                                    <Image src={residentialImages[id-1]} alt={listing.propertyType} className="object-fill h-30 w-full"/>
                                 </bs.Col>
                                 <bs.Col>
-                                    <Image src={res1} alt={listing.propertyType} className="object-fill h-30 w-full"/>
+                                    <Image src={residentialImages[id-1]} alt={listing.propertyType} className="object-fill h-30 w-full"/>
                                 </bs.Col>
                                 <bs.Col>
-                                    <Image src={res1} alt={listing.propertyType} className="object-fill h-30 w-full"/>
+                                    <Image src={residentialImages[id-1]} alt={listing.propertyType} className="object-fill h-30 w-full"/>
                                 </bs.Col>
                                 <bs.Col>
-                                    <Image src={res1} alt={listing.propertyType} className="object-fill h-30 w-full"/>
+                                    <Image src={residentialImages[id-1]} alt={listing.propertyType} className="object-fill h-30 w-full"/>
                                 </bs.Col>
                             </bs.Row>
                             <div className="font-weight-bold" style={{"fontSize": "1.1rem"}}>Description</div>
@@ -233,7 +264,6 @@ const residentialData = {
     funded: 375300.00,
     listingType: 'Residential',
     propertyType: 'Single Family Home',
-    image: res1,
     forcastedIncome: 8000,
     minInvestment: 1000,
     maxInvestment: 100000,

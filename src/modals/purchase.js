@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { ApiAssetService } from "../api/services/asset.service"
+import { ApiPropertyService } from "../api/services/property.service"
 import { Confirmation } from './confirmation';
 import "./modal.css"
 
@@ -8,10 +8,10 @@ export function Purchase(props) {
 
     useEffect(() => {
         const getOffers = async () => {
-            let assetService = new ApiAssetService();
+            let assetService = new ApiPropertyService();
             await assetService.getAssetShareListings(props.id).then(
                 (res) => {
-                    const data = res.data.assets
+                    const data = res.data.properties
                     setOffers(data)
                 }
             ).catch(error => console.error(`Error: ${error}`))

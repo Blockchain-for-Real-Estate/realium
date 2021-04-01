@@ -31,7 +31,7 @@ export function Listing(props) {
                 {props.listing.listingType === "Residential" ?
                     <div className="relative">
                         <img className="h-48 w-full object-cover" src={residentialImages[props.index] || comingSoon} alt={props.listing.streetAddress} />
-                        <span class="absolute right-1 top-3 px-2 py-1 mr-2 text-xs font-bold leading-none text-red-100 bg-indigo-600 rounded-full">NEW</span>
+                        <span class="absolute right-1 top-3 px-2 py-1 mr-2 text-xs font-bold leading-none text-white bg-indigo-600 rounded-full">NEW</span>
                     </div>
                     :
                     <div className="relative">

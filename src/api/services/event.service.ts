@@ -1,31 +1,31 @@
 import { django_environment as environment} from "../../environment"
 import axios from 'axios'
-import { Transaction } from "../interfaces/transaction.interface";
+import { Event } from "../interfaces/event.interface";
 
-export class ApiTransactionService {
+export class ApiEventService {
     
     public getTransactions() {
-      return axios.get<Transaction>(
+      return axios.get<Event>(
         `${environment.api}/api/transactions/`
       );
     }
 
     public getFilteredTransactions(id: String) {
-        return axios.get<Transaction>(
+        return axios.get<Event>(
           `${environment.api}/api/transactions?asset=${id}`
         );
     }
   
-    public postTransaction(data: Transaction) {
-      return axios.post<Transaction>(
+    public postTransaction(data: Event) {
+      return axios.post<Event>(
         `${environment.api}/api/transactions/`,
         data
       );
     }
   
     //may not be necessary
-    public patchTransaction(data: Partial<Transaction>) {
-      return axios.patch<Transaction>(
+    public patchTransaction(data: Partial<Event>) {
+      return axios.patch<Event>(
         `${environment.api}/api/transactions/`,
         data
       );

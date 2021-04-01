@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react"
 // import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 // import { faLongArrowAltRight } from '@fortawesome/free-solid-svg-icons'
 import { Listing } from "./listing"
-import { ApiAssetService } from "../api/services/asset.service"
+import { ApiPropertyService } from "../api/services/property.service"
 
 import res1 from "../resources/images/residential-1.jpg"
 import res2 from "../resources/images/residential-2.jpg"
@@ -20,10 +20,10 @@ export function Residential(props) {
 
     useEffect(() => {
         const getAllProperties = async () => {
-            let assetApiService = new ApiAssetService();
+            let assetApiService = new ApiPropertyService();
             await assetApiService.getAssets().then(
                 (res) => {
-                    const properties = res.data.assets
+                    const properties = res.data.properties
                     setListings(properties)
                 }
             ).catch(error => console.error(`Error: ${error}`))
