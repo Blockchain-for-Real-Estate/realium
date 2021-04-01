@@ -1,8 +1,10 @@
 import React from "react"
 import { useParams } from "react-router-dom"
 import * as bs from "react-bootstrap"
-import NumberFormat from 'react-number-format'
+import NumberFormat from "react-number-format"
+import LoadingWave from "@bit/ngoue.playground.loading-wave"
 import { ApiPropertyService } from '../api/services/property.service'
+import { AppContainer } from "../utilities/app-container"
 import { Transactions } from "./transactions"
 import { Modal } from "../modals/modal"
 
@@ -22,7 +24,7 @@ import res6 from "../resources/images/residential-6.jpg"
 
 export function ListingDetails(props) {
     let loading;
-    let { id } = useParams()
+    let { propertyId } = useParams()
     let [listing, setListing] = React.useState()
     const residentialImages = [
         res1, res2, res3, res4, res5, res6
@@ -56,7 +58,7 @@ export function ListingDetails(props) {
         const fetchData = async () => {
             try {
                 let assetViaApi = new ApiPropertyService()
-                await assetViaApi.getAssetById(props.id).then(
+                await assetViaApi.getAssetById(propertyId).then(
                     res => {
                         setListing(res.data[0])
                     }
@@ -67,10 +69,10 @@ export function ListingDetails(props) {
         };
 
         fetchData()
-    }, [props.id])
+    }, [propertyId])
 
     return (
-        <>
+        <AppContainer page="marketplace">
         {!loading ?
             <>  {listing &&
                 <div className="mt-12 mb-12">
@@ -93,20 +95,20 @@ export function ListingDetails(props) {
                     <bs.Row>
                         <bs.Col md={7}>
                             <div className="text-center mb-4">
-                                <Image src={residentialImages[id-1]} alt={listing.propertyType} className="object-fill h-90 w-full"/>
+                                <Image src={residentialImages[propertyId - 1]} alt={listing.propertyType} className="object-fill h-90 w-full"/>
                             </div>
                             <bs.Row className="text-center mb-5">
                                 <bs.Col>
-                                    <Image src={residentialImages[id-1]} alt={listing.propertyType} className="object-fill h-30 w-full"/>
+                                    <Image src={residentialImages[propertyId - 1]} alt={listing.propertyType} className="object-fill h-30 w-full"/>
                                 </bs.Col>
                                 <bs.Col>
-                                    <Image src={residentialImages[id-1]} alt={listing.propertyType} className="object-fill h-30 w-full"/>
+                                    <Image src={residentialImages[propertyId - 1]} alt={listing.propertyType} className="object-fill h-30 w-full"/>
                                 </bs.Col>
                                 <bs.Col>
-                                    <Image src={residentialImages[id-1]} alt={listing.propertyType} className="object-fill h-30 w-full"/>
+                                    <Image src={residentialImages[propertyId - 1]} alt={listing.propertyType} className="object-fill h-30 w-full"/>
                                 </bs.Col>
                                 <bs.Col>
-                                    <Image src={residentialImages[id-1]} alt={listing.propertyType} className="object-fill h-30 w-full"/>
+                                    <Image src={residentialImages[propertyId - 1]} alt={listing.propertyType} className="object-fill h-30 w-full"/>
                                 </bs.Col>
                             </bs.Row>
                             <div className="font-weight-bold" style={{"fontSize": "1.1rem"}}>Description</div>
@@ -244,13 +246,15 @@ export function ListingDetails(props) {
                     <DetailsTable listing={listing} />
                 </div>
                 {listing &&
-                    <Transactions listing={listing} assetId={props.id}/>
+                    <Transactions listing={listing} propertyId={propertyId}/>
                 }
             </>
         :
-            <h1>Loading...</h1>
+        <div className="content-center flex flex-wrap justify-center py-72">
+            <LoadingWave primaryColor="#5C6BF6" secondaryColor="#ABABAB"/>
+        </div>
         }
-    </>
+    </AppContainer>
     )
 }
 

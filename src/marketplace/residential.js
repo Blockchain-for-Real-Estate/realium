@@ -32,16 +32,6 @@ export function Residential(props) {
         getAllProperties()
     }, []);
 
-    //temporary preview array, once we get data loaded in from actual db we can query for just three properties
-    let previewArr = []
-    if (props.preview) {
-        Object.keys(listings).forEach((key, idx) => {
-            if (idx < 3) {
-                previewArr.push(key)
-            }
-        })
-    }
-
     return (
         <>
             {/* Explore Marketplace */}
@@ -59,25 +49,13 @@ export function Residential(props) {
                         </p>
                     </div>
                     <div className="mt-12 max-w-lg mx-auto grid gap-5 lg:grid-cols-3 lg:max-w-none">
-                        {props.preview ?
-                            previewArr.map((key, idx) =>
-                                <div key={key} className="l-grid__item">
-                                    <Listing listing={listings[key]} index={idx}/>
-                                </div>
-                            )
-                        :
-                            Object.keys(listings).map((key, idx) => (
+                        {Object.keys(listings).map((key, idx) => (
                                 <div key={key} className="l-grid__item">
                                     <Listing listing={listings[key]} index={idx}/>
                                 </div>
                             ))
                         }
                     </div>
-                    {/* <div className="float-right" style={{"fontSize": "0.9rem"}}>
-                        <Link to="/marketplace/residential" className="text-decoration-none text-muted">
-                            Explore <FontAwesomeIcon icon={faLongArrowAltRight}/>
-                        </Link>
-                    </div> */}
                 </div>
             </div>
         </>

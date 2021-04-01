@@ -23,7 +23,6 @@ export function LoginForm(props) {
                     (response) => {
                         localStorage.setItem('token', response.data.token)
                         if (response.status === 200) {
-                            console.log(values.username)
                             userService.getUser(values.username, response.data.token).then(
                                 (res) => {
                                     localStorage.setItem('user', res.data);

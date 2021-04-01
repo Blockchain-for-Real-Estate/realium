@@ -26,7 +26,7 @@ export function Listing(props) {
     ]
 
     return (
-        <div className="flex flex-col rounded-lg shadow-lg overflow-hidden" style={{cursor: "pointer"}} onClick={() => props.listing.listingType === "Residential" ? history.push(`/marketplace/${props.listing.listingType}/${props.listing.propertyId}`) : null}>
+        <div className="flex flex-col rounded-lg shadow-lg overflow-hidden" style={{cursor: "pointer"}} onClick={() => props.listing.listingType === "Residential" ? history.push(`/marketplace/${props.listing.propertyId}`) : null}>
             <div className="flex-shrink-0">
                 {props.listing.listingType === "Residential" ?
                     <div className="relative">
