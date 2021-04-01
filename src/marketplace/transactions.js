@@ -6,12 +6,12 @@ import { ApiEventService } from "../api/services/event.service"
 import link from "../resources/images/external_link.png"
 
 export function Transactions(props) {
-    let [transactions, setTransactions] = React.useState()
+    let [transactions, setTransactions] = React.useState([])
 
     React.useEffect(() => {
         try {
             let transactionViaApi = new ApiEventService()
-            transactionViaApi.getFilteredTransactions(props.propertyId).then(
+            transactionViaApi.getFilteredTransactions(props.listing.propertyId).then(
                 res => {
                     const txs = res.data;
                     setTransactions(txs);
@@ -20,7 +20,7 @@ export function Transactions(props) {
         } catch {
             setTransactions(null);
         }
-    }, [props.propertyId])
+    }, [props.listing])
 
     return (
         /* Transactions Table */
@@ -31,45 +31,47 @@ export function Transactions(props) {
                     <p className="mt-3 text-xl text-gray-500 sm:text-center">View recent blockchain transaction activity for {props.listing.propertyName}. Navigate to see transaction-specific details provided by Avaxscan.</p>
 
                 </div>
-                {transactions ?
-                    <div className="flex flex-col">
-                        <div className="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
-                            <div className="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
+                <div className="flex flex-col">
+                    <div className="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
+                        <div className="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
                             <div className="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
-                                <table className="min-w-full divide-y divide-gray-200">
-                                <thead className="bg-gray-50">
-                                    <tr>
-                                        <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                            Event
-                                        </th>
-                                        <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                            Quantity Listed
-                                        </th>
-                                        <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                            From
-                                        </th>
-                                        <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                            To
-                                        </th>
-                                        <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                            Time
-                                        </th>
-                                        <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                            Tx
-                                        </th>
-                                    </tr>
-                                </thead>
-                                <tbody className="bg-white divide-y divide-gray-200">
-                                    {transactions.map(transaction => <TransactionRow key={transaction.eventId} transaction={transaction} />)}
-                                </tbody>
-                                </table>
-                            </div>
+                                {transactions.length > 0 ?
+                                    <table className="min-w-full divide-y divide-gray-200">
+                                    <thead className="bg-gray-50">
+                                        <tr>
+                                            <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                                Event
+                                            </th>
+                                            <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                                Quantity Listed
+                                            </th>
+                                            <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                                From
+                                            </th>
+                                            <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                                To
+                                            </th>
+                                            <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                                Time
+                                            </th>
+                                            <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                                Tx
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody className="bg-white divide-y divide-gray-200">
+                                        {transactions.map(transaction => <TransactionRow key={transaction.eventId} transaction={transaction} />)}
+                                    </tbody>
+                                    </table>
+                                :
+                                    <div className="content-center flex flex-wrap font-medium h-24 justify-center text-gray-500">
+                                        No history to show
+                                    </div>
+                                }
                             </div>
                         </div>
                     </div>
-                :
-                    <>Hello</>
-                }
+                </div>
             </div>
         </div>
     )
