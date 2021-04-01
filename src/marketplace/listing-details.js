@@ -5,6 +5,7 @@ import NumberFormat from "react-number-format"
 import LoadingWave from "@bit/ngoue.playground.loading-wave"
 import { ApiPropertyService } from '../api/services/property.service'
 import { AppContainer } from "../utilities/app-container"
+import { ApiTokenService } from '../api/services/token.service'
 import { Transactions } from "./transactions"
 import { Modal } from "../modals/modal"
 
@@ -26,6 +27,7 @@ export function ListingDetails(props) {
     let loading;
     let { propertyId } = useParams()
     let [listing, setListing] = React.useState()
+    let [token, setToken] = React.useState()
     const residentialImages = [
         res1, res2, res3, res4, res5, res6
     ]
@@ -65,6 +67,18 @@ export function ListingDetails(props) {
                 )
             } catch {
                 setListing(residentialData)
+            }
+        };
+        const fetchToken = async () => {
+            try {
+                let tokenViaApi = new ApiTokenService()
+                    await tokenViaApi.getFilteredTokens(propertyId).then(
+                        res => {
+                            setToken(res.data[0])
+                        }
+                    )
+            } catch {
+                setToken(hardToken)
             }
         };
 
@@ -113,23 +127,23 @@ export function ListingDetails(props) {
                             </bs.Row>
                             <div className="font-weight-bold" style={{"fontSize": "1.1rem"}}>Description</div>
                             <div className="mb-8">
-                                Property is located in {listing.city}, {listing.state} for a steal at {<NumberFormat value={listing.purchasedPrice} displayType={'text'} thousandSeparator={true} prefix={'$'}/>}. {/*{listing.description}*/}
+                                Property is located in {listing.city}, {listing.state} for a steal at {<NumberFormat value={token.purchasedPrice} displayType={'text'} thousandSeparator={true} prefix={'$'}/>}. {/*{listing.description}*/}
                                 Anim aute id magna aliqua ad ad non deserunt sunt. Qui irure qui lorem cupidatat commodo. Elit sunt amet fugiat veniam occaecat fugiat aliqua. Anim aute id magna aliqua ad ad non deserunt sunt. Qui irure qui lorem cupidatat commodo. Elit sunt amet fugiat veniam occaecat fugiat aliqua. Anim aute id magna aliqua ad ad non deserunt sunt. Qui irure qui lorem cupidatat commodo. Elit sunt amet fugiat veniam occaecat fugiat aliqua. Anim aute id magna aliqua ad ad non deserunt sunt. Qui irure qui lorem cupidatat commodo. Elit sunt amet fugiat veniam occaecat fugiat aliqua.
                             </div>
                         </bs.Col>
                         <bs.Col md={1} />
                         <bs.Col md={4}>
-                            <bs.ProgressBar className="mb-3" now={listing.funded/listing.seriesCount*100} style={{"height": "0.1rem"}}/>
+                            <bs.ProgressBar className="mb-3" now={token.listedPrice/token.purchasedPrice*100} style={{"height": "0.1rem"}}/>
                             <div className="mb-3">
                                     <NumberFormat
                                         className="text-primary font-weight-bold"
                                         style={{"fontSize": "1.3rem"}}
-                                        value={listing.funded}
+                                        value={token.listedPrice}
                                         displayType={'text'}
                                         thousandSeparator={true}
                                         prefix={'$'}
                                     /> / <NumberFormat
-                                            value={listing.seriesCount}
+                                            value={token.purchasedPrice}
                                             displayType={'text'}
                                             thousandSeparator={true}
                                             prefix={'$'}
@@ -179,7 +193,7 @@ export function ListingDetails(props) {
                             <div style={{"fontSize": "1.3rem"}} className="font-weight-bold mb-3">
                                 Share Price:
                                 <NumberFormat
-                                    value={listing.share}
+                                    value={token.listedPrice / listing.seriesCount}
                                     displayType={'text'}
                                     thousandSeparator={true}
                                     prefix={'$'}
@@ -221,7 +235,7 @@ export function ListingDetails(props) {
                                             </td>
                                             <td>
                                                 <NumberFormat
-                                                    value={listing.seriesCount}
+                                                    value={token.listedPrice}
                                                     displayType={'text'}
                                                     thousandSeparator={true}
                                                     prefix={'$'}
@@ -243,7 +257,7 @@ export function ListingDetails(props) {
                 </div>
                 }
                 <div className="mb-8">
-                    <DetailsTable listing={listing} />
+                    <DetailsTable listing={listing} token={token}/>
                 </div>
                 {listing &&
                     <Transactions listing={listing}/>
@@ -274,4 +288,13 @@ const residentialData = {
     share: 20,
     yearBuilt: 1998,
     acerage: 0.42
+}
+
+const hardToken = {
+    "tokenId": 1,
+    "purchasedPrice": "800000.00",
+    "listedPrice": "50000.00",
+    "listed": true,
+    "property": 1,
+    "owner": 1
 }

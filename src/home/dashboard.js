@@ -1,7 +1,25 @@
 import React from "react"
 import "../modals/modal.css"
+import { ApiUserService } from "../api/services/user.service"
 
 export function Dashboard(props) {
+
+    React.useEffect(() => {
+        const fetchData = async () => {
+            try {
+                let userService = new ApiUserService()
+                // await userService.getUser(props.id).then(
+                //     res => {
+                //         setListing(res.data[0])
+                //     }
+                // )
+            } catch {
+                //setListing(residentialData)
+            }
+        };
+        fetchData();
+    }, [])
+
     return (
         <>
             <div className="py-16 bg-gray-50 overflow-hidden lg:py-18">

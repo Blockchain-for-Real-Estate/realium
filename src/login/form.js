@@ -22,16 +22,16 @@ export function LoginForm(props) {
                 userService.login(values).then(
                     (response) => {
                         localStorage.setItem('token', response.data.token)
-                        if (response.status === 200) {
+                        try { 
                             userService.getUser(values.username, response.data.token).then(
                                 (res) => {
-                                    localStorage.setItem('user', res.data);
+                                    localStorage.setItem('user', res.data.email);
                                 }
                             ).then(
                                 history.push(`/dashboard`)
-                            ).then(
-                                window.location.reload()
                             )
+                        } catch {
+                            alert("Could not retrieve user")
                         }
                     }
                 ).catch(error => {
