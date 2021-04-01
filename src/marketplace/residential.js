@@ -23,7 +23,7 @@ export function Residential(props) {
             let assetApiService = new ApiPropertyService();
             await assetApiService.getAssets().then(
                 (res) => {
-                    const properties = res.data.properties
+                    const properties = res.data
                     setListings(properties)
                 }
             ).catch(error => console.error(`Error: ${error}`))

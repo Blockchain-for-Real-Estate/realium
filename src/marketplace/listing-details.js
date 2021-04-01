@@ -58,7 +58,7 @@ export function ListingDetails(props) {
                 let assetViaApi = new ApiPropertyService()
                 await assetViaApi.getAssetById(props.id).then(
                     res => {
-                        setListing(res.data.properties[0])
+                        setListing(res.data[0])
                     }
                 )
             } catch {
@@ -76,7 +76,7 @@ export function ListingDetails(props) {
                 <div className="mt-12 mb-12">
                     <div className="border-bottom mb-4 m-4">
                         <bs.Row className="mb-2">
-                            <h1 className="text-5xl font-extrabold text-gray-900 sm:text-center">{listing.assetName || "Valley Ridge"}</h1>
+                            <h1 className="text-5xl font-extrabold text-gray-900 sm:text-center">{listing.propertyName || "Valley Ridge"}</h1>
                         </bs.Row>
                         <bs.Row className="mb-2">
                             <div style={{"fontSize": "1.3rem"}} className="font-weight-bold">{listing.propertyType} in {listing.city}, {listing.state}</div >
@@ -117,7 +117,7 @@ export function ListingDetails(props) {
                         </bs.Col>
                         <bs.Col md={1} />
                         <bs.Col md={4}>
-                            <bs.ProgressBar className="mb-3" now={listing.funded/listing.price*100} style={{"height": "0.1rem"}}/>
+                            <bs.ProgressBar className="mb-3" now={listing.funded/listing.seriesCount*100} style={{"height": "0.1rem"}}/>
                             <div className="mb-3">
                                     <NumberFormat
                                         className="text-primary font-weight-bold"
@@ -127,7 +127,7 @@ export function ListingDetails(props) {
                                         thousandSeparator={true}
                                         prefix={'$'}
                                     /> / <NumberFormat
-                                            value={listing.purchasedPrice}
+                                            value={listing.seriesCount}
                                             displayType={'text'}
                                             thousandSeparator={true}
                                             prefix={'$'}
@@ -219,7 +219,7 @@ export function ListingDetails(props) {
                                             </td>
                                             <td>
                                                 <NumberFormat
-                                                    value={listing.purchasedPrice}
+                                                    value={listing.seriesCount}
                                                     displayType={'text'}
                                                     thousandSeparator={true}
                                                     prefix={'$'}

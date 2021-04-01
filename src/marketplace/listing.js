@@ -26,17 +26,17 @@ export function Listing(props) {
     ]
 
     return (
-        <div className="flex flex-col rounded-lg shadow-lg overflow-hidden" style={{cursor: "pointer"}} onClick={() => props.listing.listingType === "Residential" ? history.push(`/marketplace/${props.listing.listingType}/${props.listing.assetId}`) : null}>
+        <div className="flex flex-col rounded-lg shadow-lg overflow-hidden" style={{cursor: "pointer"}} onClick={() => props.listing.listingType === "Residential" ? history.push(`/marketplace/${props.listing.listingType}/${props.listing.propertyId}`) : null}>
             <div className="flex-shrink-0">
                 {props.listing.listingType === "Residential" ?
                     <div className="relative">
                         <img className="h-48 w-full object-cover" src={residentialImages[props.index] || comingSoon} alt={props.listing.streetAddress} />
-                        <span class="absolute right-1 top-3 px-2 py-1 mr-2 text-xs font-bold leading-none text-white bg-indigo-600 rounded-full">NEW</span>
+                        <span className="absolute right-1 top-3 px-2 py-1 mr-2 text-xs font-bold leading-none text-white bg-indigo-600 rounded-full">NEW</span>
                     </div>
                     :
                     <div className="relative">
                         <img className="opacity-40 h-48 w-full object-cover" src={commercialImages[props.index] || comingSoon} alt={props.listing.streetAddress} />
-                        <span class="absolute right-1 top-3 px-2 px-2 py-1 mr-2 text-xs font-semibold leading-none text-white bg-green-400 rounded-full">COMING SOON</span>
+                        <span className="absolute right-1 top-3 px-2 px-2 py-1 mr-2 text-xs font-semibold leading-none text-white bg-green-400 rounded-full">COMING SOON</span>
                     </div>
                 }
                 </div>
@@ -60,7 +60,7 @@ export function Listing(props) {
                     {props.listing.listingType === "Residential" ?
                     <p className="mt-3 text-sm font-medium text-indigo-600">
                         <NumberFormat
-                            value={props.listing.share}
+                            value={props.listing.seriesCount}
                             displayType={'text'}
                             thousandSeparator={true}
                             prefix={'Share Price: $'}
@@ -69,7 +69,7 @@ export function Listing(props) {
                     :
                     <p className="mt-3 text-sm font-medium text-green-500">
                         <NumberFormat
-                            value={props.listing.share}
+                            value={props.listing.seriesCount}
                             displayType={'text'}
                             thousandSeparator={true}
                             prefix={'Share Price: $'}

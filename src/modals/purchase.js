@@ -11,7 +11,7 @@ export function Purchase(props) {
             let assetService = new ApiPropertyService();
             await assetService.getAssetShareListings(props.id).then(
                 (res) => {
-                    const data = res.data.properties
+                    const data = res.data
                     setOffers(data)
                 }
             ).catch(error => console.error(`Error: ${error}`))
