@@ -8,22 +8,20 @@ import { ApiBalanceService } from '../api/services/balance.service'
 export function NavItems(props) {
     let history = useHistory();
     let [balance, setBalance] = React.useState()
-    let wallet = "X-fuji1e4kxg6vjpn43238y55u20pry2fx6agvnl0wf67"
 
     function logout() {
-        localStorage.removeItem('token');
-        localStorage.removeItem('user');
+        sessionStorage.clear()
         history.push("/")
         window.location.reload()
     }
 
     const initials = () => {
-      let user = "Bentley Harrison"
-      let names = user.split(' ')
+      let names = sessionStorage.getItem('user').split(' ')
       return names[0].split('')[0] + names[names.length-1].split('')[0]
     }
 
     React.useEffect(() => {
+      let wallet = sessionStorage.getItem('avax')
       const fetchBalance = async () => {
           try {
             let balanceService = new ApiBalanceService()
@@ -38,7 +36,7 @@ export function NavItems(props) {
       };
 
       fetchBalance()
-    }, [wallet])
+    }, [])
 
     return (
         <>
@@ -52,7 +50,7 @@ export function NavItems(props) {
                             How It Works
                         </Link>
                     </div>
-                    {localStorage.getItem('token') === null ?
+                    {sessionStorage.getItem('token') === null ?
                         <Link className="block px-3 py-2 ml-10 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50" to="/login">
                             Sign in
                         </Link>
@@ -116,7 +114,7 @@ export function NavItems(props) {
                       </a>
                     </div>
                   </div>
-                {localStorage.getItem('token') === null ?
+                {sessionStorage.getItem('token') === null ?
                 <div className="flex items-center">
                     <div className="hidden md:ml-6 md:flex md:space-x-8 pr-8">
                         <Link to="/login" style={{ textDecoration: 'none' }} className="border-transparent text-gray-500 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">

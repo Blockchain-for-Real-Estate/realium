@@ -1,7 +1,4 @@
 import React, { useEffect, useState } from "react"
-// import { Link } from "react-router-dom"
-// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-// import { faLongArrowAltRight } from '@fortawesome/free-solid-svg-icons'
 import { Listing } from "./listing"
 import { ApiPropertyService } from "../api/services/property.service"
 

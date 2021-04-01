@@ -26,11 +26,14 @@ export function LoginForm(props) {
                             userService.getUser(values.username, response.data.token).then(
                                 (res) => {
                                     res.data[0].avaxpassword = "*********"
-                                    sessionStorage.setItem('user', JSON.stringify(res.data[0]));
+                                    sessionStorage.setItem('user', JSON.stringify(res.data[0].fullName).replace(/['"]+/g, ''));
                                     sessionStorage.setItem('id', JSON.stringify(res.data[0].realiumUserId))
+                                    sessionStorage.setItem('avax', JSON.stringify(res.data[0].walletAddress).replace(/['"]+/g, ''))
                                 }
-                            ).then(
-                                history.push(`/dashboard`)
+                            ).then(() => {
+                                    history.push(`/dashboard`)
+                                    history.go(0)
+                                }
                             )
                         } catch {
                             alert("Could not retrieve user")

@@ -34,7 +34,7 @@ export function CreateAccountForm(props) {
                 }
                 userService.postUser(data).then(
                     (response) => {
-                        localStorage.setItem('token', response.data.token)
+                        sessionStorage.setItem('token', response.data.token)
                         if (response.status === 200 || response.status === 201) {
                             history.push(`/dashboard`)
                             window.location.reload()
