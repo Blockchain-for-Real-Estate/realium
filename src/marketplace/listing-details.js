@@ -16,27 +16,38 @@ import yearIcon from "../resources/images/purple_year_built_icon.png"
 import sqFtIcon from "../resources/images/purple_sq_footage_icon.png"
 import priceIcon from "../resources/images/purple_price_icon.png"
 import { DetailsTable } from "./details-table"
-import styled from 'styled-components'
 
 import res1 from "../resources/images/residential-1.jpg"
 import res2 from "../resources/images/residential-2.jpg"
 import res3 from "../resources/images/residential-3.jpg"
 import res4 from "../resources/images/residential-4.jpg"
 import res5 from "../resources/images/residential-5.jpg"
-import res6 from "../resources/images/residential-6.jpg"
+// import res6 from "../resources/images/residential-6.jpg"
 import avax_icon from "../resources/images/avax_icon_indigo.png"
 
 export function ListingDetails(props) {
-    let loading;
-    let { propertyId } = useParams()
-    let [listing, setListing] = React.useState()
-    let [token, setToken] = React.useState()
-    let [transactions, setTransactions] = React.useState()
-    const residentialImages = [res1, res2, res3, res4, res5, res6]
+    let loading
+    let imgs = {
+        img1: res1,
+        img2: res2,
+        img3: res3,
+        img4: res4,
+        main: res5
+    }
+
+    const { propertyId } = useParams()
+    const [carousel, setCarousel] = React.useState(imgs)
+    const [listing, setListing] = React.useState()
+    const [token, setToken] = React.useState()
+    const [transactions, setTransactions] = React.useState()
     const setNotify = props.setNotify
-    const Image = styled.img`
-        border:1px solid grey;
-    `
+
+    function changeImage(id) {
+        let imgHolder = imgs[id]
+        imgs[id] = imgs.main
+        imgs.main = imgHolder
+        setCarousel(imgs)
+    }
 
     React.useEffect(() => {
         const fetchData = async () => {
@@ -116,20 +127,20 @@ export function ListingDetails(props) {
                     <bs.Row>
                         <bs.Col md={7}>
                             <div className="text-center mb-4">
-                                <Image src={residentialImages[propertyId - 1]} alt={listing.propertyType} className="object-fill h-90 w-full"/>
+                                <img src={carousel.main} alt={listing.propertyType} className="object-fill h-90 w-full" style={{border:"1px solid grey"}}/>
                             </div>
                             <bs.Row className="text-center mb-5">
                                 <bs.Col>
-                                    <Image src={residentialImages[propertyId - 1]} alt={listing.propertyType} className="object-fill h-30 w-full"/>
+                                    <img src={carousel.img1} alt={listing.propertyType} className="object-fill h-30 w-full" onClick={() => changeImage('img1')} style={{border:"1px solid grey"}}/>
                                 </bs.Col>
                                 <bs.Col>
-                                    <Image src={residentialImages[propertyId - 1]} alt={listing.propertyType} className="object-fill h-30 w-full"/>
+                                    <img src={carousel.img2} alt={listing.propertyType} className="object-fill h-30 w-full" onClick={() => changeImage('img2')} style={{border:"1px solid grey"}}/>
                                 </bs.Col>
                                 <bs.Col>
-                                    <Image src={residentialImages[propertyId - 1]} alt={listing.propertyType} className="object-fill h-30 w-full"/>
+                                    <img src={carousel.img3} alt={listing.propertyType} className="object-fill h-30 w-full" onClick={() => changeImage('img3')} style={{border:"1px solid grey"}}/>
                                 </bs.Col>
                                 <bs.Col>
-                                    <Image src={residentialImages[propertyId - 1]} alt={listing.propertyType} className="object-fill h-30 w-full"/>
+                                    <img src={carousel.img4} alt={listing.propertyType} className="object-fill h-30 w-full" onClick={() => changeImage('img4')} style={{border:"1px solid grey"}}/>
                                 </bs.Col>
                             </bs.Row>
                             <div className="font-weight-bold" style={{"fontSize": "1.1rem"}}>Description</div>
@@ -153,7 +164,7 @@ export function ListingDetails(props) {
                                     <svg width="15" height="15" viewBox="0 0 153 153" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <path fill-rule="evenodd" clip-rule="evenodd" d="M153 76.5C153 118.75 118.75 153 76.5 153C34.2502 153 0 118.75 0 76.5C0 34.2502 34.2502 0 76.5 0C118.75 0 153 34.2502 153 76.5ZM72.2494 21.5512L22.6284 108.776C20.8649 111.876 23.1037 115.725 26.6701 115.725H57.7531C59.4209 115.725 60.961 114.832 61.7892 113.384L96.0274 53.5368C96.8467 52.1048 96.8458 50.3458 96.025 48.9145L80.325 21.5372C78.5347 18.4154 74.0289 18.4231 72.2494 21.5512ZM90.0853 115.95H126.325C130.017 115.95 132.327 111.956 130.486 108.756L112.443 77.3996C110.601 74.1984 105.985 74.1898 104.131 77.3843L85.9337 108.741C84.0767 111.941 86.3855 115.95 90.0853 115.95Z" fill="#374151"/>
                                     </svg>
-                                    </div> / 
+                                    </div> /
                                     <NumberFormat
                                             value={token.purchasedPrice}
                                             displayType={'text'}
