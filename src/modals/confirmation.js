@@ -85,7 +85,6 @@ export function Confirmation(props) {
                     </h3>
                     }
                     {!unconfirmed ?
-<<<<<<< HEAD
                     <div class="mt-2">
                         <p class="text-sm text-gray-500" id="modalText">
                         Are you sure you want to purchase <span className="text-sm text-indigo-600 font-bold">
@@ -101,11 +100,6 @@ export function Confirmation(props) {
                                 thousandSeparator={true}
                             />
                         </span> per share?
-=======
-                    <div className="mt-2">
-                        <p className="text-sm text-gray-500" id="modalText">
-                        Are you sure you want to purchase <span className="text-sm text-indigo-600 font-bold">{props.shares}</span> shares for <span className="text-sm text-indigo-600 font-bold">${props.price}</span> per share?
->>>>>>> Add notification banners, add them to try catches, fix mobile menu
                         </p>
                     </div>
                     :
