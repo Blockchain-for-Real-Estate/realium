@@ -57,11 +57,6 @@ export function Commercial(props) {
                             ))
                         }
                     </div>
-                    <div className="float-right" style={{"fontSize": "0.9rem"}}>
-                        <Link to="/marketplace" className="text-decoration-none text-muted">
-                            Explore <FontAwesomeIcon icon={faLongArrowAltRight}/>
-                        </Link>
-                    </div>
                 </div>
             </div>
         </>

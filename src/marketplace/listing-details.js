@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom"
 import * as bs from "react-bootstrap"
 import NumberFormat from "react-number-format"
 import LoadingWave from "@bit/ngoue.playground.loading-wave"
+import { Breadcrumbs } from "../utilities/breadcrumbs"
 import { AppContainer } from "../utilities/app-container"
 import { ApiPropertyService } from '../api/services/property.service'
 import { ApiTokenService } from '../api/services/token.service'
@@ -108,9 +109,7 @@ export function ListingDetails(props) {
                             <div>
                                 {listing.streetAddress} | {listing.city}, {listing.state} | {listing.zipCode}
                             </div>
-                            <div>
-                                Marketplace > {listing.listingType} Properties
-                            </div>
+                            <Breadcrumbs listing={listing} />
                         </bs.Row>
                     </div>
                     <bs.Row>
