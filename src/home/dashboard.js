@@ -70,7 +70,7 @@ export function Dashboard(props) {
                 </svg>
                 <div className="pb-10">
                     <h4 className="pr-4 inline-block mb-0 align-baseline text-lg font-extrabold text-indigo-700 tracking-tight sm:text-xl">
-                        Realium uses Avalanche Testnet funds available by faucet.
+                    While Realium is in beta, access the Avalanche test faucet for funds.
                     </h4>
                     <FaucetPopOut wallet={tokens[0].owner.walletAddress} />
                 </div>
