@@ -3,7 +3,7 @@ import axios from 'axios'
 import { Property } from "../interfaces/property.interface";
 
 export class ApiPropertyService {
-  
+
     public getAssets() {
       return axios.get<Property>(
         `${environment.api}/api/properties/`
@@ -21,14 +21,20 @@ export class ApiPropertyService {
         `${environment.api}/api/properties?avalancheAssetId=${id}&listed=true`
       );
     }
-  
+
+    public getAssetBySearchTerm(term: String) {
+      return axios.get<Property>(
+        `${environment.api}/api/properties?search=${term}`
+      )
+    }
+
     public postAsset(data: Property) {
       return axios.post<Property>(
         `${environment.api}/api/properties`,
         data
       );
     }
-  
+
     //may not be necessary
     public patchAsset(data: Partial<Property>) {
       return axios.patch<Property>(
