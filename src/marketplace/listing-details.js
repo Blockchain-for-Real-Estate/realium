@@ -24,6 +24,7 @@ import res3 from "../resources/images/residential-3.jpg"
 import res4 from "../resources/images/residential-4.jpg"
 import res5 from "../resources/images/residential-5.jpg"
 import res6 from "../resources/images/residential-6.jpg"
+import avax_icon from "../resources/images/avax_icon_indigo.png"
 
 export function ListingDetails(props) {
     let loading;
@@ -133,7 +134,7 @@ export function ListingDetails(props) {
                             </bs.Row>
                             <div className="font-weight-bold" style={{"fontSize": "1.1rem"}}>Description</div>
                             <div className="mb-8">
-                                Property is located in {listing.city}, {listing.state} for a steal at {<NumberFormat value={token.purchasedPrice} displayType={'text'} thousandSeparator={true} prefix={'$'}/>}. {/*{listing.description}*/}
+                                Property is located in {listing.city}, {listing.state} for a steal at {<NumberFormat value={token.purchasedPrice} displayType={'text'} thousandSeparator={true} prefix={avax_icon}/>}. {/*{listing.description}*/}
                                 Anim aute id magna aliqua ad ad non deserunt sunt. Qui irure qui lorem cupidatat commodo. Elit sunt amet fugiat veniam occaecat fugiat aliqua. Anim aute id magna aliqua ad ad non deserunt sunt. Qui irure qui lorem cupidatat commodo. Elit sunt amet fugiat veniam occaecat fugiat aliqua. Anim aute id magna aliqua ad ad non deserunt sunt. Qui irure qui lorem cupidatat commodo. Elit sunt amet fugiat veniam occaecat fugiat aliqua. Anim aute id magna aliqua ad ad non deserunt sunt. Qui irure qui lorem cupidatat commodo. Elit sunt amet fugiat veniam occaecat fugiat aliqua.
                             </div>
                         </bs.Col>
@@ -141,18 +142,19 @@ export function ListingDetails(props) {
                         <bs.Col md={4}>
                             <bs.ProgressBar className="mb-3" now={token.listedPrice/token.purchasedPrice*100} style={{"height": "0.1rem"}}/>
                             <div className="mb-3">
+                            <img className="h-5 inline-flex px-1" src={avax_icon} alt="AVAX" />
                                     <NumberFormat
                                         className="text-primary font-weight-bold"
                                         style={{"fontSize": "1.3rem"}}
                                         value={token.listedPrice}
                                         displayType={'text'}
                                         thousandSeparator={true}
-                                        prefix={'$'}
-                                    /> / <NumberFormat
+                                    /> / 
+                                    <img className="h-4 inline-flex px-1" src={avax_icon} alt="AVAX" />
+                                    <NumberFormat
                                             value={token.purchasedPrice}
                                             displayType={'text'}
                                             thousandSeparator={true}
-                                            prefix={'$'}
                                         />
                             </div>
                             <div className="border-bottom mb-3" />
@@ -162,33 +164,33 @@ export function ListingDetails(props) {
                                         <tr>
                                             <td>Forecasted Income: </td>
                                             <td>
+                                            <img className="h-4 inline-flex px-1" src={avax_icon} alt="AVAX" />
                                                 <NumberFormat
                                                     value={listing.forcastedIncome}
                                                     displayType={'text'}
                                                     thousandSeparator={true}
-                                                    prefix={'$'}
                                                 />/yr
                                             </td>
                                         </tr>
                                         <tr>
                                             <td>Minimum Investment: </td>
                                             <td>
+                                                <img className="h-4 inline-flex px-1" src={avax_icon} alt="AVAX" />
                                                 <NumberFormat
                                                     value={listing.minInvestment}
                                                     displayType={'text'}
                                                     thousandSeparator={true}
-                                                    prefix={'$'}
                                                 />
                                             </td>
                                         </tr>
                                         <tr>
                                             <td>Maximum Investment: </td>
                                             <td>
+                                            <img className="h-4 inline-flex px-1" src={avax_icon} alt="AVAX" />
                                                 <NumberFormat
                                                     value={listing.maxInvestment}
                                                     displayType={'text'}
                                                     thousandSeparator={true}
-                                                    prefix={'$'}
                                                 />
                                             </td>
                                         </tr>
@@ -198,12 +200,12 @@ export function ListingDetails(props) {
                             <div className="border-bottom mb-3"/>
                             <div style={{"fontSize": "1.3rem"}} className="font-weight-bold mb-3">
                                 Share Price:
+                                <img className="h-5 inline-flex px-1" src={avax_icon} alt="AVAX" />
                                 <NumberFormat
                                     value={Math.round(token.listedPrice / listing.seriesCount)}
                                     displayType={'text'}
                                     thousandSeparator={true}
-                                    prefix={'$'}
-                                    suffix=" USD"
+                                    suffix=" AVAX"
                                     className="text-primary ml-1"
                                 />
                             </div>
@@ -240,11 +242,11 @@ export function ListingDetails(props) {
                                                 <img src={priceIcon} alt="price" className="pl-2 mr-2"/> Price:
                                             </td>
                                             <td>
+                                                <img className="h-4 inline-flex px-1" src={avax_icon} alt="AVAX" />
                                                 <NumberFormat
                                                     value={token.purchasedPrice}
                                                     displayType={'text'}
                                                     thousandSeparator={true}
-                                                    prefix={'$'}
                                                 />
                                             </td>
                                         </tr>

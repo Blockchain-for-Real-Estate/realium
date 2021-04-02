@@ -15,6 +15,8 @@ import com3 from "../resources/images/commercial-3.jpg"
 import com4 from "../resources/images/commercial-4.jpg"
 import com5 from "../resources/images/commercial-5.jpg"
 import com6 from "../resources/images/commercial-6.jpg"
+import avax_icon_i from "../resources/images/avax_icon_indigo.png"
+import avax_icon_g from "../resources/images/avax_icon.png"
 
 export function Listing(props) {
     let history = useHistory()
@@ -59,20 +61,22 @@ export function Listing(props) {
                     </p>
                     {props.listing.listingType === "Residential" ?
                     <p className="mt-3 text-sm font-medium text-indigo-600">
+                        Share Price: 
+                        <img className="h-4 inline-flex px-1" src={props.listing.listingType === "Residential" ? avax_icon_i : avax_icon_g} alt="AVAX" />
                         <NumberFormat
                             value={props.listing.seriesCount}
                             displayType={'text'}
                             thousandSeparator={true}
-                            prefix={'Share Price: $'}
                         />
                     </p>
                     :
                     <p className="mt-3 text-sm font-medium text-green-500">
+                        Share Price: 
+                        <img className="h-4 inline-flex px-1" src={props.listing.listingType === "Residential" ? avax_icon_i : avax_icon_g} alt="AVAX" />
                         <NumberFormat
                             value={props.listing.seriesCount}
                             displayType={'text'}
                             thousandSeparator={true}
-                            prefix={'Share Price: $'}
                         />
                     </p>
                     }
