@@ -74,9 +74,6 @@ export function Dashboard(props) {
                     </h4>
                     <FaucetPopOut wallet={tokens[0].owner.walletAddress} />
                 </div>
-                <div id="copied-success" class="copied">
-                    <span>Copied!</span>
-                </div>
                 <div className="relative mt-2 lg:mt-24 lg:grid lg:grid-cols-2 lg:gap-16 lg:items-top">
                 <div className="relative">
                     <h3 className="text-2xl font-extrabold text-gray-900 tracking-tight sm:text-3xl">
