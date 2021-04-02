@@ -130,16 +130,16 @@ export function ListingDetails(props) {
                             </div>
                             <bs.Row className="text-center mb-5">
                                 <bs.Col>
-                                    <img src={carousel.img1} alt={listing.propertyType} className="object-fill h-30 w-full" onClick={() => changeImage('img1')} style={{border:"1px solid grey"}}/>
+                                    <img src={carousel.img1} alt={listing.propertyType} className="object-fill h-30 w-full" onClick={() => changeImage('img1')} style={{border:"1px solid grey", cursor: "pointer"}}/>
                                 </bs.Col>
                                 <bs.Col>
-                                    <img src={carousel.img2} alt={listing.propertyType} className="object-fill h-30 w-full" onClick={() => changeImage('img2')} style={{border:"1px solid grey"}}/>
+                                    <img src={carousel.img2} alt={listing.propertyType} className="object-fill h-30 w-full" onClick={() => changeImage('img2')} style={{border:"1px solid grey", cursor: "pointer"}}/>
                                 </bs.Col>
                                 <bs.Col>
-                                    <img src={carousel.img3} alt={listing.propertyType} className="object-fill h-30 w-full" onClick={() => changeImage('img3')} style={{border:"1px solid grey"}}/>
+                                    <img src={carousel.img3} alt={listing.propertyType} className="object-fill h-30 w-full" onClick={() => changeImage('img3')} style={{border:"1px solid grey", cursor: "pointer"}}/>
                                 </bs.Col>
                                 <bs.Col>
-                                    <img src={carousel.img4} alt={listing.propertyType} className="object-fill h-30 w-full" onClick={() => changeImage('img4')} style={{border:"1px solid grey"}}/>
+                                    <img src={carousel.img4} alt={listing.propertyType} className="object-fill h-30 w-full" onClick={() => changeImage('img4')} style={{border:"1px solid grey", cursor: "pointer"}}/>
                                 </bs.Col>
                             </bs.Row>
                             <div className="font-weight-bold" style={{"fontSize": "1.1rem"}}>Description</div>
