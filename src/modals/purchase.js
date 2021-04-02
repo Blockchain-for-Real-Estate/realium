@@ -8,27 +8,28 @@ import "./modal.css"
 
 export function Purchase(props) {
     let [postings, setPostings] = useState('')
-
+    const setNotify = props.setNotify
+    const assetId = props.id
     React.useEffect(() => {
         const fetchPostings = async () => {
             try {
                 let eventService = new ApiEventService()
-                    await eventService.getListingsForAvaxAssetId(props.id).then(
+                    await eventService.getListingsForAvaxAssetId(assetId).then(
                         res => {
                             setPostings(res.data)
                         }
                     )
             } catch(error) {
                 setPostings(null)
-                props.setNotify && props.setNotify({ msg: `There was an error getting listings for this property.`,
-                                                    color: 'red',
-                                                    show: true })
+                setNotify && setNotify({ msg: `There was an error getting listings for this property.`,
+                                        color: 'red',
+                                        show: true })
                 console.error(error)
             }
         };
 
         fetchPostings()
-    }, [props.id]);
+    }, [assetId, setNotify])
 
     return (
         <>

@@ -14,6 +14,7 @@ import res6 from "../resources/images/residential-6.jpg"
 export function Residential(props) {
     //load in residential stuff from server here, until then use dummy data below
     let [listings, setListings] = useState('')
+    const setNotify = props.setNotify
 
     useEffect(() => {
         const getAllProperties = async () => {
@@ -24,15 +25,15 @@ export function Residential(props) {
                     setListings(properties)
                 }
             ).catch(error => {
-                props.setNotify && props.setNotify({ msg: `There was an error property data.`,
-                                                    color: 'red',
-                                                    show: true })
+                setNotify && setNotify({ msg: `There was an error property data.`,
+                                        color: 'red',
+                                        show: true })
                 console.error(`Error: ${error}`)
             })
         }
 
         getAllProperties()
-    }, []);
+    }, [setNotify])
 
     return (
         <>
