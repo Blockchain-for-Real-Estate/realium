@@ -9,29 +9,39 @@ import { Login } from "./login"
 import { Dashboard } from "./home/dashboard"
 import { Footer } from "./utilities/footer"
 import { Nav } from "./utilities/nav"
+import { Notification } from "./utilities/notification"
 import { ListingDetails } from "./marketplace/listing-details"
 
 function App() {
+	const [notify, setNotifiy] = React.useState({msg: 'Welcome to Realium!', color: 'blue', show: true})
+
 	return (
 		<Router>
 			<Nav />
+			<Notification notify={notify} setNotify={setNotifiy}/>
 			<ScrollToTop>
 				<Switch>
 					<Route exact path="/">
-						<Home />
+						<Home setNotifiy={setNotifiy} />
 					</Route>
 					<Route path="/marketplace" exact>
-						<Marketplace />
+						<Marketplace setNotifiy={setNotifiy} />
 					</Route>
 					<Route path="/marketplace/:propertyId">
-						<ListingDetails />
+						<ListingDetails setNotifiy={setNotifiy} />
 					</Route>
 					<Route path="/howitworks" exact>
-						<HowItWorks />
+						<HowItWorks setNotifiy={setNotifiy} />
 					</Route>
-					<Route path="/about" component={About} />
-					<Route path="/login" component={Login} />
-					<Route path="/dashboard" component={Dashboard} />
+					<Route path="/about">
+						<About setNotifiy={setNotifiy} />
+					</Route>
+					<Route path="/login">
+						<Login setNotifiy={setNotifiy} />
+					</Route>
+					<Route path="/dashboard">
+						<Dashboard setNotifiy={setNotifiy} />
+					</Route>
 				</Switch>
 			</ScrollToTop>
 			<Footer />
