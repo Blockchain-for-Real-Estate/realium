@@ -28,6 +28,8 @@ export function ListingDetails(props) {
     let loading;
     let { propertyId } = useParams()
     let [listing, setListing] = React.useState()
+    let [token, setToken] = React.useState()
+    let [transactions, setTransactions] = React.useState()
     const residentialImages = [res1, res2, res3, res4, res5, res6]
 
     const Image = styled.img`
