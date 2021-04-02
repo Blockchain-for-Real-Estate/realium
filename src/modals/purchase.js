@@ -18,8 +18,12 @@ export function Purchase(props) {
                             setPostings(res.data)
                         }
                     )
-            } catch {
+            } catch(error) {
                 setPostings(null)
+                props.setNotify && props.setNotify({ msg: `There was an error getting listings for this property.`,
+                                                    color: 'red',
+                                                    show: true })
+                console.error(error)
             }
         };
 

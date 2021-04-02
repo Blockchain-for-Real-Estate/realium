@@ -41,8 +41,10 @@ export function CreateAccountForm(props) {
                         }
                     }
                 ).catch(error => {
-                    console.error(error);
-                    alert("User account not created. Please try again.");
+                    props.setNotify && props.setNotify({ msg: `There was an error creating your account.`,
+                                                        color: 'red',
+                                                        show: true })
+                    console.error(error)
                 })
             }}
         >
