@@ -17,8 +17,9 @@ import { FaucetPopOut } from "../utilities/faucet-pop-out"
 export function Dashboard(props) {
     let id = sessionStorage.getItem('id')
     let walletAdress = sessionStorage.getItem('avax')
-    let [tokens, setTokens] = React.useState()
-    let [events, setEvents] = React.useState()
+    const [tokens, setTokens] = React.useState()
+    const [events, setEvents] = React.useState()
+    const [reloadAll, setReload] = React.useState(0)
 
     const residentialImages = [
         res1, res2, res3, res4, res5, res6
@@ -39,7 +40,7 @@ export function Dashboard(props) {
         };
 
         fetchData()
-    }, [id])
+    }, [id, reloadAll])
 
     React.useEffect(() => {
         const fetchEvents = async () => {
@@ -92,10 +93,10 @@ export function Dashboard(props) {
                     View your purchased Realium assets. Manage your shares and sell the assets you no longer wish to hold.
                     </p>
                     {/*
-                    This example requires Tailwind CSS v2.0+ 
-                    
+                    This example requires Tailwind CSS v2.0+
+
                     This example requires some changes to your config:
-                    
+
                     ```
                     // tailwind.config.js
                     module.exports = {
@@ -105,14 +106,14 @@ export function Dashboard(props) {
                         require('@tailwindcss/forms'),
                         ]
                     }
-                    
+
                 */}
                     <div>
-                        <SearchForm setListings={setTokens} setNotify={props.setNotify} searchService={"tokenService"}/>
+                        <SearchForm setListings={setTokens} setNotify={props.setNotify} searchService={"tokenService"} reset={setReload} reloadAll={reloadAll}/>
                     </div>
                     <dl className="mt-10 space-y-10">
                         <div className="grid grid-cols-1 gap-6">
-                        {Object.keys(tokens).map((key) => ( 
+                        {Object.keys(tokens).map((key) => (
                         <div key={key} className="relative rounded-lg border border-gray-300 bg-white shadow-md flex items-center space-x-3 hover:border-gray-400 focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-indigo-500">
                             <div className="grid grid-cols-1 sm:flex sm:flex-cols items-center">
                             <div className="flex-shrink-0">
@@ -136,7 +137,7 @@ export function Dashboard(props) {
                                                 displayType={'text'}
                                                 thousandSeparator={true}
                                                 suffix={' total shares'}
-                                                /> @ 
+                                                /> @
                                             <NumberFormat
                                                 value={tokens[key].property.details.estimatedAppreciation*100}
                                                 displayType={'text'}
@@ -201,7 +202,7 @@ export function Dashboard(props) {
                                 </tr>
                             </thead>
                             <tbody>
-                                {Object.keys(events).map((key) => ( 
+                                {Object.keys(events).map((key) => (
                                 <tr key={key} className="bg-white m-4 border-b border-gray-200 shadow-md rounded-md">
                                 <td className="px-6 py-4 whitespace-nowrap text-xs font-medium text-gray-900" data-label="Time">
                                     <ReactTimeAgo date={events[key].eventDateTime} locale="en-US"/>
@@ -246,7 +247,7 @@ export function Dashboard(props) {
                 </div>
             </div>
             </div>
-            </div> 
+            </div>
             }
         </>
     )

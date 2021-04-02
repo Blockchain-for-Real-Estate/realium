@@ -14,7 +14,8 @@ import res6 from "../resources/images/residential-6.jpg"
 // TODO: need to handle different number of listings loaded in
 export function Residential(props) {
     //load in residential stuff from server here, until then use dummy data below
-    let [listings, setListings] = useState('')
+    const [listings, setListings] = useState('')
+    const [reloadAll, setReload] = useState(0)
     const setNotify = props.setNotify
 
     useEffect(() => {
@@ -34,12 +35,12 @@ export function Residential(props) {
         }
 
         getAllProperties()
-    }, [setNotify])
+    }, [setNotify, reloadAll])
 
     return (
         <>
             {/* Explore Marketplace */}
-            <div className="relative bg-gray-50">
+            <div className="relative">
                 <div className="absolute inset-0">
                     <div className="bg-white h-1/3 sm:h-2/3"/>
                 </div>
@@ -53,7 +54,7 @@ export function Residential(props) {
                                 <p className="max-w-xl mt-5 mx-auto text-xl text-gray-500">
                                     Start trading real estate to diversify your investment portfolio.
                                 </p>
-                                <SearchForm setListings={setListings} setNotify={props.setNotify} searchService={"propertyService"}/>
+                                <SearchForm setListings={setListings} setNotify={props.setNotify} searchService={"propertyService"} reset={setReload} reloadAll={reloadAll}/>
                             </div>
                         </div>
                     </div>
