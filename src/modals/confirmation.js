@@ -7,6 +7,11 @@ export function Confirmation(props) {
     const [showModal, setShowModal] = React.useState(false);
     const [unconfirmed, setConfirmed] = React.useState(false);
 
+    function submit() {
+        
+        setConfirmed(true)
+    }
+
   return (
         <>
         <button
@@ -115,8 +120,8 @@ export function Confirmation(props) {
                     {!unconfirmed ?
                     <button type="button" id="modalButton" className="inline-flex justify-center w-full rounded-md border border-transparent shadow-sm px-4 py-2 bg-indigo-600 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:text-sm"
                     onClick={() => {
-                        sessionStorage.getItem('token') !== null ?
-                            setConfirmed(true)
+                        sessionStorage.getItem('token') !== null ? 
+                            submit()
                         :
                         document.getElementById("modalText").innerHTML = "Please sign in to complete purchase."
                         document.getElementById("modalButton").innerHTML = "Sign In"

@@ -11,6 +11,7 @@ import res3 from "../resources/images/residential-3.jpg"
 import res4 from "../resources/images/residential-4.jpg"
 import res5 from "../resources/images/residential-5.jpg"
 import res6 from "../resources/images/residential-6.jpg"
+import { FaucetPopOut } from "../utilities/faucet-pop-out"
 
 export function Dashboard(props) {
     let id = sessionStorage.getItem('id')
@@ -57,7 +58,7 @@ export function Dashboard(props) {
 
     return (
         <>{tokens && events &&
-            <div className="py-16 bg-gray-50 overflow-hidden lg:py-18">
+            <div className="py-12 bg-gray-50 overflow-hidden lg:py-18">
             <div className="max-w-xl mx-auto px-8 sm:px-6 lg:px-8 lg:max-w-7xl">
                 <svg className="hidden lg:block absolute left-full transform -translate-x-1/2 -translate-y-1" width="404" height="684" fill="none" viewBox="0 0 404 784" aria-hidden="true">
                 <defs>
@@ -67,7 +68,15 @@ export function Dashboard(props) {
                 </defs>
                 <rect width="404" height="784" fill="url(#b1e6e422-73f8-40a6-b5d9-c8586e37e0e7)" />
                 </svg>
-
+                <div className="pb-10">
+                    <h4 className="pr-4 inline-block mb-0 align-baseline text-lg font-extrabold text-indigo-700 tracking-tight sm:text-xl">
+                        Realium uses Avalanche Testnet funds available by faucet.
+                    </h4>
+                    <FaucetPopOut wallet={tokens[0].owner.walletAddress} />
+                </div>
+                <div id="copied-success" class="copied">
+                    <span>Copied!</span>
+                </div>
                 <div className="relative mt-2 lg:mt-24 lg:grid lg:grid-cols-2 lg:gap-16 lg:items-top">
                 <div className="relative">
                     <h3 className="text-2xl font-extrabold text-gray-900 tracking-tight sm:text-3xl">
