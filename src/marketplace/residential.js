@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react"
 import { Listing } from "./listing"
+import { PropertySearchForm } from "./property-search-form"
 import { ApiPropertyService } from "../api/services/property.service"
 
 import res1 from "../resources/images/residential-1.jpg"
@@ -38,18 +39,23 @@ export function Residential(props) {
     return (
         <>
             {/* Explore Marketplace */}
-            <div className="relative bg-gray-50 pt-16 pb-20 px-4 sm:px-6 lg:pt-24 lg:pb-28 lg:px-8">
+            <div className="relative bg-gray-50">
                 <div className="absolute inset-0">
                     <div className="bg-white h-1/3 sm:h-2/3"/>
                 </div>
                 <div className="relative max-w-7xl mx-auto">
-                    <div className="text-center">
-                        <h2 className="text-3xl tracking-tight font-extrabold text-gray-900 sm:text-4xl">
-                            Explore the Marketplace
-                        </h2>
-                        <p className="mt-3 max-w-2xl mx-auto text-xl text-gray-500 sm:mt-4">
-                            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ipsa libero labore natus atque, ducimus sed.
-                        </p>
+                    <div className="bg-white">
+                        <div className="max-w-7xl mx-auto sm:pb-1.5 sm:py-24">
+                            <div className="text-center">
+                                <p className="mt-1 text-4xl font-extrabold text-gray-900 sm:text-5xl sm:tracking-tight lg:text-6xl">
+                                    Explore the marketplace
+                                </p>
+                                <p className="max-w-xl mt-5 mx-auto text-xl text-gray-500">
+                                    Start trading real estate to diversify your investment portfolio.
+                                </p>
+                                <PropertySearchForm setListings={setListings} setNotify={props.setNotify} />
+                            </div>
+                        </div>
                     </div>
                     <div className="mt-12 max-w-lg mx-auto grid gap-5 lg:grid-cols-3 lg:max-w-none">
                         {Object.keys(listings).map((key, idx) => (

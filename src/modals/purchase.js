@@ -10,6 +10,7 @@ export function Purchase(props) {
     let [postings, setPostings] = useState('')
     const setNotify = props.setNotify
     const assetId = props.id
+
     React.useEffect(() => {
         const fetchPostings = async () => {
             try {
