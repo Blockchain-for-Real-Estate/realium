@@ -3,8 +3,11 @@ import { useParams } from "react-router-dom"
 import * as bs from "react-bootstrap"
 import NumberFormat from "react-number-format"
 import LoadingWave from "@bit/ngoue.playground.loading-wave"
-import { ApiPropertyService } from '../api/services/property.service'
+import { Breadcrumbs } from "../utilities/breadcrumbs"
 import { AppContainer } from "../utilities/app-container"
+import { ApiPropertyService } from '../api/services/property.service'
+import { ApiTokenService } from '../api/services/token.service'
+import { ApiEventService } from "../api/services/event.service"
 import { Transactions } from "./transactions"
 import { Modal } from "../modals/modal"
 
@@ -26,30 +29,10 @@ export function ListingDetails(props) {
     let loading;
     let { propertyId } = useParams()
     let [listing, setListing] = React.useState()
-    const residentialImages = [
-        res1, res2, res3, res4, res5, res6
-    ]
-    // const residentialImages = {
-    //     1: [
-    //         res1, res2, res3, res4, res5, res6
-    //     ],
-    //     2: [
-    //         res1, res2, res3, res4, res5, res6
-    //     ],
-    //     3: [
-    //         res1, res2, res3, res4, res5, res6
-    //     ],
-    //     4: [
-    //         res1, res2, res3, res4, res5, res6
-    //     ],
-    //     5: [
-    //         res1, res2, res3, res4, res5, res6
-    //     ],
-    //     6: [
-    //         res1, res2, res3, res4, res5, res6
-    //     ],
-    // }
-
+    let [token, setToken] = React.useState()
+    let [transactions, setTransactions] = React.useState()
+    const residentialImages = [res1, res2, res3, res4, res5, res6]
+    const setNotify = props.setNotify
     const Image = styled.img`
         border:1px solid grey;
     `
@@ -64,17 +47,56 @@ export function ListingDetails(props) {
                     }
                 )
             } catch {
-                setListing(residentialData)
+                setNotify && setNotify({ msg: `There was an error loading data for this property.`,
+                                        color: 'red',
+                                        show: true })
             }
         };
 
         fetchData()
-    }, [propertyId])
+    }, [propertyId, setNotify])
+
+    React.useEffect(() => {
+        const fetchToken = async () => {
+            try {
+                let tokenViaApi = new ApiTokenService()
+                    await tokenViaApi.getPropertyTokens(propertyId).then(
+                        res => {
+                            setToken(res.data[0])
+                        }
+                    )
+            } catch {
+                setToken(hardToken)
+                setNotify && setNotify({ msg: `There was an error loading token data for this property.`,
+                                        color: 'red',
+                                        show: true })
+            }
+        };
+
+        fetchToken()
+    }, [propertyId, listing, setNotify])
+
+    React.useEffect(() => {
+        try {
+            let transactionViaApi = new ApiEventService()
+            transactionViaApi.getFilteredTransactions(propertyId).then(
+                res => {
+                    const txs = res.data
+                    setTransactions(txs)
+                }
+            )
+        } catch {
+            setTransactions(null)
+            setNotify && setNotify({ msg: `There was an error loading transaction data for this property.`,
+                                    color: 'red',
+                                    show: true })
+        }
+    }, [propertyId, setNotify])
 
     return (
         <AppContainer page="marketplace">
         {!loading ?
-            <>  {listing &&
+            <>  {listing && token && transactions &&
                 <div className="mt-12 mb-12">
                     <div className="border-bottom mb-4 m-4">
                         <bs.Row className="mb-2">
@@ -87,9 +109,7 @@ export function ListingDetails(props) {
                             <div>
                                 {listing.streetAddress} | {listing.city}, {listing.state} | {listing.zipCode}
                             </div>
-                            <div>
-                                Marketplace > {listing.listingType} Properties
-                            </div>
+                            <Breadcrumbs listing={listing} />
                         </bs.Row>
                     </div>
                     <bs.Row>
@@ -113,23 +133,23 @@ export function ListingDetails(props) {
                             </bs.Row>
                             <div className="font-weight-bold" style={{"fontSize": "1.1rem"}}>Description</div>
                             <div className="mb-8">
-                                Property is located in {listing.city}, {listing.state} for a steal at {<NumberFormat value={listing.purchasedPrice} displayType={'text'} thousandSeparator={true} prefix={'$'}/>}. {/*{listing.description}*/}
+                                Property is located in {listing.city}, {listing.state} for a steal at {<NumberFormat value={token.purchasedPrice} displayType={'text'} thousandSeparator={true} prefix={'$'}/>}. {/*{listing.description}*/}
                                 Anim aute id magna aliqua ad ad non deserunt sunt. Qui irure qui lorem cupidatat commodo. Elit sunt amet fugiat veniam occaecat fugiat aliqua. Anim aute id magna aliqua ad ad non deserunt sunt. Qui irure qui lorem cupidatat commodo. Elit sunt amet fugiat veniam occaecat fugiat aliqua. Anim aute id magna aliqua ad ad non deserunt sunt. Qui irure qui lorem cupidatat commodo. Elit sunt amet fugiat veniam occaecat fugiat aliqua. Anim aute id magna aliqua ad ad non deserunt sunt. Qui irure qui lorem cupidatat commodo. Elit sunt amet fugiat veniam occaecat fugiat aliqua.
                             </div>
                         </bs.Col>
                         <bs.Col md={1} />
                         <bs.Col md={4}>
-                            <bs.ProgressBar className="mb-3" now={listing.funded/listing.seriesCount*100} style={{"height": "0.1rem"}}/>
+                            <bs.ProgressBar className="mb-3" now={token.listedPrice/token.purchasedPrice*100} style={{"height": "0.1rem"}}/>
                             <div className="mb-3">
                                     <NumberFormat
                                         className="text-primary font-weight-bold"
                                         style={{"fontSize": "1.3rem"}}
-                                        value={listing.funded}
+                                        value={token.listedPrice}
                                         displayType={'text'}
                                         thousandSeparator={true}
                                         prefix={'$'}
                                     /> / <NumberFormat
-                                            value={listing.seriesCount}
+                                            value={token.purchasedPrice}
                                             displayType={'text'}
                                             thousandSeparator={true}
                                             prefix={'$'}
@@ -179,7 +199,7 @@ export function ListingDetails(props) {
                             <div style={{"fontSize": "1.3rem"}} className="font-weight-bold mb-3">
                                 Share Price:
                                 <NumberFormat
-                                    value={listing.share}
+                                    value={Math.round(token.listedPrice / listing.seriesCount)}
                                     displayType={'text'}
                                     thousandSeparator={true}
                                     prefix={'$'}
@@ -221,7 +241,7 @@ export function ListingDetails(props) {
                                             </td>
                                             <td>
                                                 <NumberFormat
-                                                    value={listing.seriesCount}
+                                                    value={token.purchasedPrice}
                                                     displayType={'text'}
                                                     thousandSeparator={true}
                                                     prefix={'$'}
@@ -232,7 +252,7 @@ export function ListingDetails(props) {
                                 </bs.Table>
                             </div>
                             <div className="border-bottom mb-4"/>
-                                <Modal buttonText="PURCHASE SHARES" id={listing.avalancheAssetId}/>
+                                <Modal buttonText="PURCHASE SHARES" id={listing.avalancheAssetId} setNotify={props.setNotify}/>
                             <div style={{"fontSize": "0.9rem"}} className="text-muted">
                                 *By purchasing shares of this asset,
                                 you become a part owner of this property
@@ -243,11 +263,13 @@ export function ListingDetails(props) {
                 </div>
                 }
                 <div className="mb-8">
-                    <DetailsTable listing={listing} />
+                    {listing && token && transactions &&
+                        <DetailsTable listing={listing} token={token} event={transactions}/>
+                    }
+                    {listing &&
+                        <Transactions listing={listing} setNotify={props.setNotify}/>
+                    }
                 </div>
-                {listing &&
-                    <Transactions listing={listing} propertyId={propertyId}/>
-                }
             </>
         :
         <div className="content-center flex flex-wrap justify-center py-72">
@@ -258,20 +280,11 @@ export function ListingDetails(props) {
     )
 }
 
-const residentialData = {
-    id: 1,
-    streetAddress: '445 W 400 N',
-    city: 'Provo',
-    state: 'UT',
-    zipCode: 84601,
-    purchasedPrice: 500400.00,
-    funded: 375300.00,
-    listingType: 'Residential',
-    propertyType: 'Single Family Home',
-    forcastedIncome: 8000,
-    minInvestment: 1000,
-    maxInvestment: 100000,
-    share: 20,
-    yearBuilt: 1998,
-    acerage: 0.42
+const hardToken = {
+    "tokenId": 1,
+    "purchasedPrice": "800000.00",
+    "listedPrice": "50000.00",
+    "listed": true,
+    "property": 1,
+    "owner": 1
 }

@@ -21,22 +21,29 @@ export function LoginForm(props) {
             onSubmit={(values, { setSubmitting }) => {
                 userService.login(values).then(
                     (response) => {
-                        localStorage.setItem('token', response.data.token)
-                        if (response.status === 200) {
+                        sessionStorage.setItem('token', response.data.token)
+                        try { 
                             userService.getUser(values.username, response.data.token).then(
                                 (res) => {
-                                    localStorage.setItem('user', res.data);
+                                    res.data[0].avaxpassword = "*********"
+                                    sessionStorage.setItem('user', JSON.stringify(res.data[0].fullName).replace(/['"]+/g, ''));
+                                    sessionStorage.setItem('id', JSON.stringify(res.data[0].realiumUserId))
+                                    sessionStorage.setItem('avax', JSON.stringify(res.data[0].walletAddress).replace(/['"]+/g, ''))
                                 }
-                            ).then(
-                                history.push(`/dashboard`)
-                            ).then(
-                                window.location.reload()
+                            ).then(() => {
+                                    history.push(`/dashboard`)
+                                    history.go(0)
+                                }
                             )
+                        } catch {
+                            alert("Could not retrieve user")
                         }
                     }
                 ).catch(error => {
-                    console.error(error);
-                    alert("Login failed - recheck your username and password");
+                    props.setNotify && props.setNotify({ msg: `There was an error logging you in.`,
+                                                        color: 'red',
+                                                        show: true })
+                    console.error(error)
                 })
             }}
         >

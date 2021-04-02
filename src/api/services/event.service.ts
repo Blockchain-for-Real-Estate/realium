@@ -15,6 +15,18 @@ export class ApiEventService {
           `${environment.api}/api/events?property=${id}`
         );
     }
+
+    public getEventsByUserId(id: String) {
+      return axios.get<Event>(
+        `${environment.api}/api/events?eventCreator=${id}`
+      )
+    }
+
+    public getListingsForAvaxAssetId(id: string) {
+      return axios.get<Event>(
+        `${environment.api}/api/events?eventType=LIST&avalancheAssetId=${id}`
+      )
+    }
   
     public postTransaction(data: Event) {
       return axios.post<Event>(

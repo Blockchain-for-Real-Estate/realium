@@ -1,10 +1,16 @@
 import React from "react";
 import { useHistory } from "react-router-dom"
+import NumberFormat from "react-number-format"
 
 export function Confirmation(props) {
     let history = useHistory();
     const [showModal, setShowModal] = React.useState(false);
     const [unconfirmed, setConfirmed] = React.useState(false);
+
+    function submit() {
+        
+        setConfirmed(true)
+    }
 
   return (
         <>
@@ -86,7 +92,19 @@ export function Confirmation(props) {
                     {!unconfirmed ?
                     <div class="mt-2">
                         <p class="text-sm text-gray-500" id="modalText">
-                        Are you sure you want to purchase <span className="text-sm text-indigo-600 font-bold">{props.shares}</span> shares for <span className="text-sm text-indigo-600 font-bold">${props.price}</span> per share?
+                        Are you sure you want to purchase <span className="text-sm text-indigo-600 font-bold">
+                            <NumberFormat
+                                value={props.shares}
+                                displayType={'text'}
+                                thousandSeparator={true}
+                            />
+                        </span> shares for <span className="text-sm text-indigo-600 font-bold">$
+                        <NumberFormat
+                                value={props.price}
+                                displayType={'text'}
+                                thousandSeparator={true}
+                            />
+                        </span> per share?
                         </p>
                     </div>
                     :
@@ -100,10 +118,10 @@ export function Confirmation(props) {
                 </div>
                 <div className="mt-5 sm:mt-6">
                     {!unconfirmed ?
-                    <button type="button" id="modalButton" class="inline-flex justify-center w-full rounded-md border border-transparent shadow-sm px-4 py-2 bg-indigo-600 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:text-sm"
+                    <button type="button" id="modalButton" className="inline-flex justify-center w-full rounded-md border border-transparent shadow-sm px-4 py-2 bg-indigo-600 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:text-sm"
                     onClick={() => {
-                        localStorage.getItem('token') !== null ?
-                            setConfirmed(true)
+                        sessionStorage.getItem('token') !== null ? 
+                            submit()
                         :
                         document.getElementById("modalText").innerHTML = "Please sign in to complete purchase."
                         document.getElementById("modalButton").innerHTML = "Sign In"

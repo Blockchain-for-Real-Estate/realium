@@ -1,8 +1,5 @@
 import React from "react"
-import { Link } from "react-router-dom"
 import { Listing } from "./listing"
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faLongArrowAltRight } from '@fortawesome/free-solid-svg-icons'
 
 import com1 from "../resources/images/commercial-1.jpg"
 import com2 from "../resources/images/commercial-2.jpg"
@@ -56,11 +53,6 @@ export function Commercial(props) {
                                 </div>
                             ))
                         }
-                    </div>
-                    <div className="float-right" style={{"fontSize": "0.9rem"}}>
-                        <Link to="/marketplace" className="text-decoration-none text-muted">
-                            Explore <FontAwesomeIcon icon={faLongArrowAltRight}/>
-                        </Link>
                     </div>
                 </div>
             </div>
