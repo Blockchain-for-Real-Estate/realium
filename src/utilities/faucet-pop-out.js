@@ -65,17 +65,20 @@ export function FaucetPopOut(props) {
                 <h3 class="text-base leading-6 font-medium text-gray-900" id="modal-title">
                     You'll want to have your wallet address handy to receive AVAX.
                 </h3>
+                {copySuccess === "" ?
                 <p className="text-xs text-gray-900">
                     Click to copy it below.
                 </p>
-                <div class="mt-2">
+                :
+                <p className="text-xs text-gray-900">
+                    {copySuccess}
+                </p>
+                }
+                <div class="py-2">
                     <input class="text-center text-xs text-indigo-500 w-full border-1 border-gray-200 bg-gray-100 rounded-lg p-2" ref={textAreaRef} style={{cursor: "pointer", color: "transparent", textShadow: "0 0 0 #6366F1"}} value={props.wallet} 
                     onClick={copyToClipboard} readonly/>
                 </div>
                 </div>
-            </div>
-            <div className="p-2 text-center text-xs">
-                {copySuccess}
             </div>
             <div class="mt-3 sm:mt-6">
                 <a href="https://faucet.avax-test.network/" target="_blank" rel="noreferrer">

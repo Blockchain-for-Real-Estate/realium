@@ -4,6 +4,7 @@ import ReactTimeAgo from 'react-time-ago'
 import NumberFormat from "react-number-format"
 import { ApiEventService } from "../api/services/event.service"
 import { Confirmation } from './confirmation';
+import avax_icon from "../resources/images/avax_icon.png"
 import "./modal.css"
 
 export function Purchase(props) {
@@ -64,7 +65,7 @@ export function Purchase(props) {
                                 value={postings[key].listedPrice}
                                 displayType={'text'}
                                 thousandSeparator={true}
-                                prefix={"$"}
+                                prefix={avax_icon}
                             /></td>
                             <td className="p-3" data-label="Time">
                                 <ReactTimeAgo date={postings[key].eventDateTime} locale="en-US"/>
