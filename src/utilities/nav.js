@@ -2,6 +2,7 @@ import React from "react"
 import { Link, useLocation, useHistory } from "react-router-dom"
 import logo from "../resources/images/logo.svg"
 import { ApiBalanceService } from '../api/services/balance.service'
+import { ApiAVAXService } from '../api/services/crypto.services'
 
 export function Nav(props) {
     const [menuOpen, setMenuOpen] = React.useState(false)
@@ -9,6 +10,8 @@ export function Nav(props) {
     let route = location.pathname.split("/")[1]
     let history = useHistory();
     let [balance, setBalance] = React.useState()
+    let [avaxPrice, setAvaxPrice] = React.useState()
+    let [currency, setCurrency] = React.useState(true)
 
     function logout() {
         sessionStorage.clear()
@@ -36,7 +39,21 @@ export function Nav(props) {
           }
       };
 
+      const getCurrentAvaxPrice = async () => {
+          try {
+              let avaxService = new ApiAVAXService()
+                await avaxService.getAvaxAmount().then(
+                    (res) => {
+                        setAvaxPrice(Number(res.data.AVAX.USD))
+                    }
+                )
+          } catch{
+              setAvaxPrice(null)
+          }
+      }
+
       fetchBalance()
+      getCurrentAvaxPrice()
     }, [])
 
     return (
@@ -72,10 +89,18 @@ export function Nav(props) {
                                     type="button"
                                     onClick={() => history.push("/dashboard")}>{initials() || "TW"}
                                 </div>
-                                <div className="flex-shrink-0 text-gray-900 bg-indigo-100 border-2 border-indigo-500 font-bold uppercase text-sm p-2 rounded focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
-                                    type="button"
-                                    onClick={() => history.push("/dashboard")}>{balance} AVAX
-                                </div>
+                                {currency===false &&
+                                    <div className="flex-shrink-0 text-gray-900 bg-indigo-100 border-2 border-indigo-500 font-bold uppercase text-sm p-2 rounded focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                                        type="button"
+                                        onClick={() => history.push("/dashboard", setCurrency(true))}>${(balance*avaxPrice).toFixed(2)} USD
+                                    </div>
+                                }
+                                {currency===true &&
+                                    <div className="flex-shrink-0 text-gray-900 bg-indigo-100 border-2 border-indigo-500 font-bold uppercase text-sm p-2 rounded focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                                        type="button"
+                                        onClick={() => history.push("/dashboard", setCurrency(false))}>{balance} AVAX
+                                    </div>
+                                }
                                 <Link onClick={logout} className="block px-3 py-2 rounded-md text-sm font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50 text-decoration-none" to="/">
                                     Sign out
                                 </Link>
@@ -121,10 +146,18 @@ export function Nav(props) {
                                 type="button"
                                 onClick={() => history.push("/dashboard")}>{initials() || "TW"}
                             </div>
-                            <div className="border-transparent text-indigo-700 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-700 block pl-3 pr-4 py-2 border-l-4 text-base font-medium text-decoration-none"
-                                type="button"
-                                onClick={() => history.push("/dashboard")}>{balance} AVAX
-                            </div>
+                            {currency===false &&
+                                <div className="border-transparent text-indigo-700 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-700 block pl-3 pr-4 py-2 border-l-4 text-base font-medium text-decoration-none"
+                                    type="button"
+                                    onClick={() => history.push("/dashboard", setCurrency(true))}>${(balance*avaxPrice).toFixed(2)} USD
+                                </div>
+                            }
+                            {currency===true &&
+                                <div className="border-transparent text-indigo-700 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-700 block pl-3 pr-4 py-2 border-l-4 text-base font-medium text-decoration-none"
+                                    type="button"
+                                    onClick={() => history.push("/dashboard", setCurrency(false))}>{balance} AVAX
+                                </div>
+                            }
                             <Link onClick={logout} className="border-transparent text-gray-500 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-700 block pl-3 pr-4 py-2 border-l-4 text-base font-medium text-decoration-none" to="/">
                                 Sign out
                             </Link>

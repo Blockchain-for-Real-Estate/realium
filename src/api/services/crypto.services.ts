@@ -1,8 +1,7 @@
-import { django_environment as environment} from "../../environment"
 import axios from 'axios'
 import { Avax } from "../interfaces/avax.interface";
 
-export class ApiEventService {
+export class ApiAVAXService {
 
     public getAvaxAmount() {
         return axios.get<Avax>(
