@@ -31,7 +31,7 @@ export function ListingDetails(props) {
     let [token, setToken] = React.useState()
     let [transactions, setTransactions] = React.useState()
     const residentialImages = [res1, res2, res3, res4, res5, res6]
-
+    const setNotify = props.setNotify
     const Image = styled.img`
         border:1px solid grey;
     `
@@ -46,14 +46,14 @@ export function ListingDetails(props) {
                     }
                 )
             } catch {
-                props.setNotify && props.setNotify({ msg: `There was an error loading data for this property.`,
-                                                    color: 'red',
-                                                    show: true })
+                setNotify && setNotify({ msg: `There was an error loading data for this property.`,
+                                        color: 'red',
+                                        show: true })
             }
         };
 
         fetchData()
-    }, [propertyId])
+    }, [propertyId, setNotify])
 
     React.useEffect(() => {
         const fetchToken = async () => {
@@ -66,31 +66,31 @@ export function ListingDetails(props) {
                     )
             } catch {
                 setToken(hardToken)
-                props.setNotify && props.setNotify({ msg: `There was an error loading token data for this property.`,
-                                                    color: 'red',
-                                                    show: true })
+                setNotify && setNotify({ msg: `There was an error loading token data for this property.`,
+                                        color: 'red',
+                                        show: true })
             }
         };
 
         fetchToken()
-    }, [propertyId, listing]);
+    }, [propertyId, listing, setNotify])
 
     React.useEffect(() => {
         try {
             let transactionViaApi = new ApiEventService()
             transactionViaApi.getFilteredTransactions(propertyId).then(
                 res => {
-                    const txs = res.data;
-                    setTransactions(txs);
+                    const txs = res.data
+                    setTransactions(txs)
                 }
             )
         } catch {
             setTransactions(null)
-            props.setNotify && props.setNotify({ msg: `There was an error loading transaction data for this property.`,
-                                                    color: 'red',
-                                                    show: true })
+            setNotify && setNotify({ msg: `There was an error loading transaction data for this property.`,
+                                    color: 'red',
+                                    show: true })
         }
-    }, [propertyId])
+    }, [propertyId, setNotify])
 
     return (
         <AppContainer page="marketplace">

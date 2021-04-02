@@ -7,11 +7,13 @@ import link from "../resources/images/external_link.png"
 
 export function Transactions(props) {
     let [transactions, setTransactions] = React.useState([])
+    const setNotify = props.setNotify
+    const listing = props.listing
 
     React.useEffect(() => {
         try {
             let transactionViaApi = new ApiEventService()
-            transactionViaApi.getFilteredTransactions(props.listing.propertyId).then(
+            transactionViaApi.getFilteredTransactions(listing.propertyId).then(
                 res => {
                     const txs = res.data;
                     setTransactions(txs);
@@ -19,11 +21,11 @@ export function Transactions(props) {
             )
         } catch {
             setTransactions(null)
-            props.setNotify && props.setNotify({ msg: `There was an error property data.`,
+            setNotify && setNotify({ msg: `There was an error property data.`,
                                                 color: 'red',
                                                 show: true })
         }
-    }, [props.listing])
+    }, [listing, setNotify])
 
     return (
         /* Transactions Table */
