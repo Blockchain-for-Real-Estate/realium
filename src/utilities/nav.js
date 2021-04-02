@@ -85,20 +85,20 @@ export function Nav(props) {
                             </Link>
                             :
                             <>
-                                <div className="flex-shrink-0 text-gray-900 bg-gray-100 border-2 border-gray-300 font-bold uppercase text-sm p-2 rounded focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                                <div className="flex-shrink-0 text-gray-900 bg-gray-100 border-2 border-gray-300 hover:bg-gray-200 hover:shadow-lg font-bold uppercase text-sm p-2 rounded focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
                                     type="button"
                                     onClick={() => history.push("/dashboard")}>{initials() || "TW"}
                                 </div>
                                 {currency===false &&
-                                    <div className="flex-shrink-0 text-gray-900 bg-indigo-100 border-2 border-indigo-500 font-bold uppercase text-sm p-2 rounded focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                                    <div className="flex-shrink-0 text-gray-900 bg-indigo-100 border-2 border-indigo-500 hover:bg-indigo-200 hover:shadow-lg font-bold uppercase text-sm p-2 rounded focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
                                         type="button"
-                                        onClick={() => history.push("/dashboard", setCurrency(true))}>${(balance*avaxPrice).toFixed(2)} USD
+                                        onClick={() => setCurrency(true)}>${(balance*avaxPrice).toFixed(2)} USD
                                     </div>
                                 }
                                 {currency===true &&
-                                    <div className="flex-shrink-0 text-gray-900 bg-indigo-100 border-2 border-indigo-500 font-bold uppercase text-sm p-2 rounded focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                                    <div className="flex-shrink-0 text-gray-900 bg-indigo-100 border-2 border-indigo-500 hover:bg-indigo-200 hover:shadow-lg font-bold uppercase text-sm p-2 rounded focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
                                         type="button"
-                                        onClick={() => history.push("/dashboard", setCurrency(false))}>{balance} AVAX
+                                        onClick={() => setCurrency(false)}>{balance} AVAX
                                     </div>
                                 }
                                 <Link onClick={logout} className="block px-3 py-2 rounded-md text-sm font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50 text-decoration-none" to="/">
@@ -149,13 +149,13 @@ export function Nav(props) {
                             {currency===false &&
                                 <div className="border-transparent text-indigo-700 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-700 block pl-3 pr-4 py-2 border-l-4 text-base font-medium text-decoration-none"
                                     type="button"
-                                    onClick={() => history.push("/dashboard", setCurrency(true))}>${(balance*avaxPrice).toFixed(2)} USD
+                                    onClick={() => setCurrency(true)}>${(balance*avaxPrice).toFixed(2)} USD
                                 </div>
                             }
                             {currency===true &&
                                 <div className="border-transparent text-indigo-700 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-700 block pl-3 pr-4 py-2 border-l-4 text-base font-medium text-decoration-none"
                                     type="button"
-                                    onClick={() => history.push("/dashboard", setCurrency(false))}>{balance} AVAX
+                                    onClick={() => setCurrency(false)}>{balance} AVAX
                                 </div>
                             }
                             <Link onClick={logout} className="border-transparent text-gray-500 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-700 block pl-3 pr-4 py-2 border-l-4 text-base font-medium text-decoration-none" to="/">

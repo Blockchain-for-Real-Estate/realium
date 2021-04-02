@@ -60,7 +60,7 @@ export function Residential(props) {
                     <div className="mt-12 max-w-lg mx-auto grid gap-5 lg:grid-cols-3 lg:max-w-none">
                         {Object.keys(listings).map((key, idx) => (
                                 <div key={key} className="l-grid__item">
-                                    <Listing listing={listings[key]} index={idx}/>
+                                    <Listing listing={listings[key]} index={listings[key].propertyId}/>
                                 </div>
                             ))
                         }
