@@ -61,7 +61,7 @@ export function Dashboard(props) {
 
     return (
         <>{tokens && events &&
-            <div className="py-8 bg-gray-50 overflow-hidden lg:py-18">
+            <div className="pt-8 pb-64 bg-gray-50 overflow-hidden lg:py-18">
             <div className="max-w-xl mx-auto px-8 sm:px-6 lg:px-8 lg:max-w-7xl">
                 <svg className="hidden lg:block absolute left-full transform -translate-x-1/2 -translate-y-1" width="404" height="684" fill="none" viewBox="0 0 404 784" aria-hidden="true">
                 <defs>
