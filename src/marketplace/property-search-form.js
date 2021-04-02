@@ -2,9 +2,13 @@ import React from 'react'
 import { Formik, Field, Form } from "formik"
 import * as Yup from "yup"
 import { ApiPropertyService } from "../api/services/property.service"
+import { ApiTokenService } from "../api/services/token.service"
 
-export function PropertySearchForm(props) {
+export function SearchForm(props) {
     const propertyService = new ApiPropertyService()
+    const tokenService = new ApiTokenService()
+    let id = sessionStorage.getItem('id')
+    
     return (
         <Formik
             validateOnChange={false}
@@ -12,17 +16,27 @@ export function PropertySearchForm(props) {
             initialValues={{
                             term: ''
                         }}
-            validationSchema={Yup.object({
+            validationSchema={
+                Yup.object({
                 term: Yup.string()
-                    .required('Enter a property name, city, or state to search properties.')
+                    .required('Enter a name, city, or state to search.')
             })}
             onSubmit={async (values, { setSubmitting }) => {
                 try {
                     setSubmitting(true)
-                    let resp = await propertyService.getAssetBySearchTerm(values.term)
+                    let resp
+                    if (props.searchService === "propertyService"){
+                        console.log("property")
+                        resp = await propertyService.getAssetBySearchTerm(values.term)
+                    }
+                    else if (props.searchService === "tokenService"){
+                        console.log("tokens")
+                        resp = await tokenService.searchTokens(values.term, id)
+                    }
+                    console.log(resp.data)
                     props.setListings(resp.data)
                 } catch (error) {
-                    props.setNotify({msg: 'There was an error searching for properties.',
+                    props.setNotify({msg: 'There was an error searching.',
                                     color: 'red',
                                     show: true})
                     console.error(error)

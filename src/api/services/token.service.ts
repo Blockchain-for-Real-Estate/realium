@@ -21,6 +21,12 @@ export class ApiTokenService {
           `${environment.api}/api/tokens/?owner=${id}`
         );
     }
+
+    public searchTokens(searchInput: String, id: String){
+      return axios.get<Token>(        
+        `${environment.api}/api/tokens/?owner=${id}&search=${searchInput}`
+      );
+    }
   
     public postToken(data: Token) {
       return axios.post<Token>(

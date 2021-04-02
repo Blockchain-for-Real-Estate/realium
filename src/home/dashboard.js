@@ -4,6 +4,7 @@ import "../modals/modal.css"
 import NumberFormat from "react-number-format"
 import { ApiTokenService } from "../api/services/token.service"
 import { ApiEventService } from "../api/services/event.service"
+import { SearchForm } from "../marketplace/property-search-form"
 
 import res1 from "../resources/images/residential-1.jpg"
 import res2 from "../resources/images/residential-2.jpg"
@@ -15,6 +16,7 @@ import { FaucetPopOut } from "../utilities/faucet-pop-out"
 
 export function Dashboard(props) {
     let id = sessionStorage.getItem('id')
+    let walletAdress = sessionStorage.getItem('avax')
     let [tokens, setTokens] = React.useState()
     let [events, setEvents] = React.useState()
 
@@ -72,7 +74,7 @@ export function Dashboard(props) {
                     <h4 className="pr-4 inline-block mb-0 align-baseline text-lg font-extrabold text-indigo-700 tracking-tight sm:text-xl">
                     While Realium is in beta, access the Avalanche test faucet for funds.
                     </h4>
-                    <FaucetPopOut wallet={tokens[0].owner.walletAddress} />
+                    <FaucetPopOut wallet={walletAdress} />
                 </div>
                 <div className="relative mt-2 lg:mt-24 lg:grid lg:grid-cols-2 lg:gap-16 lg:items-top">
                 <div className="relative">
@@ -99,9 +101,7 @@ export function Dashboard(props) {
                     
                 */}
                     <div>
-                    <div className="mt-1">
-                        <input type="text" name="email" id="email" className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-xs border-gray-300 rounded-md" placeholder="Search by name, city, or state" />
-                    </div>
+                        <SearchForm setListings={setTokens} setNotify={props.setNotify} searchService={"tokenService"}/>
                     </div>
                     <dl className="mt-10 space-y-10">
                         <div className="grid grid-cols-1 gap-6">
