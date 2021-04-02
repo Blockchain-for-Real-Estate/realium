@@ -4,7 +4,7 @@ import "../modals/modal.css"
 import NumberFormat from "react-number-format"
 import { ApiTokenService } from "../api/services/token.service"
 import { ApiEventService } from "../api/services/event.service"
-import { SearchForm } from "../marketplace/property-search-form"
+import { SearchForm } from "../marketplace/search-form"
 
 import res1 from "../resources/images/residential-1.jpg"
 import res2 from "../resources/images/residential-2.jpg"
@@ -109,7 +109,7 @@ export function Dashboard(props) {
 
                 */}
                     <div>
-                        <SearchForm setListings={setTokens} setNotify={props.setNotify} searchService={"tokenService"} reset={setReload} reloadAll={reloadAll}/>
+                        <SearchForm resultsSetter={setTokens} setNotify={props.setNotify} searchService={"tokenService"} reset={setReload} reloadAll={reloadAll}/>
                     </div>
                     <dl className="mt-10 space-y-10">
                         <div className="grid grid-cols-1 gap-6">

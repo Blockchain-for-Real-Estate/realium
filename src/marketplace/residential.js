@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react"
 import { Listing } from "./listing"
-import { SearchForm } from "./property-search-form"
+import { SearchForm } from "./search-form"
 import { ApiPropertyService } from "../api/services/property.service"
 
 import res1 from "../resources/images/residential-1.jpg"
@@ -54,7 +54,7 @@ export function Residential(props) {
                                 <p className="max-w-xl mt-5 mx-auto text-xl text-gray-500">
                                     Start trading real estate to diversify your investment portfolio.
                                 </p>
-                                <SearchForm setListings={setListings} setNotify={props.setNotify} searchService={"propertyService"} reset={setReload} reloadAll={reloadAll}/>
+                                <SearchForm resultsSetter={setListings} setNotify={props.setNotify} searchService={"propertyService"} reset={setReload} reloadAll={reloadAll}/>
                             </div>
                         </div>
                     </div>

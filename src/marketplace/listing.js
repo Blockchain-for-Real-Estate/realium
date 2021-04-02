@@ -3,6 +3,8 @@ import { useHistory } from "react-router-dom"
 import NumberFormat from "react-number-format"
 
 import comingSoon from "../resources/images/coming-soon.jpg"
+import newBadge from "../resources/images/new-badge.png"
+import csBadge from "../resources/images/coming-soon-badge.png"
 import res1 from "../resources/images/residential-1.jpg"
 import res2 from "../resources/images/residential-2.jpg"
 import res3 from "../resources/images/residential-3.jpg"
@@ -31,12 +33,12 @@ export function Listing(props) {
                 {props.listing.listingType === "Residential" ?
                     <div className="relative">
                         <img className="h-48 w-full object-cover" src={residentialImages[props.index] || comingSoon} alt={props.listing.streetAddress} />
-                        <span className="absolute right-1 top-3 px-2 py-1 mr-2 text-xs font-bold leading-none text-white bg-indigo-600 rounded-full">NEW</span>
+                        <img src={newBadge} alt="NEW" className="absolute right-1 top-3 px-2 py-1 mr-2 h-7"/>
                     </div>
                     :
                     <div className="relative">
                         <img className="opacity-40 h-48 w-full object-cover" src={commercialImages[props.index] || comingSoon} alt={props.listing.streetAddress} />
-                        <span className="absolute right-1 top-3 px-2 px-2 py-1 mr-2 text-xs font-semibold leading-none text-white bg-green-400 rounded-full">COMING SOON</span>
+                        <img src={csBadge} alt="COMING SOON" className="absolute right-1 top-3 px-2 py-1 mr-2 h-7"/>
                     </div>
                 }
                 </div>

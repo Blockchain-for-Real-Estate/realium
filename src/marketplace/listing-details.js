@@ -22,8 +22,7 @@ import res2 from "../resources/images/residential-2.jpg"
 import res3 from "../resources/images/residential-3.jpg"
 import res4 from "../resources/images/residential-4.jpg"
 import res5 from "../resources/images/residential-5.jpg"
-// import res6 from "../resources/images/residential-6.jpg"
-import avax_icon from "../resources/images/avax_icon_indigo.png"
+import res6 from "../resources/images/residential-6.jpg"
 
 export function ListingDetails(props) {
     let loading

@@ -34,7 +34,7 @@ export function SearchForm(props) {
                         else if (props.searchService === "tokenService"){
                             resp = await tokenService.searchTokens(values.term, id)
                         }
-                        props.setListings(resp.data)
+                        props.resultsSetter(resp.data)
                     } catch (error) {
                         props.setNotify({msg: 'There was an error searching.',
                                         color: 'red',
