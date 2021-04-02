@@ -90,19 +90,23 @@ export function Nav(props) {
                                     onClick={() => history.push("/dashboard")}>{initials() || "TW"}
                                 </div>
                                 {currency===false &&
-                                    <div className="flex-shrink-0 text-indigo-900 bg-indigo-100 border-2 border-indigo-500 hover:bg-indigo-200 hover:shadow-lg font-bold uppercase text-sm p-2 rounded focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                                    <div className="flex-shrink-0 inline-flex text-indigo-900 bg-indigo-100 border-2 border-indigo-500 hover:bg-indigo-200 hover:shadow-lg font-bold uppercase text-sm p-2 rounded focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
                                         type="button"
-                                        onClick={() => setCurrency(true)}>${(balance*avaxPrice).toFixed(2)} USD
+                                        onClick={() => setCurrency(true)}>
+                                            <div className="pr-2">
+                                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M12 8C10.343 8 9 8.895 9 10C9 11.105 10.343 12 12 12C13.657 12 15 12.895 15 14C15 15.105 13.657 16 12 16M12 8V16M12 8C13.11 8 14.08 8.402 14.599 9L12 8ZM12 8V7M12 16V17M12 16C10.89 16 9.92 15.598 9.401 15L12 16ZM21 12C21 13.1819 20.7672 14.3522 20.3149 15.4442C19.8626 16.5361 19.1997 17.5282 18.364 18.364C17.5282 19.1997 16.5361 19.8626 15.4442 20.3149C14.3522 20.7672 13.1819 21 12 21C10.8181 21 9.64778 20.7672 8.55585 20.3149C7.46392 19.8626 6.47177 19.1997 5.63604 18.364C4.80031 17.5282 4.13738 16.5361 3.68508 15.4442C3.23279 14.3522 3 13.1819 3 12C3 9.61305 3.94821 7.32387 5.63604 5.63604C7.32387 3.94821 9.61305 3 12 3C14.3869 3 16.6761 3.94821 18.364 5.63604C20.0518 7.32387 21 9.61305 21 12Z" stroke="#312E81" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                            </svg>
+                                            </div>
+                                            {(balance*avaxPrice).toFixed(2)} USD
                                     </div>
                                 }
                                 {currency===true &&
                                     <div className="flex-shrink-0 inline-flex text-indigo-900 bg-indigo-100 border-2 border-indigo-500 hover:bg-indigo-200 hover:shadow-lg font-bold uppercase text-sm p-2 rounded focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
                                         type="button"
                                         onClick={() => setCurrency(false)}>
-                                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                <path d="M1.99988 6C1.99988 5.46957 2.21059 4.96086 2.58566 4.58579C2.96074 4.21071 3.46944 4 3.99988 4H19.9999C20.5303 4 21.039 4.21071 21.4141 4.58579C21.7892 4.96086 21.9999 5.46957 21.9999 6V18C21.9999 18.5304 21.7892 19.0391 21.4141 19.4142C21.039 19.7893 20.5303 20 19.9999 20H3.99988C3.46944 20 2.96074 19.7893 2.58566 19.4142C2.21059 19.0391 1.99988 18.5304 1.99988 18V6Z" stroke="#312E81" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                                <path d="M1.99988 8H21.9999" stroke="#312E81" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                                <path d="M1.99988 12H8.99988C8.99988 13 9.59988 15 11.9999 15C14.3999 15 14.9999 13 14.9999 12H21.9999" stroke="#312E81" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                            <svg width="20" height="20" viewBox="0 0 153 153" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path fill-rule="evenodd" clip-rule="evenodd" d="M153 76.5C153 118.75 118.75 153 76.5 153C34.2502 153 0 118.75 0 76.5C0 34.2502 34.2502 0 76.5 0C118.75 0 153 34.2502 153 76.5ZM72.2494 21.5512L22.6284 108.776C20.8649 111.876 23.1037 115.725 26.6701 115.725H57.7531C59.4209 115.725 60.961 114.832 61.7892 113.384L96.0274 53.5368C96.8467 52.1048 96.8458 50.3458 96.025 48.9145L80.325 21.5372C78.5347 18.4154 74.0289 18.4231 72.2494 21.5512ZM90.0853 115.95H126.325C130.017 115.95 132.327 111.956 130.486 108.756L112.443 77.3996C110.601 74.1984 105.985 74.1898 104.131 77.3843L85.9337 108.741C84.0767 111.941 86.3855 115.95 90.0853 115.95Z" fill="#4F46E5"/>
                                             </svg>
                                     <span className="pl-1.5">{balance} AVAX</span>
                                     </div>
@@ -153,19 +157,23 @@ export function Nav(props) {
                                 onClick={() => history.push("/dashboard")}>{initials() || "TW"}
                             </div>
                             {currency===false &&
-                                <div className="border-transparent text-indigo-700 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-700 block pl-3 pr-4 py-2 border-l-4 text-base font-medium text-decoration-none"
+                                <div className="border-transparent inline-flex text-indigo-700 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-700 block pl-3 pr-4 py-2 border-l-4 text-base font-medium text-decoration-none"
                                     type="button"
-                                    onClick={() => setCurrency(true)}>${(balance*avaxPrice).toFixed(2)} USD
+                                    onClick={() => setCurrency(true)}>
+                                        <div className="pr-2">
+                                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M12 8C10.343 8 9 8.895 9 10C9 11.105 10.343 12 12 12C13.657 12 15 12.895 15 14C15 15.105 13.657 16 12 16M12 8V16M12 8C13.11 8 14.08 8.402 14.599 9L12 8ZM12 8V7M12 16V17M12 16C10.89 16 9.92 15.598 9.401 15L12 16ZM21 12C21 13.1819 20.7672 14.3522 20.3149 15.4442C19.8626 16.5361 19.1997 17.5282 18.364 18.364C17.5282 19.1997 16.5361 19.8626 15.4442 20.3149C14.3522 20.7672 13.1819 21 12 21C10.8181 21 9.64778 20.7672 8.55585 20.3149C7.46392 19.8626 6.47177 19.1997 5.63604 18.364C4.80031 17.5282 4.13738 16.5361 3.68508 15.4442C3.23279 14.3522 3 13.1819 3 12C3 9.61305 3.94821 7.32387 5.63604 5.63604C7.32387 3.94821 9.61305 3 12 3C14.3869 3 16.6761 3.94821 18.364 5.63604C20.0518 7.32387 21 9.61305 21 12Z" stroke="#312E81" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                        </svg>
+                                        </div>
+                                        {(balance*avaxPrice).toFixed(2)} USD
                                 </div>
                             }
                             {currency===true &&
                                 <div className="border-transparent inline-flex text-indigo-700 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-700 block pl-3 pr-4 py-2 border-l-4 text-base font-medium text-decoration-none"
                                     type="button"
                                     onClick={() => setCurrency(false)}>
-                                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                            <path d="M1.99988 6C1.99988 5.46957 2.21059 4.96086 2.58566 4.58579C2.96074 4.21071 3.46944 4 3.99988 4H19.9999C20.5303 4 21.039 4.21071 21.4141 4.58579C21.7892 4.96086 21.9999 5.46957 21.9999 6V18C21.9999 18.5304 21.7892 19.0391 21.4141 19.4142C21.039 19.7893 20.5303 20 19.9999 20H3.99988C3.46944 20 2.96074 19.7893 2.58566 19.4142C2.21059 19.0391 1.99988 18.5304 1.99988 18V6Z" stroke="#312E81" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                            <path d="M1.99988 8H21.9999" stroke="#312E81" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                            <path d="M1.99988 12H8.99988C8.99988 13 9.59988 15 11.9999 15C14.3999 15 14.9999 13 14.9999 12H21.9999" stroke="#312E81" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                        <svg width="20" height="20" viewBox="0 0 153 153" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path fill-rule="evenodd" clip-rule="evenodd" d="M153 76.5C153 118.75 118.75 153 76.5 153C34.2502 153 0 118.75 0 76.5C0 34.2502 34.2502 0 76.5 0C118.75 0 153 34.2502 153 76.5ZM72.2494 21.5512L22.6284 108.776C20.8649 111.876 23.1037 115.725 26.6701 115.725H57.7531C59.4209 115.725 60.961 114.832 61.7892 113.384L96.0274 53.5368C96.8467 52.1048 96.8458 50.3458 96.025 48.9145L80.325 21.5372C78.5347 18.4154 74.0289 18.4231 72.2494 21.5512ZM90.0853 115.95H126.325C130.017 115.95 132.327 111.956 130.486 108.756L112.443 77.3996C110.601 74.1984 105.985 74.1898 104.131 77.3843L85.9337 108.741C84.0767 111.941 86.3855 115.95 90.0853 115.95Z" fill="#4F46E5"/>
                                         </svg>
                                     <span className="pl-1">{balance} AVAX</span>
                                 </div>

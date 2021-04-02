@@ -60,7 +60,7 @@ export function Dashboard(props) {
 
     return (
         <>{tokens && events &&
-            <div className="py-12 bg-gray-50 overflow-hidden lg:py-18">
+            <div className="py-8 bg-gray-50 overflow-hidden lg:py-18">
             <div className="max-w-xl mx-auto px-8 sm:px-6 lg:px-8 lg:max-w-7xl">
                 <svg className="hidden lg:block absolute left-full transform -translate-x-1/2 -translate-y-1" width="404" height="684" fill="none" viewBox="0 0 404 784" aria-hidden="true">
                 <defs>
@@ -70,6 +70,13 @@ export function Dashboard(props) {
                 </defs>
                 <rect width="404" height="784" fill="url(#b1e6e422-73f8-40a6-b5d9-c8586e37e0e7)" />
                 </svg>
+                    <div className="max-w-7xl mx-auto sm:pb-1.5 sm:py-4">
+                        <div className="text-left">
+                            <p className="mt-1 text-4xl font-extrabold text-gray-900 sm:text-5xl sm:tracking-tight lg:text-6xl">
+                                Dashboard
+                            </p>
+                        </div>
+                    </div>
                 <div className="pb-10">
                     <h4 className="pr-4 inline-block mb-0 align-baseline text-lg font-extrabold text-indigo-700 tracking-tight sm:text-xl">
                     While Realium is in beta, access the Avalanche test faucet for funds.

@@ -15,8 +15,6 @@ import com3 from "../resources/images/commercial-3.jpg"
 import com4 from "../resources/images/commercial-4.jpg"
 import com5 from "../resources/images/commercial-5.jpg"
 import com6 from "../resources/images/commercial-6.jpg"
-import avax_icon_i from "../resources/images/avax_icon_indigo.png"
-import avax_icon_g from "../resources/images/avax_icon.png"
 
 export function Listing(props) {
     let history = useHistory()
@@ -61,23 +59,31 @@ export function Listing(props) {
                     </p>
                     {props.listing.listingType === "Residential" ?
                     <p className="mt-3 text-sm font-medium text-indigo-600">
-                        Share Price: 
-                        <img className="h-4 inline-flex px-1" src={props.listing.listingType === "Residential" ? avax_icon_i : avax_icon_g} alt="AVAX" />
                         <NumberFormat
                             value={props.listing.seriesCount}
                             displayType={'text'}
                             thousandSeparator={true}
+                            prefix={'Share Price: '}
                         />
+                        <div className="h-4 inline-flex px-1">
+                        <svg width="12" height="12" viewBox="0 0 153 153" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd" clip-rule="evenodd" d="M153 76.5C153 118.75 118.75 153 76.5 153C34.2502 153 0 118.75 0 76.5C0 34.2502 34.2502 0 76.5 0C118.75 0 153 34.2502 153 76.5ZM72.2494 21.5512L22.6284 108.776C20.8649 111.876 23.1037 115.725 26.6701 115.725H57.7531C59.4209 115.725 60.961 114.832 61.7892 113.384L96.0274 53.5368C96.8467 52.1048 96.8458 50.3458 96.025 48.9145L80.325 21.5372C78.5347 18.4154 74.0289 18.4231 72.2494 21.5512ZM90.0853 115.95H126.325C130.017 115.95 132.327 111.956 130.486 108.756L112.443 77.3996C110.601 74.1984 105.985 74.1898 104.131 77.3843L85.9337 108.741C84.0767 111.941 86.3855 115.95 90.0853 115.95Z" fill="#4F46E5"/>
+                        </svg>
+                        </div>
                     </p>
                     :
                     <p className="mt-3 text-sm font-medium text-green-500">
-                        Share Price: 
-                        <img className="h-4 inline-flex px-1" src={props.listing.listingType === "Residential" ? avax_icon_i : avax_icon_g} alt="AVAX" />
                         <NumberFormat
-                            value={props.listing.seriesCount}
+                            value={props.listing.sharePrice}
                             displayType={'text'}
                             thousandSeparator={true}
+                            prefix={'Share Price: '}
                         />
+                        <div className="h-4 inline-flex px-1">
+                        <svg width="12" height="12" viewBox="0 0 153 153" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd" clip-rule="evenodd" d="M153 76.5C153 118.75 118.75 153 76.5 153C34.2502 153 0 118.75 0 76.5C0 34.2502 34.2502 0 76.5 0C118.75 0 153 34.2502 153 76.5ZM72.2494 21.5512L22.6284 108.776C20.8649 111.876 23.1037 115.725 26.6701 115.725H57.7531C59.4209 115.725 60.961 114.832 61.7892 113.384L96.0274 53.5368C96.8467 52.1048 96.8458 50.3458 96.025 48.9145L80.325 21.5372C78.5347 18.4154 74.0289 18.4231 72.2494 21.5512ZM90.0853 115.95H126.325C130.017 115.95 132.327 111.956 130.486 108.756L112.443 77.3996C110.601 74.1984 105.985 74.1898 104.131 77.3843L85.9337 108.741C84.0767 111.941 86.3855 115.95 90.0853 115.95Z" fill="#34D399"/>
+                        </svg>
+                        </div>
                     </p>
                     }
                 </div>

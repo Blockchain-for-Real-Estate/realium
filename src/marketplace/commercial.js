@@ -78,7 +78,8 @@ export const commercialData = {
         maxInvestment: 100000,
         share: 20,
         yearBuilt: 1998,
-        acerage: 0.42
+        acerage: 0.42,
+        sharePrice: 33
     },
     8: {
         id: 8,
@@ -96,7 +97,8 @@ export const commercialData = {
         maxInvestment: 100000,
         share: 20,
         yearBuilt: 1998,
-        acerage: 0.42
+        acerage: 0.42,
+        sharePrice: 16
     },
     9: {
         id: 9,
@@ -114,7 +116,8 @@ export const commercialData = {
         maxInvestment: 100000,
         share: 20,
         yearBuilt: 1998,
-        acerage: 0.42
+        acerage: 0.42,
+        sharePrice: 77
     },
     10: {
         id: 10,
@@ -132,7 +135,8 @@ export const commercialData = {
         maxInvestment: 100000,
         share: 20,
         yearBuilt: 1998,
-        acerage: 0.42
+        acerage: 0.42,
+        sharePrice: 109
     },
     11: {
         id: 11,
@@ -150,7 +154,8 @@ export const commercialData = {
         maxInvestment: 100000,
         share: 20,
         yearBuilt: 1998,
-        acerage: 0.42
+        acerage: 0.42,
+        sharePrice: 31
     },
     12: {
         id: 12,
@@ -168,6 +173,7 @@ export const commercialData = {
         maxInvestment: 100000,
         share: 20,
         yearBuilt: 1998,
-        acerage: 0.42
+        acerage: 0.42,
+        sharePrice: 89
     }
 }
