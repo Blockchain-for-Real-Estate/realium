@@ -85,6 +85,7 @@ export function Confirmation(props) {
                     </h3>
                     }
                     {!unconfirmed ?
+<<<<<<< HEAD
                     <div class="mt-2">
                         <p class="text-sm text-gray-500" id="modalText">
                         Are you sure you want to purchase <span className="text-sm text-indigo-600 font-bold">
@@ -100,6 +101,11 @@ export function Confirmation(props) {
                                 thousandSeparator={true}
                             />
                         </span> per share?
+=======
+                    <div className="mt-2">
+                        <p className="text-sm text-gray-500" id="modalText">
+                        Are you sure you want to purchase <span className="text-sm text-indigo-600 font-bold">{props.shares}</span> shares for <span className="text-sm text-indigo-600 font-bold">${props.price}</span> per share?
+>>>>>>> Add notification banners, add them to try catches, fix mobile menu
                         </p>
                     </div>
                     :
@@ -113,7 +119,7 @@ export function Confirmation(props) {
                 </div>
                 <div className="mt-5 sm:mt-6">
                     {!unconfirmed ?
-                    <button type="button" id="modalButton" class="inline-flex justify-center w-full rounded-md border border-transparent shadow-sm px-4 py-2 bg-indigo-600 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:text-sm"
+                    <button type="button" id="modalButton" className="inline-flex justify-center w-full rounded-md border border-transparent shadow-sm px-4 py-2 bg-indigo-600 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:text-sm"
                     onClick={() => {
                         sessionStorage.getItem('token') !== null ?
                             setConfirmed(true)

@@ -52,11 +52,11 @@ export function Modal(props) {
               {props.page === "create" ?
               <div className="relative p-6 flex-auto">
                 {/* PLACE LOGIN FORM HERE */}
-                <CreateAccountForm id={props.id}/>
+                <CreateAccountForm id={props.id} setNotify={props.setNotify}/>
             </div>
               :
               <div className="relative pl-6 pr-6 flex-auto">
-              <Purchase id={props.id}/>
+              <Purchase id={props.id} setNotify={props.setNotify}/>
               </div>
               }
               {/*footer*/}

@@ -23,7 +23,12 @@ export function Residential(props) {
                     const properties = res.data
                     setListings(properties)
                 }
-            ).catch(error => console.error(`Error: ${error}`))
+            ).catch(error => {
+                props.setNotify && props.setNotify({ msg: `There was an error property data.`,
+                                                    color: 'red',
+                                                    show: true })
+                console.error(`Error: ${error}`)
+            })
         }
 
         getAllProperties()

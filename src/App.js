@@ -13,7 +13,9 @@ import { Notification } from "./utilities/notification"
 import { ListingDetails } from "./marketplace/listing-details"
 
 function App() {
-	const [notify, setNotifiy] = React.useState({msg: 'Welcome to Realium!', color: 'blue', show: true})
+	const [notify, setNotifiy] = React.useState({msg: 'Welcome to Realium! We are currently in testing mode so funds and properties are not real for now.',
+												color: 'blue',
+												show: true})
 
 	return (
 		<Router>

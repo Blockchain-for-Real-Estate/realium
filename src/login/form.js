@@ -40,8 +40,10 @@ export function LoginForm(props) {
                         }
                     }
                 ).catch(error => {
-                    console.error(error);
-                    alert("Login failed - recheck your username and password");
+                    props.setNotify && props.setNotify({ msg: `There was an error logging you in.`,
+                                                        color: 'red',
+                                                        show: true })
+                    console.error(error)
                 })
             }}
         >

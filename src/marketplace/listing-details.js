@@ -28,31 +28,7 @@ export function ListingDetails(props) {
     let loading;
     let { propertyId } = useParams()
     let [listing, setListing] = React.useState()
-    let [token, setToken] = React.useState()
-    let [transactions, setTransactions] = React.useState()
-    const residentialImages = [
-        res1, res2, res3, res4, res5, res6
-    ]
-    // const residentialImages = {
-    //     1: [
-    //         res1, res2, res3, res4, res5, res6
-    //     ],
-    //     2: [
-    //         res1, res2, res3, res4, res5, res6
-    //     ],
-    //     3: [
-    //         res1, res2, res3, res4, res5, res6
-    //     ],
-    //     4: [
-    //         res1, res2, res3, res4, res5, res6
-    //     ],
-    //     5: [
-    //         res1, res2, res3, res4, res5, res6
-    //     ],
-    //     6: [
-    //         res1, res2, res3, res4, res5, res6
-    //     ],
-    // }
+    const residentialImages = [res1, res2, res3, res4, res5, res6]
 
     const Image = styled.img`
         border:1px solid grey;
@@ -68,7 +44,9 @@ export function ListingDetails(props) {
                     }
                 )
             } catch {
-                setListing(residentialData)
+                props.setNotify && props.setNotify({ msg: `There was an error loading data for this property.`,
+                                                    color: 'red',
+                                                    show: true })
             }
         };
 
@@ -86,11 +64,14 @@ export function ListingDetails(props) {
                     )
             } catch {
                 setToken(hardToken)
+                props.setNotify && props.setNotify({ msg: `There was an error loading token data for this property.`,
+                                                    color: 'red',
+                                                    show: true })
             }
         };
 
         fetchToken()
-    }, [propertyId]);
+    }, [propertyId, listing]);
 
     React.useEffect(() => {
         try {
@@ -102,7 +83,10 @@ export function ListingDetails(props) {
                 }
             )
         } catch {
-            setTransactions(null);
+            setTransactions(null)
+            props.setNotify && props.setNotify({ msg: `There was an error loading transaction data for this property.`,
+                                                    color: 'red',
+                                                    show: true })
         }
     }, [propertyId])
 
@@ -267,7 +251,7 @@ export function ListingDetails(props) {
                                 </bs.Table>
                             </div>
                             <div className="border-bottom mb-4"/>
-                                <Modal buttonText="PURCHASE SHARES" id={listing.avalancheAssetId}/>
+                                <Modal buttonText="PURCHASE SHARES" id={listing.avalancheAssetId} setNotify={props.setNotify}/>
                             <div style={{"fontSize": "0.9rem"}} className="text-muted">
                                 *By purchasing shares of this asset,
                                 you become a part owner of this property
@@ -282,7 +266,7 @@ export function ListingDetails(props) {
                         <DetailsTable listing={listing} token={token} event={transactions}/>
                     }
                     {listing &&
-                        <Transactions listing={listing} propertyId={propertyId}/>
+                        <Transactions listing={listing} setNotify={props.setNotify}/>
                     }
                 </div>
             </>
@@ -293,24 +277,6 @@ export function ListingDetails(props) {
         }
     </AppContainer>
     )
-}
-
-const residentialData = {
-    id: 1,
-    streetAddress: '445 W 400 N',
-    city: 'Provo',
-    state: 'UT',
-    zipCode: 84601,
-    purchasedPrice: 500400.00,
-    funded: 375300.00,
-    listingType: 'Residential',
-    propertyType: 'Single Family Home',
-    forcastedIncome: 8000,
-    minInvestment: 1000,
-    maxInvestment: 100000,
-    share: 20,
-    yearBuilt: 1998,
-    acerage: 0.42
 }
 
 const hardToken = {

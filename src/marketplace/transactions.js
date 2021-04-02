@@ -18,7 +18,10 @@ export function Transactions(props) {
                 }
             )
         } catch {
-            setTransactions(null);
+            setTransactions(null)
+            props.setNotify && props.setNotify({ msg: `There was an error property data.`,
+                                                color: 'red',
+                                                show: true })
         }
     }, [props.listing])
 

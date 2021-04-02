@@ -15,9 +15,7 @@ export function Login(props) {
                     </div>
                     <div className="mt-8">
                         <div className="mt-6">
-                            {/* <form action="#" method="POST" className="space-y-6"> */}
-                                <LoginForm />
-                            {/* </form> */}
+                            <LoginForm setNotify={props.setNotify} />
                         </div>
                         <div className="mt-6">
                             <Modal buttonText="Or create a free account" page="create"/>
