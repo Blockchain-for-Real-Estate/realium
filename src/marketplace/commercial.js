@@ -1,8 +1,5 @@
 import React from "react"
-import { Link } from "react-router-dom"
 import { Listing } from "./listing"
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faLongArrowAltRight } from '@fortawesome/free-solid-svg-icons'
 
 import com1 from "../resources/images/commercial-1.jpg"
 import com2 from "../resources/images/commercial-2.jpg"
