@@ -28,11 +28,11 @@ export function Transactions(props) {
 
     return (
         /* Transactions Table */
-        <div className="mt-20 max-w-6xl mx-auto py-10 px-4 sm:px-6 lg:px-8">
+        <div className="mt-4 max-w-6xl mx-auto py-10 px-4 sm:px-6 lg:px-8">
             <div className="bg-white">
                 <div className="sm:flex sm:flex-col sm:align-center mb-6">
                     <h1 className="text-4xl font-extrabold text-gray-900 text-center">Chain History</h1>
-                    <p className="mt-3 text-xl text-gray-500 text-center">View recent blockchain transaction activity for {props.listing.propertyName}. Navigate to see transaction-specific details provided by Avaxscan.</p>
+                    <p className="mt-3 text-xl text-gray-500 text-center">View recent blockchain transaction activity for {props.listing.propertyName}. Navigate to see transaction-specific details provided by AvaxScan.</p>
 
                 </div>
                 {transactions &&
@@ -64,7 +64,7 @@ export function Transactions(props) {
                                             </th>
                                         </tr>
                                     </thead>
-                                    <tbody className="bg-white divide-y divide-gray-200">
+                                    <tbody className="bg-white divide-y-2 divide-gray-300 sm:divide-y sm:divide-gray-200">
                                         {transactions.map(transaction => <TransactionRow key={transaction.eventId} transaction={transaction} />)}
                                     </tbody>
                                     </table>
@@ -85,12 +85,12 @@ export function Transactions(props) {
 
 function TransactionRow(props) {
     return (
-        <tr>
+        <tr className="mb-10">
             <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500" data-label="Event">
                 {/* TODO: add icons here */}
                 {titleCase(props.transaction.eventType.toLowerCase())}
             </td>
-            <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500" data-label="Qty Listed">
+            <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500" data-label="Quantity Listed">
                 <NumberFormat
                     value={props.transaction.quantity}
                     displayType={'text'}
