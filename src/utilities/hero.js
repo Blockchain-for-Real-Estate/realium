@@ -20,27 +20,17 @@ export function Hero(props) {
 
     const title = (page) => {
         switch(page) {
-            case 'marketplace':
-                return <>
-                <span className="block xl:inline">Build Out Your </span>
-                <span className="block text-indigo-600 xl:inline">Investment Portfolio</span>
-            </>
             case 'howitworks':
                 return <>
                 <span className="block xl:inline">What Is Novel About the </span>
                 <span className="block text-indigo-600 xl:inline">Realium</span>
                 <span className="block xl:inline"> Platform?</span>
             </>
-            case 'dashboard':
-                return <>
-                <span className="block xl:inline">Welcome To Your </span>
-                <span className="block text-indigo-600 xl:inline">Personalized Dashboard</span>
-            </>
             default:
                 return <>
-                    <span className="block xl:inline">A </span>
-                    <span className="block text-indigo-600 xl:inline">Stock Market</span>
-                    <span className="block xl:inline"> For Residential Housing</span>
+                    <span>A </span>
+                    <span className="text-indigo-600">Stock Market</span>
+                    <span className="block"> For Residential Housing</span>
                 </>
         }
     }

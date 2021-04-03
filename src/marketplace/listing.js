@@ -5,12 +5,12 @@ import NumberFormat from "react-number-format"
 import comingSoon from "../resources/images/coming-soon.jpg"
 import newBadge from "../resources/images/new-badge.png"
 import csBadge from "../resources/images/coming-soon-badge.png"
-import res1 from "../resources/images/residential-1.jpg"
-import res2 from "../resources/images/residential-2.jpg"
-import res3 from "../resources/images/residential-3.jpg"
-import res4 from "../resources/images/residential-4.jpg"
-import res5 from "../resources/images/residential-5.jpg"
-import res6 from "../resources/images/residential-6.jpg"
+import res1 from "../resources/images/residential/residential-1.jpg"
+import res2 from "../resources/images/residential/residential-2.jpg"
+import res3 from "../resources/images/residential/residential-3.jpg"
+import res4 from "../resources/images/residential/residential-4.jpg"
+import res5 from "../resources/images/residential/residential-5.jpg"
+import res6 from "../resources/images/residential/residential-6.jpg"
 import com1 from "../resources/images/commercial-1.jpg"
 import com2 from "../resources/images/commercial-2.jpg"
 import com3 from "../resources/images/commercial-3.jpg"
@@ -28,7 +28,7 @@ export function Listing(props) {
     ]
 
     return (
-        <div className="flex flex-col rounded-lg shadow-lg overflow-hidden" style={{cursor: "pointer"}} onClick={() => props.listing.listingType === "Residential" ? history.push(`/marketplace/${props.listing.propertyId}`) : null}>
+        <div className="flex flex-col rounded-lg shadow-md overflow-hidden" style={{cursor: "pointer"}} onClick={() => props.listing.listingType === "Residential" ? history.push(`/marketplace/${props.listing.propertyId}`) : null}>
             <div className="flex-shrink-0">
                 {props.listing.listingType === "Residential" ?
                     <div className="relative">

@@ -28,10 +28,10 @@ export function Transactions(props) {
 
     return (
         /* Transactions Table */
-        <div className="mt-20 mb-20">
+        <div className="mt-20 mb-20 max-w-6xl mx-auto">
             <div className="bg-white">
                 <div className="sm:flex sm:flex-col sm:align-center mb-6">
-                    <h1 className="text-3xl font-extrabold text-gray-900 sm:text-center">Chain History</h1>
+                    <h1 className="text-4xl font-extrabold text-gray-900 sm:text-center">Chain History</h1>
                     <p className="mt-3 text-xl text-gray-500 sm:text-center">View recent blockchain transaction activity for {props.listing.propertyName}. Navigate to see transaction-specific details provided by Avaxscan.</p>
 
                 </div>

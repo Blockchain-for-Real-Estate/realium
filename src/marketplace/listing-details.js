@@ -12,35 +12,96 @@ import { Transactions } from "./transactions"
 import { BuyListOffer } from "./buy-list-offer"
 import { DetailsTable } from "./details-table"
 
-import res1 from "../resources/images/residential-1.jpg"
-import res2 from "../resources/images/residential-2.jpg"
-import res3 from "../resources/images/residential-3.jpg"
-import res4 from "../resources/images/residential-4.jpg"
-import res5 from "../resources/images/residential-5.jpg"
-//import res6 from "../resources/images/residential-6.jpg"
+import res1 from "../resources/images/residential/residential-1.jpg"
+import res1a from "../resources/images/residential/residential-1a.jpg"
+import res1b from "../resources/images/residential/residential-1b.jpg"
+import res1c from "../resources/images/residential/residential-1c.jpg"
+import res1d from "../resources/images/residential/residential-1d.jpg"
+import res2 from "../resources/images/residential/residential-2.jpg"
+import res2a from "../resources/images/residential/residential-2a.jpg"
+import res2b from "../resources/images/residential/residential-2b.jpg"
+import res2c from "../resources/images/residential/residential-2c.jpg"
+import res2d from "../resources/images/residential/residential-2d.jpg"
+import res3 from "../resources/images/residential/residential-3.jpg"
+import res3a from "../resources/images/residential/residential-3a.jpg"
+import res3b from "../resources/images/residential/residential-3b.jpg"
+import res3c from "../resources/images/residential/residential-3c.jpg"
+import res3d from "../resources/images/residential/residential-3d.jpg"
+import res4 from "../resources/images/residential/residential-4.jpg"
+import res4a from "../resources/images/residential/residential-4a.jpg"
+import res4b from "../resources/images/residential/residential-4b.jpg"
+import res4c from "../resources/images/residential/residential-4c.jpg"
+import res4d from "../resources/images/residential/residential-4d.jpg"
+import res5 from "../resources/images/residential/residential-5.jpg"
+import res5a from "../resources/images/residential/residential-5a.jpg"
+import res5b from "../resources/images/residential/residential-5b.jpg"
+import res5c from "../resources/images/residential/residential-5c.jpg"
+import res5d from "../resources/images/residential/residential-5d.jpg"
+import res6 from "../resources/images/residential/residential-6.jpg"
+import res6a from "../resources/images/residential/residential-6a.jpg"
+import res6b from "../resources/images/residential/residential-6b.jpg"
+import res6c from "../resources/images/residential/residential-6c.jpg"
+import res6d from "../resources/images/residential/residential-6d.jpg"
 
 export function ListingDetails(props) {
     let loading
-    let imgs = {
-        img1: res1,
-        img2: res2,
-        img3: res3,
-        img4: res4,
-        main: res5
+    let imgPackages = {
+        1: {
+            img1: res1a,
+            img2: res1b,
+            img3: res1c,
+            img4: res1d,
+            main: res1
+        },
+        2: {
+            img1: res2a,
+            img2: res2b,
+            img3: res2c,
+            img4: res2d,
+            main: res2
+        },
+        3: {
+            img1: res3a,
+            img2: res3b,
+            img3: res3c,
+            img4: res3d,
+            main: res3
+        },
+        4: {
+            img1: res4a,
+            img2: res4b,
+            img3: res4c,
+            img4: res4d,
+            main: res4
+        },
+        5: {
+            img1: res5a,
+            img2: res5b,
+            img3: res5c,
+            img4: res5d,
+            main: res5
+        },
+        6: {
+            img1: res6a,
+            img2: res6b,
+            img3: res6c,
+            img4: res6d,
+            main: res6
+        }
     }
 
     const { propertyId } = useParams()
-    const [carousel, setCarousel] = React.useState(imgs)
     const [listing, setListing] = React.useState()
     const [token, setToken] = React.useState()
     const [transactions, setTransactions] = React.useState()
+    const [carousel, setCarousel] = React.useState(imgPackages[propertyId])
     const setNotify = props.setNotify
 
     function changeImage(id) {
-        let imgHolder = imgs[id]
-        imgs[id] = imgs.main
-        imgs.main = imgHolder
-        setCarousel(imgs)
+        let imgHolder = imgPackages[propertyId][id]
+        imgPackages[propertyId][id] = imgPackages[propertyId].main
+        imgPackages[propertyId].main = imgHolder
+        setCarousel(imgPackages[propertyId])
     }
 
     React.useEffect(() => {
@@ -100,9 +161,10 @@ export function ListingDetails(props) {
     }, [propertyId, setNotify])
 
     return (
-        <AppContainer page="marketplace">
+        <>
+        <AppContainer>
         {!loading ?
-            <>  {listing && token && transactions &&
+            <>  {listing && token && transactions && carousel &&
                 <div className="mt-12 mb-12">
                     <div className="border-bottom mb-4 m-4">
                         <bs.Row className="mb-2">
@@ -160,14 +222,6 @@ export function ListingDetails(props) {
                     </bs.Row>
                 </div>
                 }
-                <div className="mb-8">
-                    {listing && token && transactions &&
-                        <DetailsTable listing={listing} token={token} event={transactions}/>
-                    }
-                    {listing &&
-                        <Transactions listing={listing} setNotify={props.setNotify}/>
-                    }
-                </div>
             </>
         :
         <div className="content-center flex flex-wrap justify-center py-72">
@@ -175,6 +229,13 @@ export function ListingDetails(props) {
         </div>
         }
     </AppContainer>
+    {listing && token && transactions &&
+        <DetailsTable listing={listing} token={token} event={transactions}/>
+    }
+    {listing &&
+        <Transactions listing={listing} setNotify={props.setNotify}/>
+    }
+    </>
     )
 }
 

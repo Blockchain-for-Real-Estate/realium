@@ -6,12 +6,12 @@ import { ApiTokenService } from "../api/services/token.service"
 import { ApiEventService } from "../api/services/event.service"
 import { SearchForm } from "../marketplace/search-form"
 
-import res1 from "../resources/images/residential-1.jpg"
-import res2 from "../resources/images/residential-2.jpg"
-import res3 from "../resources/images/residential-3.jpg"
-import res4 from "../resources/images/residential-4.jpg"
-import res5 from "../resources/images/residential-5.jpg"
-import res6 from "../resources/images/residential-6.jpg"
+import res1 from "../resources/images/residential/residential-1.jpg"
+import res2 from "../resources/images/residential/residential-2.jpg"
+import res3 from "../resources/images/residential/residential-3.jpg"
+import res4 from "../resources/images/residential/residential-4.jpg"
+import res5 from "../resources/images/residential/residential-5.jpg"
+import res6 from "../resources/images/residential/residential-6.jpg"
 import { FaucetPopOut } from "../utilities/faucet-pop-out"
 
 export function Dashboard(props) {
@@ -61,7 +61,7 @@ export function Dashboard(props) {
 
     return (
         <>{tokens && events &&
-            <div className="pt-8 pb-64 bg-gray-50 overflow-hidden lg:py-18">
+            <div className="py-12 bg-gray-50 overflow-hidden sm:pb-12 lg:py-18">
             <div className="max-w-xl mx-auto px-8 sm:px-6 lg:px-8 lg:max-w-7xl">
                 <svg className="hidden lg:block absolute left-full transform -translate-x-1/2 -translate-y-1" width="404" height="684" fill="none" viewBox="0 0 404 784" aria-hidden="true">
                 <defs>
@@ -92,22 +92,6 @@ export function Dashboard(props) {
                     <p className="mt-3 text-md text-gray-500">
                     View your purchased Realium assets. Manage your shares and sell the assets you no longer wish to hold.
                     </p>
-                    {/*
-                    This example requires Tailwind CSS v2.0+
-
-                    This example requires some changes to your config:
-
-                    ```
-                    // tailwind.config.js
-                    module.exports = {
-                        // ...
-                        plugins: [
-                        // ...
-                        require('@tailwindcss/forms'),
-                        ]
-                    }
-
-                */}
                     <div>
                         <SearchForm resultsSetter={setTokens} setNotify={props.setNotify} searchService={"tokenService"} reset={setReload} reloadAll={reloadAll}/>
                     </div>
@@ -247,6 +231,17 @@ export function Dashboard(props) {
                 </div>
             </div>
             </div>
+            {tokens.length === 0 && events.length === 0 ?
+            <div className="py-16">
+                <h3 className="text-center text-xl font-extrabold text-gray-500 tracking-tight sm:text-2xl">
+                Nothing to show here yet... 
+                </h3>
+                <p className="text-center text-sm text-gray-400">
+                    Request some funds and start transacting for activity to show up here.
+                </p>
+            </div>
+            : null
+            }
             </div>
             }
         </>

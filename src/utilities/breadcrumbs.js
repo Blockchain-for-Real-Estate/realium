@@ -3,7 +3,7 @@ import { Link } from "react-router-dom"
 
 export function Breadcrumbs(props) {
     return (
-        <nav className="flex pt-8" aria-label="Breadcrumb">
+        <nav className="flex pt-8 sm:pt-0" aria-label="Breadcrumb">
             <ol className="flex items-center space-x-4">
                 <li>
                     <div>
