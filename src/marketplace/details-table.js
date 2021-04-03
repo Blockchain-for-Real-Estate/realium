@@ -2,6 +2,18 @@ import React from 'react'
 import NumberFormat from "react-number-format"
 
 export function DetailsTable(props) {
+
+    var sales = []
+    props.event.map((event) => {
+        if (event.eventType === "SALE") {
+            sales.push(event)
+        }
+    })
+
+    sales.sort(function(a, b) {
+        return a.listedPrice - b.listedPrice;
+    });
+
     return (
         <div className="bg-gray-50">
         <div className="max-w-6xl mx-auto py-10 px-4 sm:px-6 lg:px-8">
@@ -200,7 +212,17 @@ export function DetailsTable(props) {
                         </svg>
                         <span className="flex-1 text-sm text-gray-500">Lowest Ask</span>
                         <span className="flex-1 text-sm text-gray-500">
-                            200 @ 5
+                        <NumberFormat className="inline-flex"
+                            value={sales[0].quantity}
+                            displayType={'text'}
+                            thousandSeparator={true}
+                        />
+                            <div className="px-1 inline-flex">@</div>
+                        <NumberFormat className="inline-flex"
+                            value={sales[0].listedPrice}
+                            displayType={'text'}
+                            thousandSeparator={true}
+                        />
                         <div className="h-4 inline-flex px-1">
                         <svg width="12" height="12" viewBox="0 0 153 153" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path fillRule="evenodd" clipRule="evenodd" d="M153 76.5C153 118.75 118.75 153 76.5 153C34.2502 153 0 118.75 0 76.5C0 34.2502 34.2502 0 76.5 0C118.75 0 153 34.2502 153 76.5ZM72.2494 21.5512L22.6284 108.776C20.8649 111.876 23.1037 115.725 26.6701 115.725H57.7531C59.4209 115.725 60.961 114.832 61.7892 113.384L96.0274 53.5368C96.8467 52.1048 96.8458 50.3458 96.025 48.9145L80.325 21.5372C78.5347 18.4154 74.0289 18.4231 72.2494 21.5512ZM90.0853 115.95H126.325C130.017 115.95 132.327 111.956 130.486 108.756L112.443 77.3996C110.601 74.1984 105.985 74.1898 104.131 77.3843L85.9337 108.741C84.0767 111.941 86.3855 115.95 90.0853 115.95Z" fill="#374151"/>
@@ -213,7 +235,18 @@ export function DetailsTable(props) {
                             <path d="M6.66667 6.66667H6.67333M6.66667 4H10C10.3412 3.99999 10.6824 4.13016 10.9428 4.39052L15.6095 9.05719C16.1302 9.57789 16.1302 10.4221 15.6095 10.9428L10.9428 15.6095C10.4221 16.1302 9.57789 16.1302 9.05719 15.6095L4.39052 10.9428C4.13018 10.6825 4 10.3412 4 10V6.66667C4 5.19391 5.19391 4 6.66667 4Z" stroke="#4F46E5" strokeLinecap="round" strokeLinejoin="round"/>
                         </svg>
                         <span className="flex-1 text-sm text-gray-500">Last Sale</span>
-                        <span className="flex-1 text-sm text-gray-500">1,000 @ 5
+                        <span className="flex-1 text-sm text-gray-500">
+                        <NumberFormat className="inline-flex"
+                            value={props.event[0].quantity}
+                            displayType={'text'}
+                            thousandSeparator={true}
+                        />
+                            <div className="px-1 inline-flex">@</div>
+                        <NumberFormat className="inline-flex"
+                            value={props.event[0].listedPrice}
+                            displayType={'text'}
+                            thousandSeparator={true}
+                        />
                         <div className="h-4 inline-flex px-1">
                         <svg width="12" height="12" viewBox="0 0 153 153" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path fillRule="evenodd" clipRule="evenodd" d="M153 76.5C153 118.75 118.75 153 76.5 153C34.2502 153 0 118.75 0 76.5C0 34.2502 34.2502 0 76.5 0C118.75 0 153 34.2502 153 76.5ZM72.2494 21.5512L22.6284 108.776C20.8649 111.876 23.1037 115.725 26.6701 115.725H57.7531C59.4209 115.725 60.961 114.832 61.7892 113.384L96.0274 53.5368C96.8467 52.1048 96.8458 50.3458 96.025 48.9145L80.325 21.5372C78.5347 18.4154 74.0289 18.4231 72.2494 21.5512ZM90.0853 115.95H126.325C130.017 115.95 132.327 111.956 130.486 108.756L112.443 77.3996C110.601 74.1984 105.985 74.1898 104.131 77.3843L85.9337 108.741C84.0767 111.941 86.3855 115.95 90.0853 115.95Z" fill="#374151"/>
@@ -227,7 +260,11 @@ export function DetailsTable(props) {
                         </svg>
                         <span className="flex-1 text-sm text-gray-500">Week High</span>
                         <span className="flex-1 text-sm text-gray-500">
-                        7.30
+                        <NumberFormat className="inline-flex"
+                        value={sales[sales.length-1].listedPrice}
+                        displayType={'text'}
+                        thousandSeparator={true}
+                        />
                         <div className="h-4 inline-flex px-1">
                         <svg width="12" height="12" viewBox="0 0 153 153" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path fillRule="evenodd" clipRule="evenodd" d="M153 76.5C153 118.75 118.75 153 76.5 153C34.2502 153 0 118.75 0 76.5C0 34.2502 34.2502 0 76.5 0C118.75 0 153 34.2502 153 76.5ZM72.2494 21.5512L22.6284 108.776C20.8649 111.876 23.1037 115.725 26.6701 115.725H57.7531C59.4209 115.725 60.961 114.832 61.7892 113.384L96.0274 53.5368C96.8467 52.1048 96.8458 50.3458 96.025 48.9145L80.325 21.5372C78.5347 18.4154 74.0289 18.4231 72.2494 21.5512ZM90.0853 115.95H126.325C130.017 115.95 132.327 111.956 130.486 108.756L112.443 77.3996C110.601 74.1984 105.985 74.1898 104.131 77.3843L85.9337 108.741C84.0767 111.941 86.3855 115.95 90.0853 115.95Z" fill="#374151"/>
@@ -241,12 +278,24 @@ export function DetailsTable(props) {
                         </svg>
                         <span className="flex-1 text-sm text-gray-500">Trading Range</span>
                         <span className="flex-1 text-sm text-gray-500">
-                            4.23<div className="h-4 inline-flex px-1">
+                        <NumberFormat className="inline-flex"
+                            value={sales[0].listedPrice}
+                            displayType={'text'}
+                            thousandSeparator={true}
+                        />
+                            <div className="h-4 inline-flex px-1">
                             <svg width="12" height="12" viewBox="0 0 153 153" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path fillRule="evenodd" clipRule="evenodd" d="M153 76.5C153 118.75 118.75 153 76.5 153C34.2502 153 0 118.75 0 76.5C0 34.2502 34.2502 0 76.5 0C118.75 0 153 34.2502 153 76.5ZM72.2494 21.5512L22.6284 108.776C20.8649 111.876 23.1037 115.725 26.6701 115.725H57.7531C59.4209 115.725 60.961 114.832 61.7892 113.384L96.0274 53.5368C96.8467 52.1048 96.8458 50.3458 96.025 48.9145L80.325 21.5372C78.5347 18.4154 74.0289 18.4231 72.2494 21.5512ZM90.0853 115.95H126.325C130.017 115.95 132.327 111.956 130.486 108.756L112.443 77.3996C110.601 74.1984 105.985 74.1898 104.131 77.3843L85.9337 108.741C84.0767 111.941 86.3855 115.95 90.0853 115.95Z" fill="#374151"/>
                             </svg>
 
-                        </div> - 7.98<div className="h-4 inline-flex px-1">
+                        </div>
+                        <NumberFormat className="inline-flex"
+                            value={sales[sales.length-1].listedPrice}
+                            displayType={'text'}
+                            thousandSeparator={true}
+                            prefix={"- "}
+                        />
+                        <div className="h-4 inline-flex px-1">
                         <svg width="12" height="12" viewBox="0 0 153 153" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path fillRule="evenodd" clipRule="evenodd" d="M153 76.5C153 118.75 118.75 153 76.5 153C34.2502 153 0 118.75 0 76.5C0 34.2502 34.2502 0 76.5 0C118.75 0 153 34.2502 153 76.5ZM72.2494 21.5512L22.6284 108.776C20.8649 111.876 23.1037 115.725 26.6701 115.725H57.7531C59.4209 115.725 60.961 114.832 61.7892 113.384L96.0274 53.5368C96.8467 52.1048 96.8458 50.3458 96.025 48.9145L80.325 21.5372C78.5347 18.4154 74.0289 18.4231 72.2494 21.5512ZM90.0853 115.95H126.325C130.017 115.95 132.327 111.956 130.486 108.756L112.443 77.3996C110.601 74.1984 105.985 74.1898 104.131 77.3843L85.9337 108.741C84.0767 111.941 86.3855 115.95 90.0853 115.95Z" fill="#374151"/>
                         </svg>

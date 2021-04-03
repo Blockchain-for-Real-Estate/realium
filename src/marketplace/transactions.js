@@ -90,14 +90,14 @@ function TransactionRow(props) {
                 {/* TODO: add icons here */}
                 {titleCase(props.transaction.eventType.toLowerCase())}
             </td>
-            <td className="px-6 py-4 whitespace-nowrap flex items-center text-sm text-gray-500" data-label="Quantity Listed">
-                <NumberFormat
+            <td className="px-6 py-4 whitespace-nowrap sm:flex items-center text-sm text-gray-500" data-label="Quantity Listed">
+                <NumberFormat className="inline-flex"
                     value={props.transaction.quantity}
                     displayType={'text'}
                     thousandSeparator={true}
                 />
-                    <div className="px-1">@</div>
-                <NumberFormat
+                    <div className="px-1 inline-flex">@</div>
+                <NumberFormat className="inline-flex"
                     value={props.transaction.listedPrice}
                     displayType={'text'}
                     thousandSeparator={true}

@@ -155,7 +155,7 @@ export function Dashboard(props) {
                 </div>
                 <div className="mt-16 sm:mt-8 -mx-4 relative lg:mt-0" aria-hidden="true">
                 <div className="lg:grid lg:grid-flow-row-dense lg:grid-cols-1 lg:gap-8 lg:items-top">
-                    <div className="lg:col-start-2">
+                    <div className="mx-3 lg:col-start-2">
                     <h3 className="text-2xl font-extrabold text-gray-900 tracking-tight sm:text-3xl">
                         Recent Transactions
                     </h3>
@@ -238,7 +238,7 @@ export function Dashboard(props) {
             </div>
             </div>
             {tokens.length === 0 && events.length === 0 ?
-            <div className="py-16">
+            <div className="py-16 mx-3">
                 <h3 className="text-center text-xl font-extrabold text-gray-500 tracking-tight sm:text-2xl">
                 Nothing to show here yet...
                 </h3>
