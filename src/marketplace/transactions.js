@@ -28,17 +28,17 @@ export function Transactions(props) {
 
     return (
         /* Transactions Table */
-        <div className="mt-20 mb-20 max-w-6xl mx-auto">
+        <div className="mt-20 max-w-6xl mx-auto py-10 px-4 sm:px-6 lg:px-8">
             <div className="bg-white">
                 <div className="sm:flex sm:flex-col sm:align-center mb-6">
-                    <h1 className="text-4xl font-extrabold text-gray-900 sm:text-center">Chain History</h1>
-                    <p className="mt-3 text-xl text-gray-500 sm:text-center">View recent blockchain transaction activity for {props.listing.propertyName}. Navigate to see transaction-specific details provided by Avaxscan.</p>
+                    <h1 className="text-4xl font-extrabold text-gray-900 text-center">Chain History</h1>
+                    <p className="mt-3 text-xl text-gray-500 text-center">View recent blockchain transaction activity for {props.listing.propertyName}. Navigate to see transaction-specific details provided by Avaxscan.</p>
 
                 </div>
                 {transactions &&
                 <div className="flex flex-col">
                     <div className="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
-                        <div className="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
+                        <div className="py-8 align-middle inline-block min-w-full sm:px-6 lg:px-8">
                             <div className="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg mb-4">
                                 {transactions.length > 0 ?
                                     <table className="min-w-full divide-y divide-gray-200">
@@ -86,11 +86,11 @@ export function Transactions(props) {
 function TransactionRow(props) {
     return (
         <tr>
-            <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+            <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500" data-label="Event">
                 {/* TODO: add icons here */}
                 {titleCase(props.transaction.eventType.toLowerCase())}
             </td>
-            <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+            <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500" data-label="Qty Listed">
                 <NumberFormat
                     value={props.transaction.quantity}
                     displayType={'text'}
@@ -110,10 +110,10 @@ function TransactionRow(props) {
                 {/* add username? */}
                 {props.transaction.eventType !== 'LIST' && props.transaction.tokenOwner.walletAddress}
             </td>
-            <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+            <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500" data-label="Time">
                 <TimeAgo date={props.transaction.eventDateTime}/>
             </td>
-            <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+            <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500" data-label="TX">
                 {/* TODO: add link to avascan (missing id)
                     // <a href={'https://testnet.avascan.info/blockchain/x/tx/' + transactions[key].txId} target="_blank" rel="noreferrer" className="block hover:bg-gray-50">
                 */}
