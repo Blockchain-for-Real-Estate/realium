@@ -10,12 +10,6 @@ import { ApiTokenService } from '../api/services/token.service'
 import { ApiEventService } from "../api/services/event.service"
 import { Transactions } from "./transactions"
 import { BuyListOffer } from "./buy-list-offer"
-import { Modal } from "../modals/modal"
-
-import typeIcon from "../resources/images/purple_prop_type.png"
-import yearIcon from "../resources/images/purple_year_built_icon.png"
-import sqFtIcon from "../resources/images/purple_sq_footage_icon.png"
-import priceIcon from "../resources/images/purple_price_icon.png"
 import { DetailsTable } from "./details-table"
 
 import res1 from "../resources/images/residential-1.jpg"
