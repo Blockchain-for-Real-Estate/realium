@@ -8,7 +8,7 @@ export function Confirmation(props) {
     const [unconfirmed, setConfirmed] = React.useState(false);
 
     function submit() {
-        
+
         setConfirmed(true)
     }
 
@@ -90,8 +90,8 @@ export function Confirmation(props) {
                     </h3>
                     }
                     {!unconfirmed ?
-                    <div class="mt-2">
-                        <p class="text-sm text-gray-500" id="modalText">
+                    <div className="mt-2">
+                        <p className="text-sm text-gray-500" id="modalText">
                         Are you sure you want to purchase <span className="text-sm text-indigo-600 font-bold">
                             <NumberFormat
                                 value={props.shares}
@@ -120,7 +120,7 @@ export function Confirmation(props) {
                     {!unconfirmed ?
                     <button type="button" id="modalButton" className="inline-flex justify-center w-full rounded-md border border-transparent shadow-sm px-4 py-2 bg-indigo-600 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:text-sm"
                     onClick={() => {
-                        sessionStorage.getItem('token') !== null ? 
+                        sessionStorage.getItem('token') !== null ?
                             submit()
                         :
                         document.getElementById("modalText").innerHTML = "Please sign in to complete purchase."

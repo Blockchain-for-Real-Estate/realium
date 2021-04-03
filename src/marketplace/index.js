@@ -6,7 +6,7 @@ import { CollapsableSection, FAQS } from "../utilities/collapsable-section"
 export function Marketplace(props) {
     return (
         <>
-            <Residential setNotify={props.setNotify} />
+            <Residential searchable setNotify={props.setNotify} />
             <Commercial />
             {/* FAQs */}
             <div className="bg-gray-50">

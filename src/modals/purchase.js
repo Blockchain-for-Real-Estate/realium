@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import ReactTimeAgo from 'react-time-ago'
+import TimeAgo from 'react-timeago'
 
 import NumberFormat from "react-number-format"
 import { ApiEventService } from "../api/services/event.service"
@@ -68,7 +68,7 @@ export function Purchase(props) {
                                 prefix={avax_icon}
                             /></td>
                             <td className="p-3" data-label="Time">
-                                <ReactTimeAgo date={postings[key].eventDateTime} locale="en-US"/>
+                                <TimeAgo date={postings[key].eventDateTime} locale="en-US"/>
                             </td>
                             <td className="p-3">
                                 <Confirmation shares={postings[key].quantity} price={postings[key].listedPrice}>
