@@ -77,7 +77,7 @@ export function BuyListOffer(props) {
                 </div>
                 {/* BUY */}
                 {currentTab === 0 &&
-                    <div class="border-t-2 border-gray-100 rounded-b-lg pt-8 pb-1 px-6 bg-white shadow-lg sm:px-10 sm:py-10">
+                    <div class="border-t-2 border-gray-100 rounded-b-lg pt-8 pb-1 px-6 bg-white shadow-md sm:px-10 sm:py-10">
                         <div className="m-2">
                             <h4 className="font-semibold text-lg">Buying shares</h4>
                             <p className="text-sm">
@@ -100,7 +100,7 @@ export function BuyListOffer(props) {
                                 12 days
                             </div>
                         </div>
-                        <Modal buttonText="PURCHASE SHARES" id={1} setNotify={true}/>
+                        <Modal buttonText="Select and Buy" id={1} setNotify={true}/>
                         <div className="flex">
                             <p className="flex-1 text-left text-gray-400 text-xs">
                                 Realium balance
