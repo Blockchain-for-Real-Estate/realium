@@ -1,5 +1,6 @@
 import React from 'react'
 import { Modal } from "../modals/modal"
+import { Link } from "react-router-dom"
 import { ApiBalanceService } from "../api/services/balance.service"
 
 export function BuyListOffer(props) {
@@ -105,9 +106,15 @@ export function BuyListOffer(props) {
                             <p className="flex-1 text-left text-gray-400 text-xs">
                                 Realium balance
                             </p>
+                            {sessionStorage.getItem('token') !== null ?
                             <p className="flex-1 text-right text-indigo-500 text-xs">
                                 {balance || 0} AVAX
                             </p>
+                            :
+                            <Link to="/login" className="flex-1 text-right text-indigo-500 text-xs">
+                                Sign in to view balance
+                            </Link>
+                            }
                         </div>
                     </div>
                     }
@@ -163,9 +170,15 @@ export function BuyListOffer(props) {
                             <p className="flex-1 text-left text-gray-400 text-xs">
                                 Realium balance
                             </p>
+                            {sessionStorage.getItem('token') !== null ?
                             <p className="flex-1 text-right text-indigo-500 text-xs">
                                 {balance || 0} AVAX
                             </p>
+                            :
+                            <Link to="/login" className="flex-1 text-right text-indigo-500 text-xs">
+                                Sign in to view balance
+                            </Link>
+                            }
                         </div>
                     </div>
                     }
@@ -221,9 +234,15 @@ export function BuyListOffer(props) {
                             <p className="flex-1 text-left text-gray-400 text-xs">
                                 Realium balance
                             </p>
+                            {sessionStorage.getItem('token') !== null ?
                             <p className="flex-1 text-right text-indigo-500 text-xs">
                                 {balance || 0} AVAX
                             </p>
+                            :
+                            <Link to="/login" className="flex-1 text-right text-indigo-500 text-xs">
+                                Sign in to view balance
+                            </Link>
+                            }
                         </div>
                     </div>
                     }

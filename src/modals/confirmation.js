@@ -8,7 +8,7 @@ export function Confirmation(props) {
     const [unconfirmed, setConfirmed] = React.useState(false);
 
     function submit() {
-
+        //trigger Event POST as a SALE
         setConfirmed(true)
     }
 
