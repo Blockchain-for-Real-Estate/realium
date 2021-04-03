@@ -33,7 +33,7 @@ export function Residential(props) {
     return (
         <>
             {/* Explore Marketplace */}
-            <div className="relative mb-24">
+            <div className="relative mb-12 sm:mb-24">
                 <div className="absolute inset-0">
                     <div className="bg-white h-1/3 sm:h-2/3"/>
                 </div>
