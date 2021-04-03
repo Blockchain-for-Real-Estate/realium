@@ -45,9 +45,11 @@ export function Residential(props) {
                                     Explore the marketplace
                                 </p>
                                 <p className="max-w-xl mt-5 mx-auto text-xl text-gray-500">
-                                    Start trading real estate to diversify your investment portfolio.
+                                    View the properties that are currently availalbe on the Realium marketplace and choose the best investment for you.
                                 </p>
-                                <SearchForm resultsSetter={setListings} setNotify={props.setNotify} searchService={"propertyService"} reset={setReload} reloadAll={reloadAll}/>
+                                {props.searchable &&
+                                    <SearchForm resultsSetter={setListings} setNotify={props.setNotify} searchService={"propertyService"} reset={setReload} reloadAll={reloadAll}/>
+                                }
                             </div>
                         </div>
                     </div>

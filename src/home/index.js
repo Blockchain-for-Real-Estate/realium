@@ -14,10 +14,10 @@ export function Home(props) {
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="max-w-4xl mx-auto text-center">
                         <h2 className="text-3xl font-extrabold text-gray-900 sm:text-4xl">
-                            Trusted by developers from over 80 planets
+                            The best of real estate and stocks
                         </h2>
                         <p className="mt-3 text-xl text-gray-500 sm:mt-4">
-                            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Repellendus repellat laudantium.
+                            Realium converts physical real estate assets to trade like securities on an exchange.
                         </p>
                     </div>
                 </div>
@@ -29,26 +29,26 @@ export function Home(props) {
                                 <dl className="rounded-lg bg-white shadow-lg sm:grid sm:grid-cols-3">
                                     <div className="flex flex-col border-b border-gray-100 p-6 text-center sm:border-0 sm:border-r">
                                         <dt className="order-2 mt-2 text-lg leading-6 font-medium text-gray-500">
-                                            Pepperoni
+                                            Properties
                                         </dt>
                                         <dd className="order-1 text-5xl font-extrabold text-indigo-600">
-                                            100%
+                                            12
                                         </dd>
                                     </div>
                                     <div className="flex flex-col border-t border-b border-gray-100 p-6 text-center sm:border-0 sm:border-l sm:border-r">
                                         <dt className="order-2 mt-2 text-lg leading-6 font-medium text-gray-500">
-                                            Delivery
+                                            Daily trade volume
                                         </dt>
                                         <dd className="order-1 text-5xl font-extrabold text-indigo-600">
-                                            24/7
+                                            1K
                                         </dd>
                                     </div>
                                     <div className="flex flex-col border-t border-gray-100 p-6 text-center sm:border-0 sm:border-l">
                                         <dt className="order-2 mt-2 text-lg leading-6 font-medium text-gray-500">
-                                            Calories
+                                            Trading window
                                         </dt>
                                         <dd className="order-1 text-5xl font-extrabold text-indigo-600">
-                                            100k
+                                            24/7
                                         </dd>
                                     </div>
                                 </dl>
@@ -71,19 +71,19 @@ export function Home(props) {
                     </svg>
                     <div className="relative">
                         <h2 className="text-center text-3xl leading-8 font-extrabold tracking-tight text-gray-900 sm:text-4xl">
-                            A better way to send money
+                            A Better Way to Invest
                         </h2>
                         <p className="mt-4 max-w-3xl mx-auto text-center text-xl text-gray-500">
-                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Possimus magnam voluptatum cupiditate veritatis in, accusamus quisquam.
+                            Realium is takes away the headaches of traditional real estate investing, while still allowing users to take advantage of the real estate asset class.
                         </p>
                     </div>
                     <div className="relative mt-12 lg:mt-24 lg:grid lg:grid-cols-2 lg:gap-8 lg:items-center">
                         <div className="relative">
                             <h3 className="text-2xl font-extrabold text-gray-900 tracking-tight sm:text-3xl">
-                                Transfer funds world-wide
+                                Invest in Real Estate Nation Wide
                             </h3>
                             <p className="mt-3 text-lg text-gray-500">
-                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Pariatur minima sequi recusandae, porro maiores officia assumenda aliquam laborum ab aliquid veritatis impedit odit adipisci optio iste blanditiis facere. Totam, velit.
+                                Realium allows you to create a truly diversified  your investment portfolio
                             </p>
                             <dl className="mt-10 space-y-10">
                                 <div className="flex">

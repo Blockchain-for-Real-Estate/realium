@@ -14,7 +14,7 @@ export function Hero(props) {
             case 'dashboard':
                 return 'Welcome to your personal Realium dashboard. Take a look at your recent investment activity, asset performance, or list your shares for exchange.';
             default:
-                return 'Realium allows you to invest directly into residential real estate. Each transaction is run on a privately-held blockchain to remove the need for third party involvement.';
+                return 'Realium allows you to invest directly into residential real estate. View the properties for sale in the marketplace to get started with your first real estate investment.';
         }
     }
 
