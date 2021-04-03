@@ -4,7 +4,7 @@ import NumberFormat from "react-number-format"
 export function DetailsTable(props) {
 
     var sales = []
-    props.event.map((event) => {
+    props.event.forEach(event => {
         if (event.eventType === "SALE") {
             sales.push(event)
         }
