@@ -112,7 +112,7 @@ export function ListingDetails(props) {
                             <div style={{"fontSize": "1.3rem"}} className="font-weight-bold">{listing.propertyType} in {listing.city}, {listing.state}</div >
                         </bs.Row>
                         <bs.Row className="justify-content-between mb-4">
-                            <div>
+                            <div className="text-xs sm:text-base">
                                 {listing.streetAddress} | {listing.city}, {listing.state} | {listing.zipCode}
                             </div>
                             <Breadcrumbs listing={listing} />
