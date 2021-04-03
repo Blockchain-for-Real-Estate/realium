@@ -57,7 +57,7 @@ export function BuyListOffer(props) {
                  
                 <div>
                 <div>
-                <nav class="rounded-t-lg flex divide-x divide-gray-200 shadow">
+                <nav class="rounded-t-lg flex divide-x divide-gray-200 shadow-md">
                 <div onClick={() => setCurrentTab(0)} style={{cursor: "pointer"}} class={`${currentTab === 0 ? "bg-white text-gray-700" : "bg-gray-100"} rounded-tl-lg text-gray-500 hover:text-gray-700 group relative min-w-0 flex-1 overflow-hidden py-3 px-4 text-base font-medium text-center hover:bg-gray-50 focus:z-10`}>
                 <span>Buy</span>
                 <span class={`${currentTab === 0 ? "bg-indigo-600" : "bg-transparent"} absolute inset-x-0 bottom-0 h-0.5`}></span>
