@@ -113,7 +113,7 @@ export function BuyListOffer(props) {
                     }
                     {/* LIST */}
                     {currentTab === 1 &&
-                    <div class="border-t-2 border-gray-100 rounded-b-lg pt-8 pb-1 px-6 bg-white shadow-lg sm:px-10 sm:py-10">
+                    <div class="border-t-2 border-gray-100 rounded-b-lg pt-8 pb-1 px-6 bg-white shadow-md sm:px-10 sm:py-10">
                         <div className="m-2">
                             <h4 className="font-semibold text-lg">Listing your current shares</h4>
                             <p className="text-sm">
@@ -171,7 +171,7 @@ export function BuyListOffer(props) {
                     }
                     {/* OFFER */}
                     {currentTab === 2 &&
-                    <div class="border-t-2 border-gray-100 rounded-b-lg pt-8 pb-1 px-6 bg-white shadow-lg sm:px-10 sm:py-10">
+                    <div class="border-t-2 border-gray-100 rounded-b-lg pt-8 pb-1 px-6 bg-white shadow-md sm:px-10 sm:py-10">
                         <div className="m-2">
                             <h4 className="font-semibold text-lg">Submitting an offer</h4>
                             <p className="text-sm">
