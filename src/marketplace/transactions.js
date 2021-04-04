@@ -32,7 +32,7 @@ export function Transactions(props) {
             <div className="bg-white">
                 <div className="sm:flex sm:flex-col sm:align-center mb-6">
                     <h1 className="text-4xl font-extrabold text-gray-900 text-center">Chain History</h1>
-                    <p className="mt-3 text-xl text-gray-500 text-center">View recent blockchain transaction activity for {props.listing.propertyName}. Navigate to see transaction-specific details provided by AvaxScan.</p>
+                    <p className="mt-4 max-w-3xl mx-auto text-center text-xl text-gray-500">View recent blockchain transaction activity for {props.listing.propertyName}. Navigate to see transaction-specific details provided by AvaxScan.</p>
 
                 </div>
                 {transactions &&

@@ -79,11 +79,11 @@ export function Dashboard(props) {
                             </p>
                         </div>
                     </div>
-                <div className="sm:flex sm:space-x-4 pb-10">
+                <div className="sm:flex sm:space-x-4 sm:space-y-0 space-y-4 pb-10">
                     <h4 className="inline-block mb-0 align-baseline text-lg font-extrabold text-indigo-700 tracking-tight sm:text-xl">
                     While Realium is in beta, access the Avalanche test faucet for funds.
                     </h4>
-                    <div className="text-right">
+                    <div className="text-left">
                         <FaucetPopOut wallet={walletAdress}/>
                     </div>
                 </div>

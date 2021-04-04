@@ -54,7 +54,7 @@ export function Listing(props) {
                     </p>
                     }
                     <p className="text-xl font-semibold text-gray-900">
-                        {`${props.listing.city}, ${props.listing.state}`}
+                        {props.listing.propertyName}
                     </p>
                     <p className="mt-3 text-base text-gray-500">
                         {`This property is a ${props.listing.propertyType} located in ${props.listing.city}, ${props.listing.state}.`}

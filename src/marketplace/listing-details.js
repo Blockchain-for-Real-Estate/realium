@@ -169,7 +169,7 @@ export function ListingDetails(props) {
                     <div className="mt-12 mb-12">
                         <div className="border-bottom mb-4 m-4">
                             <bs.Row className="mb-2">
-                                <h1 className="text-5xl font-extrabold text-gray-900 sm:text-center">{listing.propertyName || "Valley Ridge"}</h1>
+                                <h1 className="text-4xl font-extrabold text-gray-900 sm:text-center">{listing.propertyName || "Valley Ridge"}</h1>
                             </bs.Row>
                             <bs.Row className="mb-2 text-base sm:text-xl">
                                 <div className="font-weight-bold">{listing.propertyType} in {listing.city}, {listing.state}</div >
