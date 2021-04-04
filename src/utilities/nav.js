@@ -1,6 +1,7 @@
 import React from "react"
 import { Link, useLocation, useHistory } from "react-router-dom"
 import logo from "../resources/images/logo.svg"
+import { Modal } from "../modals/modal"
 import { ApiBalanceService } from '../api/services/balance.service'
 import { ApiAVAXService } from '../api/services/crypto.services'
 
@@ -80,10 +81,15 @@ export function Nav(props) {
                     </div>
                     <div className="hidden sm:ml-6 sm:flex sm:items-center">
                         {sessionStorage.getItem('token') === null ?
-                            <Link className="block px-3 py-2 ml-10 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50 text-decoration-none" to="/login">
+                        <div className="flex space-x-6">
+                            <Link className="block px-3 py-2 border-transparent text-base font-medium rounded-md text-indigo-700 shadow-sm hover:text-gray-900 hover:bg-gray-50 text-decoration-none" to="/login">
                                 Sign in
                             </Link>
-                            :
+                            <div className="block">
+                                <Modal page="create" buttonText="Sign Up" />
+                            </div>
+                        </div>
+                        :
                             <>
                                 <div className="flex-shrink-0 text-gray-900 bg-gray-100 border-2 border-gray-300 hover:bg-gray-200 hover:shadow-lg font-bold uppercase text-sm p-2 rounded focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
                                     type="button"

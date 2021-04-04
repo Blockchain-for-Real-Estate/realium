@@ -71,7 +71,7 @@ export function Purchase(props) {
                                 <TimeAgo date={postings[key].eventDateTime} locale="en-US"/>
                             </td>
                             <td className="p-3">
-                                <Confirmation shares={postings[key].quantity} price={postings[key].listedPrice}>
+                                <Confirmation purchase={postings[key]}>
                                     Buy
                                 </Confirmation>
                             </td>

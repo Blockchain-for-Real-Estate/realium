@@ -2,6 +2,7 @@ import React from "react"
 import TimeAgo from 'react-timeago'
 import "../modals/modal.css"
 import NumberFormat from "react-number-format"
+import LoadingWave from "@bit/ngoue.playground.loading-wave"
 import { ApiTokenService } from "../api/services/token.service"
 import { ApiEventService } from "../api/services/event.service"
 import { SearchForm } from "../marketplace/search-form"
@@ -60,7 +61,7 @@ export function Dashboard(props) {
     }, [id])
 
     return (
-        <>{tokens && events &&
+        <>{tokens && events ?
             <div className="py-12 bg-gray-50 overflow-hidden sm:pb-12 lg:py-18">
             <div className="max-w-xl mx-auto px-8 sm:px-6 lg:px-8 lg:max-w-7xl">
                 <svg className="hidden lg:block absolute left-full transform -translate-x-1/2 -translate-y-1" width="404" height="684" fill="none" viewBox="0 0 404 784" aria-hidden="true">
@@ -78,11 +79,13 @@ export function Dashboard(props) {
                             </p>
                         </div>
                     </div>
-                <div className="pb-10">
-                    <h4 className="pr-4 inline-block mb-0 align-baseline text-lg font-extrabold text-indigo-700 tracking-tight sm:text-xl">
+                <div className="sm:flex sm:space-x-4 pb-10">
+                    <h4 className="inline-block mb-0 align-baseline text-lg font-extrabold text-indigo-700 tracking-tight sm:text-xl">
                     While Realium is in beta, access the Avalanche test faucet for funds.
                     </h4>
-                    <FaucetPopOut wallet={walletAdress} />
+                    <div className="text-right">
+                        <FaucetPopOut wallet={walletAdress}/>
+                    </div>
                 </div>
                 <div className="relative mt-2 lg:mt-24 lg:grid lg:grid-cols-2 lg:gap-16 lg:items-top">
                 <div className="relative">
@@ -249,7 +252,12 @@ export function Dashboard(props) {
             : null
             }
             </div>
-            }
-        </>
+        
+        :
+        <div className="content-center flex flex-wrap justify-center py-72">
+            <LoadingWave primaryColor="#5C6BF6" secondaryColor="#ABABAB"/>
+        </div>
+    }
+    </>
     )
 }

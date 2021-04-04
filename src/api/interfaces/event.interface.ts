@@ -1,5 +1,3 @@
-import { Token } from "./token.interface";
-
 export interface Event {
     eventType: string;
     listedPrice: number;
@@ -7,7 +5,9 @@ export interface Event {
     quantity: number;
     txNFTId: string;
     txAvaxId: string;
-    token: Token,
+    eventDateTime: Date;
+    avalancheAssetId: string;
+    token: number;
     property: number;
     tokenOwner: number;
     eventCreator: number;

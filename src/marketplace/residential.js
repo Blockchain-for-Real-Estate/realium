@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react"
 import { Listing } from "./listing"
 import { SearchForm } from "./search-form"
+import LoadingWave from "@bit/ngoue.playground.loading-wave"
 import { ApiPropertyService } from "../api/services/property.service"
 
 
@@ -32,7 +33,7 @@ export function Residential(props) {
 
     return (
         <>
-            {/* Explore Marketplace */}
+            {listings ?
             <div className="relative mb-12 sm:mb-24">
                 <div className="absolute inset-0">
                     <div className="bg-white h-1/3 sm:h-2/3"/>
@@ -54,7 +55,7 @@ export function Residential(props) {
                         </div>
                     </div>
                     <div className="max-w-lg mx-auto grid gap-5 lg:grid-cols-3 lg:max-w-none">
-                        {Object.keys(listings).map((key, idx) => (
+                        {Object.keys(listings).map((key) => (
                                 <div key={key} className="l-grid__item">
                                     <Listing listing={listings[key]} index={listings[key].propertyId - 1}/>
                                 </div>
@@ -63,6 +64,11 @@ export function Residential(props) {
                     </div>
                 </div>
             </div>
+            :
+            <div className="content-center flex flex-wrap justify-center py-72">
+                <LoadingWave primaryColor="#5C6BF6" secondaryColor="#ABABAB"/>
+            </div>
+            }
         </>
     )
 }

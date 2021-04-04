@@ -8,7 +8,7 @@ export function Modal(props) {
     <>
       {props.page === "create" ?
         <button
-        className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+        className="w-full block px-3 py-2 border-transparent text-base font-medium rounded-md text-white bg-indigo-600 shadow-sm hover:bg-indigo-800 text-decoration-none"
         type="button"
         onClick={() => setShowModal(true)}
       >

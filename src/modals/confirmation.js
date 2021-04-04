@@ -1,14 +1,37 @@
 import React from "react";
 import { useHistory } from "react-router-dom"
 import NumberFormat from "react-number-format"
+//import { ApiEventService } from "../api/services/event.service";
 
 export function Confirmation(props) {
     let history = useHistory();
+    //let transactionService = new ApiEventService();
     const [showModal, setShowModal] = React.useState(false);
     const [unconfirmed, setConfirmed] = React.useState(false);
 
     function submit() {
         //trigger Event POST as a SALE
+        // const payload = {
+        //     eventType: "SALE",
+        //     listedPrice: props.purchase.listedPrice,
+        //     purchasedPrice: props.purchase.purchasedPrice,
+        //     quantity: props.purchase.quantity,
+        //     txNFTId: "",
+        //     txAvaxId: "",
+        //     eventDateTime: new Date.now(),
+        //     avalancheAssetId: "2i89c5xMS1zcduR1pxjm5xPDnhAb4R5AigwWuQewGkNMBC5PTu",
+        //     token: props.purchase.token,
+        //     property: props.purchase.property,
+        //     tokenOwner: props.purchase.tokenOwner,
+        //     eventCreator: props.purchase.eventCreator
+        // }
+
+        // async function Buy(payload) {
+        //     let auth_token = sessionStorage.getItem('token')
+        //     await transactionService.postTransaction(payload, auth_token).then(
+                
+        //     )
+        // }
         setConfirmed(true)
     }
 
