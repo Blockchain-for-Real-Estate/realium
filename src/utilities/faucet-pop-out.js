@@ -81,7 +81,7 @@ export function FaucetPopOut(props) {
                 </div>
             </div>
             <div className="mt-3 sm:mt-6">
-                <a href="https://faucet.avax-test.network/" target="_blank" rel="noreferrer">
+                <a href="https://faucet.avax-test.network/" target="_blank" rel="noreferrer" onClick={() => setShowModal(false)}>
                     <button type="button" className="inline-flex justify-center w-full rounded-md border border-transparent shadow-sm px-4 py-2 bg-indigo-400 text-base font-medium text-white hover:bg-indigo-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:text-sm">
                     <div className="pr-1">Go to Avalanche Faucet </div>
                     <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
