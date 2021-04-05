@@ -19,11 +19,6 @@ export function Nav(props) {
         window.location.reload()
     }
 
-    const initials = () => {
-      let names = sessionStorage.getItem('user').split(' ')
-      return names[0].split('')[0] + names[names.length-1].split('')[0]
-    }
-
     React.useEffect(() => {
       let wallet = sessionStorage.getItem('avax')
       const fetchBalance = async () => {
@@ -94,7 +89,7 @@ export function Nav(props) {
                             <>
                                 <div className="flex-shrink-0 text-gray-900 bg-gray-100 border-2 border-gray-300 hover:bg-gray-200 hover:shadow-lg font-bold uppercase text-sm p-2 rounded focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
                                     type="button"
-                                    onClick={() => history.push("/dashboard")}>{initials() || "TW"}
+                                    onClick={() => history.push("/dashboard")}>TW
                                 </div>
                                 
                                 {/* TO REPLACE LINES ABOVE
@@ -178,7 +173,7 @@ export function Nav(props) {
                         <>
                             <div className="border-transparent text-indigo-700 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-700 block pl-3 pr-4 py-2 border-l-4 text-base font-medium text-decoration-none"
                                 type="button"
-                                onClick={() => history.push("/dashboard")}>{initials() || "TW"}
+                                onClick={() => history.push("/dashboard")}>TW
                             </div>
                             {currency===false &&
                                 <div className="border-transparent inline-flex text-indigo-700 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-700 block pl-3 pr-4 py-2 border-l-4 text-base font-medium text-decoration-none"
