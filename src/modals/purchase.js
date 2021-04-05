@@ -13,7 +13,7 @@ import "./modal.css"
 export function Purchase(props) {
     let { propertyId } = useParams()
     let [tokens, setTokens] = useState('')
-    //let times = []
+    let rows = []
     const setNotify = props.setNotify
 
     React.useEffect(() => {
@@ -24,7 +24,8 @@ export function Purchase(props) {
                     res => {
                         setTokens(lodash.groupBy(res.data, "owner.realiumUserId"))
                     }
-                )} catch(error) {
+                )
+            } catch(error) {
                 setTokens(null)
                 setNotify && setNotify({ msg: `There was an error getting listings for this property.`,
                                         color: 'red',
@@ -40,6 +41,13 @@ export function Purchase(props) {
         return new Date(start.getTime() + Math.random() * (end.getTime() - start.getTime()));
     }
 
+    Object.keys(tokens).forEach((key) => {
+        var dataset = lodash.groupBy(tokens[key], "listedPrice")
+        Object.entries(dataset).forEach((entry) => {
+            rows.push(entry[1])
+        })
+    })
+  
     // React.useEffect((tokens) => {
     //     const fetchDateTimes = async () => {
     //         try {
@@ -64,7 +72,7 @@ export function Purchase(props) {
 
     return (
         <>
-        {tokens ?
+        {tokens && rows ?
         <div className="flex flex-col">
             <div className="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
                 <div className="mb-4 mt-4 align-middle inline-block min-w-full sm:px-6 lg:px-12">
@@ -80,18 +88,18 @@ export function Purchase(props) {
                             </tr>
                         </thead>
                         <tbody className="bg-white border-1 border-gray-700 divide-y">
-                            {Object.keys(tokens).map(key => (
+                            {Object.keys(rows).map(key => (
                             <tr key={key} className="m-4 border-b border-gray-200 sm:shadow">
-                            <td className="p-3" data-label="From">{tokens[key][0].owner.fullName || "Anonymous"}</td>
+                            <td className="p-3" data-label="From">{rows[key][0].owner.fullName || "Anonymous"}</td>
                             <td className="p-3 text-center" data-label="Quantity">
                             <NumberFormat
-                                value={tokens[key].length}
+                                value={rows[key].length}
                                 displayType={'text'}
                                 thousandSeparator={true}
                             /></td>
                             <td className="p-3 text-center" data-label="Price">
                             <NumberFormat
-                                value={tokens[key][0].listedPrice}
+                                value={rows[key][0].listedPrice}
                                 displayType={'text'}
                                 thousandSeparator={true}
                             />
