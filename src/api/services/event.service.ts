@@ -22,9 +22,9 @@ export class ApiEventService {
       )
     }
 
-    public getListingsForAvaxAssetId(id: string) {
+    public getEventsForTokenId(id: string) {
       return axios.get<Event>(
-        `${environment.api}/api/events?eventType=LIST&avalancheAssetId=${id}`
+        `${environment.api}/api/events?eventType=LIST&token=${id}`
       )
     }
   

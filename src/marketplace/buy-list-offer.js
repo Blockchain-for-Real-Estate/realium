@@ -6,6 +6,7 @@ import { ApiBalanceService } from "../api/services/balance.service"
 export function BuyListOffer(props) {
     let [currentTab, setCurrentTab] = React.useState(0)
     let [balance, setBalance] = React.useState()
+    const setNotify = props.setNotify
 
     React.useEffect(() => {
         let wallet = sessionStorage.getItem('avax')
@@ -101,7 +102,7 @@ export function BuyListOffer(props) {
                                 12 days
                             </div>
                         </div>
-                        <Modal buttonText="Select and Buy" id={1} setNotify={true}/>
+                        <Modal buttonText="Select and Buy" setNotify={setNotify} />
                         <div className="flex">
                             <p className="flex-1 text-left text-gray-400 text-xs">
                                 Realium balance

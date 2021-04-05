@@ -13,36 +13,36 @@ import { Notification } from "./utilities/notification"
 import { ListingDetails } from "./marketplace/listing-details"
 
 function App() {
-	const [notify, setNotifiy] = React.useState({msg: 'Welcome to Realium! We are currently in testing mode so funds and properties are not real for now.',
+	const [notify, setNotify] = React.useState({msg: 'Welcome to Realium! We are currently in testing mode so funds and properties are not real for now.',
 												color: 'blue',
 												show: true})
 
 	return (
 		<Router>
 			<Nav />
-			<Notification notify={notify} setNotify={setNotifiy}/>
+			<Notification notify={notify} setNotify={setNotify}/>
 			<ScrollToTop>
 				<Switch>
 					<Route exact path="/">
-						<Home setNotifiy={setNotifiy} />
+						<Home setNotify={setNotify} />
 					</Route>
 					<Route path="/marketplace" exact>
-						<Marketplace setNotifiy={setNotifiy} />
+						<Marketplace setNotify={setNotify} />
 					</Route>
 					<Route path="/marketplace/:propertyId">
-						<ListingDetails setNotifiy={setNotifiy} />
+						<ListingDetails setNotify={setNotify} />
 					</Route>
 					<Route path="/howitworks" exact>
-						<HowItWorks setNotifiy={setNotifiy} />
+						<HowItWorks setNotify={setNotify} />
 					</Route>
 					<Route path="/about">
-						<About setNotifiy={setNotifiy} />
+						<About setNotify={setNotify} />
 					</Route>
 					<Route path="/login">
-						<Login setNotifiy={setNotifiy} />
+						<Login setNotify={setNotify} />
 					</Route>
 					<Route path="/dashboard">
-						<Dashboard setNotifiy={setNotifiy} />
+						<Dashboard setNotify={setNotify} />
 					</Route>
 				</Switch>
 			</ScrollToTop>

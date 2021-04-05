@@ -4,6 +4,8 @@ import { Purchase } from "./purchase"
 
 export function Modal(props) {
   const [showModal, setShowModal] = React.useState(false);
+  const setNotify = props.setNotify
+
   return (
     <>
       {props.page === "create" ?
@@ -56,7 +58,7 @@ export function Modal(props) {
             </div>
               :
               <div className="relative pl-6 pr-6 flex-auto">
-              <Purchase id={props.id} setNotify={props.setNotify}/>
+              <Purchase id={props.id} setNotify={setNotify}/>
               </div>
               }
               {/*footer*/}
