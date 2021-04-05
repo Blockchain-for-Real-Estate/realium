@@ -8,6 +8,7 @@ export function Confirmation(props) {
     //let transactionService = new ApiEventService();
     const [showModal, setShowModal] = React.useState(false);
     const [unconfirmed, setConfirmed] = React.useState(false);
+    const purchase = props.purchase
 
     function submit() {
         //trigger Event POST as a SALE
@@ -114,26 +115,40 @@ export function Confirmation(props) {
                     }
                     {!unconfirmed ?
                     <div className="mt-2">
-                        <p className="text-sm text-gray-500" id="modalText">
+                        <p className="px-8 text-sm text-gray-500" id="modalText">
                         Are you sure you want to purchase <span className="text-sm text-indigo-600 font-bold">
                             <NumberFormat
-                                value={props.shares}
+                                value={purchase.length}
                                 displayType={'text'}
                                 thousandSeparator={true}
                             />
-                        </span> shares for <span className="text-sm text-indigo-600 font-bold">$
+                        </span>{purchase.length > 1 ? " shares" : " share"} for <span className="text-sm text-indigo-600 font-bold">
                         <NumberFormat
-                                value={props.price}
+                                value={purchase[0].listedPrice}
                                 displayType={'text'}
                                 thousandSeparator={true}
                             />
-                        </span> per share?
+                        </span>
+                        <div className="h-4 inline-flex px-1">
+                        <svg width="12" height="12" viewBox="0 0 153 153" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path fillRule="evenodd" clipRule="evenodd" d="M153 76.5C153 118.75 118.75 153 76.5 153C34.2502 153 0 118.75 0 76.5C0 34.2502 34.2502 0 76.5 0C118.75 0 153 34.2502 153 76.5ZM72.2494 21.5512L22.6284 108.776C20.8649 111.876 23.1037 115.725 26.6701 115.725H57.7531C59.4209 115.725 60.961 114.832 61.7892 113.384L96.0274 53.5368C96.8467 52.1048 96.8458 50.3458 96.025 48.9145L80.325 21.5372C78.5347 18.4154 74.0289 18.4231 72.2494 21.5512ZM90.0853 115.95H126.325C130.017 115.95 132.327 111.956 130.486 108.756L112.443 77.3996C110.601 74.1984 105.985 74.1898 104.131 77.3843L85.9337 108.741C84.0767 111.941 86.3855 115.95 90.0853 115.95Z" fill="#4F46E5"/>
+                        </svg>
+                        </div>
+                         per share?
                         </p>
                     </div>
                     :
                     <div className="mt-2">
-                        <p className="text-sm text-gray-500">
-                        Purchase confirmed for <span className="text-sm text-indigo-600 font-bold">{props.shares}</span> shares at <span className="text-sm text-indigo-600 font-bold">${props.price}</span> per share.
+                        <p className="px-8 text-sm text-gray-500">
+                        Purchase confirmed for <span className="text-sm text-indigo-600 font-bold">
+                            {purchase.length}</span>{purchase.length > 1 ? " shares" : " share"} at <span className="text-sm text-indigo-600 font-bold">
+                            {purchase[0].listedPrice}
+                            <div className="h-4 inline-flex px-1">
+                            <svg width="12" height="12" viewBox="0 0 153 153" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path fillRule="evenodd" clipRule="evenodd" d="M153 76.5C153 118.75 118.75 153 76.5 153C34.2502 153 0 118.75 0 76.5C0 34.2502 34.2502 0 76.5 0C118.75 0 153 34.2502 153 76.5ZM72.2494 21.5512L22.6284 108.776C20.8649 111.876 23.1037 115.725 26.6701 115.725H57.7531C59.4209 115.725 60.961 114.832 61.7892 113.384L96.0274 53.5368C96.8467 52.1048 96.8458 50.3458 96.025 48.9145L80.325 21.5372C78.5347 18.4154 74.0289 18.4231 72.2494 21.5512ZM90.0853 115.95H126.325C130.017 115.95 132.327 111.956 130.486 108.756L112.443 77.3996C110.601 74.1984 105.985 74.1898 104.131 77.3843L85.9337 108.741C84.0767 111.941 86.3855 115.95 90.0853 115.95Z" fill="#4F46E5"/>
+                            </svg>
+                            </div>
+                            </span> per share.
                         </p>
                     </div>
                     }
