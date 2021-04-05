@@ -16,7 +16,8 @@ export function Nav(props) {
 
     function logout() {
         sessionStorage.clear()
-        setMenuOpen(!menuOpen)
+        setMenuOpen(false)
+        setProfileMenu(false)
         history.push("/")
         window.location.reload()
     }
@@ -97,14 +98,11 @@ export function Nav(props) {
                                         <img className="h-9 w-9 rounded-full" src="https://images.unsplash.com/placeholder-avatars/extra-large.jpg?ixlib=rb-0.3.5&q=80&fm=jpg&crop=faces&cs=tinysrgb&fit=crop&h=128&w=128&s=ee8bbf5fb8d6e43aaaa238feae2fe90d" alt="" />
                                         </button>
                                     </div>
-                                    <div className={`${!profileMenu ? "hidden" : null } "origin-top-right absolute right-8 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none"`}>
-                                        <Link onClick={() => history.go(0)} className="block px-3 py-2 rounded-md text-sm font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50 text-decoration-none" to="/">
-                                            Sync Wallet
-                                        </Link>
-                                        <Link to="/dashboard" className="block px-3 py-2 rounded-md text-sm font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50 text-decoration-none">
+                                    <div className={`${!profileMenu ? "hidden" : null } "z-50 origin-top-right absolute right-8 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none"`}>
+                                        <Link to="/dashboard" onClick={() => setProfileMenu(!profileMenu)} className="block px-3 py-2 rounded-md text-sm font-medium text-gray-700 hover:text-gray-100 hover:bg-indigo-500 text-decoration-none">
                                             Dashboard
                                         </Link>
-                                        <Link onClick={logout} className="block px-3 py-2 rounded-md text-sm font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50 text-decoration-none" to="/">
+                                        <Link onClick={logout} className="block px-3 py-2 rounded-md text-sm font-medium text-gray-700 hover:text-gray-100 hover:bg-indigo-500 text-decoration-none" to="/">
                                             Sign out
                                         </Link>
                                     </div>
@@ -190,9 +188,6 @@ export function Nav(props) {
                                     <span className="pl-1">{balance} AVAX</span>
                                 </div>
                             }
-                            <Link onClick={() => history.go(0)} to="/" className="border-transparent text-gray-500 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-700 block pl-3 pr-4 py-2 border-l-4 text-base font-medium text-decoration-none">
-                                Sync Wallet
-                            </Link>
                             <Link to="/dashboard" onClick={() => setMenuOpen(!menuOpen)} className="border-transparent text-gray-500 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-700 block pl-3 pr-4 py-2 border-l-4 text-base font-medium text-decoration-none">
                                 Dashboard
                             </Link>
