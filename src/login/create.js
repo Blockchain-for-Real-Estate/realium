@@ -32,13 +32,32 @@ export function CreateAccountForm(props) {
                     'avaxusername': values.email,
                     'fullName': values.fullName
                 }
+                var credentials = {
+                    "username": values.email,
+                    "password": values.password
+                }
                 userService.postUser(data).then(
                     (response) => {
-                        sessionStorage.setItem('token', response.data.token)
                         if (response.status === 200 || response.status === 201) {
                             history.push(`/dashboard`)
-                            window.location.reload()
                         }
+                        userService.login(credentials).then(
+                            (response) => {
+                                sessionStorage.setItem('token', response.data.token)
+                            }
+                        )
+                        userService.getUser(values.email, response.data.token).then(
+                            (res) => {
+                                res.data[0].avaxpassword = "*********"
+                                sessionStorage.setItem('user', JSON.stringify(res.data[0].fullName).replace(/['"]+/g, ''));
+                                sessionStorage.setItem('id', JSON.stringify(res.data[0].realiumUserId))
+                                sessionStorage.setItem('avax', JSON.stringify(res.data[0].walletAddress).replace(/['"]+/g, ''))
+                            }
+                        ).then(() => {
+                            history.push(`/dashboard`)
+                            history.go(0)
+                        }
+                    )
                     }
                 ).catch(error => {
                     props.setNotify && props.setNotify({ msg: `There was an error creating your account.`,
