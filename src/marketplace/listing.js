@@ -1,6 +1,8 @@
 import React from "react"
+import LoadingWave from "@bit/ngoue.playground.loading-wave"
 import { useHistory } from "react-router-dom"
 import NumberFormat from "react-number-format"
+import { ApiTokenService } from "../api/services/token.service"
 
 import comingSoon from "../resources/images/coming-soon.jpg"
 import res1 from "../resources/images/residential/residential-1.jpg"
@@ -18,6 +20,11 @@ import com6 from "../resources/images/commercial-6.jpg"
 
 export function Listing(props) {
     let history = useHistory()
+    let [tokens, setTokens] = React.useState('') 
+    let [minPrice, setMinPrice] = React.useState(0.00)
+    const propertyId = props.listing.propertyId
+    const setNotify = props.setNotify
+
     const residentialImages = [
         res1, res2, res3, res4, res5, res6
     ]
@@ -25,8 +32,39 @@ export function Listing(props) {
         com1, com2, com3, com4, com5, com6
     ]
 
+    React.useEffect(() => {
+        const fetchTokens = async () => {
+            try {
+                let tokenService = new ApiTokenService()
+                await tokenService.getListedTokensForPropertyId(propertyId).then(
+                    res => {
+                        let tokens =Object.values(res.data).sort(function (a, b) {
+                            return a.listedPrice - b.listedPrice;
+                        });
+                        setTokens(tokens)
+                        try {
+                            setMinPrice(tokens[0].listedPrice)
+                        } catch {
+                            setMinPrice(0.00)
+                        }
+                    }
+                )
+            } catch(error) {
+                setTokens(null)
+                setNotify && setNotify({ msg: `There was an error getting tokens for this property.`,
+                                        color: 'red',
+                                        show: true })
+                console.error(error)
+            }
+        };
+
+        fetchTokens()
+    }, [propertyId, setNotify])
+
     return (
         <div className="flex flex-col rounded-lg shadow-md overflow-hidden" style={{cursor: "pointer"}} onClick={() => props.listing.listingType === "Residential" ? history.push(`/marketplace/${props.listing.propertyId}`) : null}>
+            {tokens ?
+            <>
             <div className="flex-shrink-0">
                 {props.listing.listingType === "Residential" ?
                     <div className="relative">
@@ -70,7 +108,7 @@ export function Listing(props) {
                     {props.listing.listingType === "Residential" ?
                     <div className="mt-3 text-sm font-medium text-indigo-600">
                         <NumberFormat
-                            value={props.listing.seriesCount}
+                            value={minPrice}
                             displayType={'text'}
                             thousandSeparator={true}
                             prefix={'Share Price: '}
@@ -84,7 +122,7 @@ export function Listing(props) {
                     :
                     <div className="mt-3 text-sm font-medium text-green-500">
                         <NumberFormat
-                            value={props.listing.sharePrice}
+                            value={minPrice}
                             displayType={'text'}
                             thousandSeparator={true}
                             prefix={'Share Price: '}
@@ -98,6 +136,12 @@ export function Listing(props) {
                     }
                 </div>
             </div>
+            </>
+            :
+            <div className="content-center flex flex-wrap justify-center py-72">
+            <LoadingWave primaryColor="#5C6BF6" secondaryColor="#ABABAB"/>
+            </div>
+            }
         </div>
     )
 }
