@@ -113,7 +113,7 @@ export function Purchase(props) {
                                 <TimeAgo date={randomDate(new Date(2021, 0, 1), new Date())} locale="en-US"/>
                             </td>
                             <td className="p-3 text-center">
-                                <Confirmation purchase={rows[key]}>
+                                <Confirmation purchase={rows[key]} setNotify={setNotify}>
                                     Buy
                                 </Confirmation>
                             </td>

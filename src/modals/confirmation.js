@@ -1,39 +1,53 @@
 import React from "react";
 import { useHistory } from "react-router-dom"
 import NumberFormat from "react-number-format"
-//import { ApiEventService } from "../api/services/event.service";
+import { ApiEventService } from "../api/services/event.service";
 
 export function Confirmation(props) {
     let history = useHistory();
     //let transactionService = new ApiEventService();
     const [showModal, setShowModal] = React.useState(false);
     const [unconfirmed, setConfirmed] = React.useState(false);
+    const setNotify = props.setNotify
     const purchase = props.purchase
 
     function submit() {
         //trigger Event POST as a SALE
-        // const payload = {
-        //     eventType: "SALE",
-        //     listedPrice: props.purchase.listedPrice,
-        //     purchasedPrice: props.purchase.purchasedPrice,
-        //     quantity: props.purchase.quantity,
-        //     txNFTId: "",
-        //     txAvaxId: "",
-        //     eventDateTime: new Date.now(),
-        //     avalancheAssetId: "2i89c5xMS1zcduR1pxjm5xPDnhAb4R5AigwWuQewGkNMBC5PTu",
-        //     token: props.purchase.token,
-        //     property: props.purchase.property,
-        //     tokenOwner: props.purchase.tokenOwner,
-        //     eventCreator: props.purchase.eventCreator
-        // }
+        const data = purchase[0]
+        const payload = {
+            eventType: "SALE",
+            listedPrice: data.listedPrice,
+            purchasedPrice: data.purchasedPrice,
+            quantity: purchase.length,
+            txNFTId: "",
+            txAvaxId: "",
+            eventDateTime: new Date().now,
+            avalancheAssetId: "",
+            token: data.tokenId,
+            property: data.property
+        }
 
-        // async function Buy(payload) {
-        //     let auth_token = sessionStorage.getItem('token')
-        //     await transactionService.postTransaction(payload, auth_token).then(
-                
-        //     )
-        // }
-        setConfirmed(true)
+        async function Buy(payload) {
+            try {
+                let auth_token = sessionStorage.getItem('token')
+                let transactionService = new ApiEventService()
+                await transactionService.postTransaction(payload, auth_token).then(
+                    (res) => {
+                        if (res.status === 200 || res.status === 201) {
+                            setConfirmed(true)
+                        }
+                    }
+                )
+            } catch(error) {
+                setShowModal(false)
+                setNotify && setNotify({ msg: `There was an error processing this transaction.`,
+                                        color: 'red',
+                                        show: true })
+                console.error(error)
+            }
+        }
+
+        //Buy(payload); generates 401 right now
     }
 
   return (
