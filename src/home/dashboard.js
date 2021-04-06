@@ -74,7 +74,7 @@ export function Dashboard(props) {
                 "tokenOwner": sessionStorage.getItem("id"),
                 "eventCreator": sessionStorage.getItem("id")
             }, sessionStorage.getItem("token"))
-            setReload(1)
+            setReload(reloadAll + 1)
             setNotify && setNotify({msg: "Your tokens have been listed.",
                                 color: 'green',
                                 show: true})
