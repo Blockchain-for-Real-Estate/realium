@@ -1,5 +1,6 @@
 import React from "react"
 import TimeAgo from 'react-timeago'
+import { Link } from "react-router-dom"
 import "../modals/modal.css"
 import NumberFormat from "react-number-format"
 import LoadingWave from "@bit/ngoue.playground.loading-wave"
@@ -103,20 +104,20 @@ export function Dashboard(props) {
                         {Object.keys(tokens).map((key) => (
                         <div key={key} className="relative rounded-lg border border-gray-300 bg-white shadow-md flex items-center space-x-3 hover:border-gray-400 focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-indigo-500">
                             <div className="grid grid-cols-1 sm:flex sm:flex-cols items-center">
-                            <div className="flex-shrink-0">
+                            <Link to={`/marketplace/${tokens[key].property.propertyId}`} className="flex-shrink-0">
                                 <img className="h-48 w-full object-fill rounded-t-md sm:w-48 sm:h-full sm:object-fill sm:rounded-l-sm sm:rounded-tr-none" src={residentialImages[tokens[key].property.propertyId-1]} alt=""/>
-                            </div>
+                            </Link>
                             <div className="flex-1 min-w-0 space-x-2 pt-2 pb-2 pl-2">
                                 <div className="grid grid-cols-1 sm:grid-cols-3 sm:align-middle sm:items-center">
-                                    <div className="font-semibold grid grid-cols-2 mr-8 sm:mr-1 text-center sm:text-left sm:grid-cols-1 sm:m-2">
+                                    <Link to={`/marketplace/${tokens[key].property.propertyId}`} className="text-black font-semibold grid grid-cols-2 mr-8 sm:mr-1 text-center sm:text-left sm:grid-cols-1 sm:m-2">
                                         Address
                                         <p className="text-xs text-gray-500 pt-1 text-center sm:text-left mb-0">
                                             {tokens[key].property.streetAddress}
                                             <br/>
                                             {tokens[key].property.city}, {tokens[key].property.state}
                                         </p>
-                                    </div>
-                                    <div className="font-semibold grid grid-cols-2 mr-8 sm:mr-1 text-center sm:text-left sm:grid-cols-1 sm:m-2">
+                                    </Link>
+                                    <Link to={`/marketplace/${tokens[key].property.propertyId}`} className="text-black font-semibold grid grid-cols-2 mr-8 sm:mr-1 text-center sm:text-left sm:grid-cols-1 sm:m-2">
                                         Shares
                                         <p className="text-xs text-gray-500 pt-1 text-center sm:text-left mb-0">
                                             <NumberFormat
@@ -133,16 +134,18 @@ export function Dashboard(props) {
                                                 suffix={'% est. appreciation'}
                                                 />
                                         </p>
-                                    </div>
+                                    </Link>
                                     <div className="space-y-2 text-center sm:m-1 sm:items-center">
                                         <button className="bg-indigo-500 text-white active:bg-indigo-500 text-xs w-4/5 py-2 px-2 rounded shadow-sm hover:shadow-lg hover:bg-indigo-700 outline-none focus:outline-none ease-linear transition-all duration-150" type="button"
                                             onClick={() => {
+                                                console.log('selling shares')
                                             }}
                                         >
                                         Sell Shares
                                         </button>
                                         <button className="bg-indigo-200 text-indigo-600 active:bg-indigo-500 text-xs w-4/5 py-2 px-2 rounded shadow-sm hover:shadow-lg hover:bg-indigo-300 outline-none focus:outline-none ease-linear transition-all duration-150" type="button"
                                             onClick={() => {
+                                                console.log('viewing offers')
                                             }}
                                         >
                                         View Offers
@@ -219,13 +222,15 @@ export function Dashboard(props) {
                                     {events[key].property.streetAddress}
                                 </td>
                                 <td className="px-6 py-4 whitespace-nowrap text-xs font-medium justify-end" data-label="Tx">
-                                    <div className="object-right">
-                                    <a href="/" className="text-indigo-600 hover:text-indigo-900">
-                                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M8.3335 5.00016H5.00016C4.07969 5.00016 3.3335 5.74635 3.3335 6.66683V15.0002C3.3335 15.9206 4.07969 16.6668 5.00016 16.6668H13.3335C14.254 16.6668 15.0002 15.9206 15.0002 15.0002V11.6668M11.6668 3.3335H16.6668M16.6668 3.3335V8.3335M16.6668 3.3335L8.3335 11.6668" stroke="#4F46E5" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                                    </svg>
-                                    </a>
-                                    </div>
+                                    {events[key].eventType === "SALE" &&
+                                        <div className="object-right">
+                                            <a href={`https://testnet.avascan.info/blockchain/x/tx/${events[key].txNFTId}`} className="text-indigo-600 hover:text-indigo-900" target="_blank" rel="noreferrer">
+                                                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                    <path d="M8.3335 5.00016H5.00016C4.07969 5.00016 3.3335 5.74635 3.3335 6.66683V15.0002C3.3335 15.9206 4.07969 16.6668 5.00016 16.6668H13.3335C14.254 16.6668 15.0002 15.9206 15.0002 15.0002V11.6668M11.6668 3.3335H16.6668M16.6668 3.3335V8.3335M16.6668 3.3335L8.3335 11.6668" stroke="#4F46E5" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                                                </svg>
+                                            </a>
+                                        </div>
+                                    }
                                 </td>
                                 </tr>
                                 ))}
@@ -252,7 +257,7 @@ export function Dashboard(props) {
             : null
             }
             </div>
-        
+
         :
         <div className="content-center flex flex-wrap justify-center py-72">
             <LoadingWave primaryColor="#5C6BF6" secondaryColor="#ABABAB"/>

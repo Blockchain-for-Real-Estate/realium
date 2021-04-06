@@ -120,9 +120,6 @@ function TransactionRow(props) {
                 <TimeAgo date={props.transaction.eventDateTime}/>
             </td>
             <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500" data-label="TX">
-                {/* TODO: add link to avascan (missing id)
-                    // <a href={'https://testnet.avascan.info/blockchain/x/tx/' + transactions[key].txId} target="_blank" rel="noreferrer" className="block hover:bg-gray-50">
-                */}
                 {props.transaction.eventType === "SALE" && <a href={`https://testnet.avascan.info/blockchain/x/tx/${props.transaction.txNFTId}`} target="_blank" rel="noreferrer">
                     <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M8.3335 5.00016H5.00016C4.07969 5.00016 3.3335 5.74635 3.3335 6.66683V15.0002C3.3335 15.9206 4.07969 16.6668 5.00016 16.6668H13.3335C14.254 16.6668 15.0002 15.9206 15.0002 15.0002V11.6668M11.6668 3.3335H16.6668M16.6668 3.3335V8.3335M16.6668 3.3335L8.3335 11.6668" stroke="#4F46E5" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>

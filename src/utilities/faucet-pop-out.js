@@ -50,14 +50,14 @@ export function FaucetPopOut(props) {
                 <div className="mx-auto flex items-center justify-center h-12 w-12 rounded-full bg-yellow-100">
                 {/* Heroicon name: outline/hazard */}
                     <svg className="h-6 w-6 text-yellow-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
                     </svg>
                     </div>
                     :
                     <div className="mx-auto flex items-center justify-center h-12 w-12 rounded-full bg-green-100">
                     {/*Heroicon name: outline/check*/}
                     <svg className="h-6 w-6 text-green-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" />
                     </svg>
                     </div>
                     }
@@ -75,8 +75,8 @@ export function FaucetPopOut(props) {
                 </p>
                 }
                 <div className="py-2">
-                    <input className="text-center text-xs text-indigo-500 w-full border-1 border-gray-200 bg-gray-100 rounded-lg p-2" ref={textAreaRef} style={{cursor: "pointer", color: "transparent", textShadow: "0 0 0 #6366F1"}} value={props.wallet}
-                    onClick={copyToClipboard} readonly/>
+                    <input className="text-center text-xs text-indigo-500 w-full border-1 border-gray-200 bg-gray-100 rounded-lg p-2" ref={textAreaRef} style={{cursor: "pointer", color: "transparent", textShadow: "0 0 0 #6366F1"}} defaultValue={props.wallet}
+                    onClick={copyToClipboard} readOnly/>
                 </div>
                 </div>
             </div>

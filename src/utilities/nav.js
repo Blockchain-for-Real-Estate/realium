@@ -3,6 +3,7 @@ import { Link, useLocation, useHistory } from "react-router-dom"
 import { Modal } from "../modals/modal"
 import { ApiBalanceService } from '../api/services/balance.service'
 import { ApiAVAXService } from '../api/services/crypto.services'
+import { useInterval } from "../utilities/use-interval-hook"
 
 export function Nav(props) {
     const [menuOpen, setMenuOpen] = React.useState(false)
@@ -13,6 +14,7 @@ export function Nav(props) {
     let [avaxPrice, setAvaxPrice] = React.useState()
     let [currency, setCurrency] = React.useState(true)
     let [profileMenu, setProfileMenu] = React.useState(false)
+    let [pollInterval, setPollInterval] = React.useState(0)
 
     function logout() {
         sessionStorage.clear()
@@ -23,36 +25,40 @@ export function Nav(props) {
     }
 
     React.useEffect(() => {
-      let wallet = sessionStorage.getItem('avax')
-      const fetchBalance = async () => {
-          try {
-            let balanceService = new ApiBalanceService()
-              await balanceService.getBalance(wallet).then(
-                  (res) => {
-                      setBalance(Number(res.data.result.balance)/1000000000) //AVAX uses a demonination of 9
-                  }
-              )
-          } catch {
-              setBalance(null)
-          }
-      };
-
-      const getCurrentAvaxPrice = async () => {
-          try {
-              let avaxService = new ApiAVAXService()
-                await avaxService.getAvaxAmount().then(
+        let wallet = sessionStorage.getItem('avax')
+        const fetchBalance = async () => {
+            try {
+                let balanceService = new ApiBalanceService()
+                await balanceService.getBalance(wallet).then(
                     (res) => {
-                        setAvaxPrice(Number(res.data.AVAX.USD))
+                        setBalance(Number(res.data.result.balance)/1000000000) //AVAX uses a demonination of 9
                     }
                 )
-          } catch{
-              setAvaxPrice(null)
-          }
-      }
+            } catch {
+                setBalance(null)
+            }
+        };
 
-      fetchBalance()
-      getCurrentAvaxPrice()
-    }, [])
+        const getCurrentAvaxPrice = async () => {
+            try {
+                let avaxService = new ApiAVAXService()
+                    await avaxService.getAvaxAmount().then(
+                        (res) => {
+                            setAvaxPrice(Number(res.data.AVAX.USD))
+                        }
+                    )
+            } catch{
+                setAvaxPrice(null)
+            }
+        }
+
+        fetchBalance()
+        getCurrentAvaxPrice()
+    }, [pollInterval])
+
+    useInterval(() => {
+        setPollInterval(pollInterval + 1)
+    }, 5000)
 
     return (
         <nav className="bg-white shadow">
