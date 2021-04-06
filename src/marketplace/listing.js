@@ -1,5 +1,4 @@
 import React from "react"
-import LoadingWave from "@bit/ngoue.playground.loading-wave"
 import { useHistory } from "react-router-dom"
 import NumberFormat from "react-number-format"
 import { ApiTokenService } from "../api/services/token.service"
@@ -20,8 +19,7 @@ import com6 from "../resources/images/commercial-6.jpg"
 
 export function Listing(props) {
     let history = useHistory()
-    let [tokens, setTokens] = React.useState('') 
-    let [minPrice, setMinPrice] = React.useState(0.00)
+    let [minPrice, setMinPrice] = React.useState(0)
     const propertyId = props.listing.propertyId
     const setNotify = props.setNotify
 
@@ -41,7 +39,6 @@ export function Listing(props) {
                         let tokens =Object.values(res.data).sort(function (a, b) {
                             return a.listedPrice - b.listedPrice;
                         });
-                        setTokens(tokens)
                         try {
                             setMinPrice(tokens[0].listedPrice)
                         } catch {
@@ -50,7 +47,6 @@ export function Listing(props) {
                     }
                 )
             } catch(error) {
-                setTokens(null)
                 setNotify && setNotify({ msg: `There was an error getting tokens for this property.`,
                                         color: 'red',
                                         show: true })
@@ -63,8 +59,6 @@ export function Listing(props) {
 
     return (
         <div className="flex flex-col rounded-lg shadow-md overflow-hidden" style={{cursor: "pointer"}} onClick={() => props.listing.listingType === "Residential" ? history.push(`/marketplace/${props.listing.propertyId}`) : null}>
-            {tokens ?
-            <>
             <div className="flex-shrink-0">
                 {props.listing.listingType === "Residential" ?
                     <div className="relative">
@@ -136,12 +130,6 @@ export function Listing(props) {
                     }
                 </div>
             </div>
-            </>
-            :
-            <div className="content-center flex flex-wrap justify-center py-72">
-            <LoadingWave primaryColor="#5C6BF6" secondaryColor="#ABABAB"/>
-            </div>
-            }
         </div>
     )
 }
