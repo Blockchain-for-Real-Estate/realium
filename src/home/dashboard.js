@@ -22,6 +22,7 @@ export function Dashboard(props) {
     const [tokens, setTokens] = React.useState()
     const [events, setEvents] = React.useState()
     const [reloadAll, setReload] = React.useState(0)
+    const setNotify = props.setNotify
 
     const residentialImages = [
         res1, res2, res3, res4, res5, res6
@@ -60,6 +61,30 @@ export function Dashboard(props) {
 
         fetchEvents()
     }, [id])
+
+    async function sellShares(token) {
+        try {
+            let eventService = new ApiEventService()
+            await eventService.postTransaction({
+                "eventType": 'LIST',
+                "listedPrice": token.listedPrice,
+                "quantity": 1,
+                "token": token.tokenId,
+                "property": token.property.propertyId,
+                "tokenOwner": sessionStorage.getItem("id"),
+                "eventCreator": sessionStorage.getItem("id")
+            }, sessionStorage.getItem("token"))
+            setReload(1)
+            setNotify && setNotify({msg: "Your tokens have been listed.",
+                                color: 'green',
+                                show: true})
+        } catch (err) {
+            setNotify && setNotify({msg: 'There was an error listing tokens.',
+                                color: 'red',
+                                show: true})
+            console.error(err)
+        }
+    }
 
     return (
         <>{tokens && events ?
@@ -110,31 +135,38 @@ export function Dashboard(props) {
                                         </p>
                                     </Link>
                                     <Link to={`/marketplace/${tokens[key].property.propertyId}`} className="text-black font-semibold grid grid-cols-2 mr-8 sm:mr-1 text-center sm:text-left sm:grid-cols-1 sm:m-2">
-                                        Shares
+                                        Share Price
                                         <p className="text-xs text-gray-500 pt-1 text-center sm:text-left mb-0">
                                             <NumberFormat
-                                                value={tokens[key].property.seriesCount}
-                                                displayType={'text'}
-                                                thousandSeparator={true}
-                                                suffix={' total shares'}
-                                                /> @
-                                            <NumberFormat
-                                                value={tokens[key].property.listedPrice}
+                                                value={tokens[key].listedPrice}
                                                 displayType={'text'}
                                                 thousandSeparator={true}
                                                 prefix={' '}
-                                                suffix={'% est. appreciation'}
                                                 />
+                                            <div className="h-4 inline-flex px-1">
+                                                <svg width="10" height="10" viewBox="0 0 153 153" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <path fill-rule="evenodd" clip-rule="evenodd" d="M153 76.5C153 118.75 118.75 153 76.5 153C34.2502 153 0 118.75 0 76.5C0 34.2502 34.2502 0 76.5 0C118.75 0 153 34.2502 153 76.5ZM72.2494 21.5512L22.6284 108.776C20.8649 111.876 23.1037 115.725 26.6701 115.725H57.7531C59.4209 115.725 60.961 114.832 61.7892 113.384L96.0274 53.5368C96.8467 52.1048 96.8458 50.3458 96.025 48.9145L80.325 21.5372C78.5347 18.4154 74.0289 18.4231 72.2494 21.5512ZM90.0853 115.95H126.325C130.017 115.95 132.327 111.956 130.486 108.756L112.443 77.3996C110.601 74.1984 105.985 74.1898 104.131 77.3843L85.9337 108.741C84.0767 111.941 86.3855 115.95 90.0853 115.95Z" fill="#4F46E5"/>
+                                                </svg>
+                                            </div>
+                                            <br/>
+                                            ({tokens[key].property.details.estimatedAppreciation*100}% Est. Appr.)
                                         </p>
                                     </Link>
                                     <div className="space-y-2 text-center sm:m-1 sm:items-center">
+                                        {!tokens[key].listed ?
                                         <button className="bg-indigo-500 text-white active:bg-indigo-500 text-xs w-4/5 py-2 px-2 rounded shadow-sm hover:shadow-lg hover:bg-indigo-700 outline-none focus:outline-none ease-linear transition-all duration-150" type="button"
                                             onClick={() => {
-                                                console.log('selling shares')
+                                                sellShares(tokens[key])
                                             }}
                                         >
-                                        Sell Shares
+                                        Sell Share
                                         </button>
+                                        :
+                                        <button className="disabled bg-white text-indigo-600 font-bold active:bg-indigo-500 text-xs w-4/5 py-2 px-2 rounded outline-none focus:outline-none ease-linear transition-all duration-150" type="button"
+                                        >
+                                        Share Listed
+                                        </button>
+                                        }  
                                         <button className="bg-indigo-200 text-indigo-600 active:bg-indigo-500 text-xs w-4/5 py-2 px-2 rounded shadow-sm hover:shadow-lg hover:bg-indigo-300 outline-none focus:outline-none ease-linear transition-all duration-150" type="button"
                                             onClick={() => {
                                                 console.log('viewing offers')
