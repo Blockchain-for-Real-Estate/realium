@@ -27,7 +27,7 @@ export function ListForm(props) {
         }
 
         getAvailableTokens()
-    }, [propertyId])
+    }, [propertyId, setNotify])
 
     return (
         <Formik
@@ -58,7 +58,7 @@ export function ListForm(props) {
                         "eventCreator": sessionStorage.getItem("id")
                     }, sessionStorage.getItem("token"))
 
-                    setNotify && setNotify({msg: 'Your tokens have been listed.',
+                    setNotify && setNotify({msg: `Your tokens have been listed. ${resp.status}`,
                                         color: 'green',
                                         show: true})
                 } catch (err) {
