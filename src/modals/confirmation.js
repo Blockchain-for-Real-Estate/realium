@@ -5,9 +5,9 @@ import { ApiEventService } from "../api/services/event.service";
 
 export function Confirmation(props) {
     let history = useHistory();
-    //let transactionService = new ApiEventService();
     const [showModal, setShowModal] = React.useState(false);
     const [unconfirmed, setConfirmed] = React.useState(false);
+    const auth_token = sessionStorage.getItem('token')
     const setNotify = props.setNotify
     const purchase = props.purchase
 
@@ -47,7 +47,7 @@ export function Confirmation(props) {
             }
         }
 
-        //Buy(payload); generates 401 right now
+        Buy(payload); //generates 401 right now
     }
 
   return (
@@ -85,14 +85,14 @@ export function Confirmation(props) {
                     <div className="mx-auto flex items-center justify-center h-12 w-12 rounded-full bg-yellow-100">
                     {/* Heroicon name: outline/hazard */}
                     <svg className="h-6 w-6 text-yellow-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
                     </svg>
                     </div>
                     :
                     <div className="mx-auto flex items-center justify-center h-12 w-12 rounded-full bg-green-100">
                     {/*Heroicon name: outline/check*/}
                     <svg className="h-6 w-6 text-green-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" />
                     </svg>
                     </div>
                     }
@@ -108,7 +108,8 @@ export function Confirmation(props) {
                     }
                     {!unconfirmed ?
                     <div className="mt-2">
-                        <p className="px-8 text-sm text-gray-500" id="modalText">
+                        {auth_token ?
+                        <p className="px-8 text-sm text-gray-500">
                         Are you sure you want to purchase <span className="text-sm text-indigo-600 font-bold">
                             <NumberFormat
                                 value={purchase.length}
@@ -129,6 +130,9 @@ export function Confirmation(props) {
                         </span>
                          per share?
                         </p>
+                        :
+                        <p className="px-8 text-sm text-gray-500">Please sign in to complete this purchase.</p>
+                        }
                     </div>
                     :
                     <div className="mt-2">
@@ -150,15 +154,8 @@ export function Confirmation(props) {
                 <div className="mt-5 sm:mt-6">
                     {!unconfirmed ?
                     <button type="button" id="modalButton" className="inline-flex justify-center w-full rounded-md border border-transparent shadow-sm px-4 py-2 bg-indigo-600 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:text-sm"
-                    onClick={() => {
-                        sessionStorage.getItem('token') !== null ?
-                            submit()
-                        :
-                        document.getElementById("modalText").innerHTML = "Please sign in to complete purchase."
-                        document.getElementById("modalButton").innerHTML = "Sign In"
-                        document.getElementById("modalButton").onclick = () => { history.push("/login")}
-                    }}>
-                        CONFIRM PURCHASE
+                    onClick={auth_token ? () => { submit() } : history.push("/login")}>
+                        {auth_token ? "CONFIRM PURCHASE" : "Sign In"}
                     </button>
                     :
                     <button type="button" className="inline-flex justify-center w-full rounded-md border border-transparent shadow-sm px-4 py-2 bg-indigo-600 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:text-sm"
