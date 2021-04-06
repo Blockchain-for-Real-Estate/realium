@@ -46,11 +46,11 @@ export function ListForm(props) {
                         .min(1, "Enter a value over 0")
                         .required("Enter the price you would like to list at your shares for.")
             })}
-            onSubmit={async (values, { setSubmitting }) => {
+            onSubmit={async (values, actions) => {
                 try {
-                    setSubmitting(true)
+                    actions.setSubmitting(true)
                     let eventService = new ApiEventService()
-                    let resp = await eventService.postTransaction({
+                    await eventService.postTransaction({
                         "eventType": 'LIST',
                         "listedPrice": values.price,
                         "quantity": values.shares,
@@ -59,7 +59,7 @@ export function ListForm(props) {
                         "eventCreator": sessionStorage.getItem("id")
                     }, sessionStorage.getItem("token"))
 
-                    setNotify && setNotify({msg: `Your tokens have been listed. ${resp.status}`,
+                    setNotify && setNotify({msg: "Your tokens have been listed.",
                                         color: 'green',
                                         show: true})
                 } catch (err) {
@@ -68,6 +68,8 @@ export function ListForm(props) {
                                         show: true})
                     console.error(err)
                 }
+                actions.setSubmitting(false)
+                actions.resetForm()
             }}
         >{form => (
             <Form>
@@ -112,7 +114,7 @@ export function ListForm(props) {
                                         name="price"
                                         type="text"
                                         className="rounded-br focus:ring-white-500 focus:border-white-500 text-right relative block w-full rounded-none bg-transparent focus:z-10 sm:text-sm border-l-white border-white"
-                                        placeholder={tokensAvailable.length > 0 ? `${Number(tokensAvailable[0].listedPrice) + 1} AVAX` : "$1"}
+                                        placeholder={tokensAvailable.length > 0 ? `${Number(tokensAvailable[0].listedPrice) + 1} AVAX` : "1 AVAX"}
                                     />
                                 </div>
                             </div>

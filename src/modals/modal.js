@@ -1,29 +1,40 @@
 import React from "react";
+import { useHistory } from "react-router-dom"
 import { CreateAccountForm } from "../login/create";
 import { Purchase } from "./purchase"
 
 export function Modal(props) {
+  let history = useHistory()
   const [showModal, setShowModal] = React.useState(false);
   const setNotify = props.setNotify
 
   return (
     <>
       {props.page === "create" ?
-        <button
-        className="w-full block px-3 py-2 border-transparent text-base font-medium rounded-md text-white bg-indigo-600 shadow-sm hover:bg-indigo-800 text-decoration-none"
-        type="button"
-        onClick={() => setShowModal(true)}
-      >
-      {props.buttonText}
-      </button>
-      :
-      <button
-        className="bg-indigo-600 text-white active:bg-indigo-500 font-bold uppercase text-sm w-full py-3 mb-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
-        type="button"
-        onClick={() => setShowModal(true)}
-      >
-       {props.buttonText}
-      </button>
+          <button
+            className="w-full block px-3 py-2 border-transparent text-base font-medium rounded-md text-white bg-indigo-600 shadow-sm hover:bg-indigo-800 text-decoration-none"
+            type="button"
+            onClick={() => setShowModal(true)}
+          >
+              {props.buttonText}
+          </button>
+      : !sessionStorage.getItem("id") || !sessionStorage.getItem("token") ?
+          <button
+            className="bg-indigo-600 text-white active:bg-indigo-500 font-bold uppercase text-sm w-full py-3 mb-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+            type="button"
+            onClick={() => history.push("/login")}
+          >
+            Login To Access
+          </button>
+        :
+          <button
+            className="test bg-indigo-600 text-white active:bg-indigo-500 font-bold uppercase text-sm w-full py-3 mb-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+            type="button"
+            onClick={() => setShowModal(true)}
+
+          >
+            {props.buttonText}
+          </button>
       }
       {showModal ? (
         <>
