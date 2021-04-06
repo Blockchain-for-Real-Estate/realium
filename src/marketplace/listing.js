@@ -32,30 +32,32 @@ export function Listing(props) {
 
     React.useEffect(() => {
         const fetchTokens = async () => {
-            try {
-                let tokenService = new ApiTokenService()
-                await tokenService.getListedTokensForPropertyId(propertyId).then(
-                    res => {
-                        let tokens =Object.values(res.data).sort(function (a, b) {
-                            return a.listedPrice - b.listedPrice;
-                        });
-                        try {
-                            setMinPrice(tokens[0].listedPrice)
-                        } catch {
-                            setMinPrice(0.00)
+            if (props.listing.listingType === "Residential") {
+                try {
+                    let tokenService = new ApiTokenService()
+                    await tokenService.getListedTokensForPropertyId(propertyId).then(
+                        res => {
+                            let tokens = Object.values(res.data).sort(function (a, b) {
+                                return a.listedPrice - b.listedPrice;
+                            });
+                            try {
+                                setMinPrice(tokens[0].listedPrice)
+                            } catch {
+                                setMinPrice(0.00)
+                            }
                         }
-                    }
-                )
-            } catch(error) {
-                setNotify && setNotify({ msg: `There was an error getting tokens for this property.`,
-                                        color: 'red',
-                                        show: true })
-                console.error(error)
+                    )
+                } catch(error) {
+                    setNotify && setNotify({ msg: `There was an error getting tokens for this property.`,
+                                            color: 'red',
+                                            show: true })
+                    console.error(error)
+                }
             }
         };
 
         fetchTokens()
-    }, [propertyId, setNotify])
+    }, [propertyId, setNotify, props.listing.listingType])
 
     return (
         <div className="flex flex-col rounded-lg shadow-md overflow-hidden" style={{cursor: "pointer"}} onClick={() => props.listing.listingType === "Residential" ? history.push(`/marketplace/${props.listing.propertyId}`) : null}>
@@ -105,7 +107,7 @@ export function Listing(props) {
                             value={minPrice}
                             displayType={'text'}
                             thousandSeparator={true}
-                            prefix={'Share Price: '}
+                            prefix={'Shares From: '}
                         />
                         <div className="h-4 inline-flex px-1">
                         <svg width="12" height="12" viewBox="0 0 153 153" fill="none" xmlns="http://www.w3.org/2000/svg">
