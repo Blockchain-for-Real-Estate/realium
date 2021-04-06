@@ -62,11 +62,11 @@ export function Dashboard(props) {
         fetchEvents()
     }, [id])
 
-    async function sellShares(token) {
+    async function handleShares(token, eventType) {
         try {
             let eventService = new ApiEventService()
             await eventService.postTransaction({
-                "eventType": 'LIST',
+                "eventType": eventType,
                 "listedPrice": token.listedPrice,
                 "quantity": 1,
                 "token": token.tokenId,
@@ -156,15 +156,18 @@ export function Dashboard(props) {
                                         {!tokens[key].listed ?
                                         <button className="bg-indigo-500 text-white active:bg-indigo-500 text-xs w-4/5 py-2 px-2 rounded shadow-sm hover:shadow-lg hover:bg-indigo-700 outline-none focus:outline-none ease-linear transition-all duration-150" type="button"
                                             onClick={() => {
-                                                sellShares(tokens[key])
+                                                handleShares(tokens[key], "LIST")
                                             }}
                                         >
                                         Sell Share
                                         </button>
                                         :
-                                        <button className="disabled bg-white text-indigo-600 font-bold active:bg-indigo-500 text-xs w-4/5 py-2 px-2 rounded outline-none focus:outline-none ease-linear transition-all duration-150" type="button"
+                                        <button className="bg-gray-50 text-indigo-500 active:bg-indigo-500 text-xs w-4/5 py-2 px-2 rounded hover:bg-gray-300 outline-none focus:outline-none ease-linear transition-all duration-150" type="button"
+                                            onClick={() => {
+                                                handleShares(tokens[key], "UNLIST")
+                                            }}
                                         >
-                                        Share Listed
+                                        Unlist Share
                                         </button>
                                         }  
                                         <button className="bg-indigo-200 text-indigo-600 active:bg-indigo-500 text-xs w-4/5 py-2 px-2 rounded shadow-sm hover:shadow-lg hover:bg-indigo-300 outline-none focus:outline-none ease-linear transition-all duration-150" type="button"
