@@ -22,7 +22,9 @@ export function Purchase(props) {
                 let tokenService = new ApiTokenService()
                 await tokenService.getListedTokensForPropertyId(propertyId).then(
                     res => {
-                        setTokens(lodash.groupBy(res.data, "owner.realiumUserId"))
+                        let tokenArr = res.data.filter(token => token.owner.realiumUserId !== Number(sessionStorage.getItem('id')))
+                        console.log(res.data)
+                        setTokens(lodash.groupBy(tokenArr, "owner.realiumUserId"))
                     }
                 )
             } catch(error) {
