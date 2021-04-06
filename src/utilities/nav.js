@@ -115,7 +115,7 @@ export function Nav(props) {
                                         <img className="h-9 w-9 rounded-full" src="https://images.unsplash.com/placeholder-avatars/extra-large.jpg?ixlib=rb-0.3.5&q=80&fm=jpg&crop=faces&cs=tinysrgb&fit=crop&h=128&w=128&s=ee8bbf5fb8d6e43aaaa238feae2fe90d" alt="" />
                                         </button>
                                     </div>
-                                    <div className={`${!profileMenu ? "hidden" : null } "z-50 origin-top-right absolute right-8 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none"`}>
+                                    <div className={`${!profileMenu ? "hidden" : null } z-50 origin-top-right absolute right-8 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none`} style={{'zIndex': '1000'}}>
                                         <h1 to="/" onClick={ (event) => event.preventDefault() } className="block px-3 py-2 rounded-md text-sm font-medium font-bold text-indigo-800 text-decoration-none">
                                             {sessionStorage.getItem("user")}
                                         </h1>
