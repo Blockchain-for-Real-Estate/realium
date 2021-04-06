@@ -23,7 +23,6 @@ export function Purchase(props) {
                 await tokenService.getListedTokensForPropertyId(propertyId).then(
                     res => {
                         let tokenArr = res.data.filter(token => token.owner.realiumUserId !== Number(sessionStorage.getItem('id')))
-                        console.log(res.data)
                         setTokens(lodash.groupBy(tokenArr, "owner.realiumUserId"))
                     }
                 )

@@ -2,15 +2,35 @@ import React from "react";
 import { useHistory } from "react-router-dom"
 import NumberFormat from "react-number-format"
 import { ApiEventService } from "../api/services/event.service";
+import { ApiBalanceService } from "../api/services/balance.service"
 
 export function Confirmation(props) {
     let history = useHistory();
+    let [balance, setBalance] = React.useState(0)
     const [showModal, setShowModal] = React.useState(false);
     const [unconfirmed, setConfirmed] = React.useState(false);
     const auth_token = sessionStorage.getItem('token')
     const setNotify = props.setNotify
     const purchase = props.purchase
 
+    React.useEffect(() => {
+        let wallet = sessionStorage.getItem('avax')
+        const fetchBalance = async () => {
+            try {
+                let balanceService = new ApiBalanceService()
+                await balanceService.getBalance(wallet).then(
+                    (res) => {
+                        setBalance(Number(res.data.result.balance)/1000000000) //AVAX uses a demonination of 9
+                    }
+                )
+            } catch {
+                setBalance(null)
+            }
+        };
+
+        fetchBalance()
+    }, [])
+    
     function submit() {
         //trigger Event POST as a SALE
         const data = purchase[0]
@@ -24,26 +44,33 @@ export function Confirmation(props) {
         }
 
         async function Buy(payload) {
-            try {
-                let auth_token = sessionStorage.getItem('token')
-                let transactionService = new ApiEventService()
-                await transactionService.postTransaction(payload, auth_token).then(
-                    (res) => {
-                        if (res.status === 200 || res.status === 201) {
-                            setConfirmed(true)
+            let txTotal = purchase.length * data.listedPrice
+            if (balance > txTotal) {
+                try {
+                    let auth_token = sessionStorage.getItem('token')
+                    let transactionService = new ApiEventService()
+                    await transactionService.postTransaction(payload, auth_token).then(
+                        (res) => {
+                            if (res.status === 200 || res.status === 201) {
+                                setConfirmed(true)
+                            }
                         }
-                    }
-                )
-            } catch(error) {
+                    )
+                } catch(error) {
+                    setShowModal(false)
+                    setNotify && setNotify({ msg: `There was an error processing this transaction.`,
+                                            color: 'red',
+                                            show: true })
+                    console.error(error)
+                }
+            } else {
                 setShowModal(false)
-                setNotify && setNotify({ msg: `There was an error processing this transaction.`,
+                setNotify && setNotify({ msg: `You do not have enough funds to conduct this transaction. Request more funds at the faucet from your dashboard.`,
                                         color: 'red',
                                         show: true })
-                console.error(error)
             }
         }
 
-        console.log("payload: " + JSON.stringify(payload))
         Buy(payload); //generates 401 right now
     }
 
