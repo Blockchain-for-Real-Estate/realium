@@ -30,7 +30,11 @@ export class ApiEventService {
 
     public postTransaction(data: Event, token: string) {
       const headers = {
+<<<<<<< HEAD
         "Authorization": "Token " + token,
+=======
+        "HTTP_AUTHORIZATION": "Token " + token
+>>>>>>> be99058 (trim payload)
       }
       return axios.post<Event>(
         `${environment.api}/api/events/`,

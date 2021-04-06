@@ -17,14 +17,10 @@ export function Confirmation(props) {
         const payload = {
             eventType: "SALE",
             listedPrice: data.listedPrice,
-            purchasedPrice: data.purchasedPrice,
             quantity: purchase.length,
-            txNFTId: "",
-            txAvaxId: "",
-            eventDateTime: new Date().now,
-            avalancheAssetId: "",
-            token: data.tokenId,
-            property: data.property
+            property: data.property.propertyId,
+            tokenOwner: data.owner.realiumUserId,
+            eventCreator: sessionStorage.getItem('id')
         }
 
         async function Buy(payload) {
@@ -47,6 +43,7 @@ export function Confirmation(props) {
             }
         }
 
+        console.log("payload: " + JSON.stringify(payload))
         Buy(payload); //generates 401 right now
     }
 
