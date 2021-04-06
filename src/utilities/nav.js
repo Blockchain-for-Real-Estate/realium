@@ -99,6 +99,9 @@ export function Nav(props) {
                                         </button>
                                     </div>
                                     <div className={`${!profileMenu ? "hidden" : null } "z-50 origin-top-right absolute right-8 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none"`}>
+                                        <h1 to="/" onClick={ (event) => event.preventDefault() } className="block px-3 py-2 rounded-md text-sm font-medium font-bold text-indigo-800 text-decoration-none">
+                                            {sessionStorage.getItem("user")}
+                                        </h1>
                                         <Link to="/dashboard" onClick={() => setProfileMenu(!profileMenu)} className="block px-3 py-2 rounded-md text-sm font-medium text-gray-700 hover:text-gray-100 hover:bg-indigo-500 text-decoration-none">
                                             Dashboard
                                         </Link>
@@ -188,6 +191,9 @@ export function Nav(props) {
                                     <span className="pl-1">{balance} AVAX</span>
                                 </div>
                             }
+                            <h1 to="/" onClick={ (event) => event.preventDefault() } className="block px-3 py-2 rounded-md text-sm font-medium font-bold text-indigo-800 text-decoration-none">
+                                {sessionStorage.getItem("user")}
+                            </h1>
                             <Link to="/dashboard" onClick={() => setMenuOpen(!menuOpen)} className="border-transparent text-gray-500 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-700 block pl-3 pr-4 py-2 border-l-4 text-base font-medium text-decoration-none">
                                 Dashboard
                             </Link>
