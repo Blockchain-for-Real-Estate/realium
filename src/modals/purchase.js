@@ -49,28 +49,6 @@ export function Purchase(props) {
             rows.push(entry[1])
         })
     })
-  
-    // React.useEffect((tokens) => {
-    //     const fetchDateTimes = async () => {
-    //         try {
-    //             let eventService = new ApiEventService()
-    //             Object.keys(tokens).map(async (key) => {
-    //                 await eventService.getEventsForTokenId(tokens[key][0].tokenId).then(
-    //                     res => {
-    //                         times.push(res.data.eventDateTime)
-    //                     }
-    //                 )
-    //             })
-    //         } catch(error) {
-    //             setNotify && setNotify({ msg: `There was an error getting listings for this property.`,
-    //                                     color: 'red',
-    //                                     show: true })
-    //             console.error(error)
-    //         }
-    //     }
-
-    //     fetchDateTimes();
-    // }, [tokens])
 
     return (
         <>
@@ -92,7 +70,7 @@ export function Purchase(props) {
                         <tbody className="bg-white border-1 border-gray-700 divide-y">
                             {Object.keys(rows).map(key => (
                             <tr key={key} className="m-4 border-b border-gray-200 sm:shadow">
-                            <td className="p-3" data-label="From">{rows[key][0].owner.fullName || "Anonymous"}</td>
+                            <td className="p-3" data-label="From">{rows[key][0].owner.walletAddress || "Anonymous"}</td>
                             <td className="p-3 text-center" data-label="Quantity">
                             <NumberFormat
                                 value={rows[key].length}

@@ -126,7 +126,7 @@ export function Dashboard(props) {
                                                 suffix={' total shares'}
                                                 /> @
                                             <NumberFormat
-                                                value={tokens[key].property.details.estimatedAppreciation*100}
+                                                value={tokens[key].property.listedPrice}
                                                 displayType={'text'}
                                                 thousandSeparator={true}
                                                 prefix={' '}
