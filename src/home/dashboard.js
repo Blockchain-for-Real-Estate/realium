@@ -1,5 +1,6 @@
 import React from "react"
 import TimeAgo from 'react-timeago'
+import lodash from "lodash"
 import { Link } from "react-router-dom"
 import "../modals/modal.css"
 import NumberFormat from "react-number-format"
@@ -15,6 +16,7 @@ import res4 from "../resources/images/residential/residential-4.jpg"
 import res5 from "../resources/images/residential/residential-5.jpg"
 import res6 from "../resources/images/residential/residential-6.jpg"
 import { FaucetPopOut } from "../utilities/faucet-pop-out"
+import { SellModal } from "../modals/sell"
 
 export function Dashboard(props) {
     let id = sessionStorage.getItem('id')
@@ -22,7 +24,7 @@ export function Dashboard(props) {
     const [tokens, setTokens] = React.useState()
     const [events, setEvents] = React.useState()
     const [reloadAll, setReload] = React.useState(0)
-    const setNotify = props.setNotify
+    let alreadyListed = ""
 
     const residentialImages = [
         res1, res2, res3, res4, res5, res6
@@ -34,7 +36,7 @@ export function Dashboard(props) {
                 let tokenService = new ApiTokenService()
                 await tokenService.getUserTokens(id.toString()).then(
                     res => {
-                        setTokens(res.data)
+                        setTokens(lodash.groupBy(res.data, "property.propertyId"))
                     }
                 )
             } catch {
@@ -62,29 +64,7 @@ export function Dashboard(props) {
         fetchEvents()
     }, [id])
 
-    async function handleShares(token, eventType) {
-        try {
-            let eventService = new ApiEventService()
-            await eventService.postTransaction({
-                "eventType": eventType,
-                "listedPrice": token.listedPrice,
-                "quantity": 1,
-                "token": token.tokenId,
-                "property": token.property.propertyId,
-                "tokenOwner": sessionStorage.getItem("id"),
-                "eventCreator": sessionStorage.getItem("id")
-            }, sessionStorage.getItem("token"))
-            setReload(reloadAll + 1)
-            setNotify && setNotify({msg: "Your tokens have been listed.",
-                                color: 'green',
-                                show: true})
-        } catch (err) {
-            setNotify && setNotify({msg: 'There was an error listing tokens.',
-                                color: 'red',
-                                show: true})
-            console.error(err)
-        }
-    }
+    console.log(tokens)
 
     return (
         <>{tokens && events ?
@@ -119,57 +99,58 @@ export function Dashboard(props) {
                     <dl className="mt-10 space-y-10">
                         <div className="grid grid-cols-1 gap-6">
                         {Object.keys(tokens).map((key) => (
+                            // eslint-disable-next-line
+                            alreadyListed = lodash.groupBy(tokens[key], "listed"),
                         <div key={key} className="relative rounded-lg border border-gray-300 bg-white shadow-md flex items-center space-x-3 hover:border-gray-400 focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-indigo-500">
                             <div className="grid grid-cols-1 sm:flex sm:flex-cols items-center">
-                            <Link to={`/marketplace/${tokens[key].property.propertyId}`} className="flex-shrink-0">
-                                <img className="h-48 w-full object-fill rounded-t-md sm:w-48 sm:h-full sm:object-fill sm:rounded-l-sm sm:rounded-tr-none" src={residentialImages[tokens[key].property.propertyId-1]} alt=""/>
+                            <Link to={`/marketplace/${tokens[key][0].property.propertyId}`} className="flex-shrink-0">
+                                <img className="h-48 w-full object-fill rounded-t-md sm:w-48 sm:h-full sm:object-fill sm:rounded-l-sm sm:rounded-tr-none" src={residentialImages[tokens[key][0].property.propertyId-1]} alt=""/>
                             </Link>
                             <div className="flex-1 min-w-0 space-x-2 pt-2 pb-2 pl-2">
                                 <div className="grid grid-cols-1 sm:grid-cols-3 sm:align-middle sm:items-center">
-                                    <Link to={`/marketplace/${tokens[key].property.propertyId}`} className="text-black font-semibold grid grid-cols-2 mr-8 sm:mr-1 text-center sm:text-left sm:grid-cols-1 sm:m-2">
+                                    <Link to={`/marketplace/${tokens[key][0].property.propertyId}`} className="text-black font-semibold grid grid-cols-2 mr-8 sm:mr-1 text-center sm:text-left sm:grid-cols-1 sm:m-2">
                                         Address
                                         <p className="text-xs text-gray-500 pt-1 text-center sm:text-left mb-0">
-                                            {tokens[key].property.streetAddress}
+                                            {tokens[key][0].property.streetAddress}
                                             <br/>
-                                            {tokens[key].property.city}, {tokens[key].property.state}
+                                            {tokens[key][0].property.city}, {tokens[key][0].property.state}
                                         </p>
                                     </Link>
-                                    <Link to={`/marketplace/${tokens[key].property.propertyId}`} className="text-black font-semibold grid grid-cols-2 mr-8 sm:mr-1 text-center sm:text-left sm:grid-cols-1 sm:m-2">
-                                        Share Price
+                                    <Link to={`/marketplace/${tokens[key][0].property.propertyId}`} className="text-black font-semibold grid grid-cols-2 mr-8 sm:mr-1 text-center sm:text-left sm:grid-cols-1 sm:m-2">
+                                        Shares:
                                         <p className="text-xs text-gray-500 pt-1 text-center sm:text-left mb-0">
-                                            <NumberFormat
-                                                value={tokens[key].listedPrice}
+                                            {alreadyListed['true'] ?
+                                            <><NumberFormat
+                                                value={alreadyListed['true'].length}
                                                 displayType={'text'}
                                                 thousandSeparator={true}
-                                                prefix={' '}
+                                                suffix={` ${alreadyListed['true'].length > 1 ? "shares" : "share"} listed`}
                                                 />
-                                            <div className="h-4 inline-flex px-1">
-                                                <svg width="10" height="10" viewBox="0 0 153 153" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                <path fill-rule="evenodd" clip-rule="evenodd" d="M153 76.5C153 118.75 118.75 153 76.5 153C34.2502 153 0 118.75 0 76.5C0 34.2502 34.2502 0 76.5 0C118.75 0 153 34.2502 153 76.5ZM72.2494 21.5512L22.6284 108.776C20.8649 111.876 23.1037 115.725 26.6701 115.725H57.7531C59.4209 115.725 60.961 114.832 61.7892 113.384L96.0274 53.5368C96.8467 52.1048 96.8458 50.3458 96.025 48.9145L80.325 21.5372C78.5347 18.4154 74.0289 18.4231 72.2494 21.5512ZM90.0853 115.95H126.325C130.017 115.95 132.327 111.956 130.486 108.756L112.443 77.3996C110.601 74.1984 105.985 74.1898 104.131 77.3843L85.9337 108.741C84.0767 111.941 86.3855 115.95 90.0853 115.95Z" fill="#4F46E5"/>
-                                                </svg>
-                                            </div>
-                                            <br/>
-                                            ({tokens[key].property.details.estimatedAppreciation*100}% Est. Appr.)
+                                            <br/></>
+                                                :
+                                                null
+                                            }
+                                            {alreadyListed['false'] ?
+                                            <NumberFormat
+                                                value={alreadyListed['false'].length}
+                                                displayType={'text'}
+                                                thousandSeparator={true}
+                                                suffix={` ${alreadyListed['false'].length > 1 ? "shares" : "share"} available to sell`}
+                                                />
+                                            :
+                                                null
+                                            }
                                         </p>
                                     </Link>
                                     <div className="space-y-2 text-center sm:m-1 sm:items-center">
-                                        {!tokens[key].listed ?
-                                        <button className="bg-indigo-500 text-white active:bg-indigo-500 text-xs w-4/5 py-2 px-2 rounded shadow-sm hover:shadow-lg hover:bg-indigo-700 outline-none focus:outline-none ease-linear transition-all duration-150" type="button"
-                                            onClick={() => {
-                                                handleShares(tokens[key], "LIST")
-                                            }}
+                                        {alreadyListed['false'] ?
+                                        <SellModal potentialListing={tokens[key]} availableToSell={alreadyListed['false'].length} />
+                                        : 
+                                        <button className="bg-gray-50 text-indigo-600 active:bg-indigo-500 text-xs w-4/5 py-2 px-2 rounded hover:bg-gray-100 outline-none focus:outline-none ease-linear transition-all duration-150" type="button"
                                         >
-                                        Sell Share
+                                        Shares Listed
                                         </button>
-                                        :
-                                        <button className="bg-gray-50 text-indigo-500 active:bg-indigo-500 text-xs w-4/5 py-2 px-2 rounded hover:bg-gray-300 outline-none focus:outline-none ease-linear transition-all duration-150" type="button"
-                                            onClick={() => {
-                                                handleShares(tokens[key], "UNLIST")
-                                            }}
-                                        >
-                                        Unlist Share
-                                        </button>
-                                        }  
+                                        }
                                         <button className="bg-indigo-200 text-indigo-600 active:bg-indigo-500 text-xs w-4/5 py-2 px-2 rounded shadow-sm hover:shadow-lg hover:bg-indigo-300 outline-none focus:outline-none ease-linear transition-all duration-150" type="button"
                                             onClick={() => {
                                                 console.log('viewing offers')

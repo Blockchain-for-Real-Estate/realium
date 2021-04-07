@@ -58,11 +58,10 @@ export function Residential(props) {
                     </div>
                     <div className="max-w-lg mx-auto grid gap-5 lg:grid-cols-3 lg:max-w-none">
                         {Object.keys(listings).map((key) => (
-                                <div key={key} className="l-grid__item">
-                                    <Listing listing={listings[key]} index={listings[key].propertyId - 1} setNotify={setNotify}/>
-                                </div>
-                            ))
-                        }
+                            <div key={key} className="l-grid__item">
+                                <Listing listing={listings[key]} index={listings[key].propertyId - 1} setNotify={setNotify}/>
+                            </div>
+                        ))}
                     </div>
                 </div>
             </div>

@@ -205,7 +205,7 @@ export function ListingDetails(props) {
                             </bs.Col>
                             <bs.Col md={1} />
                             <bs.Col md={4}>
-                                <BuyListOffer setNotify={props.setNotify} events={transactions} />
+                                <BuyListOffer setNotify={props.setNotify} events={transactions} propertyId={listing.propertyId} />
                                 <div style={{"fontSize": "0.9rem"}} className="text-muted m-2 pt-8">
                                     *By purchasing shares of this asset,
                                     you become a part owner of this property

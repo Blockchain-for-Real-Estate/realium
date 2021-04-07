@@ -1,12 +1,13 @@
 import React from "react"
-import { useParams } from "react-router-dom"
+import { useHistory } from "react-router-dom"
 import { Formik, Field, Form, ErrorMessage } from "formik"
 import * as Yup from "yup"
 import { ApiTokenService } from "../api/services/token.service"
 import { ApiEventService } from "../api/services/event.service"
 
 export function ListForm(props) {
-    const { propertyId } = useParams()
+    const history = useHistory()
+    const propertyId = props.propertyId
     const [tokensAvailable, setTokensAvailable] = React.useState([])
     const setNotify = props.setNotify
 
@@ -70,6 +71,11 @@ export function ListForm(props) {
                 }
                 actions.setSubmitting(false)
                 actions.resetForm()
+                if (props.isModal) {
+                    props.confirmed(true)
+                    props.showForm(false)
+                    history.go(0)
+                }
             }}
         >{form => (
             <Form>
@@ -87,6 +93,7 @@ export function ListForm(props) {
                                     />
                                 </div>
                                 <div className="flex-1 min-w-0">
+                                    {!props.isModal ?
                                     <Field
                                         as="input"
                                         id="shares"
@@ -95,6 +102,16 @@ export function ListForm(props) {
                                         className="rounded-tr focus:ring-white-500 focus:border-white-500 text-right relative block w-full rounded-none bg-transparent focus:z-10 sm:text-sm border-l-white border-white"
                                         placeholder={`${tokensAvailable.length} available` || "100"}
                                     />
+                                    :
+                                    <Field
+                                        as="input"
+                                        id="shares"
+                                        name="shares"
+                                        type="text"
+                                        className="rounded-tr focus:ring-white-500 focus:border-white-500 text-right relative block w-full rounded-none bg-transparent focus:z-10 sm:text-sm border-l-white border-white"
+                                        placeholder={`${props.availableToSell} available` || "100"}
+                                    />
+                                    }
                                 </div>
                             </div>
                             <div className="flex -space-x-px border rounded-b border-gray-900">
@@ -135,6 +152,7 @@ export function ListForm(props) {
                     >
                         Sell Shares
                     </button>
+                    {!props.isModal ? 
                     <button
                         className="bg-indigo-200 text-indigo-600 active:bg-indigo-500 text-xs w-full py-2 px-2 rounded shadow-sm hover:shadow-lg hover:bg-indigo-300 outline-none focus:outline-none ease-linear transition-all duration-150"
                         type="button"
@@ -142,6 +160,7 @@ export function ListForm(props) {
                     >
                         View Offers
                     </button>
+                    : null }
                 </div>
             </Form>)}
         </Formik>
