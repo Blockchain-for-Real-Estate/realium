@@ -144,7 +144,7 @@ export function BuyListOffer(props) {
                                 type="button"
                                 onClick={() => history.push("/login")}
                             >
-                                Login To Access
+                                Sign In To Access
                             </button>
                         :
                             <ListForm setNotify={props.setNotify} valueHandler={values_handler} total={total} events={props.events} propertyId={propertyId}/>

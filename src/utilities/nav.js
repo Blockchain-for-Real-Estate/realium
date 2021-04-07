@@ -99,7 +99,7 @@ export function Nav(props) {
                         {sessionStorage.getItem('token') === null ?
                         <div className="flex space-x-6">
                             <Link className="block px-3 py-2 border-transparent text-base font-medium rounded-md text-indigo-700 shadow-sm hover:text-gray-900 hover:bg-gray-50 text-decoration-none" to="/login">
-                                Sign in
+                                Sign In
                             </Link>
                             <div className="block">
                                 <Modal page="create" buttonText="Sign Up" />
@@ -123,7 +123,7 @@ export function Nav(props) {
                                             Dashboard
                                         </Link>
                                         <Link onClick={logout} className="block px-3 py-2 rounded-md text-sm font-medium text-gray-700 hover:text-gray-100 hover:bg-indigo-500 text-decoration-none" to="/">
-                                            Sign out
+                                            Sign Out
                                         </Link>
                                     </div>
                                 </div>
@@ -171,7 +171,7 @@ export function Nav(props) {
                 <div className="space-y-1">
                     {sessionStorage.getItem('token') === null ?
                         <Link className="border-transparent text-gray-500 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-700 block pl-3 pr-4 py-2 border-l-4 text-base font-medium text-decoration-none" to="/login">
-                            Sign in
+                            Sign In
                         </Link>
                         :
                         <>
@@ -204,7 +204,7 @@ export function Nav(props) {
                                 Dashboard
                             </Link>
                             <Link onClick={logout} className="border-transparent text-gray-500 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-700 block pl-3 pr-4 py-2 border-l-4 text-base font-medium text-decoration-none" to="/">
-                                Sign out
+                                Sign Out
                             </Link>
                         </>
                     }

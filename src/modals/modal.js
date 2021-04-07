@@ -24,7 +24,7 @@ export function Modal(props) {
             type="button"
             onClick={() => history.push("/login")}
           >
-            Login To Access
+            Sign In To Access
           </button>
         :
           <button
