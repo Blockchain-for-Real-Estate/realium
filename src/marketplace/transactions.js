@@ -28,7 +28,7 @@ export function Transactions(props) {
 
     return (
         /* Transactions Table */
-        <div className="mt-4 max-w-6xl mx-auto py-10 px-4 sm:px-6 lg:px-8">
+        <div className="mt-4 max-w-7xl mx-auto py-10 px-4 sm:px-6 lg:px-8">
             <div className="bg-white">
                 <div className="sm:flex sm:flex-col sm:align-center mb-6">
                     <h1 className="text-4xl font-extrabold text-gray-900 text-center">Chain History</h1>
@@ -86,11 +86,11 @@ export function Transactions(props) {
 function TransactionRow(props) {
     return (
         <tr className="mb-10">
-            <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500" data-label="Event">
+            <td className="px-6 py-4 whitespace-nowrap text-xs text-gray-500" data-label="Event">
                 {/* TODO: add icons here */}
                 {titleCase(props.transaction.eventType.toLowerCase())}
             </td>
-            <td className="px-6 py-4 whitespace-nowrap sm:flex items-center text-sm text-gray-500" data-label="Quantity Listed">
+            <td className="px-6 py-4 whitespace-nowrap sm:flex items-center text-xs text-gray-500" data-label="Quantity Listed">
                 <NumberFormat className="inline-flex"
                     value={props.transaction.quantity}
                     displayType={'text'}
@@ -116,7 +116,7 @@ function TransactionRow(props) {
                 {/* add username? */}
                 {props.transaction.eventType !== 'LIST' && props.transaction.tokenOwner.walletAddress}
             </td>
-            <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500" data-label="Time">
+            <td className="px-6 py-4 whitespace-nowrap text-xs text-gray-500" data-label="Time">
                 <TimeAgo date={props.transaction.eventDateTime}/>
             </td>
             <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500" data-label="TX">
