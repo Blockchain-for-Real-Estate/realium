@@ -107,7 +107,7 @@ export function DetailsTable(props) {
                 <h2 className="text-lg leading-6 font-medium text-gray-900">Investment Details</h2>
                 <div className="mt-2 border-t-4 border-indigo-600 pt-4">
                 <p className="text-sm text-gray-600">
-                    Investment details outline how the deal is structured and what returns should be expected from participation
+                    Investment details outline how the deal is structured and what returns should be expected from participation.
                 </p>
                 </div>
                 </div>

@@ -99,7 +99,7 @@ export function Listing(props) {
                         {props.listing.propertyName}
                     </p>
                     <p className="mt-3 text-base text-gray-500">
-                        {`This property is a ${props.listing.propertyType} located in ${props.listing.city}, ${props.listing.state}.`}
+                        {`This property is a ${props.listing.propertyType.toLowerCase()} located in ${props.listing.city}, ${props.listing.state}.`}
                     </p>
                     {props.listing.listingType === "Residential" ?
                     <div className="mt-3 text-sm font-medium text-indigo-600">

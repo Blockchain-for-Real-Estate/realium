@@ -36,7 +36,7 @@ export function Commercial(props) {
                             Commercial Properties
                         </h2>
                         <p className="mt-3 max-w-2xl mx-auto text-xl text-gray-500 sm:mt-4">
-                            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ipsa libero labore natus atque, ducimus sed.
+                            View the properties that are currently available on the Realium marketplace and choose the best investment for you.
                         </p>
                     </div>
                     <div className="mt-12 max-w-lg mx-auto grid gap-5 lg:grid-cols-3 lg:max-w-none">
