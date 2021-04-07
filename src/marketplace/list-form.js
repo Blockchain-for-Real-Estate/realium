@@ -41,7 +41,7 @@ export function ListForm(props) {
             validationSchema={
                 Yup.object({
                     shares: Yup.string()
-                        .matches(/^(?<=\s|^)\d+(?=\s|$)/, "Enter a whole number of shares.")
+                        .matches(/^\s|^(\d)+(?=\s|$)/, "Enter a whole number of shares.")
                         .required("Enter a whole number of shares to list."),
                     price: Yup.number("Please enter a valid number of AVAX")
                         .min(1, "Enter a value over 0")
