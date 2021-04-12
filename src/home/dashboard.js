@@ -64,8 +64,6 @@ export function Dashboard(props) {
         fetchEvents()
     }, [id])
 
-    console.log(tokens)
-
     return (
         <>{tokens && events ?
             <div className="py-12 bg-gray-50 overflow-hidden sm:pb-12 lg:py-18">
