@@ -19,7 +19,7 @@ export function DetailsTable(props) {
         <div className="max-w-6xl mx-auto py-10 px-4 sm:px-6 lg:px-8">
             <div className="sm:flex sm:flex-col sm:align-center">
             <h1 className="mt-4 text-4xl font-extrabold text-gray-900 text-center">Property Statistics</h1>
-            <p className="mt-4 max-w-3xl mx-auto text-center text-xl text-gray-500">Breakdown {props.listing.propertyName} even further for your investment decisions. All details are updated live as listings are posted and transactions occur on the blockchain.</p>
+            <p className="mt-4 max-w-3xl mx-auto text-center text-xl text-gray-500">Break down {props.listing.propertyName} even further for your investment decisions. All details are updated live as listings are posted and transactions occur on the blockchain.</p>
 
             </div>
             <div className="mt-4 space-y-4 sm:mt-16 sm:space-y-0 sm:grid sm:grid-cols-1 sm:gap-6 lg:max-w-4xl lg:mx-auto xl:max-w-none xl:mx-0 xl:grid-cols-3">

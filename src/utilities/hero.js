@@ -22,7 +22,7 @@ export function Hero(props) {
         switch(page) {
             case 'howitworks':
                 return <>
-                <span className="block xl:inline">What Is Novel About the </span>
+                <span className="block xl:inline">What Is Novel About The </span>
                 <span className="block text-indigo-600 xl:inline">Realium</span>
                 <span className="block xl:inline"> Platform?</span>
             </>

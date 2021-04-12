@@ -74,7 +74,7 @@ export function Home(props) {
                             A better way to invest
                         </h2>
                         <p className="mt-4 max-w-3xl mx-auto text-center text-xl text-gray-500">
-                            Realium is takes away the headaches of traditional real estate investing, while still allowing users to take advantage of the real estate asset class.
+                            Realium takes away the headaches of traditional real estate investing, while still allowing users to take advantage of the real estate asset class.
                         </p>
                     </div>
                     <div className="relative mt-12 lg:mt-24 lg:grid lg:grid-cols-2 lg:gap-8 lg:items-center">
