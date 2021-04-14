@@ -94,9 +94,14 @@ export function Hero(props) {
                             </div>
                             <br/>
                             <div className="sm:mt-0 sm:ml-3">
-                            <Link to="/marketplace" className="w-full flex items-center justify-center px-8 py-3 border-transparent text-base font-medium rounded-md text-indigo-700 shadow hover:bg-indigo-200 md:py-4 md:text-lg md:px-10">
+                            {props.page === 'howitworks' ?
+                                <a href="https://docs.realium.io/" className="w-full flex items-center justify-center px-8 py-3 border-transparent text-base font-medium rounded-md text-indigo-700 shadow hover:bg-indigo-200 md:py-4 md:text-lg md:px-10">
+                                    Learn More
+                                </a>
+                            : <Link to="/marketplace" className="w-full flex items-center justify-center px-8 py-3 border-transparent text-base font-medium rounded-md text-indigo-700 shadow hover:bg-indigo-200 md:py-4 md:text-lg md:px-10">
                                 View Marketplace
                             </Link>
+                            }
                             </div>
                         </div>
                         </div>
