@@ -1,7 +1,7 @@
 import React from "react"
 import { Residential } from "./residential"
 import { Commercial } from "./commercial"
-import { CollapsableSection, FAQS } from "../utilities/collapsable-section"
+import { CollapsableSection, MARKETPLACE_FAQS } from "../utilities/collapsable-section"
 
 export function Marketplace(props) {
     return (
@@ -16,7 +16,7 @@ export function Marketplace(props) {
                             Frequently asked questions
                         </h2>
                         <dl className="mt-6 space-y-6 divide-y divide-gray-200">
-                            {FAQS.map(faq => (
+                            {MARKETPLACE_FAQS.map(faq => (
                                 <CollapsableSection
                                     title={faq.title}
                                     text={faq.text}

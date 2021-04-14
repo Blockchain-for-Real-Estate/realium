@@ -1,6 +1,6 @@
 import React from "react"
 import { Hero } from "../utilities/hero"
-import { CollapsableSection, FAQS } from "../utilities/collapsable-section"
+import { CollapsableSection, HOME_FAQS } from "../utilities/collapsable-section"
 import { Residential } from "../marketplace/residential"
 import hero_img from "../resources/images/hero-green.jpg"
 import home_feature from "../resources/images/home_feature.svg"
@@ -249,7 +249,7 @@ export function Home(props) {
                             Frequently asked questions
                         </h2>
                         <dl className="mt-6 space-y-6 divide-y divide-gray-200">
-                            {FAQS.map(faq => (
+                            {HOME_FAQS.map(faq => (
                                 <CollapsableSection
                                     title={faq.title}
                                     text={faq.text}
