@@ -2,12 +2,12 @@ import React from "react"
 import { Hero } from "../utilities/hero"
 import { CollapsableSection, HOW_IT_WORKS_FAQS } from "../utilities/collapsable-section"
 import hero_img from "../resources/images/hero-blue.jpg"
-import res from "../resources/images/residential_capital_stack.svg"
+import res from "../resources/images/residential-capital-stack.svg"
 import asset_table from "../resources/images/asset_table.svg"
 import brand_icon from "../resources/images/brand-icon.svg"
 import brand_icon2 from "../resources/images/brand-icon-2.svg"
 import brand_icon3 from "../resources/images/brand-icon-3.svg"
-import listing_example from "../resources/images/how-it-works-listing-example.svg"
+import listing_example from "../resources/images/transacting-a-property.svg"
 
 
 export function HowItWorks() {
@@ -27,10 +27,10 @@ export function HowItWorks() {
                     </div>
                 </div>
             </div>
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div className="space-y-4 sm:mt-16 sm:space-y-0 sm:grid sm:grid-cols-1 sm:gap-6 lg:max-w-4xl lg:mx-auto xl:max-w-none xl:mx-0 xl:grid-cols-2">
-                    <div className="flex-1">
-                        <img src={res} alt="Residential"/>
+            <div className="max-w-7xl mx-auto px-4 py-10 sm:px-6 lg:px-8">
+                <div className="lg:flex">
+                    <div className="flex-1 py-3">
+                        <img src={res} alt="Residential" className="mt-4"/>
                     </div>
                     <div className="flex-1">
                         <h2 className="text-3xl font-extrabold text-gray-900">Expanding the capital stack</h2>
@@ -115,7 +115,7 @@ export function HowItWorks() {
                             </div>
                         </div>
                     </div>
-                    <div className="flex-1">
+                    <div className="flex justify-end">
                         <img src={listing_example} alt="listing example" />
                     </div>
                 </div>
