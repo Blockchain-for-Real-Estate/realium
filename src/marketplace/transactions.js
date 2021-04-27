@@ -6,6 +6,10 @@ import { ApiEventService } from "../api/services/event.service"
 
 export function Transactions(props) {
     let [transactions, setTransactions] = React.useState([])
+    let [currentPage, setCurrentPage] = React.useState(1)
+    let [startRange, setStartRange] = React.useState(1)
+    let [endRange, setEndRange] = React.useState(10)
+    let pages = []
     const setNotify = props.setNotify
     const listing = props.listing
 
@@ -26,6 +30,12 @@ export function Transactions(props) {
         }
     }, [listing, setNotify])
 
+    var i,j,temparray,chunk = 10;
+    for (i=0,j=transactions.length; i<j; i+=chunk) {
+        temparray = transactions.slice(i,i+chunk);
+        pages.push(temparray)
+    }
+
     return (
         /* Transactions Table */
         <div className="mt-4 max-w-7xl mx-auto py-10 px-4 sm:px-6 lg:px-8">
@@ -35,7 +45,7 @@ export function Transactions(props) {
                     <p className="mt-4 max-w-3xl mx-auto text-center text-xl text-gray-500">View recent blockchain transaction activity for {props.listing.propertyName}. Navigate to see transaction-specific details provided by AvaxScan.</p>
 
                 </div>
-                {transactions &&
+                {transactions && pages &&
                 <div className="flex flex-col">
                     <div className="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
                         <div className="py-8 align-middle inline-block min-w-full sm:px-6 lg:px-8">
@@ -65,7 +75,7 @@ export function Transactions(props) {
                                         </tr>
                                     </thead>
                                     <tbody className="bg-white divide-y-2 divide-gray-300 sm:divide-y sm:divide-gray-200">
-                                        {transactions.map(transaction => <TransactionRow key={transaction.eventId} transaction={transaction} />)}
+                                        {pages[currentPage-1].map(transaction => <TransactionRow key={transaction.eventId} transaction={transaction} />)}
                                     </tbody>
                                     </table>
                                 :
@@ -73,6 +83,41 @@ export function Transactions(props) {
                                         No history to show
                                     </div>
                                 }
+                                <nav
+                                className="bg-white px-4 py-3 flex items-center justify-between border-t border-gray-200 sm:px-6"
+                                aria-label="Pagination"
+                                >
+                                <div className="hidden sm:block">
+                                    <p className="text-sm text-gray-700">
+                                    Showing <span className="font-medium">{startRange}</span> to <span className="font-medium">{endRange}</span> of{' '}
+                                    <span className="font-medium">{transactions.length}</span> results
+                                    </p>
+                                </div>
+                                <div className="flex-1 flex justify-between sm:justify-end">
+                                    {currentPage>1 ? 
+                                    <button
+                                    onClick={() => {
+                                        setCurrentPage(currentPage-1)
+                                        setStartRange(startRange-10)
+                                        setEndRange(endRange-pages[currentPage-1].length)
+                                    }}
+                                    className="relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50"
+                                    >
+                                    Previous
+                                    </button>: null }
+                                    {currentPage<pages.length ? 
+                                    <button
+                                    onClick={() => {
+                                        setCurrentPage(currentPage+1)
+                                        setStartRange(startRange+10)
+                                        setEndRange(endRange+pages[currentPage].length)
+                                    }}
+                                    className="ml-3 relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50"
+                                    >
+                                    Next
+                                    </button>: null }
+                                </div>
+                                </nav>
                             </div>
                         </div>
                     </div>
