@@ -25,6 +25,10 @@ export function Dashboard(props) {
     const [tokens, setTokens] = React.useState()
     const [events, setEvents] = React.useState()
     const [reloadAll, setReload] = React.useState(0)
+    let [currentPage, setCurrentPage] = React.useState(1)
+    let [startRange, setStartRange] = React.useState(1)
+    let [endRange, setEndRange] = React.useState(10)
+    let pages = []
     let alreadyListed = ""
 
     const residentialImages = [
@@ -65,8 +69,18 @@ export function Dashboard(props) {
         fetchEvents()
     }, [id])
 
+    if (events) {
+        var i,j,temparray,chunk = 10;
+        for (i=0,j=events.length; i<j; i+=chunk) {
+            temparray = events.slice(i,i+chunk);
+            pages.push(temparray)
+        }
+    }
+
+    console.log(currentPage)
+
     return (
-        <>{tokens && events ?
+        <>{tokens && events && pages ?
             <>
                 <div className="py-12 bg-gray-50 overflow-hidden sm:pb-12 lg:py-18">
                 <div className="max-w-xl mx-auto px-8 sm:px-6 lg:px-8 lg:max-w-7xl">
@@ -200,23 +214,23 @@ export function Dashboard(props) {
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    {Object.keys(events).map((key) => (
+                                    {Object.keys(pages[currentPage-1]).map((key) => (
                                     <tr key={key} className="bg-white m-4 border-b border-gray-200 shadow-md rounded-md">
                                     <td className="px-6 py-4 whitespace-nowrap text-xs font-medium text-gray-900" data-label="Time">
                                         <TimeAgo date={events[key].eventDateTime} locale="en-US"/>
                                     </td>
                                     <td className="px-6 py-4 whitespace-nowrap text-xs text-gray-500" data-label="Event">
-                                        {events[key].eventType}
+                                        {pages[currentPage-1][key].eventType}
                                     </td>
                                     <td className="px-6 py-4 whitespace-nowrap flex items-center text-xs text-gray-500" data-label="Quantity">
                                         <NumberFormat
-                                            value={events[key].quantity}
+                                            value={pages[currentPage-1][key].quantity}
                                             displayType={'text'}
                                             thousandSeparator={true}
                                         />
                                         <div className="px-1">@</div>
                                         <NumberFormat
-                                                value={events[key].listedPrice}
+                                                value={pages[currentPage-1][key].listedPrice}
                                                 displayType={'text'}
                                                 thousandSeparator={true}
                                         />
@@ -227,12 +241,12 @@ export function Dashboard(props) {
                                         </div>
                                     </td>
                                     <td className="px-6 py-4 whitespace-nowrap text-xs text-gray-500" data-label="Asset">
-                                        {events[key].property.streetAddress}
+                                        {pages[currentPage-1][key].property.streetAddress}
                                     </td>
                                     <td className="px-6 py-4 whitespace-nowrap text-xs font-medium justify-end" data-label="Tx">
-                                        {events[key].eventType === "SALE" &&
+                                        {pages[currentPage-1][key].eventType === "SALE" &&
                                             <div className="object-right">
-                                                <a href={`https://testnet.avascan.info/blockchain/x/tx/${events[key].txNFTId}`} className="text-indigo-600 hover:text-indigo-900" target="_blank" rel="noreferrer">
+                                                <a href={`https://testnet.avascan.info/blockchain/x/tx/${pages[currentPage-1][key].txNFTId}`} className="text-indigo-600 hover:text-indigo-900" target="_blank" rel="noreferrer">
                                                     <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                         <path d="M8.3335 5.00016H5.00016C4.07969 5.00016 3.3335 5.74635 3.3335 6.66683V15.0002C3.3335 15.9206 4.07969 16.6668 5.00016 16.6668H13.3335C14.254 16.6668 15.0002 15.9206 15.0002 15.0002V11.6668M11.6668 3.3335H16.6668M16.6668 3.3335V8.3335M16.6668 3.3335L8.3335 11.6668" stroke="#4F46E5" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
                                                     </svg>
@@ -244,6 +258,41 @@ export function Dashboard(props) {
                                     ))}
                                 </tbody>
                                 </table>
+                                <nav
+                                className="bg-gray-100 px-4 py-3 flex items-center justify-between sm:px-6"
+                                aria-label="Pagination"
+                                >
+                                <div className="hidden sm:block">
+                                    <p className="text-sm text-gray-700">
+                                    Showing <span className="font-medium">{startRange}</span> to <span className="font-medium">{endRange}</span> of{' '}
+                                    <span className="font-medium">{events.length}</span> results
+                                    </p>
+                                </div>
+                                <div className="flex-1 flex justify-between sm:justify-end">
+                                    {currentPage>1 ? 
+                                    <button
+                                    onClick={() => {
+                                        setCurrentPage(currentPage-1)
+                                        setStartRange(startRange-10)
+                                        setEndRange(endRange-pages[currentPage-1].length)
+                                    }}
+                                    className="relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50"
+                                    >
+                                    Previous
+                                    </button>: null }
+                                    {currentPage<pages.length ? 
+                                    <button
+                                    onClick={() => {
+                                        setCurrentPage(currentPage+1)
+                                        setStartRange(startRange+10)
+                                        setEndRange(endRange+pages[currentPage].length)
+                                    }}
+                                    className="ml-3 relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50"
+                                    >
+                                    Next
+                                    </button>: null }
+                                </div>
+                                </nav>
                             </div>
                             </div>
                         </div>
