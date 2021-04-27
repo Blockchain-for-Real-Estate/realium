@@ -117,12 +117,12 @@ export function Dashboard(props) {
                                 alreadyListed = lodash.groupBy(tokens[key], "listed"),
                             <div key={key} className="relative rounded-lg border border-gray-300 bg-white shadow-md flex items-center space-x-3 hover:border-gray-400 focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-indigo-500">
                                 <div className="grid grid-cols-1 sm:flex sm:flex-cols items-center">
-                                <Link to={`/marketplace/${tokens[key][0].property.propertyId}`} className="flex-shrink-0">
+                                <Link to={`/marketplace/${tokens[key][0].property.propertyId}`} className="flex-shrink-0" style={{textDecoration: "none"}}>
                                     <img className="h-48 w-full object-fill rounded-t-md sm:w-48 sm:h-full sm:object-fill sm:rounded-l-sm sm:rounded-tr-none" src={residentialImages[tokens[key][0].property.propertyId-1]} alt=""/>
                                 </Link>
                                 <div className="flex-1 min-w-0 space-x-2 pt-2 pb-2 pl-2">
                                     <div className="grid grid-cols-1 sm:grid-cols-3 sm:align-middle sm:items-center">
-                                        <Link to={`/marketplace/${tokens[key][0].property.propertyId}`} className="text-black font-semibold grid grid-cols-2 mr-8 sm:mr-1 text-center sm:text-left sm:grid-cols-1 sm:m-2">
+                                        <Link to={`/marketplace/${tokens[key][0].property.propertyId}`} className="text-black font-semibold grid grid-cols-2 mr-8 sm:mr-1 text-center sm:text-left sm:grid-cols-1 sm:m-2" style={{textDecoration: "none"}}>
                                             Address
                                             <p className="text-xs text-gray-500 pt-1 text-center sm:text-left mb-0">
                                                 {tokens[key][0].property.streetAddress}
@@ -130,7 +130,7 @@ export function Dashboard(props) {
                                                 {tokens[key][0].property.city}, {tokens[key][0].property.state}
                                             </p>
                                         </Link>
-                                        <Link to={`/marketplace/${tokens[key][0].property.propertyId}`} className="text-black font-semibold grid grid-cols-2 mr-8 sm:mr-1 text-center sm:text-left sm:grid-cols-1 sm:m-2">
+                                        <Link to={`/marketplace/${tokens[key][0].property.propertyId}`} className="text-black font-semibold grid grid-cols-2 mr-8 sm:mr-1 text-center sm:text-left sm:grid-cols-1 sm:m-2" style={{textDecoration: "none"}}>
                                             Shares:
                                             <p className="text-xs text-gray-500 pt-1 text-center sm:text-left mb-0">
                                                 {alreadyListed['true'] ?
@@ -247,7 +247,7 @@ export function Dashboard(props) {
                                         {pages[currentPage-1][key].eventType === "SALE" &&
                                             <div className="object-right">
                                                 <a href={`https://testnet.avascan.info/blockchain/x/tx/${pages[currentPage-1][key].txNFTId}`} className="text-indigo-600 hover:text-indigo-900" target="_blank" rel="noreferrer">
-                                                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                    <svg width="16" height="16" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                         <path d="M8.3335 5.00016H5.00016C4.07969 5.00016 3.3335 5.74635 3.3335 6.66683V15.0002C3.3335 15.9206 4.07969 16.6668 5.00016 16.6668H13.3335C14.254 16.6668 15.0002 15.9206 15.0002 15.0002V11.6668M11.6668 3.3335H16.6668M16.6668 3.3335V8.3335M16.6668 3.3335L8.3335 11.6668" stroke="#4F46E5" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
                                                     </svg>
                                                 </a>
