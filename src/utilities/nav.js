@@ -22,7 +22,7 @@ export function Nav(props) {
         setProfileMenu(false)
         history.push("/")
         window.location.reload()
-        window.alert("For best security, be sure disconnect your MetaMask wallet in your browser.")
+        window.alert("For best security, be sure to disconnect your MetaMask wallet in your browser.")
     }
 
     function start_and_end(str) {
