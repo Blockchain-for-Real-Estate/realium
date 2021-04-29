@@ -77,8 +77,6 @@ export function Dashboard(props) {
         }
     }
 
-    console.log(currentPage)
-
     return (
         <>{tokens && events && pages ?
             <>
