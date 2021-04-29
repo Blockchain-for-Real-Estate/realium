@@ -20,6 +20,7 @@ function App() {
 												show: true})
 	const [avaxAccount, setAvaxAccount] = React.useState();
 	const [balance, setBalance] = React.useState(0);
+	const [contract, setContract] = React.useState();
 
 	React.useEffect(() => {
 		const checkWeb3 = async () => {
@@ -27,7 +28,7 @@ function App() {
 			await loadBlockchainData();
 		}
 		checkWeb3();
-	})
+	}, []);
 
 	async function loadWeb3() {
 		if (window.ethereum) {
@@ -58,10 +59,19 @@ function App() {
 		//const networkData = PropertyNotary.networks[networkId]
 		if (networkId === "private") {
 			const abi = PropertyNotary.abi;
-			const address = "0x5FbDB2315678afecb367f032d93F642f64180aa3"; //networkData.address;
+			const address = "0xccf9D57d9a0468829D6DdC9bE54538b89a37a6da"; //networkData.address;
 			const smartContract = new web3.eth.Contract(abi, address);
 			//view the smart contract in the console ready to call on
-			console.log(smartContract)
+			setContract(smartContract);
+			console.log(smartContract);
+			const totalSupply = await smartContract.methods.totalSupply().call();
+			//console.log("total supply: " + totalSupply);
+			let properties = [];
+			for (var i = 1; i <= totalSupply; i++) {
+				const property = await smartContract.methods.properties(i-1).call();
+				properties.push(property);
+			}
+			//console.log(properties);
 		} else {
 			window.alert("No smart contract detected on network - transactions are disabled. Make sure your MetaMask network is on Avalanche FUJI.");
 		}
@@ -69,7 +79,7 @@ function App() {
 
 	return (
 		<Router>
-			<Nav account={avaxAccount} balance={balance}/>
+			<Nav account={avaxAccount} balance={balance} smartContract={contract}/>
 			<Notification notify={notify} setNotify={setNotify}/>
 			<ScrollToTop>
 				<Switch>

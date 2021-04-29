@@ -10,6 +10,7 @@ export function Nav(props) {
     let location = useLocation()
     let route = location.pathname.split("/")[1]
     let history = useHistory();
+    let smartContract = props.smartContract;
     let [balance, setBalance] = React.useState()
     let [avaxPrice, setAvaxPrice] = React.useState()
     let [currency, setCurrency] = React.useState(true)
@@ -68,6 +69,12 @@ export function Nav(props) {
     useInterval(() => {
         setPollInterval(pollInterval + 1)
     }, 5000)
+
+    async function mint() {
+        await smartContract.methods.createProperty('REALIUM', 15).call();
+        const token = smartContract.methods.properties(0).call();
+        console.log(token);
+    }
 
     return (
         <nav className="bg-white shadow">
@@ -141,6 +148,12 @@ export function Nav(props) {
                                             Connect MetaMask account
                                         </button>
                                         }
+                                        <Link to="/dashboard" className="block px-3 py-2 rounded-md text-xs font-xs text-gray-500 text-decoration-none hover:bg-gray-100" 
+                                            onClick={() => {
+                                                mint()
+                                            }}>
+                                            MINT TOKEN
+                                        </Link>
                                         <Link to="/dashboard" onClick={() => setProfileMenu(!profileMenu)} className="block px-3 py-2 rounded-md text-sm font-medium text-gray-700 hover:text-gray-100 hover:bg-indigo-500 text-decoration-none">
                                             Dashboard
                                         </Link>
