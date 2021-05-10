@@ -10,6 +10,7 @@ export function Nav(props) {
     let location = useLocation()
     let route = location.pathname.split("/")[1]
     let history = useHistory();
+    let smartContract = props.smartContract;
     let [balance, setBalance] = React.useState()
     let [avaxPrice, setAvaxPrice] = React.useState()
     let [currency, setCurrency] = React.useState(true)
@@ -22,7 +23,15 @@ export function Nav(props) {
         setProfileMenu(false)
         history.push("/")
         window.location.reload()
+        window.alert("For best security, be sure to disconnect your MetaMask wallet in your browser.")
     }
+
+    function start_and_end(str) {
+        if (str.length > 18) {
+          return str.substr(0, 8) + '...' + str.substr(str.length-8, str.length);
+        }
+        return str;
+      }
 
     React.useEffect(() => {
         let wallet = sessionStorage.getItem('avax')
@@ -31,7 +40,8 @@ export function Nav(props) {
                 let balanceService = new ApiBalanceService()
                 await balanceService.getBalance(wallet).then(
                     (res) => {
-                        setBalance(Number(res.data.result.balance)/1000000000) //AVAX uses a demonination of 9
+                        setBalance(props.balance.toFixed(4));
+                        //setBalance(Number(res.data.result.balance)/1000000000) //AVAX uses a demonination of 9
                     }
                 )
             } catch {
@@ -54,11 +64,17 @@ export function Nav(props) {
 
         fetchBalance()
         getCurrentAvaxPrice()
-    }, [pollInterval])
+    }, [pollInterval, props.balance])
 
     useInterval(() => {
         setPollInterval(pollInterval + 1)
     }, 5000)
+
+    async function mint() {
+        await smartContract.methods.createProperty('REALIUM', 15).call();
+        const token = smartContract.methods.properties(0).call();
+        console.log(token);
+    }
 
     return (
         <nav className="bg-white shadow">
@@ -116,9 +132,28 @@ export function Nav(props) {
                                         </button>
                                     </div>
                                     <div className={`${!profileMenu ? "hidden" : null } z-50 origin-top-right absolute right-8 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none`} style={{'zIndex': '1000'}}>
-                                        <h1 to="/" onClick={ (event) => event.preventDefault() } className="block px-3 py-2 rounded-md text-sm font-medium font-bold text-indigo-800 text-decoration-none">
+                                        <h1 onClick={ (event) => event.preventDefault() } className="block px-3 py-2 rounded-md text-sm font-medium font-bold text-indigo-800 text-decoration-none">
                                             {sessionStorage.getItem("user")}
                                         </h1>
+                                        {props.account !== undefined ?
+                                        <h4 className="block px-3 py-2 rounded-md text-xs font-xs text-gray-500 text-decoration-none break-all">
+                                            {start_and_end(props.account)}
+                                        </h4>
+                                        :
+                                        <button  className="block px-3 py-2 rounded-md text-xs font-xs text-gray-500 text-decoration-none" 
+                                            onClick={async () => {
+                                                await props.loadWeb3()
+                                                history.go(0)
+                                            }}>
+                                            Connect MetaMask account
+                                        </button>
+                                        }
+                                        <Link to="/dashboard" className="block px-3 py-2 rounded-md text-xs font-xs text-gray-500 text-decoration-none hover:bg-gray-100" 
+                                            onClick={() => {
+                                                mint()
+                                            }}>
+                                            MINT TOKEN
+                                        </Link>
                                         <Link to="/dashboard" onClick={() => setProfileMenu(!profileMenu)} className="block px-3 py-2 rounded-md text-sm font-medium text-gray-700 hover:text-gray-100 hover:bg-indigo-500 text-decoration-none">
                                             Dashboard
                                         </Link>
