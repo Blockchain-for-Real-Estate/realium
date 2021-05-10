@@ -74,9 +74,11 @@ export function Transactions(props) {
                                             </th>
                                         </tr>
                                     </thead>
+                                    {pages[0] !== undefined && pages[0] !== null ?
                                     <tbody className="bg-white divide-y-2 divide-gray-300 sm:divide-y sm:divide-gray-200">
                                         {pages[currentPage-1].map(transaction => <TransactionRow key={transaction.eventId} transaction={transaction} />)}
                                     </tbody>
+                                    : null }
                                     </table>
                                 :
                                     <div className="content-center flex flex-wrap font-medium h-24 justify-center text-gray-500">

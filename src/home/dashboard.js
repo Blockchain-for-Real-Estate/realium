@@ -212,7 +212,8 @@ export function Dashboard(props) {
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    {Object.keys(pages[currentPage-1]).map((key) => (
+                                    {pages[0] !== undefined && pages[0] !== null ?
+                                    Object.keys(pages[currentPage-1]).map((key) => (
                                     <tr key={key} className="bg-white m-4 border-b border-gray-200 shadow-md rounded-md">
                                     <td className="px-6 py-4 whitespace-nowrap text-xs font-medium text-gray-900" data-label="Time">
                                         <TimeAgo date={events[key].eventDateTime} locale="en-US"/>
@@ -253,9 +254,11 @@ export function Dashboard(props) {
                                         }
                                     </td>
                                     </tr>
-                                    ))}
+                                    ))
+                                : null }
                                 </tbody>
                                 </table>
+                                {pages.length>0 ?
                                 <nav
                                 className="bg-gray-100 px-4 py-3 flex items-center justify-between sm:px-6"
                                 aria-label="Pagination"
@@ -291,6 +294,7 @@ export function Dashboard(props) {
                                     </button>: null }
                                 </div>
                                 </nav>
+                                : null }
                             </div>
                             </div>
                         </div>
