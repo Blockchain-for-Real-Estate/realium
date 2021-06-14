@@ -12,42 +12,50 @@ import "./modal.css"
 
 export function Purchase(props) {
     let { propertyId } = useParams()
-    let [tokens, setTokens] = useState('')
+    let [tokens, setTokens] = useState()
     let rows = []
     const setNotify = props.setNotify
 
     React.useEffect(() => {
-        const fetchTokens = async () => {
-            try {
-                let tokenService = new ApiTokenService()
-                await tokenService.getListedTokensForPropertyId(propertyId).then(
-                    res => {
-                        let tokenArr = res.data.filter(token => token.owner.realiumUserId !== Number(sessionStorage.getItem('id')))
-                        setTokens(lodash.groupBy(tokenArr, "owner.realiumUserId"))
-                    }
-                )
-            } catch(error) {
-                setTokens(null)
-                setNotify && setNotify({ msg: `There was an error getting listings for this property.`,
-                                        color: 'red',
-                                        show: true })
-                console.error(error)
-            }
-        };
+        var listings = props.smartContract.methods.getListings().call()
+        setTokens(listings)
+        console.log(listings)
+    })
 
-        fetchTokens()
-    }, [propertyId, setNotify])
+    // React.useEffect(() => {
+    //     const fetchTokens = async () => {
+    //         try {
+    //             let tokenService = new ApiTokenService()
+    //             await tokenService.getListedTokensForPropertyId(propertyId).then(
+    //                 res => {
+    //                     let tokenArr = res.data.filter(token => token.owner.realiumUserId !== Number(sessionStorage.getItem('id')))
+    //                     setTokens(lodash.groupBy(tokenArr, "owner.realiumUserId"))
+    //                 }
+    //             )
+    //         } catch(error) {
+    //             setTokens(null)
+    //             setNotify && setNotify({ msg: `There was an error getting listings for this property.`,
+    //                                     color: 'red',
+    //                                     show: true })
+    //             console.error(error)
+    //         }
+    //     };
+
+    //     fetchTokens()
+    // }, [propertyId, setNotify])
 
     function randomDate(start, end) {
         return new Date(start.getTime() + Math.random() * (end.getTime() - start.getTime()));
     }
 
-    Object.keys(tokens).forEach((key) => {
-        var dataset = lodash.groupBy(tokens[key], "listedPrice")
-        Object.entries(dataset).forEach((entry) => {
-            rows.push(entry[1])
-        })
-    })
+    // Object.keys(tokens).forEach((key) => {
+    //     var dataset = lodash.groupBy(tokens[key], "listedPrice")
+    //     Object.entries(dataset).forEach((entry) => {
+    //         rows.push(entry[1])
+    //     })
+    // })
+
+    // TODO: Need to loop through all of the listings, take out the ones that are 0 and then sort by price
 
     return (
         <>

@@ -19,6 +19,7 @@ export interface Property {
     acerage: number;
     llc: string;
     seriesCount: number;
+    smartContract: string;
     details: {
         bedrooms: number;
         bathrooms: number;

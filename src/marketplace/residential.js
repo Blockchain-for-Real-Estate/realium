@@ -14,10 +14,11 @@ export function Residential(props) {
 
     useEffect(() => {
         const getAllProperties = async () => {
-            let assetApiService = new ApiPropertyService();
-            await assetApiService.getAssets().then(
+            let propertyApiService = new ApiPropertyService();
+            await propertyApiService.getAssets().then(
                 (res) => {
                     const properties = res.data
+                    console.log(properties)
                     setListings(properties)
                 }
             ).catch(error => {
@@ -60,6 +61,7 @@ export function Residential(props) {
                         {Object.keys(listings).map((key) => (
                             <div key={key} className="l-grid__item">
                                 <Listing listing={listings[key]} index={listings[key].propertyId - 1} setNotify={setNotify}/>
+                                {console.log(listings[key].propertyId)}
                             </div>
                         ))}
                     </div>

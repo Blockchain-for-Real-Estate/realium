@@ -69,7 +69,7 @@ export function Modal(props) {
             </div>
               :
               <div className="relative pl-6 pr-6 flex-auto">
-              <Purchase id={props.id} setNotify={setNotify}/>
+              <Purchase id={props.id} setNotify={setNotify} smartContract={props.smartContract}/>
               </div>
               }
               {/*footer*/}
