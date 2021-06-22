@@ -11,14 +11,14 @@ import { Footer } from "./utilities/footer"
 import { Nav } from "./utilities/nav"
 import { Notification } from "./utilities/notification"
 import { ListingDetails } from "./marketplace/listing-details"
-import Realium from './abis/RealiumERC20.json'
-import Web3 from "web3";
+// import Realium from './abis/RealiumERC20.json'
+// import Web3 from "web3";
 
 function App() {
 	const [notify, setNotify] = React.useState({msg: 'Welcome to Realium! We are currently in testing mode so funds and properties are not real for now.',
 												color: 'blue',
 												show: true})
-	const [avaxAccount, setAvaxAccount] = React.useState();
+	// const [avaxAccount, setAvaxAccount] = React.useState();
 	const [balance, setBalance] = React.useState(0);
 	const [contract, setContract] = React.useState();
 
@@ -28,6 +28,8 @@ function App() {
 		// 	await loadBlockchainData();
 		// }
 		// checkWeb3();
+		setContract()
+		setBalance(0)
 	}, []);
 
 	// async function loadWeb3() {
@@ -93,7 +95,7 @@ function App() {
 
 	return (
 		<Router>
-			<Nav account={avaxAccount} balance={balance} smartContract={contract}/>
+			<Nav balance={balance} smartContract={contract}/>
 			<Notification notify={notify} setNotify={setNotify}/>
 			<ScrollToTop>
 				<Switch>

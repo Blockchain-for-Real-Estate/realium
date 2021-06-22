@@ -6,7 +6,7 @@ import { Link } from "react-router-dom"
 import { ListForm } from "./list-form"
 import { ApiBalanceService } from "../api/services/balance.service"
 import Realium from '../abis/RealiumERC20.json'
-import Web3 from "web3";
+// import Web3 from "web3";
 
 export function BuyListOffer(props) {
     let history = useHistory()
@@ -17,7 +17,7 @@ export function BuyListOffer(props) {
     const setNotify = props.setNotify
 
     React.useEffect(() => {
-        console.log(props.listings)
+
         let wallet = sessionStorage.getItem('avax')
         const fetchBalance = async () => {
             try {
@@ -34,7 +34,7 @@ export function BuyListOffer(props) {
         setSmartContract(new window.web3.eth.Contract(Realium.abi, props.smartContract));
 
         fetchBalance()
-    }, [])
+    }, [props.smartContract])
 
     const [values, setValues] = React.useState({
         shares:'',

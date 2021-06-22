@@ -1,21 +1,21 @@
 import React, { useState } from 'react'
-import TimeAgo from 'react-timeago'
-import lodash from 'lodash'
+// import TimeAgo from 'react-timeago'
+// import lodash from 'lodash'
 import LoadingWave from "@bit/ngoue.playground.loading-wave"
-import { useParams } from "react-router-dom"
+// import { useParams } from "react-router-dom"
 
 import NumberFormat from "react-number-format"
-import { ApiTokenService } from "../api/services/token.service"
+// import { ApiTokenService } from "../api/services/token.service"
 //import { ApiEventService } from "../api/services/event.service"
 import { Confirmation } from './confirmation';
 import "./modal.css"
 
 export function Purchase(props) {
-    let { propertyId } = useParams()
+    // let { propertyId } = useParams()
     let [tokens, setTokens] = useState()
-    let rows = []
+    // let rows = []
     const setNotify = props.setNotify
-    let [listings,setListings] = useState([])
+    let [listings] = useState([])
 
     React.useEffect(() => {
         // var listings = await props.smartContract.methods.getListings().call()
@@ -31,7 +31,7 @@ export function Purchase(props) {
         }
 
         getListings()
-    })
+    },[props.listings, listings])
 
     // React.useEffect(() => {
     //     const fetchTokens = async () => {
@@ -55,9 +55,9 @@ export function Purchase(props) {
     //     fetchTokens()
     // }, [propertyId, setNotify])
 
-    function randomDate(start, end) {
-        return new Date(start.getTime() + Math.random() * (end.getTime() - start.getTime()));
-    }
+    // function randomDate(start, end) {
+    //     return new Date(start.getTime() + Math.random() * (end.getTime() - start.getTime()));
+    // }
 
     // Object.keys(tokens).forEach((key) => {
     //     var dataset = lodash.groupBy(tokens[key], "listedPrice")
