@@ -6,11 +6,11 @@ import LoadingWave from "@bit/ngoue.playground.loading-wave"
 import { Breadcrumbs } from "../utilities/breadcrumbs"
 import { AppContainer } from "../utilities/app-container"
 import { ApiPropertyService } from '../api/services/property.service'
-import { ApiTokenService } from '../api/services/token.service'
-import { ApiEventService } from "../api/services/event.service"
-import { Transactions } from "./transactions"
+// import { ApiTokenService } from '../api/services/token.service'
+// import { ApiEventService } from "../api/services/event.service"
+// import { Transactions } from "./transactions"
 import { BuyListOffer } from "./buy-list-offer"
-import { DetailsTable } from "./details-table"
+// import { DetailsTable } from "./details-table"
 import Realium from '../abis/RealiumERC20.json'
 import Web3 from "web3";
 
@@ -94,13 +94,13 @@ export function ListingDetails(props) {
     const { propertyId } = useParams()
     const [listing, setListing] = React.useState()
     // const [token, setToken] = React.useState()
-    const [transactions, setTransactions] = React.useState()
-    const [smartContractAddress, setSmartContractAddress] = React.useState('')
+    // const [transactions, setTransactions] = React.useState()
+    // const [smartContractAddress, setSmartContractAddress] = React.useState('')
     const [carousel, setCarousel] = React.useState(imgPackages[propertyId])
     const setNotify = props.setNotify
-    const [avaxAccount, setAvaxAccount] = React.useState();
-	const [balance, setBalance] = React.useState(0);
-	const [contract, setContract] = React.useState();
+    // const [avaxAccount, setAvaxAccount] = React.useState();
+	// const [balance, setBalance] = React.useState(0);
+	// const [contract, setContract] = React.useState();
     const [listingsForSale, setListingsForSale] = React.useState([])
 
     function changeImage(id) {
@@ -119,77 +119,83 @@ export function ListingDetails(props) {
 	// 	checkWeb3();
 	// }, []);
 
-	async function loadWeb3() {
-		if (window.ethereum) {
-			window.web3 = new Web3(window.ethereum);
-			await window.ethereum.enable();
-		}
-		else if (window.web3) {
-			window.web3 = new Web3(window.web3.currentProvider);
-		}
-		else {
-			window.alert('Non-Ethereum browser detected; consider using MetaMask.');
-		}
-	}
 
-    const checkWeb3 = async () => {
-        await loadWeb3();
-        await loadBlockchainData();
-    }
 
-    const fetchData = async () => {
-        try {
-            let assetViaApi = new ApiPropertyService()
-            await assetViaApi.getAssetById(propertyId).then(
-                res => {
-                    setListing(res.data[0])
-                    setSmartContractAddress(res.data[0].smartContract)
-                }
-            )
-        } catch {
-            setNotify && setNotify({ msg: `There was an error loading data for this property.`,
-                                    color: 'red',
-                                    show: true })
-        }
-    };
+
 
     React.useEffect(() => {
+        async function loadBlockchainData() {
+            const web3 = window.web3;
+            //Load account
+            const accounts = await web3.eth.getAccounts();
+            await web3.eth.getBalance(accounts[0]).then(
+                (res) => {
+                    // setBalance(res/1000000000000000000);
+                }
+            )
+            // setAvaxAccount(accounts[0]);
+    
+            //THESE LINES WILL NEED TO CALL THE NETWORK TO GET THE ADDRESS WHERE THE CONTRACT IS DEPLOYED AND REPLACE THE HARD CODED ADDRESS
+            const networkId = await web3.eth.net.getNetworkType();
+            //const networkData = PropertyNotary.networks[networkId]
+            if (networkId === "private") {
+                const abi = Realium.abi;
+                // const address = smartContractAddress;
+                const address = '0xdf525FA1d9A0A74d501f386804aFEF86a2593550';
+                const smartContract = new web3.eth.Contract(abi, address);
+                // console.log(smartContract)
+                // console.log(await smartContract.methods.totalSupply().call())
+                // // console.log(await smartContract.methods.listProperty(1,1).send({from:accounts[0]}))
+                setListingsForSale(await smartContract.methods.getListings().call())
+                // console.log(accounts)
+                // console.log(await smartContract.methods.buyPropertyToken('0x8302b71882F2Ee96Ac20Ecf83926E6c9B7A530E4').send({from:accounts[0]}))
+    
+                //https://web3js.readthedocs.io/en/v1.2.0/web3-eth-contract.html#contract-send
+            } else {
+                window.alert("No smart contract detected on network - transactions are disabled. Make sure your MetaMask network is on Avalanche FUJI.");
+            }
+        }
 
+        const fetchData = async () => {
+            try {
+                let assetViaApi = new ApiPropertyService()
+                await assetViaApi.getAssetById(propertyId).then(
+                    res => {
+                        setListing(res.data[0])
+                        // setSmartContractAddress(res.data[0].smartContract)
+                    }
+                )
+            } catch {
+                setNotify && setNotify({ msg: `There was an error loading data for this property.`,
+                                        color: 'red',
+                                        show: true })
+            }
+        };
+
+
+        async function loadWeb3() {
+            setListingsForSale()
+            if (window.ethereum) {
+                window.web3 = new Web3(window.ethereum);
+                await window.ethereum.enable();
+            }
+            else if (window.web3) {
+                window.web3 = new Web3(window.web3.currentProvider);
+            }
+            else {
+                window.alert('Non-Ethereum browser detected; consider using MetaMask.');
+            }
+        }
+
+        const checkWeb3 = async () => {
+            await loadWeb3();
+            await loadBlockchainData();
+        }
         fetchData();
         checkWeb3()
     }, [propertyId, setNotify])
 
-    async function loadBlockchainData() {
-		const web3 = window.web3;
-		//Load account
-		const accounts = await web3.eth.getAccounts();
-		await web3.eth.getBalance(accounts[0]).then(
-			(res) => {
-				setBalance(res/1000000000000000000);
-			}
-		)
-		setAvaxAccount(accounts[0]);
 
-		//THESE LINES WILL NEED TO CALL THE NETWORK TO GET THE ADDRESS WHERE THE CONTRACT IS DEPLOYED AND REPLACE THE HARD CODED ADDRESS
-		const networkId = await web3.eth.net.getNetworkType();
-		//const networkData = PropertyNotary.networks[networkId]
-		if (networkId === "private") {
-			const abi = Realium.abi;
-            // const address = smartContractAddress;
-            const address = '0xdf525FA1d9A0A74d501f386804aFEF86a2593550';
-			const smartContract = new web3.eth.Contract(abi, address);
-			// console.log(smartContract)
-			// console.log(await smartContract.methods.totalSupply().call())
-			// // console.log(await smartContract.methods.listProperty(1,1).send({from:accounts[0]}))
-			window.setTimeout(setListingsForSale(await smartContract.methods.getListings().call()),100000)
-			// console.log(accounts)
-			// console.log(await smartContract.methods.buyPropertyToken('0x8302b71882F2Ee96Ac20Ecf83926E6c9B7A530E4').send({from:accounts[0]}))
-
-			//https://web3js.readthedocs.io/en/v1.2.0/web3-eth-contract.html#contract-send
-		} else {
-			window.alert("No smart contract detected on network - transactions are disabled. Make sure your MetaMask network is on Avalanche FUJI.");
-		}
-    }
 
     //TODO: Figure out how to show transactions
 

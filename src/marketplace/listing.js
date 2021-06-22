@@ -1,7 +1,7 @@
 import React from "react"
 import { useHistory } from "react-router-dom"
 import NumberFormat from "react-number-format"
-import { ApiTokenService } from "../api/services/token.service"
+// import { ApiTokenService } from "../api/services/token.service"
 
 import comingSoon from "../resources/images/coming-soon.jpg"
 import res1 from "../resources/images/residential/residential-1.jpg"
@@ -16,8 +16,8 @@ import com3 from "../resources/images/commercial-3.jpg"
 import com4 from "../resources/images/commercial-4.jpg"
 import com5 from "../resources/images/commercial-5.jpg"
 import com6 from "../resources/images/commercial-6.jpg"
-import Realium from '../abis/RealiumERC20.json'
-import Web3 from "web3";
+// import Realium from '../abis/RealiumERC20.json'
+// import Web3 from "web3";
 
 export function Listing(props) {
     let history = useHistory()
@@ -26,10 +26,10 @@ export function Listing(props) {
     const setNotify = props.setNotify
     // TODO: Hit api to get smart contract
     // Go to App.js and set the smart contract to this page specifically to get all of the data from the smart contract
-    let [smartContract, setSmartContract] = React.useState();
-    const [avaxAccount, setAvaxAccount] = React.useState();
-	const [balance, setBalance] = React.useState(0);
-	const [contract, setContract] = React.useState();
+    // let [smartContract, setSmartContract] = React.useState();
+    // const [avaxAccount, setAvaxAccount] = React.useState();
+	// const [balance, setBalance] = React.useState(0);
+	// const [contract, setContract] = React.useState();
 
     const residentialImages = [
         res1, res2, res3, res4, res5, res6
@@ -39,6 +39,7 @@ export function Listing(props) {
     ]
 
     React.useEffect(() => {
+        setMinPrice(0)
         // const fetchTokens = async () => {
         //     if (props.listing.listingType === "Residential") {
         //         try {
