@@ -15,11 +15,22 @@ export function Purchase(props) {
     let [tokens, setTokens] = useState()
     let rows = []
     const setNotify = props.setNotify
+    let [listings,setListings] = useState([])
 
     React.useEffect(() => {
-        var listings = props.smartContract.methods.getListings().call()
-        setTokens(listings)
-        console.log(listings)
+        // var listings = await props.smartContract.methods.getListings().call()
+        setTokens(props.listings)
+
+        function getListings(){
+            for (let index = 0; index < props.listings.length; index++) {
+                const element = props.listings[index];
+                if (element.price>0){
+                    listings.push(element)
+                }
+            }
+        }
+
+        getListings()
     })
 
     // React.useEffect(() => {
@@ -59,7 +70,8 @@ export function Purchase(props) {
 
     return (
         <>
-        {tokens && rows ?
+        {/* {tokens && rows ? */}
+        {tokens ? 
         <div className="flex flex-col">
             <div className="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
                 <div className="mb-4 mt-4 align-middle inline-block min-w-full sm:px-6 lg:px-12">
@@ -70,23 +82,23 @@ export function Purchase(props) {
                             <th className="p-3">From</th>
                             <th className="p-3">Quantity Listed</th>
                             <th className="p-3">Price Per Share</th>
-                            <th className="p-3">Time</th>
+                            {/* <th className="p-3">Time</th> */}
                             <th className="p-3"></th>
                             </tr>
                         </thead>
                         <tbody className="bg-white border-1 border-gray-700 divide-y">
-                            {Object.keys(rows).map(key => (
-                            <tr key={key} className="m-4 border-b border-gray-200 sm:shadow">
-                            <td className="p-3" data-label="From">{rows[key][0].owner.walletAddress || "Anonymous"}</td>
+                            {listings.map(key => (
+                            <tr key={key.tokenSeller} className="m-4 border-b border-gray-200 sm:shadow">
+                            <td className="p-3" data-label="From">{key.tokenSeller || "Anonymous"}</td>
                             <td className="p-3 text-center" data-label="Quantity">
                             <NumberFormat
-                                value={rows[key].length}
+                                value={key.numTokens}
                                 displayType={'text'}
                                 thousandSeparator={true}
                             /></td>
                             <td className="p-3 text-center" data-label="Price">
                             <NumberFormat
-                                value={rows[key][0].listedPrice}
+                                value={key.price}
                                 displayType={'text'}
                                 thousandSeparator={true}
                             />
@@ -96,11 +108,11 @@ export function Purchase(props) {
                             </svg>
                             </div>
                             </td>
-                            <td className="p-3 text-center" data-label="Time">
+                            {/* <td className="p-3 text-center" data-label="Time">
                                 <TimeAgo date={randomDate(new Date(2021, 0, 1), new Date())} locale="en-US"/>
-                            </td>
+                            </td> */}
                             <td className="p-3 text-center">
-                                <Confirmation purchase={rows[key]} setNotify={setNotify}>
+                                <Confirmation purchase={key} setNotify={setNotify} smartContract={props.smartContract}>
                                     Buy
                                 </Confirmation>
                             </td>

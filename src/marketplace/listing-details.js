@@ -101,6 +101,7 @@ export function ListingDetails(props) {
     const [avaxAccount, setAvaxAccount] = React.useState();
 	const [balance, setBalance] = React.useState(0);
 	const [contract, setContract] = React.useState();
+    const [listingsForSale, setListingsForSale] = React.useState([])
 
     function changeImage(id) {
         let imgHolder = {...carousel}
@@ -174,12 +175,13 @@ export function ListingDetails(props) {
 		//const networkData = PropertyNotary.networks[networkId]
 		if (networkId === "private") {
 			const abi = Realium.abi;
-            const address = smartContractAddress;
+            // const address = smartContractAddress;
+            const address = '0xdf525FA1d9A0A74d501f386804aFEF86a2593550';
 			const smartContract = new web3.eth.Contract(abi, address);
 			// console.log(smartContract)
 			// console.log(await smartContract.methods.totalSupply().call())
 			// // console.log(await smartContract.methods.listProperty(1,1).send({from:accounts[0]}))
-			console.log(await smartContract.methods.getListings().call())
+			window.setTimeout(setListingsForSale(await smartContract.methods.getListings().call()),100000)
 			// console.log(accounts)
 			// console.log(await smartContract.methods.buyPropertyToken('0x8302b71882F2Ee96Ac20Ecf83926E6c9B7A530E4').send({from:accounts[0]}))
 
@@ -199,6 +201,7 @@ export function ListingDetails(props) {
         <>
             <AppContainer>
                 <>
+                    {console.log(listingsForSale)}
                     <div className="mt-12 mb-12">
                         <div className="border-bottom mb-4 m-4">
                             <bs.Row className="mb-2">
@@ -239,7 +242,7 @@ export function ListingDetails(props) {
                             </bs.Col>
                             <bs.Col md={1} />
                             <bs.Col md={4}>
-                                <BuyListOffer setNotify={props.setNotify} smartContract={listing.smartContract} propertyId={listing.propertyId} />
+                                <BuyListOffer setNotify={props.setNotify} smartContract={listing.smartContract} propertyId={listing.propertyId} listings={listingsForSale}/>
                                 <div style={{"fontSize": "0.9rem"}} className="text-muted m-2 pt-8">
                                     *By purchasing shares of this asset,
                                     you become a part owner of this property
