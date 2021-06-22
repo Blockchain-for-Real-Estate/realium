@@ -29,4 +29,4 @@ jobs:
       - name: Deploy app build to S3 bucket
         run: aws s3 sync ./build/ s3://${{ secrets.AWS_DEVELOPMENT_BUCKET_NAME }} --delete --acl public-read
       - name: Create Invalidation on CloudFront
-        run: aws cloudfront create-invalidation --distribution-id E6ETZBYCSC38U --paths "/*"
+        run: aws cloudfront create-invalidation --distribution-id E3LMT5N610LQLL --paths "/*"
