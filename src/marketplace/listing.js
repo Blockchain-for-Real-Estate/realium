@@ -16,12 +16,20 @@ import com3 from "../resources/images/commercial-3.jpg"
 import com4 from "../resources/images/commercial-4.jpg"
 import com5 from "../resources/images/commercial-5.jpg"
 import com6 from "../resources/images/commercial-6.jpg"
+import Realium from '../abis/RealiumERC20.json'
+import Web3 from "web3";
 
 export function Listing(props) {
     let history = useHistory()
     let [minPrice, setMinPrice] = React.useState(0)
     const propertyId = props.listing.propertyId
     const setNotify = props.setNotify
+    // TODO: Hit api to get smart contract
+    // Go to App.js and set the smart contract to this page specifically to get all of the data from the smart contract
+    let [smartContract, setSmartContract] = React.useState();
+    const [avaxAccount, setAvaxAccount] = React.useState();
+	const [balance, setBalance] = React.useState(0);
+	const [contract, setContract] = React.useState();
 
     const residentialImages = [
         res1, res2, res3, res4, res5, res6
@@ -31,32 +39,31 @@ export function Listing(props) {
     ]
 
     React.useEffect(() => {
-        const fetchTokens = async () => {
-            if (props.listing.listingType === "Residential") {
-                try {
-                    let tokenService = new ApiTokenService()
-                    await tokenService.getListedTokensForPropertyId(propertyId).then(
-                        res => {
-                            let tokens = Object.values(res.data).sort(function (a, b) {
-                                return a.listedPrice - b.listedPrice;
-                            });
-                            try {
-                                setMinPrice(tokens[0].listedPrice)
-                            } catch {
-                                setMinPrice(0.00)
-                            }
-                        }
-                    )
-                } catch(error) {
-                    setNotify && setNotify({ msg: `There was an error getting tokens for this property.`,
-                                            color: 'red',
-                                            show: true })
-                    console.error(error)
-                }
-            }
-        };
-
-        fetchTokens()
+        // const fetchTokens = async () => {
+        //     if (props.listing.listingType === "Residential") {
+        //         try {
+        //             let tokenService = new ApiTokenService()
+        //             await tokenService.getListedTokensForPropertyId(propertyId).then(
+        //                 res => {
+        //                     let tokens = Object.values(res.data).sort(function (a, b) {
+        //                         return a.listedPrice - b.listedPrice;
+        //                     });
+        //                     try {
+        //                         setMinPrice(tokens[0].listedPrice)
+        //                     } catch {
+        //                         setMinPrice(0.00)
+        //                     }
+        //                 }
+        //             )
+        //         } catch(error) {
+        //             setNotify && setNotify({ msg: `There was an error getting tokens for this property.`,
+        //                                     color: 'red',
+        //                                     show: true })
+        //             console.error(error)
+        //         }
+        //     }
+        // };
+        // fetchTokens()
     }, [propertyId, setNotify, props.listing.listingType])
 
     return (

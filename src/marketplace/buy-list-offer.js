@@ -5,15 +5,19 @@ import { Modal } from "../modals/modal"
 import { Link } from "react-router-dom"
 import { ListForm } from "./list-form"
 import { ApiBalanceService } from "../api/services/balance.service"
+import Realium from '../abis/RealiumERC20.json'
+import Web3 from "web3";
 
 export function BuyListOffer(props) {
     let history = useHistory()
     let { propertyId } = useParams()
     let [currentTab, setCurrentTab] = React.useState(0)
     let [balance, setBalance] = React.useState()
+    let [smartContract, setSmartContract] = React.useState()
     const setNotify = props.setNotify
 
     React.useEffect(() => {
+        console.log(props.listings)
         let wallet = sessionStorage.getItem('avax')
         const fetchBalance = async () => {
             try {
@@ -27,6 +31,7 @@ export function BuyListOffer(props) {
                 setBalance(null)
             }
         };
+        setSmartContract(new window.web3.eth.Contract(Realium.abi, props.smartContract));
 
         fetchBalance()
     }, [])
@@ -111,7 +116,7 @@ export function BuyListOffer(props) {
                                 12 days
                             </div>
                         </div>
-                        <Modal buttonText="Select and Buy" setNotify={setNotify} />
+                        <Modal buttonText="Select and Buy" setNotify={setNotify} smartContract = {smartContract} listings={props.listings}/>
                         <div className="flex">
                             <p className="flex-1 text-left text-gray-400 text-xs">
                                 Realium balance

@@ -1,8 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import { useHistory } from "react-router-dom"
 import NumberFormat from "react-number-format"
 import { ApiEventService } from "../api/services/event.service";
 import { ApiBalanceService } from "../api/services/balance.service"
+import Realium from '../abis/RealiumERC20.json'
+import Web3 from "web3";
 
 export function Confirmation(props) {
     let history = useHistory();
@@ -12,8 +14,11 @@ export function Confirmation(props) {
     const auth_token = sessionStorage.getItem('token')
     const setNotify = props.setNotify
     const purchase = props.purchase
+    let [smartContract, setSmartContract] = useState()
 
     React.useEffect(() => {
+        setSmartContract(new window.web3.eth.Contract(Realium.abi, props.smartContract));
+
         let wallet = sessionStorage.getItem('avax')
         const fetchBalance = async () => {
             try {
@@ -35,40 +40,43 @@ export function Confirmation(props) {
         //trigger Event POST as a SALE
         const data = purchase[0]
         const payload = {
-            eventType: "SALE",
-            listedPrice: data.listedPrice,
-            quantity: purchase.length,
-            property: data.property.propertyId,
-            tokenOwner: data.owner.realiumUserId,
-            eventCreator: sessionStorage.getItem('id')
+            // eventType: "SALE",
+            // listedPrice: data.listedPrice,
+            // quantity: purchase.length,
+            // property: data.property.propertyId,
+            // tokenOwner: data.owner.realiumUserId,
+            // eventCreator: sessionStorage.getItem('id')
         }
 
         async function Buy(payload) {
-            let txTotal = purchase.length * data.listedPrice
-            if (balance > txTotal) {
-                try {
-                    let auth_token = sessionStorage.getItem('token')
-                    let transactionService = new ApiEventService()
-                    await transactionService.postTransaction(payload, auth_token).then(
-                        (res) => {
-                            if (res.status === 200 || res.status === 201) {
+            //TODO: figure out how to do a "SALE" of a property, Metamask should pop up and make you approve a transaction
+            // await smartContract.methods.buyPropertyToken(data.tokenSeller).send()
+            // await smartContract.methods.buyPropertyToken('0x8302b71882F2Ee96Ac20Ecf83926E6c9B7A530E4').send({from:accounts[0]})
+            // let txTotal = purchase.length * data.listedPrice
+            // if (balance > txTotal) {
+            //     try {
+            //         let auth_token = sessionStorage.getItem('token')
+            //         let transactionService = new ApiEventService()
+            //         await transactionService.postTransaction(payload, auth_token).then(
+            //             (res) => {
+            //                 if (res.status === 200 || res.status === 201) {
                                 setConfirmed(true)
-                            }
-                        }
-                    )
-                } catch(error) {
-                    setShowModal(false)
-                    setNotify && setNotify({ msg: `There was an error processing this transaction.`,
-                                            color: 'red',
-                                            show: true })
-                    console.error(error)
-                }
-            } else {
-                setShowModal(false)
-                setNotify && setNotify({ msg: `You do not have enough funds to conduct this transaction. Request more funds at the faucet from your dashboard.`,
-                                        color: 'red',
-                                        show: true })
-            }
+            //                 }
+            //             }
+            //         )
+            //     } catch(error) {
+                    // setShowModal(false)
+            //         setNotify && setNotify({ msg: `There was an error processing this transaction.`,
+            //                                 color: 'red',
+            //                                 show: true })
+            //         console.error(error)
+            //     }
+            // } else {
+            //     setShowModal(false)
+            //     setNotify && setNotify({ msg: `You do not have enough funds to conduct this transaction. Request more funds at the faucet from your dashboard.`,
+            //                             color: 'red',
+            //                             show: true })
+            // }
         }
 
         Buy(payload); //generates 401 right now
@@ -136,13 +144,13 @@ export function Confirmation(props) {
                         <p className="px-8 text-sm text-gray-500">
                         Are you sure you want to purchase <span className="text-sm text-indigo-600 font-bold">
                             <NumberFormat
-                                value={purchase.length}
+                                value={purchase.numTokens}
                                 displayType={'text'}
                                 thousandSeparator={true}
                             />
                         </span>{purchase.length > 1 ? " shares" : " share"} for <span className="text-sm text-indigo-600 font-bold">
                         <NumberFormat
-                                value={purchase[0].listedPrice}
+                                value={purchase.price}
                                 displayType={'text'}
                                 thousandSeparator={true}
                             />
@@ -162,8 +170,8 @@ export function Confirmation(props) {
                     <div className="mt-2">
                         <p className="px-8 text-sm text-gray-500">
                         Purchase confirmed for <span className="text-sm text-indigo-600 font-bold">
-                            {purchase.length}</span>{purchase.length > 1 ? " shares" : " share"} at <span className="text-sm text-indigo-600 font-bold">
-                            {purchase[0].listedPrice}
+                            {purchase.numTokens}</span>{purchase.numTokens > 1 ? " shares" : " share"} at <span className="text-sm text-indigo-600 font-bold">
+                            {purchase.price}
                             <div className="h-4 inline-flex px-1">
                             <svg width="12" height="12" viewBox="0 0 153 153" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path fillRule="evenodd" clipRule="evenodd" d="M153 76.5C153 118.75 118.75 153 76.5 153C34.2502 153 0 118.75 0 76.5C0 34.2502 34.2502 0 76.5 0C118.75 0 153 34.2502 153 76.5ZM72.2494 21.5512L22.6284 108.776C20.8649 111.876 23.1037 115.725 26.6701 115.725H57.7531C59.4209 115.725 60.961 114.832 61.7892 113.384L96.0274 53.5368C96.8467 52.1048 96.8458 50.3458 96.025 48.9145L80.325 21.5372C78.5347 18.4154 74.0289 18.4231 72.2494 21.5512ZM90.0853 115.95H126.325C130.017 115.95 132.327 111.956 130.486 108.756L112.443 77.3996C110.601 74.1984 105.985 74.1898 104.131 77.3843L85.9337 108.741C84.0767 111.941 86.3855 115.95 90.0853 115.95Z" fill="#4F46E5"/>
