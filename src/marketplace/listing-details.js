@@ -128,6 +128,8 @@ export function ListingDetails(props) {
             const web3 = window.web3;
             //Load account
             const accounts = await web3.eth.getAccounts();
+            sessionStorage.setItem("account",accounts[0])
+            console.log(accounts[0])
             await web3.eth.getBalance(accounts[0]).then(
                 (res) => {
                     // setBalance(res/1000000000000000000);
