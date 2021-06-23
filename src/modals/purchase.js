@@ -24,7 +24,7 @@ export function Purchase(props) {
         function getListings(){
             for (let index = 0; index < props.listings.length; index++) {
                 const element = props.listings[index];
-                if (element.price>0){
+                if (element.price>0 && element.tokenSeller !== sessionStorage.getItem("account")){
                     listings.push(element)
                 }
             }

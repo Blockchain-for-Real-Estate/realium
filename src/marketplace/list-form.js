@@ -1,34 +1,27 @@
-import React from "react"
+import React, { useState } from "react"
 import { useHistory } from "react-router-dom"
 import { Formik, Field, Form, ErrorMessage } from "formik"
 import * as Yup from "yup"
-import { ApiTokenService } from "../api/services/token.service"
-import { ApiEventService } from "../api/services/event.service"
+// import { ApiTokenService } from "../api/services/token.service"
+// import { ApiEventService } from "../api/services/event.service"
 
 export function ListForm(props) {
     const history = useHistory()
     const propertyId = props.propertyId
-    const [tokensAvailable, setTokensAvailable] = React.useState([])
+    // const [tokensAvailable, setTokensAvailable] = React.useState([])
     const setNotify = props.setNotify
+    const [accountBalance,setAccountBalance] = useState()
 
     React.useEffect(() => {
-        const getAvailableTokens = async () => {
-            try {
-                let tokenService = new ApiTokenService()
-                let resp = await tokenService.getPropertyTokensByUser(sessionStorage.getItem("id"), propertyId)
-
-                setTokensAvailable(resp.data)
-            } catch (err) {
-                setTokensAvailable(0)
-                setNotify && setNotify({ msg: `There was an error loading user tokens.`,
-                                        color: 'red',
-                                        show: true })
-                console.error(`Error: ${err}`)
-            }
+        async function getAccountBalance(){
+            var balance = await props.smartContract.methods.balanceOf(sessionStorage.getItem("account")).call()
+            setAccountBalance(balance)
         }
+        getAccountBalance()
+        // getAvailableTokens()
+    }, [propertyId, setNotify, props.smartContract.methods])
 
-        getAvailableTokens()
-    }, [propertyId, setNotify])
+
 
     return (
         <Formik
@@ -50,15 +43,16 @@ export function ListForm(props) {
             onSubmit={async (values, actions) => {
                 try {
                     actions.setSubmitting(true)
-                    let eventService = new ApiEventService()
-                    await eventService.postTransaction({
-                        "eventType": 'LIST',
-                        "listedPrice": values.price,
-                        "quantity": values.shares,
-                        "property": propertyId,
-                        "tokenOwner": sessionStorage.getItem("id"),
-                        "eventCreator": sessionStorage.getItem("id")
-                    }, sessionStorage.getItem("token"))
+                    // let eventService = new ApiEventService()
+                    // await eventService.postTransaction({
+                    //     "eventType": 'LIST',
+                    //     "listedPrice": values.price,
+                    //     "quantity": values.shares,
+                    //     "property": propertyId,
+                    //     "tokenOwner": sessionStorage.getItem("id"),
+                    //     "eventCreator": sessionStorage.getItem("id")
+                    // }, sessionStorage.getItem("token"))
+                    await props.smartContract.methods.listProperty(values.price,values.shares)
 
                     setNotify && setNotify({msg: "Your tokens have been listed.",
                                         color: 'green',
@@ -100,7 +94,7 @@ export function ListForm(props) {
                                         name="shares"
                                         type="text"
                                         className="rounded-tr focus:ring-white-500 focus:border-white-500 text-right relative block w-full rounded-none bg-transparent focus:z-10 sm:text-sm border-l-white border-white"
-                                        placeholder={`${tokensAvailable.length} available` || "100"}
+                                        placeholder={`${accountBalance} available` || "100"}
                                     />
                                     :
                                     <Field
@@ -131,7 +125,7 @@ export function ListForm(props) {
                                         name="price"
                                         type="text"
                                         className="rounded-br focus:ring-white-500 focus:border-white-500 text-right relative block w-full rounded-none bg-transparent focus:z-10 sm:text-sm border-l-white border-white"
-                                        placeholder={tokensAvailable.length > 0 ? `${Number(tokensAvailable[0].listedPrice) + 1} AVAX` : "1 AVAX"}
+                                        placeholder="0 AVAX"
                                     />
                                 </div>
                             </div>

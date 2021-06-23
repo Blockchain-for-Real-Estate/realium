@@ -152,7 +152,7 @@ export function BuyListOffer(props) {
                                 Sign In To Access
                             </button>
                         :
-                            <ListForm setNotify={props.setNotify} valueHandler={values_handler} total={total} events={props.events} propertyId={propertyId}/>
+                            <ListForm setNotify={props.setNotify} valueHandler={values_handler} total={total} events={props.events} propertyId={propertyId} smartContract={smartContract}/>
                         }
                         <div className="flex">
                             <p className="flex-1 text-left text-gray-400 text-xs">
