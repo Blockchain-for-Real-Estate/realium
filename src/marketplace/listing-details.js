@@ -162,6 +162,10 @@ export function ListingDetails(props) {
 
     return (
         <>
+        {console.log(listing)}
+        {console.log(token)}
+        {console.log(transactions)}
+        {console.log(carousel)}
         {listing && token && transactions && carousel ?
         <>
             <AppContainer>
