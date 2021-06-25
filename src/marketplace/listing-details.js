@@ -143,12 +143,13 @@ export function ListingDetails(props) {
             if (networkId === "private") {
                 const abi = Realium.abi;
                 // const address = smartContractAddress;
+                //TODO: get the smart contract from the property not hard coded
                 const address = '0xdf525FA1d9A0A74d501f386804aFEF86a2593550';
                 const smartContract = new web3.eth.Contract(abi, address);
                 // console.log(smartContract)
                 // console.log(await smartContract.methods.totalSupply().call())
                 // // console.log(await smartContract.methods.listProperty(1,1).send({from:accounts[0]}))
-                setListingsForSale(await smartContract.methods.getListings().call())
+                await setListingsForSale(await smartContract.methods.getListings().call())
                 // console.log(accounts)
                 // console.log(await smartContract.methods.buyPropertyToken('0x8302b71882F2Ee96Ac20Ecf83926E6c9B7A530E4').send({from:accounts[0]}))
     
@@ -176,7 +177,7 @@ export function ListingDetails(props) {
 
 
         async function loadWeb3() {
-            setListingsForSale()
+            await setListingsForSale()
             if (window.ethereum) {
                 window.web3 = new Web3(window.ethereum);
                 await window.ethereum.enable();

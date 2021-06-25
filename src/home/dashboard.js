@@ -5,9 +5,12 @@ import { Link } from "react-router-dom"
 import "../modals/modal.css"
 import NumberFormat from "react-number-format"
 import LoadingWave from "@bit/ngoue.playground.loading-wave"
-import { ApiTokenService } from "../api/services/token.service"
-import { ApiEventService } from "../api/services/event.service"
-import { SearchForm } from "../marketplace/search-form"
+// import { ApiTokenService } from "../api/services/token.service"
+// import { ApiEventService } from "../api/services/event.service"
+// import { SearchForm } from "../marketplace/search-form"
+import Web3 from "web3";
+import Realium from '../abis/RealiumERC20.json'
+import { ApiPropertyService } from "../api/services/property.service"
 
 import res1 from "../resources/images/residential/residential-1.jpg"
 import res2 from "../resources/images/residential/residential-2.jpg"
@@ -19,15 +22,21 @@ import { FaucetPopOut } from "../utilities/faucet-pop-out"
 import { CollapsableSection, ACCOUNT_FAQS } from "../utilities/collapsable-section"
 import { SellModal } from "../modals/sell"
 
+//TODO: need to loop through properties, look for hard coded marketplace/1 but that will need to be the property number. Maybe this needs to be in the smartcontract?
+
 export function Dashboard(props) {
-    let id = sessionStorage.getItem('id')
+    // let id = sessionStorage.getItem('id')
     let walletAdress = sessionStorage.getItem('avax')
-    const [tokens, setTokens] = React.useState()
-    const [events, setEvents] = React.useState()
-    const [reloadAll, setReload] = React.useState(0)
+    // const [tokens, setTokens] = React.useState()
+    const [events, setEvents] = React.useState([])
+    // const [reloadAll, setReload] = React.useState(0)
     let [currentPage, setCurrentPage] = React.useState(1)
     let [startRange, setStartRange] = React.useState(1)
     let [endRange, setEndRange] = React.useState(10)
+    // const [smartContracts, setSmartContract] = React.useState([])
+    const [properties, setProperties] = React.useState()
+    let [contracts] = React.useState([])
+
     let pages = []
     let alreadyListed = ""
 
@@ -35,50 +44,167 @@ export function Dashboard(props) {
         res1, res2, res3, res4, res5, res6
     ]
 
-    React.useEffect(() => {
-        const fetchData = async () => {
-            try {
-                let tokenService = new ApiTokenService()
-                await tokenService.getUserTokens(id.toString()).then(
-                    res => {
-                        setTokens(lodash.groupBy(res.data, "property.propertyId"))
-                    }
-                )
-            } catch {
-                setTokens(null)
-            }
-        };
-
-        fetchData()
-    }, [id, reloadAll])
+    //TODO: get all smart contracts from properties and then get all of the balances for each one and only include ones that have >0 in the dashboard
 
     React.useEffect(() => {
-        const fetchEvents = async () => {
-            try {
-                let eventService = new ApiEventService()
-                await eventService.getEventsByUserId(id.toString()).then(
-                    res => {
-                        setEvents(res.data)
+        async function loadBlockchainData() {
+
+            const getAllProperties = async () => {
+                let propertyApiService = new ApiPropertyService();
+                await propertyApiService.getAssets().then(
+                    (res) => {
+                        const properties = res.data
+                        console.log(properties)
+                        setProperties(properties)
                     }
-                )
-            } catch {
-                setEvents(null)
+                ).catch(error => {
+                    // setNotify && setNotify({ msg: `There was an error property data.`,
+                    //                         color: 'red',
+                    //                         show: true })
+                    console.error(`Error: ${error}`)
+                })
             }
-        };
 
-        fetchEvents()
-    }, [id])
+            const web3 = window.web3;
+            //Load account
+            const accounts = await web3.eth.getAccounts();
+            sessionStorage.setItem("account",accounts[0])
+            console.log(accounts[0])
+            await web3.eth.getBalance(accounts[0]).then(
+                (res) => {
+                    // setBalance(res/1000000000000000000);
+                }
+            )
+            // setAvaxAccount(accounts[0]);
+    
+            //THESE LINES WILL NEED TO CALL THE NETWORK TO GET THE ADDRESS WHERE THE CONTRACT IS DEPLOYED AND REPLACE THE HARD CODED ADDRESS
+            const networkId = await web3.eth.net.getNetworkType();
+            //const networkData = PropertyNotary.networks[networkId]
+            if (networkId === "private") {
+                const abi = Realium.abi;
+                // const address = smartContractAddress;
 
-    if (events) {
-        var i,j,temparray,chunk = 10;
-        for (i=0,j=events.length; i<j; i+=chunk) {
-            temparray = events.slice(i,i+chunk);
-            pages.push(temparray)
+                await getAllProperties()
+                console.log(properties)
+                for (let index = 0; index < properties.length; index++) {
+                    const element = properties[index];
+                    console.log(element.smartContract)
+                    const smartContract1 = new web3.eth.Contract(abi, element.smartContract);
+
+                    //TODO: make sure all the events are pulled in, will have to sort afterwards
+                    setEvents(events => [...events, smartContract1.getPastEvents("Listed",{filter:{owner: sessionStorage.getItem('account')}})]);
+                    setEvents(events => [...events, smartContract1.getPastEvents("Unlisted",{filter:{owner: sessionStorage.getItem('account')}})]);
+                    setEvents(events => [...events, smartContract1.getPastEvents("Sale",{filter:{buyer: sessionStorage.getItem('account')}})]);
+                    setEvents(events => [...events, smartContract1.getPastEvents("Sale",{filter:{seller: sessionStorage.getItem('account')}})]);
+                    console.log(events)
+                    // var ev = events.push(smartContract1.getPastEvents("Listed",{filter:{owner: sessionStorage.getItem('account')}}))
+                    // events.push(smartContract1.events.Unlisted({filter:{owner: sessionStorage.getItem('account')}}))
+                    // console.log(events)
+                    // events.push(smartContract1.events.Sale({filter:{buyer: sessionStorage.getItem('account')}}))
+                    // console.log(events)
+                    // events.push(smartContract1.events.Sale({filter:{seller: sessionStorage.getItem('account')}}))
+                    // console.log(events)
+                    if(smartContract1.methods.balanceOf(sessionStorage.getItem("account"))>0){
+                        console.log(smartContract1)
+                        contracts.push(smartContract1)
+                        console.log("in the zone")
+                    }
+                }
+
+                console.log(contracts)
+
+                // const address = '0xdf525FA1d9A0A74d501f386804aFEF86a2593550';
+                // const smartContract1 = new web3.eth.Contract(abi, address);
+                // console.log(smartContract1.events)
+
+                // setSmartContract(smartContract1)
+                // setEvents(smartContract1.events)
+                // console.log(smartContract)
+                // console.log(await smartContract.methods.totalSupply().call())
+                // // console.log(await smartContract.methods.listProperty(1,1).send({from:accounts[0]}))
+                // console.log(accounts)
+                // console.log(await smartContract.methods.buyPropertyToken('0x8302b71882F2Ee96Ac20Ecf83926E6c9B7A530E4').send({from:accounts[0]}))
+    
+                //https://web3js.readthedocs.io/en/v1.2.0/web3-eth-contract.html#contract-send
+            } else {
+                window.alert("No smart contract detected on network - transactions are disabled. Make sure your MetaMask network is on Avalanche FUJI.");
+            }
         }
-    }
+
+
+
+        async function loadWeb3() {
+            if (window.ethereum) {
+                window.web3 = new Web3(window.ethereum);
+                await window.ethereum.enable();
+            }
+            else if (window.web3) {
+                window.web3 = new Web3(window.web3.currentProvider);
+            }
+            else {
+                window.alert('Non-Ethereum browser detected; consider using MetaMask.');
+            }
+        }
+
+        const checkWeb3 = async () => {
+            await loadWeb3();
+            await loadBlockchainData();
+        }
+        // const fetchEvents = async () => {
+        //     let events  = await smartContract.events.allEvents()
+        //     console.log(events)
+        // }
+
+        checkWeb3()
+        // fetchEvents()
+    },[contracts, events, properties])
+
+    // React.useEffect(() => {
+    //     const fetchData = async () => {
+    //         try {
+    //             let tokenService = new ApiTokenService()
+    //             await tokenService.getUserTokens(id.toString()).then(
+    //                 res => {
+    //                     setTokens(lodash.groupBy(res.data, "property.propertyId"))
+    //                 }
+    //             )
+    //         } catch {
+    //             setTokens(null)
+    //         }
+    //     };
+
+    //     fetchData()
+    // }, [id, reloadAll])
+
+    // React.useEffect(() => {
+    //     // const fetchEvents = async () => {
+    //     //     try {
+    //     //         let eventService = new ApiEventService()
+    //     //         await eventService.getEventsByUserId(id.toString()).then(
+    //     //             res => {
+    //     //                 setEvents(res.data)
+    //     //             }
+    //     //         )
+    //     //     } catch {
+    //     //         setEvents(null)
+    //     //     }
+    //     // };
+
+    //     loadWeb3()
+    //     fetchEvents()
+    // }, [id])
+
+    // if (events) {
+    //     var i,j,temparray,chunk = 10;
+    //     for (i=0,j=events.length; i<j; i+=chunk) {
+    //         temparray = events.slice(i,i+chunk);
+    //         pages.push(temparray)
+    //     }
+    // }
 
     return (
-        <>{tokens && events && pages ?
+        <>
+        {contracts ?
             <>
                 <div className="py-12 bg-gray-50 overflow-hidden sm:pb-12 lg:py-18">
                 <div className="max-w-xl mx-auto px-8 sm:px-6 lg:px-8 lg:max-w-7xl">
@@ -105,30 +231,30 @@ export function Dashboard(props) {
                         <p className="mt-3 text-md text-gray-500">
                         View your purchased Realium assets. Manage your shares and sell the assets you no longer wish to hold.
                         </p>
-                        <div>
+                        {/* TODO:  <div>
                             <SearchForm resultsSetter={setTokens} setNotify={props.setNotify} searchService={"tokenService"} reset={setReload} reloadAll={reloadAll}/>
-                        </div>
+                        </div> */}
                         <dl className="mt-10 space-y-10">
                             <div className="grid grid-cols-1 gap-6">
-                            {Object.keys(tokens).map((key) => (
+                            {contracts.map(key => (
                                 // eslint-disable-next-line
-                                alreadyListed = lodash.groupBy(tokens[key], "listed"),
+                                alreadyListed = lodash.groupBy(key.smartContract, "listed"),
                             <div key={key} className="relative rounded-lg border border-gray-300 bg-white shadow-md flex items-center space-x-3 hover:border-gray-400 focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-indigo-500">
                                 <div className="grid grid-cols-1 sm:flex sm:flex-cols items-center">
-                                <Link to={`/marketplace/${tokens[key][0].property.propertyId}`} className="flex-shrink-0" style={{textDecoration: "none"}}>
-                                    <img className="h-48 w-full object-fill rounded-t-md sm:w-48 sm:h-full sm:object-fill sm:rounded-l-sm sm:rounded-tr-none" src={residentialImages[tokens[key][0].property.propertyId-1]} alt=""/>
+                                <Link to={`/marketplace/1`} className="flex-shrink-0" style={{textDecoration: "none"}}>
+                                    <img className="h-48 w-full object-fill rounded-t-md sm:w-48 sm:h-full sm:object-fill sm:rounded-l-sm sm:rounded-tr-none" src={residentialImages[0]} alt=""/>
                                 </Link>
                                 <div className="flex-1 min-w-0 space-x-2 pt-2 pb-2 pl-2">
                                     <div className="grid grid-cols-1 sm:grid-cols-3 sm:align-middle sm:items-center">
-                                        <Link to={`/marketplace/${tokens[key][0].property.propertyId}`} className="text-black font-semibold grid grid-cols-2 mr-8 sm:mr-1 text-center sm:text-left sm:grid-cols-1 sm:m-2" style={{textDecoration: "none"}}>
+                                        <Link to={`/marketplace/1}`} className="text-black font-semibold grid grid-cols-2 mr-8 sm:mr-1 text-center sm:text-left sm:grid-cols-1 sm:m-2" style={{textDecoration: "none"}}>
                                             Address
                                             <p className="text-xs text-gray-500 pt-1 text-center sm:text-left mb-0">
-                                                {tokens[key][0].property.streetAddress}
+                                                {properties[0].streetAddress}
                                                 <br/>
-                                                {tokens[key][0].property.city}, {tokens[key][0].property.state}
+                                                {properties[0].city}, {properties[0].state}
                                             </p>
                                         </Link>
-                                        <Link to={`/marketplace/${tokens[key][0].property.propertyId}`} className="text-black font-semibold grid grid-cols-2 mr-8 sm:mr-1 text-center sm:text-left sm:grid-cols-1 sm:m-2" style={{textDecoration: "none"}}>
+                                        <Link to={`/marketplace/1`} className="text-black font-semibold grid grid-cols-2 mr-8 sm:mr-1 text-center sm:text-left sm:grid-cols-1 sm:m-2" style={{textDecoration: "none"}}>
                                             Shares:
                                             <p className="text-xs text-gray-500 pt-1 text-center sm:text-left mb-0">
                                                 {alreadyListed['true'] ?
@@ -156,7 +282,7 @@ export function Dashboard(props) {
                                         </Link>
                                         <div className="space-y-2 text-center sm:m-1 sm:items-center">
                                             {alreadyListed['false'] ?
-                                            <SellModal potentialListing={tokens[key]} availableToSell={alreadyListed['false'].length} />
+                                            <SellModal potentialListing={properties[0]} availableToSell={alreadyListed['false'].length} />
                                             :
                                             <button className="bg-gray-50 text-indigo-600 active:bg-indigo-500 text-xs w-4/5 py-2 px-2 rounded hover:bg-gray-100 outline-none focus:outline-none ease-linear transition-all duration-150" type="button"
                                             >
@@ -213,7 +339,7 @@ export function Dashboard(props) {
                                 </thead>
                                 <tbody>
                                     {pages[0] !== undefined && pages[0] !== null ?
-                                    Object.keys(pages[currentPage-1]).map((key) => (
+                                    contracts.map(key => (
                                     <tr key={key} className="bg-white m-4 border-b border-gray-200 shadow-md rounded-md">
                                     <td className="px-6 py-4 whitespace-nowrap text-xs font-medium text-gray-900" data-label="Time">
                                         <TimeAgo date={events[key].eventDateTime} locale="en-US"/>
@@ -304,7 +430,7 @@ export function Dashboard(props) {
                     </div>
                 </div>
                 </div>
-                {tokens.length === 0 && events.length === 0 ?
+                {contracts.length === 0 ?
                 <div className="py-16 mx-3">
                     <h3 className="text-center text-xl font-extrabold text-gray-500 tracking-tight sm:text-2xl">
                     Nothing to show here yet...

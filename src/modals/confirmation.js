@@ -6,6 +6,8 @@ import { ApiBalanceService } from "../api/services/balance.service"
 import Realium from '../abis/RealiumERC20.json'
 // import Web3 from "web3";
 
+//TODO: make sure the buy is working once the smart contract is completed
+
 export function Confirmation(props) {
     let history = useHistory();
     // let [balance, setBalance] = React.useState(0)

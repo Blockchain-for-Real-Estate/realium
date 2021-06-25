@@ -21,7 +21,7 @@ export function Purchase(props) {
         // var listings = await props.smartContract.methods.getListings().call()
         setTokens(props.listings)
 
-        function getListings(){
+        async function getListings(){
             for (let index = 0; index < props.listings.length; index++) {
                 const element = props.listings[index];
                 if (element.price>0 && element.tokenSeller !== sessionStorage.getItem("account")){
@@ -29,8 +29,11 @@ export function Purchase(props) {
                 }
             }
         }
+        async function listing(){
+            await getListings()
+        }
 
-        getListings()
+        listing()
     },[props.listings, listings])
 
     // React.useEffect(() => {

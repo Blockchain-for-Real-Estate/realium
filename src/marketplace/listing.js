@@ -24,7 +24,6 @@ export function Listing(props) {
     let [minPrice, setMinPrice] = React.useState(0)
     const propertyId = props.listing.propertyId
     const setNotify = props.setNotify
-    // TODO: Hit api to get smart contract
     // Go to App.js and set the smart contract to this page specifically to get all of the data from the smart contract
     // let [smartContract, setSmartContract] = React.useState();
     // const [avaxAccount, setAvaxAccount] = React.useState();
