@@ -1,7 +1,6 @@
 import React from "react"
 import { Link, useLocation, useHistory } from "react-router-dom"
 import { Modal } from "../modals/modal"
-import { ApiBalanceService } from '../api/services/balance.service'
 import { ApiAVAXService } from '../api/services/crypto.services'
 import { useInterval } from "../utilities/use-interval-hook"
 import Web3 from "web3";
@@ -46,19 +45,14 @@ export function Nav(props) {
         }
     }
 
-    React.useEffect(() => {
-        let wallet = sessionStorage.getItem('avax')
-
-        
+    React.useEffect(() => {        
         const fetchBalance = async () => {
             try {
-                let balanceService = new ApiBalanceService()
-                await balanceService.getBalance(wallet).then(
-                    (res) => {
-                        setBalance(props.balance.toFixed(4));
-                        //setBalance(Number(res.data.result.balance)/1000000000) //AVAX uses a demonination of 9
-                    }
-                )
+                const accounts = await window.web3.eth.getAccounts();
+                sessionStorage.setItem("account",accounts[0])
+                window.web3 = new Web3(window.web3.currentProvider);
+                var balance = await window.web3.eth.getBalance(sessionStorage.getItem('account'))
+                setBalance((balance/1000000000000000000).toFixed(2));
             } catch {
                 setBalance(null)
             }
@@ -77,8 +71,10 @@ export function Nav(props) {
             }
         }
 
+        loadWeb3()
         fetchBalance()
         getCurrentAvaxPrice()
+
     }, [pollInterval, props.balance])
 
     useInterval(() => {

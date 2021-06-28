@@ -4,9 +4,8 @@ import { useParams } from "react-router-dom"
 import { Modal } from "../modals/modal"
 import { Link } from "react-router-dom"
 import { ListForm } from "./list-form"
-import { ApiBalanceService } from "../api/services/balance.service"
 import Realium from '../abis/RealiumERC20.json'
-// import Web3 from "web3";
+import Web3 from "web3";
 
 export function BuyListOffer(props) {
     let history = useHistory()
@@ -17,23 +16,19 @@ export function BuyListOffer(props) {
     const setNotify = props.setNotify
 
     React.useEffect(() => {
-
-        let wallet = sessionStorage.getItem('avax')
         const fetchBalance = async () => {
             try {
-                let balanceService = new ApiBalanceService()
-                await balanceService.getBalance(wallet).then(
-                    (res) => {
-                        setBalance(Number(res.data.result.balance)/1000000000) //AVAX uses a demonination of 9
-                    }
-                )
+                const accounts = await window.web3.eth.getAccounts();
+                sessionStorage.setItem("account",accounts[0])
+                window.web3 = new Web3(window.web3.currentProvider);
+                var balance = await window.web3.eth.getBalance(sessionStorage.getItem('account'))
+                setBalance((balance/1000000000000000000).toFixed(2));
             } catch {
                 setBalance(null)
             }
         };
-        setSmartContract(new window.web3.eth.Contract(Realium.abi, props.smartContract));
-
         fetchBalance()
+        setSmartContract(new window.web3.eth.Contract(Realium.abi, props.smartContract));
     }, [props.smartContract])
 
     const [values, setValues] = React.useState({
