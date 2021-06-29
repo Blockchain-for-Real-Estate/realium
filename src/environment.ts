@@ -8,5 +8,6 @@ export const django_environment = {
 export const avax_environment = {
     //private chain on digitalocean
     //api: "http://144.126.214.126:9650"
-    api: "https://ava.realium.io/ext/bc/X"
+    // https://api.avax-test.network/ext/bc/C/rpc
+    api: "https://api.avax-test.network/ext/bc/X"
 }
