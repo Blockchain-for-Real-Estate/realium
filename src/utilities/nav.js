@@ -96,7 +96,7 @@ export function Nav(props) {
                     </button>
                 </div>
                     <div className="hidden sm:ml-6 sm:flex sm:items-center">
-                        {sessionStorage.getItem('token') === null ?
+                        {sessionStorage.getItem('user') === null ?
                         <div className="flex space-x-6">
                             <Link className="block px-3 py-2 border-transparent text-base font-medium rounded-md text-indigo-700 shadow-sm hover:text-gray-900 hover:bg-gray-50 text-decoration-none" to="/login">
                                 Sign In
@@ -169,7 +169,7 @@ export function Nav(props) {
                 </div>
                 <div className="pt-4 pb-3 border-t border-gray-200">
                 <div className="space-y-1">
-                    {sessionStorage.getItem('token') === null ?
+                    {sessionStorage.getItem('user') === null ?
                         <Link className="border-transparent text-gray-500 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-700 block pl-3 pr-4 py-2 border-l-4 text-base font-medium text-decoration-none" to="/login">
                             Sign In
                         </Link>
