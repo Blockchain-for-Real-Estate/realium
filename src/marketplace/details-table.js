@@ -183,7 +183,7 @@ export function DetailsTable(props) {
                 </p>
                 </div>
                 </div>
-                {sale[0]!=undefined ?
+                {sale!=undefined ?
                     <div className="px-6">
                         <ul className="mt-2 mb-10 divide-y">
                             <li className="flex space-x-3 pb-3">
