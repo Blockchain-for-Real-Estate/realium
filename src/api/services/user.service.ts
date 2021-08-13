@@ -5,12 +5,12 @@ import { User } from "../interfaces/user.interface";
 export class ApiUserService {
   
     public getUser(id: string, token: string) {
-      const headers = {
-        "Authorization": "Token " + token
-      }
+      // const headers = {
+      //   "Authorization": "Token " + token
+      // }
       return axios.get<User>(
         `${environment.api}/api/users/?email=${id}`,
-        {headers}
+        // {headers}
       );
     }
   

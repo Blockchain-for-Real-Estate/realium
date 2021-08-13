@@ -48,7 +48,7 @@ export function CreateAccountForm(props) {
                         )
                         userService.getUser(values.email, response.data.token).then(
                             (res) => {
-                                res.data[0].avaxpassword = "*********"
+                                res.data[0].avaxpassword = values.password
                                 sessionStorage.setItem('user', JSON.stringify(res.data[0].fullName).replace(/['"]+/g, ''));
                                 sessionStorage.setItem('id', JSON.stringify(res.data[0].realiumUserId))
                                 sessionStorage.setItem('avax', JSON.stringify(res.data[0].walletAddress).replace(/['"]+/g, ''))
