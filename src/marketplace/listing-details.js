@@ -140,10 +140,10 @@ export function ListingDetails(props) {
             //THESE LINES WILL NEED TO CALL THE NETWORK TO GET THE ADDRESS WHERE THE CONTRACT IS DEPLOYED AND REPLACE THE HARD CODED ADDRESS
             const networkId = await web3.eth.net.getNetworkType();
             //const networkData = PropertyNotary.networks[networkId]
-            if (networkId === "private") {
+            if (networkId === "ropsten") {
                 const abi = Realium.abi;
                 // const address = smartContractAddress;
-                const address = '0xdf525FA1d9A0A74d501f386804aFEF86a2593550';
+                const address = '0xe8e7dd7052e2d8641b5cfab99c7174978a74ff4e'; //each client will have their own contract address, so we need to encrypt/store this value and load it in
                 const smartContract = new web3.eth.Contract(abi, address);
                 // console.log(smartContract)
                 // console.log(await smartContract.methods.totalSupply().call())
