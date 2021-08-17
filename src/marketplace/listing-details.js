@@ -6,11 +6,7 @@ import LoadingWave from "@bit/ngoue.playground.loading-wave"
 import { Breadcrumbs } from "../utilities/breadcrumbs"
 import { AppContainer } from "../utilities/app-container"
 import { ApiPropertyService } from '../api/services/property.service'
-// import { ApiTokenService } from '../api/services/token.service'
-// import { ApiEventService } from "../api/services/event.service"
-// import { Transactions } from "./transactions"
 import { BuyListOffer } from "./buy-list-offer"
-// import { DetailsTable } from "./details-table"
 import Realium from '../abis/RealiumERC20.json'
 import Web3 from "web3";
 
@@ -93,14 +89,8 @@ export function ListingDetails(props) {
 
     const { propertyId } = useParams()
     const [listing, setListing] = React.useState()
-    // const [token, setToken] = React.useState()
-    // const [transactions, setTransactions] = React.useState()
-    // const [smartContractAddress, setSmartContractAddress] = React.useState('')
     const [carousel, setCarousel] = React.useState(imgPackages[propertyId])
     const setNotify = props.setNotify
-    // const [avaxAccount, setAvaxAccount] = React.useState();
-	// const [balance, setBalance] = React.useState(0);
-	// const [contract, setContract] = React.useState();
     const [listingsForSale, setListingsForSale] = React.useState([])
 
     function changeImage(id) {
@@ -111,18 +101,6 @@ export function ListingDetails(props) {
         setCarousel(imgHolder)
     }
 
-    // React.useEffect(() => {
-	// 	const checkWeb3 = async () => {
-	// 		await loadWeb3();
-	// 		await loadBlockchainData();
-	// 	}
-	// 	checkWeb3();
-	// }, []);
-
-
-
-
-
     React.useEffect(() => {
         async function loadBlockchainData() {
             const web3 = window.web3;
@@ -130,29 +108,17 @@ export function ListingDetails(props) {
             const accounts = await web3.eth.getAccounts();
             sessionStorage.setItem("account",accounts[0])
             console.log(accounts[0])
-            await web3.eth.getBalance(accounts[0]).then(
-                (res) => {
-                    // setBalance(res/1000000000000000000);
-                }
-            )
-            // setAvaxAccount(accounts[0]);
     
             //THESE LINES WILL NEED TO CALL THE NETWORK TO GET THE ADDRESS WHERE THE CONTRACT IS DEPLOYED AND REPLACE THE HARD CODED ADDRESS
             const networkId = await web3.eth.net.getNetworkType();
-            //const networkData = PropertyNotary.networks[networkId]
             if (networkId === "ropsten") {
                 const abi = Realium.abi;
-                // const address = smartContractAddress;
+                //MAJOR TODO: get the smart contract from the property not hard coded
+                // const address = listing.smartContract
                 const address = '0xe8e7dd7052e2d8641b5cfab99c7174978a74ff4e'; //each client will have their own contract address, so we need to encrypt/store this value and load it in
-                const smartContract = new web3.eth.Contract(abi, address);
-                // console.log(smartContract)
-                // console.log(await smartContract.methods.totalSupply().call())
-                // // console.log(await smartContract.methods.listProperty(1,1).send({from:accounts[0]}))
-                setListingsForSale(await smartContract.methods.getListings().call())
-                // console.log(accounts)
-                // console.log(await smartContract.methods.buyPropertyToken('0x8302b71882F2Ee96Ac20Ecf83926E6c9B7A530E4').send({from:accounts[0]}))
-    
-                //https://web3js.readthedocs.io/en/v1.2.0/web3-eth-contract.html#contract-send
+                const smartContract = await new web3.eth.Contract(abi, address);
+                console.log(await smartContract.getPastEvents())
+                await setListingsForSale(await smartContract.methods.getListings().call())
             } else {
                 window.alert("No smart contract detected on network - transactions are disabled. Make sure your MetaMask network is on Avalanche FUJI.");
             }
@@ -164,7 +130,6 @@ export function ListingDetails(props) {
                 await assetViaApi.getAssetById(propertyId).then(
                     res => {
                         setListing(res.data[0])
-                        // setSmartContractAddress(res.data[0].smartContract)
                     }
                 )
             } catch {
@@ -176,7 +141,7 @@ export function ListingDetails(props) {
 
 
         async function loadWeb3() {
-            setListingsForSale()
+            await setListingsForSale()
             if (window.ethereum) {
                 window.web3 = new Web3(window.ethereum);
                 await window.ethereum.enable();
@@ -239,7 +204,6 @@ export function ListingDetails(props) {
                                 </bs.Row>
                                 <div className="font-weight-bold" style={{"fontSize": "1.1rem"}}>Description</div>
                                 <div className="mb-8">
-                                    {/* {listing.propertyName} is located in {listing.city}, {listing.state} for a steal at {<NumberFormat value={token.purchasedPrice} displayType={'text'} thousandSeparator={true} />} */}
                                     {listing.propertyName} is located in {listing.city}, {listing.state} for a steal at {<NumberFormat value={20} displayType={'text'} thousandSeparator={true} />}
                                     <div className="h-4 inline-flex px-1">
                                     <svg width="15" height="15" viewBox="0 0 153 153" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -261,6 +225,7 @@ export function ListingDetails(props) {
                     </div>
                 </>
         </AppContainer>
+        {/* TODO: make this pages/information work */}
         {/* <DetailsTable listing={listing} token={token} event={transactions}/> */}
         {/* <Transactions listing={listing} setNotify={props.setNotify}/> */}
     </>

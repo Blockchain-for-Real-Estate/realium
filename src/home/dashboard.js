@@ -5,9 +5,10 @@ import { Link } from "react-router-dom"
 import "../modals/modal.css"
 import NumberFormat from "react-number-format"
 import LoadingWave from "@bit/ngoue.playground.loading-wave"
-import { ApiTokenService } from "../api/services/token.service"
-import { ApiEventService } from "../api/services/event.service"
-import { SearchForm } from "../marketplace/search-form"
+import Web3 from "web3";
+import Realium from '../abis/RealiumERC20.json'
+import { ApiPropertyService } from "../api/services/property.service"
+import { ApiCovalentService } from "../api/services/covalent.service"
 
 import res1 from "../resources/images/residential/residential-1.jpg"
 import res2 from "../resources/images/residential/residential-2.jpg"
@@ -19,15 +20,17 @@ import { FaucetPopOut } from "../utilities/faucet-pop-out"
 import { CollapsableSection, ACCOUNT_FAQS } from "../utilities/collapsable-section"
 import { SellModal } from "../modals/sell"
 
+//TODO: need to loop through properties, look for hard coded marketplace/1 but that will need to be the property number. Maybe this needs to be in the smartcontract?
+
 export function Dashboard(props) {
-    let id = sessionStorage.getItem('id')
     let walletAdress = sessionStorage.getItem('avax')
-    const [tokens, setTokens] = React.useState()
-    const [events, setEvents] = React.useState()
-    const [reloadAll, setReload] = React.useState(0)
     let [currentPage, setCurrentPage] = React.useState(1)
     let [startRange, setStartRange] = React.useState(1)
     let [endRange, setEndRange] = React.useState(10)
+    const [transfers, setTransfers] = React.useState([])
+    const [properties, setProperties] = React.useState()
+    let [contracts, setContracts] = React.useState([])
+
     let pages = []
     let alreadyListed = ""
 
@@ -36,49 +39,104 @@ export function Dashboard(props) {
     ]
 
     React.useEffect(() => {
-        const fetchData = async () => {
-            try {
-                let tokenService = new ApiTokenService()
-                await tokenService.getUserTokens(id.toString()).then(
-                    res => {
-                        setTokens(lodash.groupBy(res.data, "property.propertyId"))
+
+        //TODO: get transfers for all smart contracts, then sort by date
+        const getTransfers = async () => {
+            const address = '0xdf525FA1d9A0A74d501f386804aFEF86a2593550';
+            const walletAddress = sessionStorage.getItem("account")
+            let covalentApiService = new ApiCovalentService();
+            await covalentApiService.getTransfers(address,walletAddress).then(
+                (res) => {
+                    const transfersData = res.data
+                    console.log(transfersData)
+                    setTransfers(transfers => [...transfers, transfersData])
+                }
+            ).catch(error => {
+                // setNotify && setNotify({ msg: `There was an error property data.`,
+                //                         color: 'red',
+                //                         show: true })
+                console.error(`Error: ${error}`)
+            })
+        }
+
+        async function loadBlockchainData() {
+
+            const getAllProperties = async () => {
+                let propertyApiService = new ApiPropertyService();
+                await propertyApiService.getAssets().then(
+                    (res) => {
+                        const properties = res.data
+                        console.log(properties)
+                        setProperties(properties)
                     }
-                )
-            } catch {
-                setTokens(null)
+                ).catch(error => {
+                    // setNotify && setNotify({ msg: `There was an error property data.`,
+                    //                         color: 'red',
+                    //                         show: true })
+                    console.error(`Error: ${error}`)
+                })
             }
-        };
 
-        fetchData()
-    }, [id, reloadAll])
+            const web3 = window.web3;
+            
+            // setAvaxAccount(accounts[0]);
+    
+            //THESE LINES WILL NEED TO CALL THE NETWORK TO GET THE ADDRESS WHERE THE CONTRACT IS DEPLOYED AND REPLACE THE HARD CODED ADDRESS
+            const networkId = await web3.eth.net.getNetworkType();
+            if (networkId === "private") {
+                const abi = Realium.abi;
 
-    React.useEffect(() => {
-        const fetchEvents = async () => {
-            try {
-                let eventService = new ApiEventService()
-                await eventService.getEventsByUserId(id.toString()).then(
-                    res => {
-                        setEvents(res.data)
+                await getAllProperties()
+                console.log(properties)
+                //TODO: need to load properties before it drops into this for loop
+                for (let index = 0; index < properties.length; index++) {
+                    const element = properties[index];
+                    const smartContract1 = new web3.eth.Contract(abi, element.smartContract);
+                    if(smartContract1.methods.balanceOf(sessionStorage.getItem("account"))>0){
+                        setContracts(contracts => [...contracts, smartContract1])
                     }
-                )
-            } catch {
-                setEvents(null)
+                }
+
+                console.log(contracts)
+
+            } else {
+                window.alert("No smart contract detected on network - transactions are disabled. Make sure your MetaMask network is on Avalanche FUJI.");
             }
-        };
+        }
 
-        fetchEvents()
-    }, [id])
+        async function loadWeb3() {
+            if (window.ethereum) {
+                window.web3 = new Web3(window.ethereum);
+                await window.ethereum.enable();
+            }
+            else if (window.web3) {
+                window.web3 = new Web3(window.web3.currentProvider);
+            }
+            else {
+                window.alert('Non-Ethereum browser detected; consider using MetaMask.');
+            }
+        }
 
-    if (events) {
+        const checkWeb3 = async () => {
+            await loadWeb3();
+            await loadBlockchainData();
+        }
+
+        getTransfers()
+        checkWeb3()
+    },[contracts, properties])
+
+    if (transfers) {
         var i,j,temparray,chunk = 10;
-        for (i=0,j=events.length; i<j; i+=chunk) {
-            temparray = events.slice(i,i+chunk);
+        for (i=0,j=transfers.length; i<j; i+=chunk) {
+            temparray = transfers.slice(i,i+chunk);
             pages.push(temparray)
         }
     }
 
     return (
-        <>{tokens && events && pages ?
+        <>
+        {contracts ?
             <>
                 <div className="py-12 bg-gray-50 overflow-hidden sm:pb-12 lg:py-18">
                 <div className="max-w-xl mx-auto px-8 sm:px-6 lg:px-8 lg:max-w-7xl">
@@ -105,30 +163,31 @@ export function Dashboard(props) {
                         <p className="mt-3 text-md text-gray-500">
                         View your purchased Realium assets. Manage your shares and sell the assets you no longer wish to hold.
                         </p>
-                        <div>
+                        {/* TODO: fix search, not sure if this is possible, will have to do it on the frontend
+                          <div>
                             <SearchForm resultsSetter={setTokens} setNotify={props.setNotify} searchService={"tokenService"} reset={setReload} reloadAll={reloadAll}/>
-                        </div>
+                        </div> */}
                         <dl className="mt-10 space-y-10">
                             <div className="grid grid-cols-1 gap-6">
-                            {Object.keys(tokens).map((key) => (
+                            {contracts.map(key => (
                                 // eslint-disable-next-line
-                                alreadyListed = lodash.groupBy(tokens[key], "listed"),
+                                alreadyListed = lodash.groupBy(key.smartContract, "listed"),
                             <div key={key} className="relative rounded-lg border border-gray-300 bg-white shadow-md flex items-center space-x-3 hover:border-gray-400 focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-indigo-500">
                                 <div className="grid grid-cols-1 sm:flex sm:flex-cols items-center">
-                                <Link to={`/marketplace/${tokens[key][0].property.propertyId}`} className="flex-shrink-0" style={{textDecoration: "none"}}>
-                                    <img className="h-48 w-full object-fill rounded-t-md sm:w-48 sm:h-full sm:object-fill sm:rounded-l-sm sm:rounded-tr-none" src={residentialImages[tokens[key][0].property.propertyId-1]} alt=""/>
+                                <Link to={`/marketplace/1`} className="flex-shrink-0" style={{textDecoration: "none"}}>
+                                    <img className="h-48 w-full object-fill rounded-t-md sm:w-48 sm:h-full sm:object-fill sm:rounded-l-sm sm:rounded-tr-none" src={residentialImages[0]} alt=""/>
                                 </Link>
                                 <div className="flex-1 min-w-0 space-x-2 pt-2 pb-2 pl-2">
                                     <div className="grid grid-cols-1 sm:grid-cols-3 sm:align-middle sm:items-center">
-                                        <Link to={`/marketplace/${tokens[key][0].property.propertyId}`} className="text-black font-semibold grid grid-cols-2 mr-8 sm:mr-1 text-center sm:text-left sm:grid-cols-1 sm:m-2" style={{textDecoration: "none"}}>
+                                        <Link to={`/marketplace/1}`} className="text-black font-semibold grid grid-cols-2 mr-8 sm:mr-1 text-center sm:text-left sm:grid-cols-1 sm:m-2" style={{textDecoration: "none"}}>
                                             Address
                                             <p className="text-xs text-gray-500 pt-1 text-center sm:text-left mb-0">
-                                                {tokens[key][0].property.streetAddress}
+                                                {properties[0].streetAddress}
                                                 <br/>
-                                                {tokens[key][0].property.city}, {tokens[key][0].property.state}
+                                                {properties[0].city}, {properties[0].state}
                                             </p>
                                         </Link>
-                                        <Link to={`/marketplace/${tokens[key][0].property.propertyId}`} className="text-black font-semibold grid grid-cols-2 mr-8 sm:mr-1 text-center sm:text-left sm:grid-cols-1 sm:m-2" style={{textDecoration: "none"}}>
+                                        <Link to={`/marketplace/1`} className="text-black font-semibold grid grid-cols-2 mr-8 sm:mr-1 text-center sm:text-left sm:grid-cols-1 sm:m-2" style={{textDecoration: "none"}}>
                                             Shares:
                                             <p className="text-xs text-gray-500 pt-1 text-center sm:text-left mb-0">
                                                 {alreadyListed['true'] ?
@@ -156,7 +215,7 @@ export function Dashboard(props) {
                                         </Link>
                                         <div className="space-y-2 text-center sm:m-1 sm:items-center">
                                             {alreadyListed['false'] ?
-                                            <SellModal potentialListing={tokens[key]} availableToSell={alreadyListed['false'].length} />
+                                            <SellModal potentialListing={properties[0]} availableToSell={alreadyListed['false'].length} />
                                             :
                                             <button className="bg-gray-50 text-indigo-600 active:bg-indigo-500 text-xs w-4/5 py-2 px-2 rounded hover:bg-gray-100 outline-none focus:outline-none ease-linear transition-all duration-150" type="button"
                                             >
@@ -213,26 +272,27 @@ export function Dashboard(props) {
                                 </thead>
                                 <tbody>
                                     {pages[0] !== undefined && pages[0] !== null ?
-                                    Object.keys(pages[currentPage-1]).map((key) => (
+                                    transfers.data.items[0].transfers.map(key => (
                                     <tr key={key} className="bg-white m-4 border-b border-gray-200 shadow-md rounded-md">
                                     <td className="px-6 py-4 whitespace-nowrap text-xs font-medium text-gray-900" data-label="Time">
-                                        <TimeAgo date={events[key].eventDateTime} locale="en-US"/>
+                                        <TimeAgo date={key.block_signed_at} locale="en-US"/>
                                     </td>
                                     <td className="px-6 py-4 whitespace-nowrap text-xs text-gray-500" data-label="Event">
-                                        {pages[currentPage-1][key].eventType}
+                                        {key.transfer_type==='IN' ? "BUY" : "SALEa"}
                                     </td>
                                     <td className="px-6 py-4 whitespace-nowrap flex items-center text-xs text-gray-500" data-label="Quantity">
                                         <NumberFormat
-                                            value={pages[currentPage-1][key].quantity}
+                                            value={key.delta}
                                             displayType={'text'}
                                             thousandSeparator={true}
                                         />
                                         <div className="px-1">@</div>
-                                        <NumberFormat
+                                        {/*TODO: find if I can pull in selling price
+                                             <NumberFormat
                                                 value={pages[currentPage-1][key].listedPrice}
                                                 displayType={'text'}
                                                 thousandSeparator={true}
-                                        />
+                                        /> */}
                                         <div className="h-4 inline-flex px-1">
                                             <svg width="15" height="15" viewBox="0 0 153 153" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                 <path fillRule="evenodd" clipRule="evenodd" d="M153 76.5C153 118.75 118.75 153 76.5 153C34.2502 153 0 118.75 0 76.5C0 34.2502 34.2502 0 76.5 0C118.75 0 153 34.2502 153 76.5ZM72.2494 21.5512L22.6284 108.776C20.8649 111.876 23.1037 115.725 26.6701 115.725H57.7531C59.4209 115.725 60.961 114.832 61.7892 113.384L96.0274 53.5368C96.8467 52.1048 96.8458 50.3458 96.025 48.9145L80.325 21.5372C78.5347 18.4154 74.0289 18.4231 72.2494 21.5512ZM90.0853 115.95H126.325C130.017 115.95 132.327 111.956 130.486 108.756L112.443 77.3996C110.601 74.1984 105.985 74.1898 104.131 77.3843L85.9337 108.741C84.0767 111.941 86.3855 115.95 90.0853 115.95Z" fill="#374151"/>
@@ -240,12 +300,13 @@ export function Dashboard(props) {
                                         </div>
                                     </td>
                                     <td className="px-6 py-4 whitespace-nowrap text-xs text-gray-500" data-label="Asset">
-                                        {pages[currentPage-1][key].property.streetAddress}
+                                        {key.contract_address}
                                     </td>
                                     <td className="px-6 py-4 whitespace-nowrap text-xs font-medium justify-end" data-label="Tx">
-                                        {pages[currentPage-1][key].eventType === "SALE" &&
+                                        {/* TODO: ADD "OUT" or whatever transfer types there are */}
+                                        {key.transfer_type==='IN' &&
                                             <div className="object-right">
-                                                <a href={`https://testnet.avascan.info/blockchain/x/tx/${pages[currentPage-1][key].txNFTId}`} className="text-indigo-600 hover:text-indigo-900" target="_blank" rel="noreferrer">
+                                                <a href={`https://testnet.avascan.info/blockchain/x/tx/${key.tx_hash}`} className="text-indigo-600 hover:text-indigo-900" target="_blank" rel="noreferrer">
                                                     <svg width="16" height="16" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                         <path d="M8.3335 5.00016H5.00016C4.07969 5.00016 3.3335 5.74635 3.3335 6.66683V15.0002C3.3335 15.9206 4.07969 16.6668 5.00016 16.6668H13.3335C14.254 16.6668 15.0002 15.9206 15.0002 15.0002V11.6668M11.6668 3.3335H16.6668M16.6668 3.3335V8.3335M16.6668 3.3335L8.3335 11.6668" stroke="#4F46E5" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
                                                     </svg>
@@ -266,7 +327,7 @@ export function Dashboard(props) {
                                 <div className="hidden sm:block">
                                     <p className="text-sm text-gray-700">
                                     Showing <span className="font-medium">{startRange}</span> to <span className="font-medium">{endRange}</span> of{' '}
-                                    <span className="font-medium">{events.length}</span> results
+                                    <span className="font-medium">{transfers.length}</span> results
                                     </p>
                                 </div>
                                 <div className="flex-1 flex justify-between sm:justify-end">
@@ -304,7 +365,7 @@ export function Dashboard(props) {
                     </div>
                 </div>
                 </div>
-                {tokens.length === 0 && events.length === 0 ?
+                {contracts.length === 0 ?
                 <div className="py-16 mx-3">
                     <h3 className="text-center text-xl font-extrabold text-gray-500 tracking-tight sm:text-2xl">
                     Nothing to show here yet...

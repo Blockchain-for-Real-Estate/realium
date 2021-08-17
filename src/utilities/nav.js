@@ -1,16 +1,15 @@
 import React from "react"
 import { Link, useLocation, useHistory } from "react-router-dom"
 import { Modal } from "../modals/modal"
-import { ApiBalanceService } from '../api/services/balance.service'
 import { ApiAVAXService } from '../api/services/crypto.services'
 import { useInterval } from "../utilities/use-interval-hook"
+import Web3 from "web3";
 
 export function Nav(props) {
     const [menuOpen, setMenuOpen] = React.useState(false)
     let location = useLocation()
     let route = location.pathname.split("/")[1]
     let history = useHistory();
-    let smartContract = props.smartContract;
     let [balance, setBalance] = React.useState()
     let [avaxPrice, setAvaxPrice] = React.useState()
     let [currency, setCurrency] = React.useState(true)
@@ -33,17 +32,27 @@ export function Nav(props) {
         return str;
       }
 
-    React.useEffect(() => {
-        let wallet = sessionStorage.getItem('avax')
+    async function loadWeb3() {
+        if (window.ethereum) {
+            window.web3 = new Web3(window.ethereum);
+            await window.ethereum.enable();
+        }
+        else if (window.web3) {
+            window.web3 = new Web3(window.web3.currentProvider);
+        }
+        else {
+            window.alert('Non-Ethereum browser detected; consider using MetaMask.');
+        }
+    }
+
+    React.useEffect(() => {        
         const fetchBalance = async () => {
             try {
-                let balanceService = new ApiBalanceService()
-                await balanceService.getBalance(wallet).then(
-                    (res) => {
-                        setBalance(props.balance.toFixed(4));
-                        //setBalance(Number(res.data.result.balance)/1000000000) //AVAX uses a demonination of 9
-                    }
-                )
+                const accounts = await window.web3.eth.getAccounts();
+                sessionStorage.setItem("account",accounts[0])
+                window.web3 = new Web3(window.web3.currentProvider);
+                var balance = await window.web3.eth.getBalance(sessionStorage.getItem('account'))
+                setBalance((balance/1000000000000000000).toFixed(2));
             } catch {
                 setBalance(null)
             }
@@ -62,19 +71,15 @@ export function Nav(props) {
             }
         }
 
+        loadWeb3()
         fetchBalance()
         getCurrentAvaxPrice()
+
     }, [pollInterval, props.balance])
 
     useInterval(() => {
         setPollInterval(pollInterval + 1)
     }, 5000)
-
-    async function mint() {
-        await smartContract.methods.createProperty('REALIUM', 15).call();
-        const token = smartContract.methods.properties(0).call();
-        console.log(token);
-    }
 
     return (
         <nav className="bg-white shadow">
@@ -142,18 +147,12 @@ export function Nav(props) {
                                         :
                                         <button  className="block px-3 py-2 rounded-md text-xs font-xs text-gray-500 text-decoration-none" 
                                             onClick={async () => {
-                                                await props.loadWeb3()
+                                                await loadWeb3()
                                                 history.go(0)
                                             }}>
                                             Connect MetaMask account
                                         </button>
                                         }
-                                        <Link to="/dashboard" className="block px-3 py-2 rounded-md text-xs font-xs text-gray-500 text-decoration-none hover:bg-gray-100" 
-                                            onClick={() => {
-                                                mint()
-                                            }}>
-                                            MINT TOKEN
-                                        </Link>
                                         <Link to="/dashboard" onClick={() => setProfileMenu(!profileMenu)} className="block px-3 py-2 rounded-md text-sm font-medium text-gray-700 hover:text-gray-100 hover:bg-indigo-500 text-decoration-none">
                                             Dashboard
                                         </Link>

@@ -1,40 +1,15 @@
-import React, { useState } from "react";
+import React from "react";
 import { useHistory } from "react-router-dom"
 import NumberFormat from "react-number-format"
-// import { ApiEventService } from "../api/services/event.service";
-import { ApiBalanceService } from "../api/services/balance.service"
-import Realium from '../abis/RealiumERC20.json'
-// import Web3 from "web3";
+//TODO: make sure the buy is working once the smart contract is completed
 
 export function Confirmation(props) {
     let history = useHistory();
-    // let [balance, setBalance] = React.useState(0)
     const [showModal, setShowModal] = React.useState(false);
     const [unconfirmed, setConfirmed] = React.useState(false);
     const auth_token = sessionStorage.getItem('token')
-    // const setNotify = props.setNotify
     const purchase = props.purchase
-    let [smartContract, setSmartContract] = useState()
-
-    React.useEffect(() => {
-        setSmartContract(new window.web3.eth.Contract(Realium.abi, props.smartContract));
-
-        let wallet = sessionStorage.getItem('avax')
-        const fetchBalance = async () => {
-            try {
-                let balanceService = new ApiBalanceService()
-                await balanceService.getBalance(wallet).then(
-                    (res) => {
-                        // setBalance(Number(res.data.result.balance)/1000000000) //AVAX uses a demonination of 9
-                    }
-                )
-            } catch {
-                // setBalance(null)
-            }
-        };
-
-        fetchBalance()
-    }, [props.smartContract])
+    // let [smartContract, setSmartContract] = useState()
     
     function submit() {
         //trigger Event POST as a SALE
@@ -49,10 +24,11 @@ export function Confirmation(props) {
         }
 
         async function Buy(payload) {
-            var contract = smartContract
+            var contract = props.smartContract
             console.log(contract.methods)
             console.log(data.tokenSeller)
-            //TODO: figure out how to do a "SALE" of a property, Metamask should pop up and make you approve a transaction
+            //BELOW NEEDS TO GET FIXED IN THE SMART CONTRACT
+            //TODO: figure out how to do a "SALE" of a property, Metamask should pop up and make you approve a transaction,
             // await smartContract.methods.buyPropertyToken(data.tokenSeller).send()
             // await smartContract.methods.buyPropertyToken('0x8302b71882F2Ee96Ac20Ecf83926E6c9B7A530E4').send({from:accounts[0]})
             // let txTotal = purchase.length * data.listedPrice
