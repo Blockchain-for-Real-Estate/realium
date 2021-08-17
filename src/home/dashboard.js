@@ -83,7 +83,7 @@ export function Dashboard(props) {
     
             //THESE LINES WILL NEED TO CALL THE NETWORK TO GET THE ADDRESS WHERE THE CONTRACT IS DEPLOYED AND REPLACE THE HARD CODED ADDRESS
             const networkId = await web3.eth.net.getNetworkType();
-            if (networkId === "private") {
+            if (networkId === "ropsten") {
                 const abi = Realium.abi;
 
                 await getAllProperties()
