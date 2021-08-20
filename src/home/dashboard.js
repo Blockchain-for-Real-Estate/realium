@@ -27,7 +27,7 @@ export function Dashboard(props) {
     let [currentPage, setCurrentPage] = React.useState(1)
     let [startRange, setStartRange] = React.useState(1)
     let [endRange, setEndRange] = React.useState(10)
-    const [transfers, setTransfers] = React.useState([])
+    // const [transfers, setTransfers] = React.useState([])
     const [properties, setProperties] = React.useState()
     let [contracts, setContracts] = React.useState([])
 
@@ -41,23 +41,23 @@ export function Dashboard(props) {
     React.useEffect(() => {
 
         //TODO: get transfers for all smart contracts, then sort by date
-        const getTransfers = async () => {
-            const address = '0xdf525FA1d9A0A74d501f386804aFEF86a2593550';
-            const walletAddress = sessionStorage.getItem("account")
-            let covalentApiService = new ApiCovalentService();
-            await covalentApiService.getTransfers(address,walletAddress).then(
-                (res) => {
-                    const transfersData = res.data
-                    console.log(transfersData)
-                    setTransfers(transfers => [...transfers, transfersData])
-                }
-            ).catch(error => {
-                // setNotify && setNotify({ msg: `There was an error property data.`,
-                //                         color: 'red',
-                //                         show: true })
-                console.error(`Error: ${error}`)
-            })
-        }
+        // const getTransfers = async () => {
+        //     const address = '0xdf525FA1d9A0A74d501f386804aFEF86a2593550';
+        //     const walletAddress = sessionStorage.getItem("account")
+        //     let covalentApiService = new ApiCovalentService();
+        //     await covalentApiService.getTransfers(address,walletAddress).then(
+        //         (res) => {
+        //             const transfersData = res.data
+        //             console.log(transfersData)
+        //             setTransfers(transfers => [...transfers, transfersData])
+        //         }
+        //     ).catch(error => {
+        //         // setNotify && setNotify({ msg: `There was an error property data.`,
+        //         //                         color: 'red',
+        //         //                         show: true })
+        //         console.error(`Error: ${error}`)
+        //     })
+        // }
 
         async function loadBlockchainData() {
 
@@ -66,7 +66,6 @@ export function Dashboard(props) {
                 await propertyApiService.getAssets().then(
                     (res) => {
                         const properties = res.data
-                        console.log(properties)
                         setProperties(properties)
                     }
                 ).catch(error => {
@@ -87,17 +86,14 @@ export function Dashboard(props) {
                 const abi = Realium.abi;
 
                 await getAllProperties()
-                console.log(properties)
                 //TODO: need to load properties before it drops into this for loop
-                for (let index = 0; index < properties.length; index++) {
-                    const element = properties[index];
-                    const smartContract1 = new web3.eth.Contract(abi, element.smartContract);
-                    if(smartContract1.methods.balanceOf(sessionStorage.getItem("account"))>0){
-                        setContracts(contracts => [...contracts, smartContract1])
-                    }
-                }
-
-                console.log(contracts)
+                // for (let index = 0; index < properties.length; index++) {
+                //     const element = properties[index];
+                //     const smartContract1 = new web3.eth.Contract(abi, element.smartContract);
+                //     if(smartContract1.methods.balanceOf(sessionStorage.getItem("account"))>0){
+                //         setContracts(contracts => [...contracts, smartContract1])
+                //     }
+                // }
 
             } else {
                 window.alert("No smart contract detected on network - transactions are disabled. Make sure your MetaMask network is on Avalanche FUJI.");
@@ -122,17 +118,17 @@ export function Dashboard(props) {
             await loadBlockchainData();
         }
 
-        getTransfers()
+        // getTransfers()
         checkWeb3()
     },[contracts, properties])
 
-    if (transfers) {
-        var i,j,temparray,chunk = 10;
-        for (i=0,j=transfers.length; i<j; i+=chunk) {
-            temparray = transfers.slice(i,i+chunk);
-            pages.push(temparray)
-        }
-    }
+    // if (transfers) {
+    //     var i,j,temparray,chunk = 10;
+    //     for (i=0,j=transfers.length; i<j; i+=chunk) {
+    //         temparray = transfers.slice(i,i+chunk);
+    //         pages.push(temparray)
+    //     }
+    // }
 
     return (
         <>
@@ -270,7 +266,7 @@ export function Dashboard(props) {
                                     </th>
                                     </tr>
                                 </thead>
-                                <tbody>
+                                {/* <tbody>
                                     {pages[0] !== undefined && pages[0] !== null ?
                                     transfers.data.items[0].transfers.map(key => (
                                     <tr key={key} className="bg-white m-4 border-b border-gray-200 shadow-md rounded-md">
@@ -287,12 +283,6 @@ export function Dashboard(props) {
                                             thousandSeparator={true}
                                         />
                                         <div className="px-1">@</div>
-                                        {/*TODO: find if I can pull in selling price
-                                             <NumberFormat
-                                                value={pages[currentPage-1][key].listedPrice}
-                                                displayType={'text'}
-                                                thousandSeparator={true}
-                                        /> */}
                                         <div className="h-4 inline-flex px-1">
                                             <svg width="15" height="15" viewBox="0 0 153 153" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                 <path fillRule="evenodd" clipRule="evenodd" d="M153 76.5C153 118.75 118.75 153 76.5 153C34.2502 153 0 118.75 0 76.5C0 34.2502 34.2502 0 76.5 0C118.75 0 153 34.2502 153 76.5ZM72.2494 21.5512L22.6284 108.776C20.8649 111.876 23.1037 115.725 26.6701 115.725H57.7531C59.4209 115.725 60.961 114.832 61.7892 113.384L96.0274 53.5368C96.8467 52.1048 96.8458 50.3458 96.025 48.9145L80.325 21.5372C78.5347 18.4154 74.0289 18.4231 72.2494 21.5512ZM90.0853 115.95H126.325C130.017 115.95 132.327 111.956 130.486 108.756L112.443 77.3996C110.601 74.1984 105.985 74.1898 104.131 77.3843L85.9337 108.741C84.0767 111.941 86.3855 115.95 90.0853 115.95Z" fill="#374151"/>
@@ -303,7 +293,6 @@ export function Dashboard(props) {
                                         {key.contract_address}
                                     </td>
                                     <td className="px-6 py-4 whitespace-nowrap text-xs font-medium justify-end" data-label="Tx">
-                                        {/* TODO: ADD "OUT" or whatever transfer types there are */}
                                         {key.transfer_type==='IN' &&
                                             <div className="object-right">
                                                 <a href={`https://testnet.avascan.info/blockchain/x/tx/${key.tx_hash}`} className="text-indigo-600 hover:text-indigo-900" target="_blank" rel="noreferrer">
@@ -317,9 +306,9 @@ export function Dashboard(props) {
                                     </tr>
                                     ))
                                 : null }
-                                </tbody>
+                                </tbody> */}
                                 </table>
-                                {pages.length>0 ?
+                                {/* {pages.length>0 ?
                                 <nav
                                 className="bg-gray-100 px-4 py-3 flex items-center justify-between sm:px-6"
                                 aria-label="Pagination"
@@ -355,7 +344,7 @@ export function Dashboard(props) {
                                     </button>: null }
                                 </div>
                                 </nav>
-                                : null }
+                                : null } */}
                             </div>
                             </div>
                         </div>

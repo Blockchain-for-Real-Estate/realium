@@ -75,7 +75,7 @@ export function FaucetPopOut(props) {
                 </p>
                 }
                 <div className="py-2">
-                    <input className="text-center text-xs text-indigo-500 w-full border-1 border-gray-200 bg-gray-100 rounded-lg p-2" ref={textAreaRef} style={{cursor: "pointer", color: "transparent", textShadow: "0 0 0 #6366F1"}} defaultValue={props.wallet}
+                    <input className="text-center text-xs text-indigo-500 w-full border-1 border-gray-200 bg-gray-100 rounded-lg p-2" ref={textAreaRef} style={{cursor: "pointer", color: "transparent", textShadow: "0 0 0 #6366F1"}} defaultValue={sessionStorage.getItem('account') || props.wallet}
                     onClick={copyToClipboard} readOnly/>
                 </div>
                 </div>
