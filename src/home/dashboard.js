@@ -1,14 +1,14 @@
 import React from "react"
-import TimeAgo from 'react-timeago'
+//import TimeAgo from 'react-timeago'
 import lodash from "lodash"
 import { Link } from "react-router-dom"
 import "../modals/modal.css"
 import NumberFormat from "react-number-format"
 import LoadingWave from "@bit/ngoue.playground.loading-wave"
 import Web3 from "web3";
-import Realium from '../abis/RealiumERC20.json'
+//import Realium from '../abis/RealiumERC20.json'
 import { ApiPropertyService } from "../api/services/property.service"
-import { ApiCovalentService } from "../api/services/covalent.service"
+//import { ApiCovalentService } from "../api/services/covalent.service"
 
 import res1 from "../resources/images/residential/residential-1.jpg"
 import res2 from "../resources/images/residential/residential-2.jpg"
@@ -24,14 +24,14 @@ import { SellModal } from "../modals/sell"
 
 export function Dashboard(props) {
     let walletAdress = sessionStorage.getItem('avax')
-    let [currentPage, setCurrentPage] = React.useState(1)
-    let [startRange, setStartRange] = React.useState(1)
-    let [endRange, setEndRange] = React.useState(10)
+    //let [currentPage, setCurrentPage] = React.useState(1)
+    //let [startRange, setStartRange] = React.useState(1)
+    //let [endRange, setEndRange] = React.useState(10)
     // const [transfers, setTransfers] = React.useState([])
     const [properties, setProperties] = React.useState()
     let [contracts, setContracts] = React.useState([])
 
-    let pages = []
+    //let pages = []
     let alreadyListed = ""
 
     const residentialImages = [
@@ -83,7 +83,7 @@ export function Dashboard(props) {
             //THESE LINES WILL NEED TO CALL THE NETWORK TO GET THE ADDRESS WHERE THE CONTRACT IS DEPLOYED AND REPLACE THE HARD CODED ADDRESS
             const networkId = await web3.eth.net.getNetworkType();
             if (networkId === "ropsten") {
-                const abi = Realium.abi;
+                //const abi = Realium.abi;
 
                 await getAllProperties()
                 //TODO: need to load properties before it drops into this for loop
@@ -94,6 +94,7 @@ export function Dashboard(props) {
                 //         setContracts(contracts => [...contracts, smartContract1])
                 //     }
                 // }
+                setContracts(contracts) //remove this line it only suppresses a warning
 
             } else {
                 window.alert("No smart contract detected on network - transactions are disabled. Make sure your MetaMask network is on Avalanche FUJI.");
