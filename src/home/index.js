@@ -12,6 +12,13 @@ export function Home(props) {
         <>
             {/* Hero section */}
             <Hero img={hero_img} />
+            {/* LAUNCH */}
+            <div className="bg-white py-12 sm:py-18">
+            <MailList
+                title=" Want to know when we launch?"
+                description="Sign up for our product updates to stay in the loop."
+            />
+            </div>
             {/* Stats component */}
             <div className="bg-gray-50 pt-12 sm:pt-16">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -222,13 +229,6 @@ export function Home(props) {
                         </div>
                     </div>
                 </div>
-            </div>
-            {/* LAUNCH */}
-            <div className="bg-white py-12 sm:py-18">
-            <MailList
-                title=" Want to know when we launch?"
-                description="Sign up for our product updates to stay in the loop."
-            />
             </div>
             {/* FAQs */}
             <div className="bg-white">
