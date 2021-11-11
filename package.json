@@ -18,7 +18,7 @@
     "bootstrap": "^4.6.0",
     "buffer": "^6.0.3",
     "craco": "^0.0.3",
-    "formik": "^2.2.6",
+    "formik": "^2.2.9",
     "headlessui": "^0.0.0",
     "lodash": "^4.17.21",
     "react": "^17.0.1",
