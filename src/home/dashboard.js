@@ -121,11 +121,11 @@ export function Dashboard(props) {
                                 <div className="flex-1 min-w-0 space-x-2 pt-2 pb-2 pl-2">
                                     <div className="grid grid-cols-1 sm:grid-cols-3 sm:align-middle sm:items-center">
                                         <Link to={`/marketplace/${tokens[key][0].property.propertyId}`} className="text-black font-semibold grid grid-cols-2 mr-8 sm:mr-1 text-center sm:text-left sm:grid-cols-1 sm:m-2" style={{textDecoration: "none"}}>
-                                            Address
+                                            Name
                                             <p className="text-xs text-gray-500 pt-1 text-center sm:text-left mb-0">
-                                                {tokens[key][0].property.streetAddress}
-                                                <br/>
-                                                {tokens[key][0].property.city}, {tokens[key][0].property.state}
+                                                {tokens[key][0].property.propertyName}
+                                                {/* <br/>
+                                                {tokens[key][0].property.city}, {tokens[key][0].property.state} */}
                                             </p>
                                         </Link>
                                         <Link to={`/marketplace/${tokens[key][0].property.propertyId}`} className="text-black font-semibold grid grid-cols-2 mr-8 sm:mr-1 text-center sm:text-left sm:grid-cols-1 sm:m-2" style={{textDecoration: "none"}}>
@@ -240,7 +240,7 @@ export function Dashboard(props) {
                                         </div>
                                     </td>
                                     <td className="px-6 py-4 whitespace-nowrap text-xs text-gray-500" data-label="Asset">
-                                        {pages[currentPage-1][key].property.streetAddress}
+                                        {pages[currentPage-1][key].property.properyName}
                                     </td>
                                     <td className="px-6 py-4 whitespace-nowrap text-xs font-medium justify-end" data-label="Tx">
                                         {pages[currentPage-1][key].eventType === "SALE" &&
