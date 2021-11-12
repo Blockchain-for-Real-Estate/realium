@@ -36,7 +36,7 @@ export class ApiTokenService {
 
     public getListedTokensForPropertyId(id: String) {
       return axios.get<Token>(
-        `${environment.api}/api/tokens/?property=${id}&listed=true&ordering=-listedPrice`
+        `${environment.api}/api/tokens/?property=${id}&listed=true&ordering=listedPrice`
       );
     }
 
