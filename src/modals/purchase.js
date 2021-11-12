@@ -22,6 +22,7 @@ export function Purchase(props) {
                 let tokenService = new ApiTokenService()
                 await tokenService.getListedTokensForPropertyId(propertyId).then(
                     res => {
+                        res = res.sort((a,b) => (a.listedPrice < b.listedPrice) ? 1 : -1)
                         let tokenArr = res.data.filter(token => token.owner.realiumUserId !== Number(sessionStorage.getItem('id')))
                         setTokens(lodash.groupBy(tokenArr, "owner.realiumUserId"))
                     }
