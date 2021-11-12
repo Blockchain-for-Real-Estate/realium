@@ -240,7 +240,7 @@ export function Dashboard(props) {
                                         </div>
                                     </td>
                                     <td className="px-6 py-4 whitespace-nowrap text-xs text-gray-500" data-label="Asset">
-                                        {pages[currentPage-1][key].property.properyName}
+                                        {pages[currentPage-1][key].property.propertyName}
                                     </td>
                                     <td className="px-6 py-4 whitespace-nowrap text-xs font-medium justify-end" data-label="Tx">
                                         {pages[currentPage-1][key].eventType === "SALE" &&
