@@ -34,7 +34,7 @@ export function MailList({ title, description }) {
 
 export const SocialLink = ({ link }) => {
   return (
-    <a href={link.href} target="_blank" rel="noreferrer" className={`bg-${link.color}-600 px-3 py-2 text-xs font-semibold text-white inline-flex items-center space-x-2 rounded`}>
+    <a href={link.href} target="_blank" rel="noreferrer" className={`bg-black px-3 py-2 text-xs font-semibold text-white inline-flex items-center space-x-2 rounded`}>
       {link.svg}
       <span>{link.name}</span>
     </a>
