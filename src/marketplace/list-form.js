@@ -44,7 +44,7 @@ export function ListForm(props) {
                         .matches(/^\s|^(\d)+(?=\s|$)/, "Enter a whole number of shares.")
                         .required("Enter a whole number of shares to list."),
                     price: Yup.number("Please enter a valid number of AVAX")
-                        .min(1, "Enter a value over 0")
+                        .min(0.01, "Enter a value over 0")
                         .required("Enter the price you would like to list at your shares for.")
             })}
             onSubmit={async (values, actions) => {
