@@ -7,6 +7,7 @@ import { Marketplace } from "./marketplace"
 import { HowItWorks } from "./howitworks"
 import { Login } from "./login"
 import { Dashboard } from "./home/dashboard"
+import { MailList } from "./home/mail_list"
 import { Footer } from "./utilities/footer"
 import { Nav } from "./utilities/nav"
 import { Notification } from "./utilities/notification"
@@ -43,6 +44,14 @@ function App() {
 					</Route>
 					<Route path="/dashboard">
 						<Dashboard setNotify={setNotify} />
+					</Route>
+					<Route path="/subscribe">
+						<div className="bg-white py-12 sm:py-18">
+						<MailList 
+							title="You shape the Realium experience."
+							description="Sign up to become an asset in the future of real estate."
+						/>
+						</div>
 					</Route>
 				</Switch>
 			</ScrollToTop>
